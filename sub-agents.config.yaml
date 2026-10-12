@@ -1,0 +1,29 @@
+agents:
+  - id: requirement-interpreter
+    name: HVAC Requirement Interpreter
+    purpose: >
+      Analyze HVAC tickets and produce a structured interpretation.
+    promptFile: agents/requirement-interpreter.md
+    outputSchema: schemas/examiner.schema.json
+    isolated_context: true
+    allowedTools:
+      - read_ticket
+  - id: adversarial-reviewer
+    name: Adversarial Reviewer
+    purpose: >
+      Challenge the Requirement Interpreter output.
+    promptFile: agents/adversarial-reviewer.md
+    outputSchema: schemas/challenges.schema.json
+    isolated_context: true
+    allowedTools:
+      - read_ticket
+      - read_interpreter_output
+  - id: final-review-writer
+    name: Final Review Writer
+    purpose: >
+      Generate the final reviewed report.
+    promptFile: agents/final-review-writer.md
+    outputSchema: schemas/final-review.schema.json
+    isolated_context: true
+    allowedTools:
+      - read_review_artifacts

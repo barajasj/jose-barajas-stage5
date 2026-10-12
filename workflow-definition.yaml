@@ -1,0 +1,18 @@
+workflow:
+  id: hvac-ticket-governance
+  coordinator:
+    toolManifest: coordinator/coordinator-tools.json
+  stages:
+    - step: interpret
+      agent: requirement-interpreter
+    - step: review
+      agent: adversarial-reviewer
+    - step: final-report
+      agent: final-review-writer
+  guardrails:
+    - validate-interpreter-schema
+    - validate-review-schema
+    - validate-final-schema
+  audit:
+    correlationIds: true
+    persistToDisk: true

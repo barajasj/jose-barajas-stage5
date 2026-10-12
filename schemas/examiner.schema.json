@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "requirementSummary",
+    "hvacTerminology",
+    "businessRules",
+    "developerConsiderations",
+    "ambiguities",
+    "confidence"
+  ],
+  "properties": {
+    "requirementSummary": {
+      "type": "string"
+    },
+    "hvacTerminology": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "businessRules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "developerConsiderations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ambiguities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH"]
+    }
+  }
+}

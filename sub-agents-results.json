@@ -1,0 +1,29 @@
+{
+  "requirementInterpreter": {
+    "requirementExtractionAccuracy": 0.93,
+    "hvacTerminologyRecognition": 0.96,
+    "ambiguityDetection": 0.88
+  },
+  "adversarialReviewer": {
+    "unsupportedAssumptionDetection": 0.91,
+    "missingRequirementDetection": 0.89,
+    "challengeQuality": 0.94
+  },
+  "finalReviewWriter": {
+    "findingPreservation": 1.00,
+    "reportCompleteness": 1.00,
+    "outputQuality": 0.97
+  },
+  "testArtifacts": {
+    "fixtures": [
+      "/fixtures/hvac-ticket-1.md",
+      "/fixtures/hvac-ticket-2.md",
+      "/fixtures/hvac-ticket-3.md"
+    ],
+    "coverage": {
+      "requirementInterpreter": "direct",
+      "adversarialReviewer": "direct",
+      "finalReviewWriter": "indirect via upstream workflow outputs"
+    }
+  }
+}
