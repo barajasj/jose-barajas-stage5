@@ -20,6 +20,11 @@ Instead, it:
 
 ---
 
+# Current implementation uses mock execution.
+
+The architecture supports replacement with SWE-1.7 via the model layer once an Improving API key is available.
+
+---
 # Business Problem
 
 HVAC software requirements often contain:

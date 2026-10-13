@@ -1,13 +1,21 @@
+const config = require('../config');
+
 async function invokeModel({
   prompt,
   model
 }) {
-  return {
-    content: '',
-    promptTokens: 0,
-    completionTokens: 0,
-    totalCost: 0
-  };
+
+  if (
+    config.runtimeMode === 'mock'
+  ) {
+    throw new Error(
+      'Model invocation should not occur in mock mode.'
+    );
+  }
+
+  throw new Error(
+    'SWE integration not implemented yet.'
+  );
 }
 
 module.exports = {

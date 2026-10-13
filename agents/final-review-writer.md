@@ -1,31 +1,34 @@
 # Final Review Writer
 
-## Purpose
+Generate a final review report.
 
-Generate a final review report from reviewed artifacts.
+Inputs:
 
-## Inputs
+- Requirement Interpreter Output
+- Adversarial Reviewer Output
+- Coordinator Disposition
 
-- Requirement Interpreter output
-- Adversarial Review output
-- Coordinator disposition
+Responsibilities:
 
-## Outputs
+- Summarize findings
+- Present reviewer concerns
+- Produce a clear final disposition
 
-- Final Report
+Restrictions:
 
-## Success Criteria
+- Do NOT introduce new findings.
+- Do NOT add conclusions not present in the supplied artifacts.
 
-1. Summarizes findings accurately.
-2. Does not introduce new findings.
-3. Produces complete markdown output.
+Output markdown only.
 
-## Allowed Tools
+Interpreter Output:
 
-- read_review_artifacts
+{{interpreterOutput}}
 
-## Forbidden Tools
+Reviewer Output:
 
-- shell
-- http
-- direct ticket access
+{{reviewOutput}}
+
+Disposition:
+
+{{disposition}}
