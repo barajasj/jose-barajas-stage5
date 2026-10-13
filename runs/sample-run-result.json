@@ -1,0 +1,58 @@
+{
+  "correlationId": "HVAC-TICKET-1791907646938",
+  "interpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1791907646938",
+    "agentId": "requirement-interpreter",
+    "output": {
+      "requirementSummary": "DX Coil Height is calculated as the sum of all Cooling Circuit Heights.",
+      "hvacTerminology": [
+        "DX Coil",
+        "Cooling Circuit"
+      ],
+      "businessRules": [
+        "DX Coil Height equals the sum of all Cooling Circuit Heights."
+      ],
+      "developerConsiderations": [
+        "Implement automatic recalculation."
+      ],
+      "ambiguities": [],
+      "confidence": "HIGH"
+    },
+    "audit": {
+      "model": "swe-1.7",
+      "promptTokens": 100,
+      "completionTokens": 50,
+      "cost": 0.001
+    }
+  },
+  "reviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1791907646938",
+    "agentId": "adversarial-reviewer",
+    "output": {
+      "status": "PASS",
+      "findings": []
+    },
+    "audit": {
+      "model": "swe-1.7",
+      "promptTokens": 100,
+      "completionTokens": 50,
+      "cost": 0.001
+    }
+  },
+  "finalReport": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1791907646938",
+    "agentId": "final-review-writer",
+    "output": {
+      "reportMarkdown": "\n# PASS\n\n## Summary\n\nReview completed successfully.\n\n## Final Disposition\n\nPASS\n"
+    },
+    "audit": {
+      "model": "swe-1.7",
+      "promptTokens": 100,
+      "completionTokens": 50,
+      "cost": 0.001
+    }
+  }
+}

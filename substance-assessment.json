@@ -22,6 +22,6 @@
     "coreWorkflows": 2,
     "peripheralWorkflows": 1,
     "toyWorkflows": 0,
-    "humanReviewRequired": false
+    "humanReviewRequired": true
   }
 }
