@@ -1,0 +1,56 @@
+{
+  "requirementSummary": "Capture and display the appropriate physical and environmental input fields for Air Cooled (AC) and Evaporative Cooled (EC) condensers, record the entered parameters, and output condenser and circuit‑level configuration ready for ECS calculation, including dynamic options for condenser passes and roof types.",
+  "hvacTerminology": [
+    "Air Cooled (AC)",
+    "Evaporative Cooled (EC)",
+    "condenser",
+    "design ambient",
+    "ASHRAE Summer Design",
+    "condenser tube material",
+    "condenser fin material",
+    "condenser tube size",
+    "condenser fin type",
+    "Bank ID#",
+    "wet bulb temperature",
+    "ECS calculations",
+    "Condenser Passes",
+    "AutoOdd",
+    "AutoEven",
+    "Roof Type",
+    "parapet/shrouding",
+    "circuit‑level configuration"
+  ],
+  "businessRules": [
+    "When the user selects Condenser Type \"AC\" or \"EC\", the corresponding input fields are displayed.",
+    "For AC condensers, Design Ambient defaults to 95°F and is echoed in output 3.7.",
+    "AC input defaults: Condenser Tube Material = Copper, Condenser Fin Material = Aluminum, Condenser Tube Size options = 3/8, 3/8 w/ 1\" spacing, Condenser Fin Type = Corrugated.",
+    "EC inputs include Bank ID# (system generated), Copies of this Bank (numeric), EC Model (dropdown from catalog), and Wet Bulb Temperature (numeric).",
+    "The system records the entered AC condenser parameters (ambient design conditions and coil geometry) and EC condenser parameters (EC model and wet bulb temperature).",
+    "Given AC/EC condenser parameters and per‑circuit cooling configurations, the system outputs condenser and circuit‑level configuration ready for ECS calculation.",
+    "When configuring an AC condenser and selecting Condenser Passes, the system shall display options: AutoOdd, AutoEven, and numeric values 2 through 41 in increments of 1.",
+    "When configuring an AC condenser and selecting Roof Type, the system shall display dark and light roof type options, each with and without parapet/shrouding."
+  ],
+  "developerConsiderations": [
+    "Implement dynamic UI logic to show/hide AC or EC input sections based on Condenser Type selection.",
+    "Provide default values for Design Ambient, Tube Material, Fin Material, Tube Size, and Fin Type.",
+    "Echo the Design Ambient value in output section 3.7 after entry.",
+    "Populate Condenser Passes dropdown/list with AutoOdd, AutoEven, and numbers 2‑41 programmatically.",
+    "Define and render Roof Type choices (dark/light, with/without parapet/shrouding) according to specification.",
+    "Integrate EC Model catalog for dropdown population.",
+    "Validate numeric inputs for unit consistency (°F/°C) and handle possible conversions.",
+    "Store checkbox selections for Default Condenser and High Amb./Altit. Condenser modes.",
+    "Capture and persist per‑circuit refrigeration configuration data (structure not defined in ticket).",
+    "Ensure output format conforms to downstream ECS calculation module requirements."
+  ],
+  "ambiguities": [
+    "Exact list of dark and light roof type options is not provided.",
+    "Interaction and mutual exclusivity between \"Default Condenser\" and \"High Amb. / Altit. Cond.\" checkboxes are unclear.",
+    "Units conversion handling between °F and °C is not specified.",
+    "Definition and location of the \"Condenser Passes\" input control are not described.",
+    "Details of \"per‑circuit cooling configurations\" are missing.",
+    "The meaning and usage of \"Copies of this Bank\" numeric input are not explained.",
+    "Output format and schema for the condenser and circuit‑level configuration are not defined.",
+    "The term \"coil geometry\" is referenced but not listed among input fields."
+  ],
+  "confidence": "MEDIUM"
+}

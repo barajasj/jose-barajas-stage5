@@ -18,6 +18,13 @@ Instead, it:
 - Initiates re-review workflows
 - Produces final dispositions
 
+Coordinator Rule:
+
+HIGH findings → re-dispatch
+
+MEDIUM findings → continue
+
+LOW findings → continue
 ---
 
 # Current implementation uses mock execution.

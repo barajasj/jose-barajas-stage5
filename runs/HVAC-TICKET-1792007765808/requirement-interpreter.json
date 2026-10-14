@@ -1,0 +1,31 @@
+{
+  "requirementSummary": "Automatically calculate and display the DX Coil Height as the sum of all Cooling Circuit heights, updating the value in real time when any Circuit Height is edited.",
+  "hvacTerminology": [
+    "DX Coil",
+    "Cooling Circuit",
+    "Cooling Package",
+    "R-454B",
+    "FW 43"
+  ],
+  "businessRules": [
+    "The DX Coil Height field must be populated by summing the Height of each Cooling Circuit.",
+    "If there are 3 circuits each with a height of 7.5, the DX Coil Height must be 22.5.",
+    "When a user changes any Circuit Height, the DX Coil Height must be recomputed and the form updated immediately."
+  ],
+  "developerConsiderations": [
+    "Implement an event listener or data binding on each Circuit Height input to trigger recalculation.",
+    "Ensure the calculation runs after the Cooling Circuits are initially populated.",
+    "Handle dynamic numbers of circuits (any count).",
+    "Validate that Circuit Height inputs are numeric and non‑negative before summing.",
+    "Consider precision/rounding behavior for decimal heights.",
+    "Prevent infinite update loops if the DX Coil Height field also triggers change events."
+  ],
+  "ambiguities": [
+    "What specific action or data source populates the Cooling Circuits initially?",
+    "Is there a maximum number of circuits or any constraints on circuit count?",
+    "What units are used for heights, and should the result be formatted or rounded?",
+    "How should non‑numeric or missing Circuit Height inputs be handled?",
+    "Should the DX Coil Height field be read‑only or editable by the user?"
+  ],
+  "confidence": "MEDIUM"
+}

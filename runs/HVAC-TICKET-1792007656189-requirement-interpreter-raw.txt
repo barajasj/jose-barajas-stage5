@@ -1,0 +1,34 @@
+{
+  "requirementSummary": "Automatically populate the Unit Type dropdown based on selected Condenser Type and Refrigerant, then populate the Unit Size dropdown based on selected Refrigerant and Unit Type, using data from the unitdesign API.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes",
+    "unitdesign api",
+    "dropdowns"
+  ],
+  "businessRules": [
+    "When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be filtered by the selected Condenser Type and Refrigerant.",
+    "When a user selects a Unit Type, the Unit Size dropdown must be filtered by the selected Refrigerant and Unit Type.",
+    "Unit Type options are retrieved from the SDCommonUnitTypeRefrigerant attribute; filter by the 'parent' array containing the selected Refrigerant.",
+    "Unit Size options are retrieved from the SDCommonUnitModelSizes attribute; filter by the 'parent' array containing both the selected Refrigerant and the selected Unit Type."
+  ],
+  "developerConsiderations": [
+    "Call the unitdesign API (GET /dropdowns) to obtain dropdown data for Refrigerants, Unit Types, and Unit Sizes.",
+    "Implement filtering logic on the 'parent' arrays to match the selected values.",
+    "Ensure UI updates dynamically when Condenser Type, Refrigerant, or Unit Type selections change.",
+    "Consider caching the dropdown data to avoid repeated API calls.",
+    "Handle asynchronous loading states and display placeholders or messages when no matching options are found.",
+    "Validate that filtered options are marked 'isActive': true before presenting them to the user."
+  ],
+  "ambiguities": [
+    "How the selected Condenser Type influences the filtering of Unit Type, since the provided SDCommonUnitTypeRefrigerant data shows only Refrigerant in the parent array.",
+    "Whether filtering should also exclude items where isActive is false.",
+    "Exact API request format (query parameters, headers) for retrieving the specific dropdown attributes.",
+    "Behavior when no matching Unit Type or Unit Size options exist after filtering."
+  ],
+  "confidence": "MEDIUM"
+}

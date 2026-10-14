@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "findings": [
+    {
+      "severity": "HIGH",
+      "description": "No validation rules are defined for user-entered circuit heights (e.g., range limits, numeric format, required fields)."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "Units of measurement for circuit heights and the DX Coil Height are not specified, leading to potential unit inconsistency."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The process for handling dynamic addition or removal of cooling circuits is missing, creating ambiguity in how the total height should be recomputed."
+    },
+    {
+      "severity": "LOW",
+      "description": "The specific UI event that should trigger the recalculation (on blur, on input, on submit, etc.) is undefined."
+    },
+    {
+      "severity": "HIGH",
+      "description": "Behavior for invalid, missing, or non‑numeric circuit height values is not described, leaving error handling unspecified."
+    }
+  ]
+}

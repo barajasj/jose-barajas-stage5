@@ -102,10 +102,9 @@ async function executeWorkflow(ticket) {
     await runAgent(
       'final-review-writer',
       {
-        interpreterResult:
-          finalInterpreterResult,
-        reviewResult:
-          finalReviewResult
+        interpreterResult: finalInterpreterResult,
+        reviewResult: finalReviewResult,
+        disposition: finalReviewResult.output.status
       },
       correlationId
     );

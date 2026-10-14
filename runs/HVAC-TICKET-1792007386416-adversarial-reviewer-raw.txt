@@ -1,0 +1,13 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "Assumes unit consistency (e.g., inches or millimeters) for circuit heights, but the ticket does not specify any units."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "Assumes that circuits may be added or removed after the initial population and that the calculation must handle those events, which is not mentioned in the ticket."
+    }
+  ]
+}

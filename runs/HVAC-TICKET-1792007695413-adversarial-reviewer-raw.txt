@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter’s output and business rules omit any handling or recording of the \"ASHRAE Summer Design\" numeric input, which is listed in the ticket as a required field for AC condensers."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter assumes the system must \"Validate numeric inputs for unit consistency (°F/°C) and handle possible conversions,\" but the ticket does not specify any unit conversion rules or validation requirements, making this an unsupported assumption."
+    },
+    {
+      "severity": "LOW",
+      "description": "The interpreter adds a generic validation requirement for numeric inputs, despite the ticket providing no explicit validation rules for those fields."
+    }
+  ]
+}

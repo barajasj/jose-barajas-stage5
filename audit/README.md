@@ -24,3 +24,23 @@ Purpose:
 All audit data is persisted to disk.
 
 Correlation IDs connect every execution within a single examination workflow.
+
+## Cost Method
+
+Fireworks does not return cost information in API responses.
+
+Estimated cost is calculated using:
+
+Input:
+$0.50 / 1M tokens
+
+Output:
+$2.50 / 1M tokens
+
+Formula:
+
+(promptTokens / 1,000,000 * 0.50)
++
+(completionTokens / 1,000,000 * 2.50)
+
+This value is an estimate only and should not be considered a billing record.

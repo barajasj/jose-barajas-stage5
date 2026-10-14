@@ -1,0 +1,21 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "Interpreter assumes handling of non-numeric or missing Circuit Height inputs (e.g., treat as zero or display validation error) but the ticket does not specify any validation behavior."
+    },
+    {
+      "severity": "LOW",
+      "description": "Interpreter adds a requirement to define precision/rounding rules for the summed DX Coil Height, which is not mentioned in the ticket."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "Ticket does not specify the unit of measurement for Circuit Height; interpreter lists this as an ambiguity but does not include it as a required specification."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "Interpreter does not address how the list of Cooling Circuits is initially populated (data source/API), which is a missing requirement from the ticket."
+    }
+  ]
+}

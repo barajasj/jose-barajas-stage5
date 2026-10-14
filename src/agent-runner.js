@@ -143,7 +143,7 @@ async function runAgent(
     model: agent.model,
     promptTokens: response?.promptTokens || 0,
     completionTokens: response?.completionTokens || 0,
-    cost: response?.cost || 0,
+    cost: null,
     status: 'SUCCESS',
     timestamp: new Date().toISOString()
   };
@@ -159,7 +159,7 @@ async function runAgent(
       model: agent.model,
       promptTokens: response?.promptTokens || 0,
       completionTokens: response?.completionTokens || 0,
-      cost: response?.cost || 0
+      cost: null
     }
   };
 }

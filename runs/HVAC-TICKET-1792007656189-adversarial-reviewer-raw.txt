@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter adds a business rule that Unit Type filtering must consider the selected Condenser Type, but the ticket and provided data (SDCommonUnitTypeRefrigerant) only show Refrigerant in the parent array. This assumption is unsupported; the requirement does not specify how Condenser Type influences Unit Type filtering, resulting in a missing or ambiguous requirement."
+    }
+  ]
+}

@@ -19,7 +19,24 @@ Restrictions:
 - Do NOT introduce new findings.
 - Do NOT add conclusions not present in the supplied artifacts.
 
-Output markdown only.
+Output Requirements:
+
+Return ONLY valid JSON.
+
+IMPORTANT:
+The response must be parseable by JavaScript JSON.parse().
+Do not include explanations before the JSON.
+Do not include explanations after the JSON.
+The response must begin with {
+The response must end with }
+Do not wrap JSON in markdown.
+Do not use ```json.
+
+Return exactly this structure:
+
+{
+  "reportMarkdown": ""
+}
 
 Interpreter Output:
 

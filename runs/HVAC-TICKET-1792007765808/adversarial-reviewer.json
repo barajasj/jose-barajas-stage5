@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter introduces validation rules (numeric and non‑negative inputs, rounding/precision handling) and assumptions about field read‑only status that are not specified in the ticket, representing unsupported assumptions."
+    }
+  ]
+}

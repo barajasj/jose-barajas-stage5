@@ -24,17 +24,10 @@ async function invokeLlm({
     });
 
   return {
-    content:
-      response.choices?.[0]?.message?.content || '',
-
-    promptTokens:
-      response.usage?.prompt_tokens || 0,
-
-    completionTokens:
-      response.usage?.completion_tokens || 0,
-
-    totalTokens:
-      response.usage?.total_tokens || 0
+    content: response.choices?.[0]?.message?.content || '',
+    promptTokens: response.usage?.prompt_tokens || 0,
+    completionTokens: response.usage?.completion_tokens || 0,
+    totalTokens: response.usage?.total_tokens || 0
   };
 }
 
