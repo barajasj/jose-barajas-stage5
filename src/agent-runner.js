@@ -14,6 +14,7 @@ const mockResponses = require('./mock-agent-responses');
 const { writeAuditEntry } = require('./audit-logger');
 const { validateSchema } = require('./schema-validator');
 const { writeArtifact } = require('./artifact-writer');
+const { estimateCost } = require('./cost-estimator');
 
 const { invokeLlm } = require('./models/fireworks-client');
 const { loadPrompt } = require('./prompt-loader');
@@ -97,18 +98,6 @@ async function runAgent(
     }
   }
 
-//  if (config.runtimeMode === 'swe') {
-//     return {
-//       success: true,
-//       correlationId,
-//       agentId,
-//       output,
-//       audit: {
-//         model: agent.model
-//       }
-//     };
-//   }
-
   const validation = validateSchema(
     output,
     agent.schemaFile
@@ -136,6 +125,16 @@ async function runAgent(
     output
   );
 
+  const estimatedCost = estimateCost(
+    response?.promptTokens || 0,
+    response?.completionTokens || 0
+  );
+
+  const costMethod = 
+    `Estimated from pricing for ${agent.model} `
+    + `($${config.pricing.inputPerMillion}/1M input, `
+    + `$${config.pricing.outputPerMillion}/1M output)`;
+
   const auditEntry = {
     correlationId,
     workflow: 'hvac-ticket-governance',
@@ -143,7 +142,9 @@ async function runAgent(
     model: agent.model,
     promptTokens: response?.promptTokens || 0,
     completionTokens: response?.completionTokens || 0,
-    cost: null,
+    totalTokens: response?.totalTokens || 0,
+    cost: estimatedCost,
+    costMethod,
     status: 'SUCCESS',
     timestamp: new Date().toISOString()
   };
@@ -159,7 +160,7 @@ async function runAgent(
       model: agent.model,
       promptTokens: response?.promptTokens || 0,
       completionTokens: response?.completionTokens || 0,
-      cost: null
+      cost: estimatedCost
     }
   };
 }

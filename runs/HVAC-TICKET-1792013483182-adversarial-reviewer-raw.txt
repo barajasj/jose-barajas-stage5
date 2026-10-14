@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter introduces unsupported assumptions not present in the ticket, such as default behavior when no circuits are defined (DX Coil Height remains empty or zero) and the suggestion that the DX Coil Height field should be read‑only. These assumptions are not specified and may constrain implementation incorrectly."
+    }
+  ]
+}

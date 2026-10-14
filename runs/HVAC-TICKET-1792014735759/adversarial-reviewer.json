@@ -1,0 +1,21 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter assumes the system must add event listeners to Circuit Height fields and update the UI dynamically; the ticket only specifies that the DX Coil Height should be populated and summed, not how or when UI updates occur."
+    },
+    {
+      "severity": "LOW",
+      "description": "The interpreter includes validation that circuit height inputs are numeric before summing, which is not mentioned in the ticket and therefore an unsupported assumption."
+    },
+    {
+      "severity": "LOW",
+      "description": "The interpreter mentions handling scenarios where no circuits are present (display empty or zero); the ticket does not define this behavior, making it an assumed requirement."
+    },
+    {
+      "severity": "LOW",
+      "description": "The interpreter states that the DX Coil Height must be updated when the user alters a Circuit Height; while implied, the ticket does not explicitly require real‑time recalculation on edit, so this is an inferred requirement."
+    }
+  ]
+}

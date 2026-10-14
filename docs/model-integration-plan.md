@@ -1,4 +1,4 @@
-# SWE-1.7 Integration Plan
+# Model Integration Plan
 
 ## Current State
 
@@ -13,7 +13,7 @@ Agent Runner
   ↓
 Prompt Loader
   ↓
-SWE-1.7
+Configuraed Model (e.g. gpt-oss-120b)
   ↓
 Schema Validation
   ↓

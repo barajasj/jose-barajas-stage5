@@ -29,7 +29,7 @@ LOW findings → continue
 
 # Current implementation uses mock execution.
 
-The architecture supports replacement with SWE-1.7 via the model layer once an Improving API key is available.
+The architecture supports replacement with gpt-oss-120b via the model layer once an Improving API key is available.
 
 ---
 # Business Problem
@@ -290,3 +290,27 @@ This project demonstrates:
 - Human escalation support
 - Re-dispatch governance
 - Stage 3 evaluation continuity
+
+---
+
+## Honest Open Items
+
+### Reviewer Findings Remain
+
+Current tickets still produce reviewer findings.
+
+This is expected.
+
+The purpose of the Adversarial Reviewer is to identify assumptions, ambiguities, and missing requirements before implementation.
+
+### Cost Tracking
+
+Token counts are captured directly from Fireworks API responses.
+
+Cost values are estimated using published gpt-oss-120b pricing because Fireworks responses do not include billing cost information.
+
+### Additional Evaluation Runs
+
+Three end-to-end HVAC tickets have been executed.
+
+Additional tickets can be added to expand coverage and provide further evaluation evidence.

@@ -1,0 +1,25 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter assumes a design decision regarding whether the minimum (1.25\") and maximum (100\") bounds are enforced before or after rounding (“as per UI/UX decision”), which is not specified in the ticket."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter adds a requirement to provide user feedback when input is out of range or adjusted due to rounding, which is not stated in the ticket."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The ticket does not define how to handle an input that is exactly halfway between two valid increments (tie‑breaking rule). This missing validation rule is noted as an ambiguity."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The ticket does not specify the behavior when rounding produces a value outside the allowed range (e.g., rounding 99.9\" with a 9\" increment to 108\"), leaving a missing validation rule for out‑of‑range results after rounding."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The ticket does not describe how the system determines the coil type/configuration (user selection vs. inference), an ambiguity that affects which increment to apply."
+    }
+  ]
+}

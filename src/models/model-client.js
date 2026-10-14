@@ -14,7 +14,7 @@ async function invokeModel({
   }
 
   throw new Error(
-    'SWE integration not implemented yet.'
+    'gpt-oss-120b integration not implemented yet.'
   );
 }
 

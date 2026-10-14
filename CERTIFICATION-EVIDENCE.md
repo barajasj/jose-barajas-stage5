@@ -1,47 +1,120 @@
 # Stage 5 Evidence Index
 
-## Dispatch-Only Coordinator
+## Real Multi-Agent Workflow
 
-File:
-coordinator/coordinator-design.md
+Files:
+
+- src/coordinator.js
+- src/agent-runner.js
+- src/agent-registry.js
 
 ---
 
-## Adversarial Review
+## Requirement Interpreter
 
 Files:
-agents/adversarial-reviewer.md
-examples/reviewer-output.json
+
+- agents/requirement-interpreter.md
+- schemas/examiner.schema.json
+
+Evidence:
+
+- evidence/run1/ticket1-run.json
+- evidence/run1/ticket2-run.json
+- evidence/run1/ticket3-run.json
 
 ---
 
-## Schema Validation
+## Adversarial Reviewer
 
 Files:
-schemas/
-src/schema-validator.js
+
+- agents/adversarial-reviewer.md
+- schemas/challenges.schema.json
+
+Evidence:
+
+- evidence/run1/ticket1-run.json
+- evidence/run1/ticket2-run.json
+- evidence/run1/ticket3-run.json
 
 ---
 
-## Audit Trail
+## Final Review Writer
 
 Files:
-audit/
-src/audit-logger.js
 
----
+- agents/final-review-writer.md
+- schemas/final-review.schema.json
 
-## Human Escalation
+Evidence:
 
-Files:
-src/human-review.js
-human-decisions.jsonl
-runs/punchout-evidence.md
+- evidence/run1/ticket1-run.json
+- evidence/run1/ticket2-run.json
+- evidence/run1/ticket3-run.json
 
 ---
 
 ## Re-Dispatch Governance
 
 Files:
-coordinator/redispatch-example.md
-src/coordinator.js
+
+- src/coordinator.js
+
+Evidence:
+
+- runs/redispatch-evidence.md
+
+Rule:
+
+HIGH findings trigger re-dispatch.
+
+---
+
+## Human Escalation
+
+Files:
+
+- src/human-review.js
+- src/substance-gate.js
+
+Evidence:
+
+- runs/punchout-evidence.md
+- runs/continue-decision-evidence.md
+- runs/reject-decision-evidence.md
+
+---
+
+## Schema Validation
+
+Files:
+
+- src/schema-validator.js
+- schemas/
+
+Evidence:
+
+- interpreter validation
+- reviewer validation
+- writer validation
+
+---
+
+## Audit Trail
+
+Files:
+
+- audit/
+- src/audit-logger.js
+
+Evidence:
+
+- audit-log.jsonl
+
+Includes:
+
+- token counts
+- estimated costs
+- timestamps
+- correlation IDs

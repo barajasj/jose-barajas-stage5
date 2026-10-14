@@ -14,8 +14,8 @@
 ## Pending
 
 - Obtain Improving API Key
-- Implement swe-client.js
-- Connect Prompt Loader to SWE-1.7
+- Implement fireworks-client.js
+- Connect Prompt Loader to the configured model (e.g. gpt-oss-120b)
 - Replace mock-agent-responses.js
 - Generate real agent outputs
 - Run HVAC ticket evaluations
@@ -23,7 +23,7 @@
 
 ## First Task When API Key Arrives
 
-Create a simple test script that calls SWE-1.7 and confirms:
+Create a simple test script that calls the configured model (e.g. gpt-oss-120b) and confirms:
 
 - API connectivity
 - Authentication

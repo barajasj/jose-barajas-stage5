@@ -1,0 +1,30 @@
+{
+  "requirementSummary": "Validate coil height input for water/steam coils, enforcing a range of 1.25\" to 100\" and rounding the entered value to the nearest coil-specific increment (e.g., 1.25\", 1.50\", 2.25\", 9.00\", 1.00\").",
+  "hvacTerminology": [
+    "Coil Height",
+    "Water/Steam coils",
+    "tube",
+    "Lamiflo coil",
+    "increment"
+  ],
+  "businessRules": [
+    "Valid coil height must be between 1.25\" and 100\" inclusive.",
+    "The entered height must be a multiple of the increment defined for the selected coil type/configuration.",
+    "If the entered height is not an exact multiple, it must be rounded to the nearest valid increment.",
+    "Increment mapping: 3/8\" tube or 1/2\" tube → 1.25\"; 5/8\" tube → 1.50\"; 1\" tube → 2.25\"; Lamiflo coil → 9.00\"; 3/8\" tube with 1\" spacing → 1.00\"."
+  ],
+  "developerConsiderations": [
+    "Implement a lookup table linking coil type/configuration to its increment value.",
+    "Calculate the nearest multiple using rounding logic, handling ties (e.g., .5) consistently.",
+    "Enforce minimum (1.25\") and maximum (100\") bounds before or after rounding as per UI/UX decision.",
+    "Provide user feedback when input is out of range or adjusted due to rounding.",
+    "Ensure all calculations use consistent inch units and consider floating‑point precision."
+  ],
+  "ambiguities": [
+    "Tie‑breaking rule when the entered value is exactly halfway between two increments is not specified.",
+    "Behavior for inputs below the minimum (1.25\") or above the maximum (100\")—whether to clamp, reject, or show an error—is unclear.",
+    "How the system determines the coil type/configuration (e.g., user selection vs. inferred from other data) is not described.",
+    "Whether rounding occurs before or after range validation is not defined."
+  ],
+  "confidence": "HIGH"
+}

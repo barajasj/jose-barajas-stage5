@@ -1,46 +1,44 @@
 # Audit Trail
 
-This audit trail records every coordinator and sub-agent execution.
+The workflow writes append-only audit records to:
 
-Each record contains:
+audit/audit-log.jsonl
 
-- Correlation ID
-- Agent Name
-- Model
-- Prompt Tokens
-- Completion Tokens
-- Total Cost
-- Timestamp
-- Execution Status
+Each entry represents one completed agent execution.
 
-Purpose:
+## Recorded Fields
 
-- End-to-end traceability
-- Stage 5 compliance
-- Post-hoc auditing
-- Cost tracking
-- Workflow debugging
+- correlationId
+- workflow
+- agent
+- model
+- promptTokens
+- completionTokens
+- cost
+- costMethod
+- status
+- timestamp
 
-All audit data is persisted to disk.
+## Cost Calculation Method
 
-Correlation IDs connect every execution within a single examination workflow.
+Fireworks API responses provide live token counts but do not provide cost information.
 
-## Cost Method
+The cost field is calculated using the published configured model pricing:
 
-Fireworks does not return cost information in API responses.
-
-Estimated cost is calculated using:
-
-Input:
-$0.50 / 1M tokens
-
-Output:
-$2.50 / 1M tokens
+- Input Tokens: $0.50 per 1,000,000 tokens
+- Output Tokens: $2.50 per 1,000,000 tokens
 
 Formula:
 
-(promptTokens / 1,000,000 * 0.50)
+cost =
+(promptTokens / 1,000,000 × 0.50)
 +
-(completionTokens / 1,000,000 * 2.50)
+(completionTokens / 1,000,000 × 2.50)
 
-This value is an estimate only and should not be considered a billing record.
+## Important Note
+
+The cost value is an estimate.
+
+Token counts are captured directly from Fireworks API responses.
+
+Cost values are not returned by Fireworks and are therefore calculated locally using the documented pricing model.

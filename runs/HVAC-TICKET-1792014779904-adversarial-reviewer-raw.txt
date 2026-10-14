@@ -1,0 +1,21 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter omitted the requirement to capture the EC condenser inputs \"Bank ID#\" and \"Copies of this Bank\" as specified in the ticket."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter did not include the AC condenser checkboxes \"Default Condenser\" and \"High Amb. / Altit. Cond.\" in the captured requirements."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "Validation ranges or limits for numeric inputs (e.g., Design Ambient, Wet Bulb Temperature) are not defined in the ticket and the interpreter did not flag this missing validation requirement."
+    },
+    {
+      "severity": "LOW",
+      "description": "The roof type options (dark and light, with/without parapet/shrouding) are ambiguous and the interpreter did not propose any clarification or default handling."
+    }
+  ]
+}

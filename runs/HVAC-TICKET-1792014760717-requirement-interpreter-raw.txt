@@ -1,0 +1,34 @@
+{
+  "requirementSummary": "Auto‑populate the Unit Type dropdown based on the selected Condenser Type and Refrigerant, then auto‑populate the Unit Size dropdown based on the selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be filtered by the selected Condenser Type and Refrigerant.",
+    "When a user selects a Unit Type, the Unit Size dropdown must be filtered by the selected Refrigerant and Unit Type.",
+    "Filtering must use the \"parent\" array of the corresponding dropdown data to match the selected values.",
+    "Only items where \"isActive\" is true should be presented in the dropdowns."
+  ],
+  "developerConsiderations": [
+    "Retrieve dropdown data from the unitdesign API endpoint GET /dropdowns.",
+    "Use the SDCommonUnitTypeRefrigerant attribute to obtain Unit Type options and filter by parent containing the selected Refrigerant (and Condenser Type if applicable).",
+    "Use the SDCommonUnitModelSizes attribute to obtain Unit Size options and filter by parent containing both the selected Refrigerant and Unit Type.",
+    "Implement UI listeners to trigger the filtering logic after each relevant selection change.",
+    "Handle asynchronous API responses and ensure the UI remains responsive during data loading.",
+    "Cache dropdown data where appropriate to reduce repeated API calls.",
+    "Gracefully handle cases where no matching items are found (e.g., display an empty list or a placeholder message).",
+    "Consider error handling for API failures and fallback UI behavior."
+  ],
+  "ambiguities": [
+    "The ticket mentions filtering Unit Type by Condenser Type, but the example data only shows filtering by Refrigerant; clarification is needed on how Condenser Type participates in the filter.",
+    "It is not specified whether inactive items (isActive: false) must be excluded explicitly, though the business rule assumes only active items are shown.",
+    "Behavior when the filter results in zero options is not defined (e.g., disable the dropdown or show a message).",
+    "Details about the structure or content of the Condenser Type data source are missing."
+  ],
+  "confidence": "MEDIUM"
+}
