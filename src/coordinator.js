@@ -15,7 +15,9 @@ async function executeWorkflow(ticket) {
   const interpreterResult =
     await runAgent(
       'requirement-interpreter',
-      ticket,
+      {
+        ticket
+      },
       correlationId
     );
 

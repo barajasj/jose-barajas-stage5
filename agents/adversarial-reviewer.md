@@ -24,4 +24,4 @@ Ticket:
 
 Interpreter Output:
 
-{{interpreterOutput}}
+{{interpreterResult}}

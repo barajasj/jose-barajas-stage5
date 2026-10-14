@@ -23,11 +23,11 @@ Output markdown only.
 
 Interpreter Output:
 
-{{interpreterOutput}}
+{{interpreterResult}}
 
 Reviewer Output:
 
-{{reviewOutput}}
+{{reviewResult}}
 
 Disposition:
 
