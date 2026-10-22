@@ -1,26 +1,1222 @@
 {
+  "generatedBy": "node src/run-evals.js",
+  "generatedAt": "2026-10-22T18:35:25.037Z",
+  "methodology": "Each expected item in evals/test-cases.json is scored 1 when any keyword in its anyOf list appears (case-insensitive substring) in the relevant output field of the persisted run artifact, else 0. Criterion score = matched items / total items. Aggregate = pooled matched/total across all four fixtures. Baseline = same scorer applied to the earlier committed run artifacts (4fcbf47).",
   "requirementInterpreter": {
-    "requirementExtractionAccuracy": 0.93,
-    "hvacTerminologyRecognition": 0.96,
-    "ambiguityDetection": 0.88
+    "requirementExtractionAccuracy": 0.933,
+    "hvacTerminologyRecognition": 1,
+    "ambiguityDetection": 1
   },
   "adversarialReviewer": {
-    "unsupportedAssumptionDetection": 0.91,
-    "missingRequirementDetection": 0.89,
-    "challengeQuality": 0.94
+    "unsupportedAssumptionDetection": 1,
+    "missingRequirementDetection": 0.727,
+    "challengeQuality": 1
   },
   "finalReviewWriter": {
-    "findingPreservation": 1.00,
-    "reportCompleteness": 1.00,
-    "outputQuality": 0.97
+    "findingPreservation": 1,
+    "reportCompleteness": 1,
+    "outputQuality": 1
   },
+  "criterionDetail": {
+    "requirementInterpreter": {
+      "requirementExtractionAccuracy": {
+        "score": 0.933,
+        "threshold": 0.9,
+        "pass": true
+      },
+      "hvacTerminologyRecognition": {
+        "score": 1,
+        "threshold": 0.9,
+        "pass": true
+      },
+      "ambiguityDetection": {
+        "score": 1,
+        "threshold": 0.8,
+        "pass": true
+      }
+    },
+    "adversarialReviewer": {
+      "unsupportedAssumptionDetection": {
+        "score": 1,
+        "threshold": 0.85,
+        "pass": true
+      },
+      "missingRequirementDetection": {
+        "score": 0.727,
+        "threshold": 0.85,
+        "pass": false
+      },
+      "challengeQuality": {
+        "score": 1,
+        "threshold": 0.9,
+        "pass": true
+      }
+    },
+    "finalReviewWriter": {
+      "findingPreservation": {
+        "score": 1,
+        "threshold": 1,
+        "pass": true
+      },
+      "reportCompleteness": {
+        "score": 1,
+        "threshold": 1,
+        "pass": true
+      },
+      "outputQuality": {
+        "score": 1,
+        "threshold": 0.95,
+        "pass": true
+      }
+    }
+  },
+  "iterations": {
+    "baselineRef": "4fcbf47",
+    "note": "Ticket 4 was added after the baseline run and contributes to final scores only.",
+    "measured": {
+      "requirementInterpreter": {
+        "requirementExtractionAccuracy": {
+          "baselineScore": 0.9,
+          "finalScore": 0.933,
+          "delta": 0.033
+        },
+        "hvacTerminologyRecognition": {
+          "baselineScore": 0.864,
+          "finalScore": 1,
+          "delta": 0.136
+        },
+        "ambiguityDetection": {
+          "baselineScore": 0.5,
+          "finalScore": 1,
+          "delta": 0.5
+        }
+      },
+      "adversarialReviewer": {
+        "unsupportedAssumptionDetection": {
+          "baselineScore": 1,
+          "finalScore": 1,
+          "delta": 0
+        },
+        "missingRequirementDetection": {
+          "baselineScore": 0.25,
+          "finalScore": 0.727,
+          "delta": 0.477
+        },
+        "challengeQuality": {
+          "baselineScore": 1,
+          "finalScore": 1,
+          "delta": 0
+        }
+      },
+      "finalReviewWriter": {
+        "findingPreservation": {
+          "baselineScore": 0.8,
+          "finalScore": 1,
+          "delta": 0.2
+        },
+        "reportCompleteness": {
+          "baselineScore": 1,
+          "finalScore": 1,
+          "delta": 0
+        },
+        "outputQuality": {
+          "baselineScore": 0.667,
+          "finalScore": 1,
+          "delta": 0.333
+        }
+      }
+    }
+  },
+  "perFixture": [
+    {
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "correlationId": "HVAC-TICKET-1792016512336",
+      "disposition": "FAIL",
+      "scores": {
+        "requirementInterpreter": {
+          "requirementExtractionAccuracy": {
+            "score": 1,
+            "matched": 3,
+            "total": 3,
+            "items": [
+              {
+                "id": "t1-r1",
+                "expectation": "DX Coil Height equals the sum of all Cooling Circuit heights",
+                "matched": true
+              },
+              {
+                "id": "t1-r2",
+                "expectation": "Cooling Circuits are populated when a Cooling Package is entered",
+                "matched": true
+              },
+              {
+                "id": "t1-r3",
+                "expectation": "Editing a circuit height recalculates and updates the DX Coil Height",
+                "matched": true
+              }
+            ]
+          },
+          "hvacTerminologyRecognition": {
+            "score": 1,
+            "matched": 6,
+            "total": 6,
+            "matchedTerms": [
+              "DX Coil",
+              "Cooling Circuit",
+              "Cooling Package",
+              "R-454B",
+              "Circuit Height",
+              "DX Coil Information"
+            ]
+          },
+          "ambiguityDetection": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "items": [
+              {
+                "id": "t1-a1",
+                "expectation": "No validation rules for circuit heights are defined",
+                "matched": true
+              },
+              {
+                "id": "t1-a2",
+                "expectation": "Units of measurement are not defined",
+                "matched": true
+              },
+              {
+                "id": "t1-a3",
+                "expectation": "Behavior when circuits are added or removed after initial load is unclear",
+                "matched": true
+              },
+              {
+                "id": "t1-a4",
+                "expectation": "Source/format of initial circuit data is unspecified",
+                "matched": true
+              }
+            ]
+          }
+        },
+        "adversarialReviewer": {
+          "unsupportedAssumptionDetection": {
+            "score": 1,
+            "matched": 1,
+            "total": 1,
+            "items": [
+              {
+                "id": "t1-ua1",
+                "expectation": "Interpreter assumes validation behavior the ticket does not specify",
+                "matched": true
+              }
+            ]
+          },
+          "missingRequirementDetection": {
+            "score": 1,
+            "matched": 2,
+            "total": 2,
+            "items": [
+              {
+                "id": "t1-mr1",
+                "expectation": "Missing validation rules (range, precision, format) for circuit heights",
+                "matched": true
+              },
+              {
+                "id": "t1-mr2",
+                "expectation": "Missing handling for dynamic circuit add/remove",
+                "matched": true
+              }
+            ]
+          },
+          "challengeQuality": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "statusConsistent": true,
+            "wellFormedFindings": 3,
+            "totalFindings": 3
+          }
+        },
+        "finalReviewWriter": {
+          "findingPreservation": {
+            "score": 1,
+            "matched": 3,
+            "total": 3
+          },
+          "reportCompleteness": {
+            "score": 1,
+            "matched": 3,
+            "total": 3
+          },
+          "outputQuality": {
+            "score": 1,
+            "matched": 5,
+            "total": 5,
+            "checks": [
+              {
+                "name": "dispositionHeading",
+                "pass": true
+              },
+              {
+                "name": "summarySection",
+                "pass": true
+              },
+              {
+                "name": "findingsSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionStated",
+                "pass": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "correlationId": "HVAC-TICKET-1792016526650",
+      "disposition": "FAIL",
+      "scores": {
+        "requirementInterpreter": {
+          "requirementExtractionAccuracy": {
+            "score": 0.6666666666666666,
+            "matched": 2,
+            "total": 3,
+            "items": [
+              {
+                "id": "t2-r1",
+                "expectation": "Unit Type dropdown filtered by selected Condenser Type and Refrigerant",
+                "matched": true
+              },
+              {
+                "id": "t2-r2",
+                "expectation": "Unit Size dropdown filtered by selected Refrigerant and Unit Type",
+                "matched": true
+              },
+              {
+                "id": "t2-r3",
+                "expectation": "Filtering uses the 'parent' attribute of dropdown data",
+                "matched": false
+              }
+            ]
+          },
+          "hvacTerminologyRecognition": {
+            "score": 1,
+            "matched": 6,
+            "total": 6,
+            "matchedTerms": [
+              "Condenser Type",
+              "Refrigerant",
+              "Unit Type",
+              "Unit Size",
+              "SDCommonUnitTypeRefrigerant",
+              "SDCommonUnitModelSizes"
+            ]
+          },
+          "ambiguityDetection": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "items": [
+              {
+                "id": "t2-a1",
+                "expectation": "How Condenser Type participates in the Unit Type filter is unclear given the parent data",
+                "matched": true
+              },
+              {
+                "id": "t2-a2",
+                "expectation": "Behavior when filtering yields no matching options",
+                "matched": true
+              },
+              {
+                "id": "t2-a3",
+                "expectation": "Case sensitivity of filtering is undefined",
+                "matched": true
+              },
+              {
+                "id": "t2-a4",
+                "expectation": "Whether downstream selections persist or reset on upstream change",
+                "matched": true
+              }
+            ]
+          }
+        },
+        "adversarialReviewer": {
+          "unsupportedAssumptionDetection": {
+            "score": 1,
+            "matched": 1,
+            "total": 1,
+            "items": [
+              {
+                "id": "t2-ua1",
+                "expectation": "Interpreter assumes Condenser Type is part of the parent filter data",
+                "matched": true
+              }
+            ]
+          },
+          "missingRequirementDetection": {
+            "score": 1,
+            "matched": 2,
+            "total": 2,
+            "items": [
+              {
+                "id": "t2-mr1",
+                "expectation": "UI behavior for empty filter results is unspecified",
+                "matched": true
+              },
+              {
+                "id": "t2-mr2",
+                "expectation": "isActive flag handling for dropdown entries",
+                "matched": true
+              }
+            ]
+          },
+          "challengeQuality": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "statusConsistent": true,
+            "wellFormedFindings": 3,
+            "totalFindings": 3
+          }
+        },
+        "finalReviewWriter": {
+          "findingPreservation": {
+            "score": 1,
+            "matched": 3,
+            "total": 3
+          },
+          "reportCompleteness": {
+            "score": 1,
+            "matched": 3,
+            "total": 3
+          },
+          "outputQuality": {
+            "score": 1,
+            "matched": 5,
+            "total": 5,
+            "checks": [
+              {
+                "name": "dispositionHeading",
+                "pass": true
+              },
+              {
+                "name": "summarySection",
+                "pass": true
+              },
+              {
+                "name": "findingsSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionStated",
+                "pass": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "correlationId": "HVAC-TICKET-1792016543957",
+      "disposition": "FAIL",
+      "scores": {
+        "requirementInterpreter": {
+          "requirementExtractionAccuracy": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "items": [
+              {
+                "id": "t3-r1",
+                "expectation": "Selecting Condenser Type AC or EC displays the corresponding input fields",
+                "matched": true
+              },
+              {
+                "id": "t3-r2",
+                "expectation": "Condenser Passes options are AutoOdd, AutoEven, and 2 through 41",
+                "matched": true
+              },
+              {
+                "id": "t3-r3",
+                "expectation": "Roof Type options include dark/light variants with and without parapet/shrouding",
+                "matched": true
+              },
+              {
+                "id": "t3-r4",
+                "expectation": "Configuration output is prepared for ECS calculation",
+                "matched": true
+              }
+            ]
+          },
+          "hvacTerminologyRecognition": {
+            "score": 1,
+            "matched": 10,
+            "total": 10,
+            "matchedTerms": [
+              "Air Cooled",
+              "Evaporative Cooled",
+              "condenser",
+              "wet bulb",
+              "ASHRAE",
+              "Bank ID",
+              "EC model",
+              "condenser passes",
+              "roof type",
+              "ECS"
+            ]
+          },
+          "ambiguityDetection": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "items": [
+              {
+                "id": "t3-a1",
+                "expectation": "Exact roof type option list is not provided",
+                "matched": true
+              },
+              {
+                "id": "t3-a2",
+                "expectation": "EC Model catalog entries are not enumerated",
+                "matched": true
+              },
+              {
+                "id": "t3-a3",
+                "expectation": "Validation ranges for numeric inputs are not specified",
+                "matched": true
+              },
+              {
+                "id": "t3-a4",
+                "expectation": "Unit handling (deg F vs deg C) is not clarified",
+                "matched": true
+              }
+            ]
+          }
+        },
+        "adversarialReviewer": {
+          "unsupportedAssumptionDetection": {
+            "score": 1,
+            "matched": 0,
+            "total": 0,
+            "items": []
+          },
+          "missingRequirementDetection": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "items": [
+              {
+                "id": "t3-mr1",
+                "expectation": "Bank ID and Copies of this Bank fields are not captured",
+                "matched": true
+              },
+              {
+                "id": "t3-mr2",
+                "expectation": "Default Condenser and High Amb./Altit. checkboxes are omitted",
+                "matched": true
+              },
+              {
+                "id": "t3-mr3",
+                "expectation": "Validation rules/ranges for numeric inputs are missing",
+                "matched": true
+              },
+              {
+                "id": "t3-mr4",
+                "expectation": "Per-circuit cooling configuration inputs are not mentioned",
+                "matched": true
+              }
+            ]
+          },
+          "challengeQuality": {
+            "score": 1,
+            "matched": 5,
+            "total": 5,
+            "statusConsistent": true,
+            "wellFormedFindings": 4,
+            "totalFindings": 4
+          }
+        },
+        "finalReviewWriter": {
+          "findingPreservation": {
+            "score": 1,
+            "matched": 4,
+            "total": 4
+          },
+          "reportCompleteness": {
+            "score": 1,
+            "matched": 4,
+            "total": 4
+          },
+          "outputQuality": {
+            "score": 1,
+            "matched": 5,
+            "total": 5,
+            "checks": [
+              {
+                "name": "dispositionHeading",
+                "pass": true
+              },
+              {
+                "name": "summarySection",
+                "pass": true
+              },
+              {
+                "name": "findingsSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionStated",
+                "pass": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-4.md",
+      "correlationId": "HVAC-TICKET-1792016553892",
+      "disposition": "PASS",
+      "scores": {
+        "requirementInterpreter": {
+          "requirementExtractionAccuracy": {
+            "score": 1,
+            "matched": 5,
+            "total": 5,
+            "items": [
+              {
+                "id": "t4-r1",
+                "expectation": "Valid coil height range is 1.25 in to 100 in",
+                "matched": true
+              },
+              {
+                "id": "t4-r2",
+                "expectation": "Entered value must be a multiple of a coil-specific increment",
+                "matched": true
+              },
+              {
+                "id": "t4-r3",
+                "expectation": "Non-multiple values are rounded to the nearest valid increment",
+                "matched": true
+              },
+              {
+                "id": "t4-r4",
+                "expectation": "Increment mapping covers Lamiflo coil at 9.00 in",
+                "matched": true
+              },
+              {
+                "id": "t4-r5",
+                "expectation": "Increment mapping covers 1 in tube at 2.25 in",
+                "matched": true
+              }
+            ]
+          },
+          "hvacTerminologyRecognition": {
+            "score": 1,
+            "matched": 5,
+            "total": 5,
+            "matchedTerms": [
+              "Coil Height",
+              "tube",
+              "Lamiflo",
+              "increment",
+              "Water/Steam"
+            ]
+          },
+          "ambiguityDetection": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "items": [
+              {
+                "id": "t4-a1",
+                "expectation": "Tie-breaking when value is exactly between increments",
+                "matched": true
+              },
+              {
+                "id": "t4-a2",
+                "expectation": "How the 1-inch-spacing configuration is detected",
+                "matched": true
+              },
+              {
+                "id": "t4-a3",
+                "expectation": "Behavior for out-of-range inputs",
+                "matched": true
+              },
+              {
+                "id": "t4-a4",
+                "expectation": "Handling for coil types not in the increment mapping",
+                "matched": true
+              }
+            ]
+          }
+        },
+        "adversarialReviewer": {
+          "unsupportedAssumptionDetection": {
+            "score": 1,
+            "matched": 0,
+            "total": 0,
+            "items": []
+          },
+          "missingRequirementDetection": {
+            "score": 0,
+            "matched": 0,
+            "total": 3,
+            "items": [
+              {
+                "id": "t4-mr1",
+                "expectation": "Tie-breaking/rounding direction at exact half increments is unresolved",
+                "matched": false
+              },
+              {
+                "id": "t4-mr2",
+                "expectation": "Detection of the 1-inch-spacing configuration is undefined",
+                "matched": false
+              },
+              {
+                "id": "t4-mr3",
+                "expectation": "Out-of-range behavior (error vs clamp) is unspecified",
+                "matched": false
+              }
+            ]
+          },
+          "challengeQuality": {
+            "score": 1,
+            "matched": 1,
+            "total": 1,
+            "statusConsistent": true,
+            "wellFormedFindings": 0,
+            "totalFindings": 0
+          }
+        },
+        "finalReviewWriter": {
+          "findingPreservation": {
+            "score": 0,
+            "matched": 0,
+            "total": 0,
+            "note": "Report lists findings although reviewer found none."
+          },
+          "reportCompleteness": {
+            "score": 1,
+            "matched": 0,
+            "total": 0
+          },
+          "outputQuality": {
+            "score": 1,
+            "matched": 5,
+            "total": 5,
+            "checks": [
+              {
+                "name": "dispositionHeading",
+                "pass": true
+              },
+              {
+                "name": "summarySection",
+                "pass": true
+              },
+              {
+                "name": "findingsSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionStated",
+                "pass": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "baselinePerFixture": [
+    {
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "correlationId": "HVAC-TICKET-1792007765808",
+      "scores": {
+        "requirementInterpreter": {
+          "requirementExtractionAccuracy": {
+            "score": 0.6666666666666666,
+            "matched": 2,
+            "total": 3,
+            "items": [
+              {
+                "id": "t1-r1",
+                "expectation": "DX Coil Height equals the sum of all Cooling Circuit heights",
+                "matched": true
+              },
+              {
+                "id": "t1-r2",
+                "expectation": "Cooling Circuits are populated when a Cooling Package is entered",
+                "matched": false
+              },
+              {
+                "id": "t1-r3",
+                "expectation": "Editing a circuit height recalculates and updates the DX Coil Height",
+                "matched": true
+              }
+            ]
+          },
+          "hvacTerminologyRecognition": {
+            "score": 0.6666666666666666,
+            "matched": 4,
+            "total": 6,
+            "matchedTerms": [
+              "DX Coil",
+              "Cooling Circuit",
+              "Cooling Package",
+              "R-454B"
+            ]
+          },
+          "ambiguityDetection": {
+            "score": 0.5,
+            "matched": 2,
+            "total": 4,
+            "items": [
+              {
+                "id": "t1-a1",
+                "expectation": "No validation rules for circuit heights are defined",
+                "matched": false
+              },
+              {
+                "id": "t1-a2",
+                "expectation": "Units of measurement are not defined",
+                "matched": true
+              },
+              {
+                "id": "t1-a3",
+                "expectation": "Behavior when circuits are added or removed after initial load is unclear",
+                "matched": false
+              },
+              {
+                "id": "t1-a4",
+                "expectation": "Source/format of initial circuit data is unspecified",
+                "matched": true
+              }
+            ]
+          }
+        },
+        "adversarialReviewer": {
+          "unsupportedAssumptionDetection": {
+            "score": 1,
+            "matched": 1,
+            "total": 1,
+            "items": [
+              {
+                "id": "t1-ua1",
+                "expectation": "Interpreter assumes validation behavior the ticket does not specify",
+                "matched": true
+              }
+            ]
+          },
+          "missingRequirementDetection": {
+            "score": 0.5,
+            "matched": 1,
+            "total": 2,
+            "items": [
+              {
+                "id": "t1-mr1",
+                "expectation": "Missing validation rules (range, precision, format) for circuit heights",
+                "matched": true
+              },
+              {
+                "id": "t1-mr2",
+                "expectation": "Missing handling for dynamic circuit add/remove",
+                "matched": false
+              }
+            ]
+          },
+          "challengeQuality": {
+            "score": 1,
+            "matched": 2,
+            "total": 2,
+            "statusConsistent": true,
+            "wellFormedFindings": 1,
+            "totalFindings": 1
+          }
+        },
+        "finalReviewWriter": {
+          "findingPreservation": {
+            "score": 1,
+            "matched": 1,
+            "total": 1
+          },
+          "reportCompleteness": {
+            "score": 1,
+            "matched": 1,
+            "total": 1
+          },
+          "outputQuality": {
+            "score": 0.6,
+            "matched": 3,
+            "total": 5,
+            "checks": [
+              {
+                "name": "dispositionHeading",
+                "pass": false
+              },
+              {
+                "name": "summarySection",
+                "pass": true
+              },
+              {
+                "name": "findingsSection",
+                "pass": false
+              },
+              {
+                "name": "dispositionSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionStated",
+                "pass": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "correlationId": "HVAC-TICKET-1792007656189",
+      "scores": {
+        "requirementInterpreter": {
+          "requirementExtractionAccuracy": {
+            "score": 1,
+            "matched": 3,
+            "total": 3,
+            "items": [
+              {
+                "id": "t2-r1",
+                "expectation": "Unit Type dropdown filtered by selected Condenser Type and Refrigerant",
+                "matched": true
+              },
+              {
+                "id": "t2-r2",
+                "expectation": "Unit Size dropdown filtered by selected Refrigerant and Unit Type",
+                "matched": true
+              },
+              {
+                "id": "t2-r3",
+                "expectation": "Filtering uses the 'parent' attribute of dropdown data",
+                "matched": true
+              }
+            ]
+          },
+          "hvacTerminologyRecognition": {
+            "score": 1,
+            "matched": 6,
+            "total": 6,
+            "matchedTerms": [
+              "Condenser Type",
+              "Refrigerant",
+              "Unit Type",
+              "Unit Size",
+              "SDCommonUnitTypeRefrigerant",
+              "SDCommonUnitModelSizes"
+            ]
+          },
+          "ambiguityDetection": {
+            "score": 0.5,
+            "matched": 2,
+            "total": 4,
+            "items": [
+              {
+                "id": "t2-a1",
+                "expectation": "How Condenser Type participates in the Unit Type filter is unclear given the parent data",
+                "matched": true
+              },
+              {
+                "id": "t2-a2",
+                "expectation": "Behavior when filtering yields no matching options",
+                "matched": true
+              },
+              {
+                "id": "t2-a3",
+                "expectation": "Case sensitivity of filtering is undefined",
+                "matched": false
+              },
+              {
+                "id": "t2-a4",
+                "expectation": "Whether downstream selections persist or reset on upstream change",
+                "matched": false
+              }
+            ]
+          }
+        },
+        "adversarialReviewer": {
+          "unsupportedAssumptionDetection": {
+            "score": 1,
+            "matched": 1,
+            "total": 1,
+            "items": [
+              {
+                "id": "t2-ua1",
+                "expectation": "Interpreter assumes Condenser Type is part of the parent filter data",
+                "matched": true
+              }
+            ]
+          },
+          "missingRequirementDetection": {
+            "score": 0,
+            "matched": 0,
+            "total": 2,
+            "items": [
+              {
+                "id": "t2-mr1",
+                "expectation": "UI behavior for empty filter results is unspecified",
+                "matched": false
+              },
+              {
+                "id": "t2-mr2",
+                "expectation": "isActive flag handling for dropdown entries",
+                "matched": false
+              }
+            ]
+          },
+          "challengeQuality": {
+            "score": 1,
+            "matched": 2,
+            "total": 2,
+            "statusConsistent": true,
+            "wellFormedFindings": 1,
+            "totalFindings": 1
+          }
+        },
+        "finalReviewWriter": {
+          "findingPreservation": {
+            "score": 0,
+            "matched": 0,
+            "total": 1
+          },
+          "reportCompleteness": {
+            "score": 1,
+            "matched": 1,
+            "total": 1
+          },
+          "outputQuality": {
+            "score": 0.8,
+            "matched": 4,
+            "total": 5,
+            "checks": [
+              {
+                "name": "dispositionHeading",
+                "pass": false
+              },
+              {
+                "name": "summarySection",
+                "pass": true
+              },
+              {
+                "name": "findingsSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionStated",
+                "pass": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "correlationId": "HVAC-TICKET-1792007695413",
+      "scores": {
+        "requirementInterpreter": {
+          "requirementExtractionAccuracy": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "items": [
+              {
+                "id": "t3-r1",
+                "expectation": "Selecting Condenser Type AC or EC displays the corresponding input fields",
+                "matched": true
+              },
+              {
+                "id": "t3-r2",
+                "expectation": "Condenser Passes options are AutoOdd, AutoEven, and 2 through 41",
+                "matched": true
+              },
+              {
+                "id": "t3-r3",
+                "expectation": "Roof Type options include dark/light variants with and without parapet/shrouding",
+                "matched": true
+              },
+              {
+                "id": "t3-r4",
+                "expectation": "Configuration output is prepared for ECS calculation",
+                "matched": true
+              }
+            ]
+          },
+          "hvacTerminologyRecognition": {
+            "score": 0.9,
+            "matched": 9,
+            "total": 10,
+            "matchedTerms": [
+              "Air Cooled",
+              "Evaporative Cooled",
+              "condenser",
+              "wet bulb",
+              "ASHRAE",
+              "Bank ID",
+              "condenser passes",
+              "roof type",
+              "ECS"
+            ]
+          },
+          "ambiguityDetection": {
+            "score": 0.5,
+            "matched": 2,
+            "total": 4,
+            "items": [
+              {
+                "id": "t3-a1",
+                "expectation": "Exact roof type option list is not provided",
+                "matched": true
+              },
+              {
+                "id": "t3-a2",
+                "expectation": "EC Model catalog entries are not enumerated",
+                "matched": false
+              },
+              {
+                "id": "t3-a3",
+                "expectation": "Validation ranges for numeric inputs are not specified",
+                "matched": false
+              },
+              {
+                "id": "t3-a4",
+                "expectation": "Unit handling (deg F vs deg C) is not clarified",
+                "matched": true
+              }
+            ]
+          }
+        },
+        "adversarialReviewer": {
+          "unsupportedAssumptionDetection": {
+            "score": 1,
+            "matched": 0,
+            "total": 0,
+            "items": []
+          },
+          "missingRequirementDetection": {
+            "score": 0.25,
+            "matched": 1,
+            "total": 4,
+            "items": [
+              {
+                "id": "t3-mr1",
+                "expectation": "Bank ID and Copies of this Bank fields are not captured",
+                "matched": false
+              },
+              {
+                "id": "t3-mr2",
+                "expectation": "Default Condenser and High Amb./Altit. checkboxes are omitted",
+                "matched": false
+              },
+              {
+                "id": "t3-mr3",
+                "expectation": "Validation rules/ranges for numeric inputs are missing",
+                "matched": true
+              },
+              {
+                "id": "t3-mr4",
+                "expectation": "Per-circuit cooling configuration inputs are not mentioned",
+                "matched": false
+              }
+            ]
+          },
+          "challengeQuality": {
+            "score": 1,
+            "matched": 4,
+            "total": 4,
+            "statusConsistent": true,
+            "wellFormedFindings": 3,
+            "totalFindings": 3
+          }
+        },
+        "finalReviewWriter": {
+          "findingPreservation": {
+            "score": 1,
+            "matched": 3,
+            "total": 3
+          },
+          "reportCompleteness": {
+            "score": 1,
+            "matched": 3,
+            "total": 3
+          },
+          "outputQuality": {
+            "score": 0.6,
+            "matched": 3,
+            "total": 5,
+            "checks": [
+              {
+                "name": "dispositionHeading",
+                "pass": false
+              },
+              {
+                "name": "summarySection",
+                "pass": true
+              },
+              {
+                "name": "findingsSection",
+                "pass": false
+              },
+              {
+                "name": "dispositionSection",
+                "pass": true
+              },
+              {
+                "name": "dispositionStated",
+                "pass": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-4.md",
+      "correlationId": null,
+      "scores": null
+    }
+  ],
   "testArtifacts": {
     "fixtures": [
-      "/fixtures/hvac-ticket-1.md",
-      "/fixtures/hvac-ticket-2.md",
-      "/fixtures/hvac-ticket-3.md",
-      "/fixtures/hvac-ticket-4.md"
+      "fixtures/hvac-ticket-1.md",
+      "fixtures/hvac-ticket-2.md",
+      "fixtures/hvac-ticket-3.md",
+      "fixtures/hvac-ticket-4.md"
     ],
+    "testCaseDefinitions": "evals/test-cases.json",
+    "scorer": "src/eval-scorer.js",
     "coverage": {
       "requirementInterpreter": "direct",
       "adversarialReviewer": "direct",
