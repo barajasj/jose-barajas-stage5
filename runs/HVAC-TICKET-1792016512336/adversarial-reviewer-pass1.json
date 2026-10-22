@@ -1,0 +1,25 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter assumes numeric validation (e.g., positive numbers, unit consistency) for circuit heights, but the ticket does not specify any validation requirements."
+    },
+    {
+      "severity": "HIGH",
+      "description": "The interpreter does not capture missing validation rules such as required range, precision, or format for circuit height inputs, which are essential for reliable calculations."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter omits the requirement to handle dynamic addition or removal of cooling circuits after the initial load, which is ambiguous in the ticket."
+    },
+    {
+      "severity": "LOW",
+      "description": "Units of measurement for circuit heights are not defined in the ticket, yet the interpreter does not explicitly require unit specification."
+    },
+    {
+      "severity": "LOW",
+      "description": "The interpreter assumes implementation details like event listeners or data binding, which are developer considerations not mandated by the ticket."
+    }
+  ]
+}

@@ -22,6 +22,16 @@ function writeArtifact(
     `${agentId}.json`
   );
 
+  if (fs.existsSync(filename)) {
+    const pass1Filename = path.join(
+      runDir,
+      `${agentId}-pass1.json`
+    );
+    if (!fs.existsSync(pass1Filename)) {
+      fs.copyFileSync(filename, pass1Filename);
+    }
+  }
+
   fs.writeFileSync(
     filename,
     JSON.stringify(output, null, 2)

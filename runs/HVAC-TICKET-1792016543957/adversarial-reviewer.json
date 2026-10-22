@@ -1,0 +1,21 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter output does not capture the \"Bank ID#\" field and the \"Copies of this Bank\" numeric input required for EC condenser configuration."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter omits the \"Default Condenser\" and \"High Amb. / Altit. Cond.\" checkboxes from the AC condenser requirements, leaving their intended behavior undocumented."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "No validation rules or range specifications for numeric inputs (Design Ambient, ASHRAE Summer Design, Wet Bulb Temperature, Copies of this Bank) are included, contrary to the need for input validation."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter does not mention per‑circuit cooling configuration inputs, which are referenced in the ticket as necessary for accurate ECS calculations."
+    }
+  ]
+}

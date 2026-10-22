@@ -2,22 +2,19 @@
 
 ## Current State
 
-Mock execution
+Live execution via Fireworks AI (`src/models/fireworks-client.js`) using `accounts/fireworks/models/gpt-oss-120b` (with optional `RUNTIME_MODE=mock` fallback in `src/mock-agent-responses.js`).
 
-Source:
-mock-agent-responses.js
-
-## Target State
+## Architecture Flow
 
 Agent Runner
   ↓
-Prompt Loader
+Prompt Loader & Builder
   ↓
-Configuraed Model (e.g. gpt-oss-120b)
+Configured Model (`accounts/fireworks/models/gpt-oss-120b`)
   ↓
-Schema Validation
+Schema Validation (`ajv`)
   ↓
-Audit Trail
+Audit Trail & Cost Estimation (`audit/audit-log.jsonl`)
 
 ## Objectives
 

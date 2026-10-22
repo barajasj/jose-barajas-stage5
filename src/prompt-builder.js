@@ -18,6 +18,28 @@ function buildPrompt(
 
     });
 
+  if (
+    variables.previousInterpretation &&
+    !template.includes('{{previousInterpretation}}')
+  ) {
+    prompt += `\n\nPrevious Interpretation:\n${JSON.stringify(
+      variables.previousInterpretation,
+      null,
+      2
+    )}`;
+  }
+
+  if (
+    variables.reviewerFindings &&
+    !template.includes('{{reviewerFindings}}')
+  ) {
+    prompt += `\n\nAdversarial Reviewer Findings (address all HIGH severity challenges without inventing unsupported requirements):\n${JSON.stringify(
+      variables.reviewerFindings,
+      null,
+      2
+    )}`;
+  }
+
   return prompt;
 }
 

@@ -35,12 +35,15 @@ The coordinator did not automatically approve the workflow.
 
 ---
 
-Initial Review Findings: 3
+Initial Review Findings: 5 (1 HIGH, 2 MEDIUM, 2 LOW)
 
-Final Review Findings: 2
+Final Review Findings: 3 (0 HIGH, 2 MEDIUM, 1 LOW)
+
+Correlation ID:
+HVAC-TICKET-1792016512336 (`evidence/ticket1-run.json`)
 
 Coordinator Action:
-Re-dispatch Requirement Interpreter
+Re-dispatch Requirement Interpreter with `previousInterpretation` and `reviewerFindings`, then re-run Adversarial Reviewer.
 
 Result:
-Findings reduced after second analysis pass.
+HIGH severity finding resolved and total findings reduced from 5 to 3 after second analysis pass (`stepsExecuted`: 5, `totalCost`: $0.009393).

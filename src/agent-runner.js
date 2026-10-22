@@ -125,9 +125,14 @@ async function runAgent(
     output
   );
 
+  const promptTokens = response?.promptTokens || 0;
+  const completionTokens = response?.completionTokens || 0;
+  const totalTokens =
+    response?.totalTokens || (promptTokens + completionTokens);
+
   const estimatedCost = estimateCost(
-    response?.promptTokens || 0,
-    response?.completionTokens || 0
+    promptTokens,
+    completionTokens
   );
 
   const costMethod = 
@@ -140,9 +145,9 @@ async function runAgent(
     workflow: 'hvac-ticket-governance',
     agent: agentId,
     model: agent.model,
-    promptTokens: response?.promptTokens || 0,
-    completionTokens: response?.completionTokens || 0,
-    totalTokens: response?.totalTokens || 0,
+    promptTokens,
+    completionTokens,
+    totalTokens,
     cost: estimatedCost,
     costMethod,
     status: 'SUCCESS',
@@ -158,9 +163,11 @@ async function runAgent(
     output,
     audit: {
       model: agent.model,
-      promptTokens: response?.promptTokens || 0,
-      completionTokens: response?.completionTokens || 0,
-      cost: estimatedCost
+      promptTokens,
+      completionTokens,
+      totalTokens,
+      cost: estimatedCost,
+      costMethod
     }
   };
 }

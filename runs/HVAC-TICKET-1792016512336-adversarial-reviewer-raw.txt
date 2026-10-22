@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter output does not specify validation rules for Circuit Height inputs (e.g., numeric range, required format, precision) which are required to ensure correct summation."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter output omits requirements for handling dynamic addition or removal of Cooling Circuits after the initial load, which may affect the DX Coil Height calculation."
+    },
+    {
+      "severity": "LOW",
+      "description": "Units of measurement for circuit heights are not defined in the interpreter output, leading to ambiguity."
+    }
+  ]
+}

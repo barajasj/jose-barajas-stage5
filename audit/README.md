@@ -6,7 +6,7 @@ audit/audit-log.jsonl
 
 Each entry represents one completed agent execution.
 
-## Recorded Fields
+## Recorded Fields (Per-Step Audit Log: `audit/audit-log.jsonl`)
 
 - correlationId
 - workflow
@@ -14,10 +14,24 @@ Each entry represents one completed agent execution.
 - model
 - promptTokens
 - completionTokens
+- totalTokens
 - cost
 - costMethod
 - status
 - timestamp
+
+## Workflow-Level Cost Summary (`totalCost` & `auditSummary`)
+
+Each workflow execution returns a top-level `totalCost` and `auditSummary` object aggregating all executed steps (3 steps on standard runs, 5 steps when re-dispatched):
+
+- model
+- stepsExecuted
+- reDispatched
+- totalPromptTokens
+- totalCompletionTokens
+- totalTokens
+- totalCost
+- costMethod
 
 ## Cost Calculation Method
 

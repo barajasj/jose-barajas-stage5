@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "HIGH",
+      "description": "The interpreter assumes that the selected Condenser Type influences the Unit Type filter, but the provided data examples (SDCommonUnitTypeRefrigerant) only contain Refrigerant in the 'parent' array; the ticket does not provide evidence of Condenser Type being part of the filter criteria, making this assumption unsupported."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The ticket does not specify the expected UI behavior when filtering yields no matching Unit Type or Unit Size options; the interpreter does not define handling for empty result sets, which is a missing requirement."
+    },
+    {
+      "severity": "LOW",
+      "description": "The ticket does not define case‑sensitivity for filtering or whether selections should be persisted or reset when an upstream dropdown changes; these ambiguities are noted but not captured as explicit requirements."
+    }
+  ]
+}

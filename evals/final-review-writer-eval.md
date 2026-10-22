@@ -46,6 +46,7 @@ The writer receives prior workflow outputs, not tickets directly. These fixtures
 - /fixtures/hvac-ticket-1.md
 - /fixtures/hvac-ticket-2.md
 - /fixtures/hvac-ticket-3.md
+- /fixtures/hvac-ticket-4.md
 
 ## Test Artifacts
 

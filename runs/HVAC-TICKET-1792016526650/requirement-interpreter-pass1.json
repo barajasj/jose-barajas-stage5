@@ -1,0 +1,32 @@
+{
+  "requirementSummary": "Autopopulate the Unit Type dropdown based on selected Condenser Type and Refrigerant, then autopopulate the Unit Size dropdown based on selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be filtered to options whose 'parent' includes the selected Refrigerant (and implicitly the selected Condenser Type).",
+    "When a user selects a Unit Type, the Unit Size dropdown must be filtered to options whose 'parent' includes both the selected Refrigerant and the selected Unit Type.",
+    "Only items with \"isActive\": true should be presented in the dropdowns."
+  ],
+  "developerConsiderations": [
+    "Retrieve dropdown data via the unitdesign API endpoint GET /dropdowns.",
+    "Use the SDCommonUnitTypeRefrigerant attribute to obtain Unit Type options and filter on its 'parent' array.",
+    "Use the SDCommonUnitModelSizes attribute to obtain Unit Size options and filter on its 'parent' array containing both Refrigerant and Unit Type.",
+    "Implement UI logic to trigger filtering after each relevant selection change and to clear dependent dropdowns when upstream selections change.",
+    "Ensure asynchronous calls handle loading states and error handling.",
+    "Confirm that Condenser Type data is available for filtering Unit Type; if not, coordinate with backend to include it.",
+    "Respect the 'isActive' flag to exclude inactive entries."
+  ],
+  "ambiguities": [
+    "How the selected Condenser Type influences the Unit Type filter, since the provided data example only shows Refrigerant in the 'parent' field.",
+    "Behavior when no matching Unit Type or Unit Size entries exist (e.g., display message, disable dropdown).",
+    "Whether filtering should be case‑sensitive or case‑insensitive.",
+    "If selections should be persisted or reset when the user changes a previous dropdown."
+  ],
+  "confidence": "HIGH"
+}

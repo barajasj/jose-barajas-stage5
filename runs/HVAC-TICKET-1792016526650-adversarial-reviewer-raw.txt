@@ -1,0 +1,17 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "HIGH",
+      "description": "The interpreter assumes that the SDCommonUnitTypeRefrigerant 'parent' array contains both the selected Condenser Type and Refrigerant, but the ticket's example only shows refrigerants in the parent list. This is an unsupported assumption not supported by the provided data."
+    },
+    {
+      "severity": "MEDIUM",
+      "description": "The interpreter omits the requirement to filter out inactive entries (isActive = false) when populating Unit Type and Unit Size dropdowns, which is implied by the ticket data examples."
+    },
+    {
+      "severity": "LOW",
+      "description": "The interpreter does not address the need for UI behavior when filtering yields no matching Unit Type or Unit Size options (e.g., showing a message or disabling the dropdown). This requirement is missing from the summary."
+    }
+  ]
+}

@@ -27,9 +27,9 @@ MEDIUM findings → continue
 LOW findings → continue
 ---
 
-# Current implementation uses mock execution.
+# Model Execution
 
-The architecture supports replacement with gpt-oss-120b via the model layer once an Improving API key is available.
+Runtime inference executes live against `accounts/fireworks/models/gpt-oss-120b` via the Fireworks API client (`src/models/fireworks-client.js`), with an optional mock mode (`RUNTIME_MODE=mock`) for offline testing.
 
 ---
 # Business Problem
@@ -305,12 +305,10 @@ The purpose of the Adversarial Reviewer is to identify assumptions, ambiguities,
 
 ### Cost Tracking
 
-Token counts are captured directly from Fireworks API responses.
+Token counts (`promptTokens`, `completionTokens`, `totalTokens`) are captured directly from Fireworks API responses.
 
-Cost values are estimated using published gpt-oss-120b pricing because Fireworks responses do not include billing cost information.
+Per-step `cost` and workflow-level `totalCost` (`auditSummary.totalCost`) are calculated using published `gpt-oss-120b` pricing (`src/cost-estimator.js`) because Fireworks API responses do not include billing cost fields.
 
-### Additional Evaluation Runs
+### Evaluation Runs
 
-Three end-to-end HVAC tickets have been executed.
-
-Additional tickets can be added to expand coverage and provide further evaluation evidence.
+Four end-to-end HVAC tickets (`fixtures/hvac-ticket-1.md` through `fixtures/hvac-ticket-4.md`) have been executed with full evidence persisted under `evidence/` and `runs/`.

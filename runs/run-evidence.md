@@ -3,7 +3,7 @@
 ## Test Command
 
 ```bash
-node src/run-workflow.js fixtures/hvac-ticket-1.md
+node src/run-workflow.js fixtures/hvac-ticket-4.md evidence/ticket4-run.json
 ```
 
 ## Result
@@ -12,7 +12,7 @@ Success
 
 ## Correlation ID
 
-HVAC-TICKET-1791907937375
+HVAC-TICKET-1792016553892
 
 ## Agents Executed
 
@@ -22,7 +22,7 @@ HVAC-TICKET-1791907937375
 
 ## Audit Entries Generated
 
-3
+3 (`totalTokens`: 4911, `totalCost`: $0.006854)
 
 ## Status
 

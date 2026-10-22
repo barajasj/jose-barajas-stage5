@@ -44,6 +44,7 @@ Success Threshold:
 - /fixtures/hvac-ticket-1.md
 - /fixtures/hvac-ticket-2.md
 - /fixtures/hvac-ticket-3.md
+- /fixtures/hvac-ticket-4.md
 
 ## Result Location
 

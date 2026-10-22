@@ -19,9 +19,14 @@ Files:
 
 Evidence:
 
+- evidence/ticket1-run.json
+- evidence/ticket2-run.json
+- evidence/ticket3-run.json
+- evidence/ticket4-run.json
 - evidence/run1/ticket1-run.json
 - evidence/run1/ticket2-run.json
 - evidence/run1/ticket3-run.json
+- evidence/run1/ticket4-run.json
 
 ---
 
@@ -34,9 +39,14 @@ Files:
 
 Evidence:
 
+- evidence/ticket1-run.json
+- evidence/ticket2-run.json
+- evidence/ticket3-run.json
+- evidence/ticket4-run.json
 - evidence/run1/ticket1-run.json
 - evidence/run1/ticket2-run.json
 - evidence/run1/ticket3-run.json
+- evidence/run1/ticket4-run.json
 
 ---
 
@@ -49,9 +59,14 @@ Files:
 
 Evidence:
 
+- evidence/ticket1-run.json
+- evidence/ticket2-run.json
+- evidence/ticket3-run.json
+- evidence/ticket4-run.json
 - evidence/run1/ticket1-run.json
 - evidence/run1/ticket2-run.json
 - evidence/run1/ticket3-run.json
+- evidence/run1/ticket4-run.json
 
 ---
 
@@ -114,7 +129,8 @@ Evidence:
 
 Includes:
 
-- token counts
-- estimated costs
+- token counts (`promptTokens`, `completionTokens`, `totalTokens`)
+- per-step estimated `cost` and workflow `totalCost` (`auditSummary.totalCost`)
+- `costMethod`
 - timestamps
 - correlation IDs

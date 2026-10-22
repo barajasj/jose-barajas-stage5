@@ -4,7 +4,7 @@ Every examination receives a unique correlation ID.
 
 Example:
 
-EXAM-20261012-001
+HVAC-TICKET-1792016553892
 
 The same correlation ID is attached to:
 

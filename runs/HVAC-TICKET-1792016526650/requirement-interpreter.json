@@ -1,0 +1,29 @@
+{
+  "requirementSummary": "Auto-populate the Unit Type dropdown based on selected Condenser Type and Refrigerant, then auto-populate the Unit Size dropdown based on selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be populated with options filtered by the selected Condenser Type and Refrigerant.",
+    "When a user selects a Unit Type, the Unit Size dropdown must be populated with options filtered by the selected Refrigerant and Unit Type."
+  ],
+  "developerConsiderations": [
+    "Retrieve dropdown data via the unitdesign API endpoint GET /dropdowns.",
+    "Use the SDCommonUnitTypeRefrigerant attribute to obtain Unit Type options and filter on its 'parent' array containing the selected Condenser Type and Refrigerant.",
+    "Use the SDCommonUnitModelSizes attribute to obtain Unit Size options and filter on its 'parent' array containing the selected Refrigerant and Unit Type.",
+    "Implement UI logic to trigger filtering after each relevant selection change and to clear dependent dropdowns when an upstream selection changes.",
+    "Handle asynchronous API calls with appropriate loading states and error handling."
+  ],
+  "ambiguities": [
+    "The ticket states filtering by Condenser Type for Unit Type, but the provided data example for SDCommonUnitTypeRefrigerant shows only Refrigerant in the 'parent' array; the exact mapping for Condenser Type is unclear.",
+    "The required UI behavior when a filter yields no matching Unit Type or Unit Size options is not specified.",
+    "Case sensitivity of the filtering logic is not defined.",
+    "Whether downstream selections should be reset or retained when an upstream dropdown value changes is not addressed."
+  ],
+  "confidence": "HIGH"
+}

@@ -1,5 +1,6 @@
 const { runAgent } = require('./agent-runner');
 const { generateCorrelationId } = require('./correlation-id');
+const coordinatorTools = require('../coordinator/coordinator-tools.json');
 
 const {
   requiresHumanReview
@@ -9,27 +10,49 @@ const {
   getLatestDecision
 } = require('./human-review');
 
+async function launch_requirement_interpreter(input, correlationId) {
+  return runAgent('requirement-interpreter', input, correlationId);
+}
+
+async function launch_adversarial_reviewer(input, correlationId) {
+  return runAgent('adversarial-reviewer', input, correlationId);
+}
+
+async function launch_final_review_writer(input, correlationId) {
+  return runAgent('final-review-writer', input, correlationId);
+}
+
+function assembleDeterministicHeading(reportMarkdown, disposition) {
+  const trimmed = (reportMarkdown || '').trim();
+  const expectedHeading = `# ${disposition}`;
+  if (trimmed.startsWith(expectedHeading)) {
+    return trimmed;
+  }
+  return `${expectedHeading}\n\n${trimmed}`;
+}
+
 async function executeWorkflow(ticket) {
   const correlationId = generateCorrelationId();
+  const executedSteps = [];
 
   const interpreterResult =
-    await runAgent(
-      'requirement-interpreter',
+    await launch_requirement_interpreter(
       {
         ticket
       },
       correlationId
     );
+  executedSteps.push(interpreterResult);
 
   const reviewResult =
-    await runAgent(
-      'adversarial-reviewer',
+    await launch_adversarial_reviewer(
       {
         ticket,
-        interpreterResult
+        interpreterResult: interpreterResult.output
       },
       correlationId
     );
+  executedSteps.push(reviewResult);
 
   const hasHighSeverityFinding =
     reviewResult.output.findings?.some(
@@ -44,13 +67,12 @@ async function executeWorkflow(ticket) {
 
   if (hasHighSeverityFinding) {
 
-    console.log(
+    console.error(
       'HIGH severity finding detected. Re-dispatching...'
     );
 
     finalInterpreterResult =
-      await runAgent(
-        'requirement-interpreter',
+      await launch_requirement_interpreter(
         {
           ticket,
           previousInterpretation:
@@ -60,10 +82,10 @@ async function executeWorkflow(ticket) {
         },
         correlationId
       );
+    executedSteps.push(finalInterpreterResult);
 
     finalReviewResult =
-      await runAgent(
-        'adversarial-reviewer',
+      await launch_adversarial_reviewer(
         {
           ticket,
           interpreterResult:
@@ -71,6 +93,7 @@ async function executeWorkflow(ticket) {
         },
         correlationId
       );
+    executedSteps.push(finalReviewResult);
   }
 
   // Human escalation gate
@@ -98,19 +121,58 @@ async function executeWorkflow(ticket) {
     }
   }
 
+  const disposition = finalReviewResult.output.status;
+
   const finalReport =
-    await runAgent(
-      'final-review-writer',
+    await launch_final_review_writer(
       {
-        interpreterResult: finalInterpreterResult,
-        reviewResult: finalReviewResult,
-        disposition: finalReviewResult.output.status
+        interpreterResult: finalInterpreterResult.output,
+        reviewResult: finalReviewResult.output,
+        disposition
       },
       correlationId
     );
 
+  finalReport.output.reportMarkdown =
+    assembleDeterministicHeading(
+      finalReport.output.reportMarkdown,
+      disposition
+    );
+
+  executedSteps.push(finalReport);
+
+  const totalPromptTokens = executedSteps.reduce(
+    (sum, step) => sum + (step.audit?.promptTokens || 0),
+    0
+  );
+  const totalCompletionTokens = executedSteps.reduce(
+    (sum, step) => sum + (step.audit?.completionTokens || 0),
+    0
+  );
+  const totalTokens = executedSteps.reduce(
+    (sum, step) => sum + (step.audit?.totalTokens || 0),
+    0
+  );
+  const totalCost = Number(
+    executedSteps
+      .reduce((sum, step) => sum + (step.audit?.cost || 0), 0)
+      .toFixed(6)
+  );
+
   return {
     correlationId,
+    disposition,
+    totalCost,
+    auditSummary: {
+      model: finalReport.audit?.model,
+      stepsExecuted: executedSteps.length,
+      reDispatched: Boolean(hasHighSeverityFinding),
+      totalPromptTokens,
+      totalCompletionTokens,
+      totalTokens,
+      totalCost,
+      costMethod: finalReport.audit?.costMethod
+    },
     interpreterResult,
     reviewResult,
     finalInterpreterResult,
@@ -120,5 +182,9 @@ async function executeWorkflow(ticket) {
 }
 
 module.exports = {
-  executeWorkflow
+  executeWorkflow,
+  allowedTools: coordinatorTools.tools,
+  launch_requirement_interpreter,
+  launch_adversarial_reviewer,
+  launch_final_review_writer
 };

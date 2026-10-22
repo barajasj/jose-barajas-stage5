@@ -1,31 +1,20 @@
-# Stage 5 Next Steps
+# Stage 5 Status
 
 ## Completed
 
-- Coordinator
-- Agent Runner
-- Agent Registry
-- Schema Validation
-- Audit Trail
-- Artifact Persistence
-- Re-Dispatch Governance
-- Human Review Gate
+- Coordinator (`src/coordinator.js`)
+- Agent Runner (`src/agent-runner.js`)
+- Agent Registry (`src/agent-registry.js`)
+- Schema Validation (`src/schema-validator.js`)
+- Audit Trail (`src/audit-logger.js`, `audit/audit-log.jsonl`)
+- Per-Step Cost & Workflow Total Cost Tracking (`src/cost-estimator.js`)
+- Artifact Persistence (`src/artifact-writer.js`)
+- Re-Dispatch Governance (`HIGH` findings trigger re-dispatch with reviewer findings)
+- Human Review Gate (`src/substance-gate.js`, `src/human-review.js`)
+- Fireworks Model Integration (`src/models/fireworks-client.js` with `accounts/fireworks/models/gpt-oss-120b`)
+- End-to-End HVAC Ticket Evaluations (`fixtures/hvac-ticket-1.md` through `fixtures/hvac-ticket-4.md`)
 
-## Pending
+## Optional Future Enhancements
 
-- Obtain Improving API Key
-- Implement fireworks-client.js
-- Connect Prompt Loader to the configured model (e.g. gpt-oss-120b)
-- Replace mock-agent-responses.js
-- Generate real agent outputs
-- Run HVAC ticket evaluations
-- Final certification review
-
-## First Task When API Key Arrives
-
-Create a simple test script that calls the configured model (e.g. gpt-oss-120b) and confirms:
-
-- API connectivity
-- Authentication
-- Response parsing
-- Token tracking
+- Expand HVAC fixture suite with additional edge-case tickets
+- Automated regression test runner for schema and disposition assertions
