@@ -91,6 +91,32 @@ Expected Output:
 
 ## Step 7
 
+Human Escalation Gate.
+
+If `requiresHumanReview()` is true, the coordinator
+explicitly evaluates the latest recorded human
+decision before any further dispatch:
+
+- No decision recorded:
+  Status = PUNCH_OUT (halt, audited)
+- Decision unrecognized or missing reviewer/reason:
+  Status = PUNCH_OUT (fail closed, audited)
+- Decision older than the maximum allowed age:
+  Status = PUNCH_OUT (timeout, audited)
+- Decision = REJECT:
+  Status = REJECTED_BY_HUMAN (halt, audited)
+- Decision = APPROVE or CONTINUE:
+  governance reasoning is logged to the audit trail
+  as HUMAN_APPROVED_CONTINUE and the workflow
+  proceeds to the Final Review Writer.
+
+There is no implicit fall-through: every gate branch
+returns an explicit disposition or records explicit
+reasoning. Test coverage: `src/test-punchout.js`
+(8 scenarios).
+
+## Step 8
+
 Final Disposition.
 
 If critical findings remain:
@@ -103,7 +129,7 @@ Disposition = PASS
 
 ---
 
-## Step 8
+## Step 9
 
 Dispatch Final Review Writer.
 
@@ -117,7 +143,7 @@ Output:
 
 ---
 
-## Step 9
+## Step 10
 
 Persist Audit Trail.
 
@@ -133,6 +159,6 @@ Persist:
 
 ---
 
-## Step 10
+## Step 11
 
 Return Final Result.

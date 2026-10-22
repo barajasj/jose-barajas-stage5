@@ -1,3 +1,20 @@
+# CONTINUE Decision Evidence
+
+Two evidence sources demonstrate the CONTINUE path:
+
+1. Live workflow run (below): a recorded human
+   CONTINUE allowed the coordinator to complete the
+   pipeline and produce the final report.
+2. Active gate test: scenarios `S3-explicit-continue`
+   and `S8-fresh-decision-honored` in
+   `src/test-punchout.js` assert that a valid CONTINUE
+   returns `COMPLETED_AFTER_HUMAN_APPROVAL` with an
+   explicit `humanGovernance` record and a
+   `HUMAN_APPROVED_CONTINUE` audit entry. See
+   `runs/punchout-test-results.json`.
+
+## Live Run Output
+
 HIGH severity finding detected. Re-dispatching...
 {
   "correlationId": "HVAC-TICKET-1791910318137",

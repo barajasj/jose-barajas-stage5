@@ -1,11 +1,13 @@
 const fs = require('fs');
 
-function requiresHumanReview() {
+function requiresHumanReview(
+  assessmentFile = 'substance-assessment.json'
+) {
 
   const assessment =
     JSON.parse(
       fs.readFileSync(
-        'substance-assessment.json',
+        assessmentFile,
         'utf8'
       )
     );

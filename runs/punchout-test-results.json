@@ -1,0 +1,203 @@
+{
+  "generatedAt": "2026-10-22T18:35:25.600Z",
+  "runtimeMode": "real",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "scenarios": [
+    {
+      "id": "S1-silence-no-decision",
+      "description": "Human review required but no decision recorded; coordinator must halt (PUNCH_OUT) and must not dispatch the final-review-writer.",
+      "expectedStatus": "PUNCH_OUT",
+      "actualStatus": "PUNCH_OUT",
+      "checks": [
+        {
+          "name": "status",
+          "expected": "PUNCH_OUT",
+          "actual": "PUNCH_OUT",
+          "pass": true
+        },
+        {
+          "name": "finalReviewWriterDispatched",
+          "expected": false,
+          "actual": false,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "S2-explicit-reject",
+      "description": "Human decision REJECT; coordinator must return REJECTED_BY_HUMAN and must not dispatch the final-review-writer.",
+      "expectedStatus": "REJECTED_BY_HUMAN",
+      "actualStatus": "REJECTED_BY_HUMAN",
+      "checks": [
+        {
+          "name": "status",
+          "expected": "REJECTED_BY_HUMAN",
+          "actual": "REJECTED_BY_HUMAN",
+          "pass": true
+        },
+        {
+          "name": "finalReviewWriterDispatched",
+          "expected": false,
+          "actual": false,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "S3-explicit-continue",
+      "description": "Human decision CONTINUE with reviewer and reason; coordinator must log governance reasoning and complete the workflow.",
+      "expectedStatus": "COMPLETED_AFTER_HUMAN_APPROVAL",
+      "actualStatus": "COMPLETED_AFTER_HUMAN_APPROVAL",
+      "checks": [
+        {
+          "name": "status",
+          "expected": "COMPLETED_AFTER_HUMAN_APPROVAL",
+          "actual": "COMPLETED_AFTER_HUMAN_APPROVAL",
+          "pass": true
+        },
+        {
+          "name": "finalReviewWriterDispatched",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "name": "humanGovernance.status",
+          "expected": "HUMAN_APPROVED_CONTINUE",
+          "actual": "HUMAN_APPROVED_CONTINUE",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "S4-explicit-approve",
+      "description": "Human decision APPROVE with reviewer and reason; coordinator must log governance reasoning and complete the workflow.",
+      "expectedStatus": "COMPLETED_AFTER_HUMAN_APPROVAL",
+      "actualStatus": "COMPLETED_AFTER_HUMAN_APPROVAL",
+      "checks": [
+        {
+          "name": "status",
+          "expected": "COMPLETED_AFTER_HUMAN_APPROVAL",
+          "actual": "COMPLETED_AFTER_HUMAN_APPROVAL",
+          "pass": true
+        },
+        {
+          "name": "finalReviewWriterDispatched",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "name": "humanGovernance.status",
+          "expected": "HUMAN_APPROVED_CONTINUE",
+          "actual": "HUMAN_APPROVED_CONTINUE",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "S5-bypass-unknown-value",
+      "description": "Bypass attempt: decision value \"AUTO-APPROVE\" is not an allowed value; coordinator must fail closed (PUNCH_OUT) instead of falling through to implicit approval.",
+      "expectedStatus": "PUNCH_OUT",
+      "actualStatus": "PUNCH_OUT",
+      "checks": [
+        {
+          "name": "status",
+          "expected": "PUNCH_OUT",
+          "actual": "PUNCH_OUT",
+          "pass": true
+        },
+        {
+          "name": "finalReviewWriterDispatched",
+          "expected": false,
+          "actual": false,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "S6-bypass-missing-reason",
+      "description": "Bypass attempt: APPROVE without a documented reason; coordinator must fail closed (PUNCH_OUT) because approvals require recorded reasoning.",
+      "expectedStatus": "PUNCH_OUT",
+      "actualStatus": "PUNCH_OUT",
+      "checks": [
+        {
+          "name": "status",
+          "expected": "PUNCH_OUT",
+          "actual": "PUNCH_OUT",
+          "pass": true
+        },
+        {
+          "name": "finalReviewWriterDispatched",
+          "expected": false,
+          "actual": false,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "S7-timeout-stale-decision",
+      "description": "Human decision exists but is older than the allowed decision age; coordinator must treat it as timed out and halt (PUNCH_OUT).",
+      "expectedStatus": "PUNCH_OUT",
+      "actualStatus": "PUNCH_OUT",
+      "checks": [
+        {
+          "name": "status",
+          "expected": "PUNCH_OUT",
+          "actual": "PUNCH_OUT",
+          "pass": true
+        },
+        {
+          "name": "finalReviewWriterDispatched",
+          "expected": false,
+          "actual": false,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "failedChecks": []
+    },
+    {
+      "id": "S8-fresh-decision-honored",
+      "description": "Human decision within the allowed age is honored; coordinator completes after explicit approval.",
+      "expectedStatus": "COMPLETED_AFTER_HUMAN_APPROVAL",
+      "actualStatus": "COMPLETED_AFTER_HUMAN_APPROVAL",
+      "checks": [
+        {
+          "name": "status",
+          "expected": "COMPLETED_AFTER_HUMAN_APPROVAL",
+          "actual": "COMPLETED_AFTER_HUMAN_APPROVAL",
+          "pass": true
+        },
+        {
+          "name": "finalReviewWriterDispatched",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "name": "humanGovernance.status",
+          "expected": "HUMAN_APPROVED_CONTINUE",
+          "actual": "HUMAN_APPROVED_CONTINUE",
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "failedChecks": []
+    }
+  ]
+}

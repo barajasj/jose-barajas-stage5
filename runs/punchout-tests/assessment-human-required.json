@@ -1,0 +1,12 @@
+{
+  "systemName": "punchout-test",
+  "workflows": [
+    {
+      "name": "test-workflow",
+      "classification": "TOY"
+    }
+  ],
+  "overallAssessment": {
+    "humanReviewRequired": true
+  }
+}

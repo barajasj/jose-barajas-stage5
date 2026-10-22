@@ -1,14 +1,22 @@
 const fs = require('fs');
 
-function loadHumanDecisions() {
+const ALLOWED_DECISIONS = [
+  'APPROVE',
+  'CONTINUE',
+  'REJECT'
+];
 
-  if (!fs.existsSync('human-decisions.jsonl')) {
+function loadHumanDecisions(
+  decisionsFile = 'human-decisions.jsonl'
+) {
+
+  if (!fs.existsSync(decisionsFile)) {
     return [];
   }
 
   const lines =
     fs.readFileSync(
-      'human-decisions.jsonl',
+      decisionsFile,
       'utf8'
     )
     .split('\n')
@@ -19,9 +27,13 @@ function loadHumanDecisions() {
   );
 }
 
-function getLatestDecision() {
+function getLatestDecision(
+  decisionsFile = 'human-decisions.jsonl'
+) {
 
-  const decisions = loadHumanDecisions();
+  const decisions = loadHumanDecisions(
+    decisionsFile
+  );
 
   if (!decisions.length) {
     return null;
@@ -32,6 +44,95 @@ function getLatestDecision() {
   ];
 }
 
+function validateDecision(decision) {
+
+  if (!decision || typeof decision !== 'object') {
+    return {
+      valid: false,
+      reason:
+        'Human decision record is missing or malformed.'
+    };
+  }
+
+  const normalized =
+    typeof decision.decision === 'string'
+      ? decision.decision.trim().toUpperCase()
+      : null;
+
+  if (
+    !normalized ||
+    !ALLOWED_DECISIONS.includes(normalized)
+  ) {
+    return {
+      valid: false,
+      reason:
+        `Unrecognized human decision value: `
+        + `${decision.decision}. `
+        + `Allowed values: `
+        + ALLOWED_DECISIONS.join(', ')
+        + '.'
+    };
+  }
+
+  if (
+    normalized === 'APPROVE' ||
+    normalized === 'CONTINUE'
+  ) {
+    if (
+      typeof decision.reviewer !== 'string' ||
+      !decision.reviewer.trim()
+    ) {
+      return {
+        valid: false,
+        reason:
+          'APPROVE/CONTINUE decision is missing '
+          + 'reviewer identity.'
+      };
+    }
+
+    if (
+      typeof decision.reason !== 'string' ||
+      !decision.reason.trim()
+    ) {
+      return {
+        valid: false,
+        reason:
+          'APPROVE/CONTINUE decision is missing '
+          + 'a documented reason.'
+      };
+    }
+  }
+
+  return {
+    valid: true,
+    normalized
+  };
+}
+
+function isDecisionStale(
+  decision,
+  maxAgeMs,
+  now = Date.now()
+) {
+
+  if (!maxAgeMs) {
+    return false;
+  }
+
+  const decidedAt = Date.parse(
+    decision.timestamp
+  );
+
+  if (Number.isNaN(decidedAt)) {
+    return true;
+  }
+
+  return (now - decidedAt) > maxAgeMs;
+}
+
 module.exports = {
-  getLatestDecision
+  getLatestDecision,
+  validateDecision,
+  isDecisionStale,
+  ALLOWED_DECISIONS
 };
