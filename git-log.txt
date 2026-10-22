@@ -1,3 +1,125 @@
+commit 37fa3101ee3ad636184a15744cbcc690a08450c3
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: Thu Oct 22 12:43:25 2026 -0600
+
+    Document workflow success rate and export repository history
+    audit/workflow-success-rate.md reports 23/27 (85.2%) end-to-end
+completion with per-step rates; GIT-HISTORY.md + git-log.txt provide
+commit history evidence; README, CERTIFICATION-EVIDENCE.md,
+stage5-summary.md, and NEXT-STEPS.md updated; remaining run artifacts
+persisted.
+
+
+ CERTIFICATION-EVIDENCE.md                          |  77 +++-
+ GIT-HISTORY.md                                     |  42 +++
+ NEXT-STEPS.md                                      |   6 +-
+ README.md                                          |  42 ++-
+ audit/README.md                                    |  26 +-
+ audit/audit-log.jsonl                              | 132 +++++++
+ audit/workflow-success-rate.md                     |  66 ++++
+ git-log.txt                                        | 397 +++++++++++++++++++++
+ ...CKET-1792693686495-adversarial-reviewer-raw.txt |   4 +
+ ...ICKET-1792693686495-final-review-writer-raw.txt |   3 +
+ ...T-1792693686495-requirement-interpreter-raw.txt |  31 ++
+ .../adversarial-reviewer.json                      |   4 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  31 ++
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ runs/punchout-test-results.json                    |   2 +-
+ runs/punchout-tests/S2-explicit-reject.jsonl       |   2 +-
+ runs/punchout-tests/S3-explicit-continue.jsonl     |   2 +-
+ runs/punchout-tests/S4-explicit-approve.jsonl      |   2 +-
+ runs/punchout-tests/S5-bypass-unknown-value.jsonl  |   2 +-
+ runs/punchout-tests/S6-bypass-missing-reason.jsonl |   2 +-
+ .../punchout-tests/S7-timeout-stale-decision.jsonl |   2 +-
+ .../punchout-tests/S8-fresh-decision-honored.jsonl |   2 +-
+ stage5-summary.md                                  |  60 +++-
+ 93 files changed, 1708 insertions(+), 18 deletions(-)
+commit 485959156eb17bb1ad2e1385983b26c722481882
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: Thu Oct 22 12:42:23 2026 -0600
+
+    Add deterministic eval scorer, test cases, and iteration evidence
+    
+
+ evals/adversarial-reviewer-eval.md    |  132 +++-
+ evals/final-review-writer-eval.md     |  107 ++-
+ evals/requirement-interpreter-eval.md |  119 +++-
+ evals/test-cases.json                 |  338 +++++++++
+ prompts/prompt-evolution.md           |   57 +-
+ src/eval-scorer.js                    |  311 +++++++++
+ src/run-evals.js                      |  291 ++++++++
+ sub-agents-results.json               | 1224 ++++++++++++++++++++++++++++++++-
+ 8 files changed, 2549 insertions(+), 30 deletions(-)
 commit 27369cf313bfef31f5f57cb4b7b806aa0d404305
 Author: Jose Barajas <jose.barajas@improving.com>
 Date: Thu Oct 22 12:37:42 2026 -0600
