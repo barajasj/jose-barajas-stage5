@@ -222,6 +222,13 @@ Evidence:
 
 audit/
 
+End-to-end workflow success rate:
+
+audit/workflow-success-rate.md
+
+(23/27 non-test executions completed end-to-end =
+85.2%; latest 4 evaluation runs = 100%)
+
 ---
 
 # Substance Assessment
@@ -244,11 +251,29 @@ substance-assessment.json
 
 # Human Escalation Support
 
-The system supports human review decisions.
+The system supports human review decisions with
+explicit, audited gate handling — every branch
+returns an explicit disposition (no implicit
+auto-approval):
+
+- No decision -> PUNCH_OUT
+- Invalid/unreasoned decision -> PUNCH_OUT (fail closed)
+- Stale/timed-out decision -> PUNCH_OUT
+- REJECT -> REJECTED_BY_HUMAN
+- APPROVE / CONTINUE -> audited
+  HUMAN_APPROVED_CONTINUE, then writer dispatch
 
 Evidence:
 
 human-decisions.jsonl
+
+runs/punchout-evidence.md
+
+runs/punchout-test-results.json
+
+Gate test suite:
+
+node src/test-punchout.js (8/8 scenarios pass)
 
 ---
 
@@ -258,13 +283,20 @@ Each sub-agent includes:
 
 - Defined prompt
 - Named evaluation criteria
-- Measured results
+- Test case definitions (evals/test-cases.json)
+- Documented scoring rubric and methodology
+- Measured results with iteration history
+  (baseline -> final deltas)
 
 Evidence:
 
 evals/
 
 sub-agents-results.json
+
+Eval runner:
+
+node src/run-evals.js
 
 ---
 
@@ -312,3 +344,9 @@ Per-step `cost` and workflow-level `totalCost` (`auditSummary.totalCost`) are ca
 ### Evaluation Runs
 
 Four end-to-end HVAC tickets (`fixtures/hvac-ticket-1.md` through `fixtures/hvac-ticket-4.md`) have been executed with full evidence persisted under `evidence/` and `runs/`.
+
+### Repository History
+
+Full commit history is exported for examination in
+`GIT-HISTORY.md` and `git-log.txt` at the repository
+root.

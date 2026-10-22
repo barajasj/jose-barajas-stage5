@@ -18,3 +18,7 @@
 
 - Expand HVAC fixture suite with additional edge-case tickets
 - Automated regression test runner for schema and disposition assertions
+- Next reviewer iteration: challenge boundary-value
+  and option-detection behavior (targets the
+  ticket-4 missing-requirement detection gap,
+  currently 0.727 vs 0.85 threshold)

@@ -75,14 +75,20 @@ Evidence:
 Files:
 
 - src/coordinator.js
+- src/prompt-builder.js
+- src/artifact-writer.js
 
 Evidence:
 
 - runs/redispatch-evidence.md
+- runs/HVAC-TICKET-1792016512336/*-pass1.json
+- runs/HVAC-TICKET-1792016526650/*-pass1.json
 
 Rule:
 
-HIGH findings trigger re-dispatch.
+HIGH findings trigger re-dispatch with
+`previousInterpretation` and `reviewerFindings`
+fed back into the prompt.
 
 ---
 
@@ -92,12 +98,65 @@ Files:
 
 - src/human-review.js
 - src/substance-gate.js
+- src/coordinator.js (explicit gate: APPROVE /
+  CONTINUE / REJECT / no-decision / invalid /
+  stale all return audited dispositions)
 
 Evidence:
 
 - runs/punchout-evidence.md
+- runs/punchout-test-results.json
 - runs/continue-decision-evidence.md
 - runs/reject-decision-evidence.md
+- audit/audit-log.jsonl
+  (`coordinator-human-gate` entries)
+
+Active test suite:
+
+- src/test-punchout.js — 8 scenarios: silence,
+  REJECT, CONTINUE, APPROVE, bypass attempts
+  (unknown value, missing reason), stale-decision
+  timeout, fresh decision honored. 8/8 pass.
+
+---
+
+## Per-Step Evaluations
+
+Files:
+
+- evals/requirement-interpreter-eval.md
+- evals/adversarial-reviewer-eval.md
+- evals/final-review-writer-eval.md
+- evals/test-cases.json (expected outputs and
+  pass/fail criteria per fixture)
+- src/eval-scorer.js (scoring rubric)
+- src/run-evals.js (eval runner)
+
+Evidence:
+
+- sub-agents-results.json (regenerated via
+  `node src/run-evals.js`; contains per-fixture
+  detail and baseline-vs-final iteration deltas)
+
+Iteration logs (2+ cycles per step, with baseline
+scores, hypotheses, changes, and measured deltas):
+
+- evals/requirement-interpreter-eval.md
+- evals/adversarial-reviewer-eval.md
+- evals/final-review-writer-eval.md
+- prompts/prompt-evolution.md
+
+---
+
+## Workflow Success Rate
+
+Evidence:
+
+- audit/workflow-success-rate.md
+
+22/26 non-test executions completed end-to-end
+(84.6%); latest 4 fixture evaluations 4/4 (100%);
+per-step rates documented in the report.
 
 ---
 
@@ -134,3 +193,17 @@ Includes:
 - `costMethod`
 - timestamps
 - correlation IDs
+- coordinator human-gate decisions
+  (`coordinator-human-gate`: PUNCH_OUT,
+  PUNCH_OUT_INVALID_DECISION,
+  PUNCH_OUT_DECISION_STALE, REJECTED_BY_HUMAN,
+  HUMAN_APPROVED_CONTINUE)
+
+---
+
+## Version-Controlled Repository
+
+Evidence:
+
+- git-log.txt (exported commit history)
+- GIT-HISTORY.md (milestones and progression)

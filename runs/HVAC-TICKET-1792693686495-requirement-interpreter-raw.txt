@@ -1,0 +1,31 @@
+{
+  "requirementSummary": "Calculate the DX Coil Height by summing the heights of all populated cooling circuits and automatically update the DX Coil Information field whenever a circuit height is edited.",
+  "hvacTerminology": [
+    "DX Coil",
+    "DX Coil Height",
+    "Cooling Package",
+    "R-454B FW 43",
+    "Cooling Circuits",
+    "Circuit Height",
+    "DX Coil Information"
+  ],
+  "businessRules": [
+    "When a cooling package is entered, the system runs calculations and populates the cooling circuits.",
+    "The DX Coil Height value must be the sum of the height of each cooling circuit.",
+    "If the user changes a circuit height, the DX Coil Height must be recomputed and the DX Coil Information field updated immediately."
+  ],
+  "developerConsiderations": [
+    "Implement a reactive calculation that triggers on changes to any circuit height input.",
+    "Ensure the sum handles an arbitrary number of circuits.",
+    "Validate that circuit height inputs are numeric before summation.",
+    "Update the DX Coil Height field in the DX Coil Information section programmatically after each change.",
+    "Handle initial empty DX Coil Height field by populating it after the first calculation."
+  ],
+  "ambiguities": [
+    "Exact event(s) that should trigger the recalculation (e.g., on blur, on input, on form submit) are not specified.",
+    "How to handle non‑numeric or missing circuit height values is not detailed.",
+    "Desired precision/rounding rules for the summed height are not mentioned.",
+    "Whether the calculation should persist across sessions or only within the current form session is unclear."
+  ],
+  "confidence": "MEDIUM"
+}

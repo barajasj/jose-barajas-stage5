@@ -1,0 +1,3 @@
+{
+  "reportMarkdown": "# FAIL\n\n## Summary\n\nCritical findings remain unresolved.\n\n## Reviewer Findings\n\n- Behavior when no cooling circuits exist is undefined.\n\n## Final Disposition\n\nFAIL"
+}

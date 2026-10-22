@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "findings": [
+    {
+      "severity": "HIGH",
+      "description": "Behavior when no cooling circuits exist is undefined."
+    }
+  ]
+}
