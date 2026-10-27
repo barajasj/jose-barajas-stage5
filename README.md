@@ -27,6 +27,26 @@ MEDIUM findings → continue
 LOW findings → continue
 ---
 
+# Setup
+
+`node_modules/` is not included in this submission.
+
+Restore dependencies before running any scripts:
+
+```
+npm ci
+```
+
+(or `npm install` to resolve fresh — requires Node.js 18+)
+
+Environment:
+
+Copy `env.example` to `.env` and set `AI_API_KEY`
+for live model execution, or set `RUNTIME_MODE=mock`
+for offline/mock testing.
+
+---
+
 # Model Execution
 
 Runtime inference executes live against `accounts/fireworks/models/gpt-oss-120b` via the Fireworks API client (`src/models/fireworks-client.js`), with an optional mock mode (`RUNTIME_MODE=mock`) for offline testing.
