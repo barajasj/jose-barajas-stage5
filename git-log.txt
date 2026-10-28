@@ -1,3 +1,32 @@
+commit 705b48d7ac842db12c19b0a34b58f18839609f9f
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: Tue Oct 27 14:50:51 2026 -0600
+
+    Update README with instruction to restore node_modules
+    
+
+ README.md   | 20 ++++++++++++++++++++
+ env.example |  3 ++-
+ 2 files changed, 22 insertions(+), 1 deletion(-)
+commit 64c601a8a84d0fe8ea55b25de1ad97b2fbe370c2
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: Thu Oct 22 12:59:17 2026 -0600
+
+    Rename and move documentation to docs
+    
+
+ .../stage5-certification-examination-report-v1.md           |   0
+ stage5-requirements.png => docs/stage5-requirements.png     | Bin
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+commit 5d397dfc2cb05b300905e255f5ec7dfde7c02e46
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: Thu Oct 22 12:45:46 2026 -0600
+
+    Refresh exported git history
+    
+
+ git-log.txt | 122 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 122 insertions(+)
 commit 37fa3101ee3ad636184a15744cbcc690a08450c3
 Author: Jose Barajas <jose.barajas@improving.com>
 Date: Thu Oct 22 12:43:25 2026 -0600
