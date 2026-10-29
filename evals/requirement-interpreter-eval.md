@@ -1,5 +1,68 @@
 # HVAC Requirement Interpreter Evaluation
 
+## Stage 3 load-bearing coverage — Deliverable 3
+
+The legacy scoring methodology, results, and iteration log below are historical and have not been revalidated. This section measures instruction coverage and whether the new criteria distinguish authored valid outputs from targeted violations. It does not claim improved live-model accuracy or satisfy the separate prompt-evolution evidence requirement.
+
+| Prompt Artifact | Examiner Coverage | New Local Coverage | Required Coverage | Previously Missing Criteria |
+|---|---|---|---|---|
+| Requirement Interpreter | 8/12 = 66.7% | 16/16 = 100% | >=90% independently; local preflight requires every retained unit | Summary, grounded developer considerations, readiness confidence; substantive validation and behavior |
+| Adversarial Reviewer | 8/12 = 66.7% | 18/18 = 100% | >=90% independently | HVAC errors, missed/open ambiguities, ticket and interpreter grounding, severity impact |
+| Final Review Writer | 6/8 = 75% | 12/12 = 100% | >=90% independently | Interpreter grounding, unsupported conclusions, substantive findings/disposition fidelity |
+
+These are different inventories, not like-for-like performance deltas. The local denominator includes numbered instruction bullets, input slots, and appended re-dispatch instructions. It excludes Markdown headings used only as labels. The examiner's exact Markdown disassembler is unavailable; local 100% does not assert an official grader result.
+
+### Executable artifacts and method
+
+- `evals/load-bearing-map.json`: exact prompt/source hashes and unit-to-criterion mappings.
+- `evals/load-bearing-cases.js`: fixed ticket/interpreter inputs, authored complete-proposition labels, valid outputs, and targeted mutations.
+- `src/load-bearing-criteria.js`: named executable assertions. Full propositions and field values are compared, not isolated keyword presence.
+- `src/run-load-bearing-audit.js`: executes the cases, verifies schema-valid content counterexamples, detects unmapped prose/list items/input slots, and includes dynamically appended instructions.
+- `tests/load-bearing.test.js`: audit regressions and false-credit controls.
+- Run `node src/run-load-bearing-audit.js`; use `--json` for per-case assertions, mappings, and normalized-text hashes. Run `node --test tests/load-bearing.test.js` for audit regressions.
+
+Each applicable assertion is Boolean: valid counterpart accepted AND every targeted violation rejected. No empty-denominator recall credit is used. Content mutations must remain schema-valid; explicit JSON/schema/status violations are separately identified. A case without applicable labels is an evaluation-configuration error, not a pass.
+
+Observed on this revision: all **61 valid counterparts accepted** and all **139 negative controls rejected** across the three agents. These are authored criterion-sensitivity measurements, not model executions. Gold proposition wording is deliberately conservative, with case/whitespace normalization only; broader paraphrase grading and integration with the legacy scoring pipeline remain Deliverable 4 work.
+
+### Interpreter instruction map
+
+| Current Unit | Named Criterion | Case / Rejected Violation |
+|---|---|---|
+| I01 requirementSummary | summaryAccuracy | `summary`: changed range/unit or generic summary |
+| I02 HVAC terminology | hvacTerminologyAccuracy, sourceGrounding | `terminology`: invented or omitted term |
+| I03 explicit business rules | businessRuleAccuracy | `business-rules`: maximum instead of sum; omitted edit rule |
+| I04 validation-rule content | validationRuleAccuracy, sourceGrounding, ambiguityAccuracy | `validation`, `coil-grounding`, `ambiguities`: each mapping, range limit, unit, override, or unanswered policy changed |
+| I05 trigger/action/output behavior | functionalBehaviorAccuracy | `dx-functional`, `filters-functional`: wrong trigger or dependent output |
+| I06 missing/contradictory details | ambiguityAccuracy | `ambiguities`: erased question or false claim that the specified Lamiflo increment is missing |
+| I07 developer considerations | developerConsiderationGrounding | `dx-developer`, `filters-developer`: invented architecture/reset policy or missing supported constraint |
+| I08 readiness confidence | confidencePolicyConsistency | `clean-confidence`, `dx-confidence`, `sparse-confidence`, `conflict-confidence`: wrong HIGH/MEDIUM/LOW class |
+| I09 no unsupported inference | sourceGrounding | `coil-grounding`, `filters-grounding`: invented clamp/inactive-option policy or summary from another ticket |
+| I10 empty arrays versus real questions | emptyArrayDiscipline | `empty-arrays`: invented terms/rules/technical policy or removed question on a sparse ticket |
+| I11 re-dispatch safety | redispatchSafety | `redispatch`: erased unresolved question, invented validation, or irrelevant-but-real resolution quotation |
+| I12 JSON/schema contract | rawResponseFormat, schemaConformance | `requirement-interpreter-raw/schema`: fences, surrounding prose, array root, wrong types, extra field |
+| Ticket input slot | summaryAccuracy, sourceGrounding | Ticket-specific complete propositions; unrelated-ticket summary rejected |
+| Appended previous interpretation | redispatchSafety | Same fixed previous interpretation and explicitly sourced correction |
+| Appended reviewer feedback | redispatchSafety, sourceGrounding | Required correction captured without fabricating absent validation policy |
+| Appended ambiguity preservation | redispatchSafety | Prior unanswered questions retained; only a genuinely answered question is removed |
+
+### Examiner unit reconciliation and preferred treatment
+
+| Original Unit(s) | Original Gap | Preferred Action Implemented |
+|---|---|---|
+| 6, 10: developer considerations | Unmeasured and broad enough to invite implementation invention | **Rewrite + test** as source-supported technical constraints; retain the field |
+| 7: requirementSummary | Not read by a criterion | **Test** requested action, objects, conditions, and numeric content |
+| 12: confidence | Enum/schema membership only | **Rewrite + test** readiness confidence: complete source HIGH, localized gaps MEDIUM, missing/contradictory core LOW |
+| 3: validation rules | Partial ambiguity keyword checks | **Test directly** all explicit ranges, units, rounding, and mapping content |
+| 4: functional behavior | Indirect business-rule keywords | **Test directly** trigger, action, and affected output |
+| 1, 8: HVAC terminology | Existing mapping | Retain under I02 with full term/source support checks |
+| 2, 9: business rules | Existing mapping | Retain under I03 with complete propositions |
+| 5, 11: ambiguities | Existing mapping | Retain under I06 with omissions and false-ambiguity controls |
+
+All original substantive instruction families remain represented. Repeated JSON-format paragraphs and duplicate field/example prose were consolidated into I12, not silently excluded. Unsupported generic developer advice was narrowed, not disguised as a mandatory business requirement. Runtime governance and schemas from Deliverable 2 are unchanged.
+
+## Historical evaluation record — not refreshed by Deliverable 3
+
 ## Purpose
 
 Evaluate the HVAC Requirement Interpreter agent.

@@ -1,5 +1,13 @@
 {
   "description": "Test case definitions for per-step evaluations. Each expected item is matched when ANY keyword in anyOf appears (case-insensitive substring) in the relevant output field of the evaluated step.",
+  "loadBearingAudit": {
+    "map": "evals/load-bearing-map.json",
+    "cases": "evals/load-bearing-cases.js",
+    "criteria": "src/load-bearing-criteria.js",
+    "command": "node src/run-load-bearing-audit.js",
+    "jsonCommand": "node src/run-load-bearing-audit.js --json",
+    "scope": "Supplemental Deliverable 3 instruction coverage and criterion-sensitivity checks; not legacy metric repair or live-model performance."
+  },
   "fixtures": [
     {
       "fixture": "fixtures/hvac-ticket-1.md",

@@ -1,61 +1,29 @@
 # Final Review Writer
 
-Generate a final review report.
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Return the exact bounded Markdown supplied below, including substantive summary, findings, ambiguities, disposition, and reasons sections. Preserve JSON-escaped source strings. Only outer whitespace and CRLF line endings may differ; do not add or remove prose or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
 
-Inputs:
-
-- Requirement Interpreter Output
-- Adversarial Reviewer Output
-- Coordinator Disposition
-
-Responsibilities:
-
-- Summarize findings
-- Present reviewer concerns
-- Produce a clear final disposition
-
-Restrictions:
-
-- Do NOT introduce new findings.
-- Do NOT add conclusions not present in the supplied artifacts.
-
-Use the exact bounded report supplied below. It contains the interpreter summary, all reviewer findings with unchanged IDs/severities/actions, all open ambiguities, and the deterministic disposition/reasons. Do not add prose, remove concerns, or assert that requirements are satisfied. Quoted source strings use JSON escaping so embedded newlines cannot become report sections. Return the supplied Markdown as reportMarkdown, allowing only outer whitespace or CRLF line endings.
-
-Output Requirements:
-
-Return ONLY valid JSON.
-
-IMPORTANT:
-The response must be parseable by JavaScript JSON.parse().
-Do not include explanations before the JSON.
-Do not include explanations after the JSON.
-The response must begin with {
-The response must end with }
-Do not wrap JSON in markdown.
-Do not use ```json.
-
-Return exactly this structure:
-
-{
-  "reportMarkdown": ""
-}
-
-Interpreter Output:
+## Interpreter Output
 
 {{interpreterResult}}
 
-Reviewer Output:
+## Reviewer Output
 
 {{reviewResult}}
 
-Disposition:
+## Disposition
 
 {{disposition}}
 
-Governance Reasons:
+## Governance Reasons
 
 {{reasonCodes}}
 
-Required Report Markdown:
+## Required Report Markdown:
 
 {{reportTemplate}}

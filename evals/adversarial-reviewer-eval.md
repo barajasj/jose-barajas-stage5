@@ -1,5 +1,62 @@
 # Adversarial Reviewer Evaluation
 
+## Stage 3 load-bearing coverage — Deliverable 3
+
+The legacy metrics and iteration history below are preserved as historical records, not revalidated claims. The supplemental instruction audit is independently executable:
+
+```
+node src/run-load-bearing-audit.js
+node src/run-load-bearing-audit.js --json
+node --test tests/load-bearing.test.js
+```
+
+Local coverage is **18/18 = 100%**: fifteen explicit instruction units and three input slots, versus the examiner's historical 8/12. Different denominators are not a performance improvement claim. The exact examiner parser is unavailable; this is a conservative local preflight, not an official grading result.
+
+The definitions are discoverable through `evals/test-cases.json.loadBearingAudit`. `evals/load-bearing-map.json` maps each unit to named functions in `src/load-bearing-criteria.js`; `evals/load-bearing-cases.js` supplies frozen ticket/interpreter pairs and their authored expected findings. Each criterion must accept valid output and reject its targeted violations before it counts as measured coverage.
+
+### Reviewer instruction map
+
+| Current Unit | Named Criterion | Case / Rejected Violation |
+|---|---|---|
+| R01 unsupported assumptions | unsupportedAssumptionDetection, ticketGrounding | `assumption-detection`: sample isActive data incorrectly promoted to policy |
+| R02 explicit omissions | missingRequirementDetection, interpreterGrounding | `missing-detection`: edit-triggered recalculation omitted; clean-input false accusation rejected |
+| R03 HVAC meaning | hvacInterpretationErrorDetection | `hvac-detection`: swapped AC/EC meanings must be challenged |
+| R04 explicit validation | missingValidationDetection | `validation-detection`: absent 1.25-to-100-inch range |
+| R05 missed ambiguities | reviewerAmbiguityCoverage | `missed-ambiguity-detection`: tie-breaking question absent from interpreter |
+| R06 already-listed open ambiguities | reviewerAmbiguityCoverage, statusConsistency | `open-detection`, `open-status`: all four exact references required; zero-finding PASS rejected |
+| R07 boundaries/options | boundaryChallengeCoverage, ticketGrounding | `boundary-detection`: ties, spacing detection, limits, unknown configuration, range/increment interaction; `boundary-grounding`: invented clamp policy rejected |
+| R08 both source artifacts / false positives | ticketGrounding, interpreterGrounding | Supported and clean-control cases: real quotations do not excuse false accusations; invented quotes rejected |
+| R09 finding structure/action | schemaConformance, findingActionability, reviewerAmbiguityCoverage | `actionability`: generic or invented action rejected; schema and exact references checked separately |
+| R10 severity impact | severityAppropriateness, statusConsistency | `hvac-severity` HIGH, `validation-severity` MEDIUM, `minor-label-severity` LOW; all block PASS |
+| R11 PASS iff empty, no open questions | statusConsistency | Clean, HIGH, MEDIUM, LOW, and open-question cases; cardinality mismatch or false clearance rejected |
+| R12 supported rationale | reviewRationaleQuality | Clean and concern-bearing rationale cases reject generic approval and unsupported clearance |
+| R13 prior finding continuity | concernContinuity | `retained-continuity`, `resolved-continuity`: renamed/dropped concern, absent or irrelevant resolution rejected |
+| R14 verify removed questions | ambiguityResolutionVerification | `bad-resolution-detection`: a real range quotation does not resolve rounding ties |
+| R15 raw JSON/schema | rawResponseFormat, schemaConformance | `adversarial-reviewer-raw/schema`: fences, prose, wrong root/type, or extra field |
+| Ticket input slot | ticketGrounding | Assertions tied to the fixed ticket, not expected accusation keywords alone |
+| Interpreter input slot | interpreterGrounding, reviewerAmbiguityCoverage | Actual clean/defective output determines expected challenges |
+| Previous-review input slot | concernContinuity | Remaining IDs preserved; each correction is explicitly supported |
+
+### Examiner unit reconciliation and preferred treatment
+
+| Original Unit(s) | Original Gap | Preferred Action Implemented |
+|---|---|---|
+| 3: incorrect HVAC interpretations | Unmapped | **Test** frozen reversed-definition output against the original AC/EC ticket |
+| 5: missed ambiguities | Interpreter-only coverage | **Rewrite + test** missed questions separately from already-identified open questions |
+| 6: grounding in Ticket | Unmapped | **Test** supported findings, true source quotations, false policy inference, and clean false-positive controls |
+| 7: grounding in Interpreter Output | Unmapped | **Test** accusations against the actual frozen output, including corrected/clean cases |
+| 1, 2, 4: assumptions, omissions, validation | Partial ticket-specific keywords | **Retain + strengthen** full finding propositions on fixed inputs |
+| 8, 9: PASS/FAIL cardinality | Eval-only Boolean consistency | **Retain + test** both cardinalities and schema-valid PASS/empty with open questions |
+| 10, 11, 12: LOW/MEDIUM/HIGH | Enum membership only | **Rewrite + test** impact-specific severity classes, including a LOW-only concern |
+
+Removed prose: “Be skeptical” and “Assume the interpreter may be wrong.” These unobservable exhortations are replaced by R01–R08's concrete detection/grounding duties. Repeated JSON directives and contradictory/redundant examples were consolidated into R09/R11/R15. No substantive review responsibility was pruned to reduce the denominator.
+
+The suite validates criterion sensitivity, not the model's detection rate. Schema-valid missing-finding controls change status consistently, so detection cannot pass merely by noticing an invalid JSON contract. Grounding labels require supported full descriptions/actions and exact sources; quotation existence alone is insufficient. Clean controls explicitly penalize invented accusations.
+
+**Still deferred:** repairs to `src/eval-scorer.js` and `src/run-evals.js`, the historical 0.727 metric, baseline provenance, live re-runs, and genuine measured prompt-evolution iterations. This audit does not relabel those as resolved.
+
+## Historical evaluation record — not refreshed by Deliverable 3
+
 ## Purpose
 
 Evaluate review quality.
