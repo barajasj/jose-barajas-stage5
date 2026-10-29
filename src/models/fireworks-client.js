@@ -2,19 +2,20 @@ require('dotenv').config({ quiet: true });
 
 const OpenAI = require('openai');
 
-const client = new OpenAI({
-  apiKey: process.env.AI_API_KEY,
-  baseURL: 'https://api.fireworks.ai/inference/v1'
-});
-
 async function invokeLlm({
   prompt,
-  model
+  model,
+  temperature = 0
 }) {
+  const client = new OpenAI({
+    apiKey: process.env.AI_API_KEY,
+    baseURL: 'https://api.fireworks.ai/inference/v1'
+  });
 
   const response =
     await client.chat.completions.create({
       model,
+      temperature,
       messages: [
         {
           role: 'user',

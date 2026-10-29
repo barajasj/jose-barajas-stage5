@@ -12,7 +12,8 @@
   ],
   "properties": {
     "requirementSummary": {
-      "type": "string"
+      "type": "string",
+      "pattern": "\\S"
     },
     "hvacTerminology": {
       "type": "array",
@@ -34,8 +35,23 @@
     },
     "ambiguities": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
-        "type": "string"
+        "type": "string",
+        "pattern": "\\S"
+      }
+    },
+    "ambiguityResolutions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ambiguity", "rationale", "sourceQuote"],
+        "properties": {
+          "ambiguity": { "type": "string", "pattern": "\\S" },
+          "rationale": { "type": "string", "pattern": "\\S" },
+          "sourceQuote": { "type": "string", "pattern": "\\S" }
+        }
       }
     },
     "confidence": {

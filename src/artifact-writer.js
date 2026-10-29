@@ -1,14 +1,24 @@
 const fs = require('fs');
 const path = require('path');
+const config = require('./config');
 
 function writeArtifact(
   correlationId,
   agentId,
-  output
+  output,
+  options = {}
 ) {
+  const { cycle = 1, stage = 'validated', runsDir = config.runsDir } = options;
+  if (!/^[A-Za-z0-9_-]+$/.test(correlationId)
+    || !/^[A-Za-z0-9_-]+$/.test(agentId)
+    || !/^[A-Za-z0-9_-]+$/.test(stage)
+    || !Number.isInteger(cycle) || cycle < 1) {
+    throw new Error('Invalid artifact identity.');
+  }
   const runDir = path.join(
-    'runs',
-    correlationId
+    runsDir,
+    correlationId,
+    `cycle-${cycle}`
   );
 
   if (!fs.existsSync(runDir)) {
@@ -19,23 +29,15 @@ function writeArtifact(
 
   const filename = path.join(
     runDir,
-    `${agentId}.json`
+    `${agentId}-${stage}.${typeof output === 'string' ? 'txt' : 'json'}`
   );
-
-  if (fs.existsSync(filename)) {
-    const pass1Filename = path.join(
-      runDir,
-      `${agentId}-pass1.json`
-    );
-    if (!fs.existsSync(pass1Filename)) {
-      fs.copyFileSync(filename, pass1Filename);
-    }
-  }
 
   fs.writeFileSync(
     filename,
-    JSON.stringify(output, null, 2)
+    typeof output === 'string' ? output : JSON.stringify(output, null, 2),
+    { encoding: 'utf8', flag: 'wx' }
   );
+  return filename;
 }
 
 module.exports = {

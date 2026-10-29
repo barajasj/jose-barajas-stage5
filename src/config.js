@@ -5,7 +5,9 @@ module.exports = {
     inputPerMillion: 0.50,
     outputPerMillion: 2.50
   },
-  maxReviewCycles: 2,
+  maxReviewCycles: Number(process.env.MAX_REVIEW_CYCLES || 2),
 
-  runtimeMode: process.env.RUNTIME_MODE || 'mock'
+  runtimeMode: process.env.RUNTIME_MODE || 'mock',
+  runsDir: process.env.RUNS_DIR || 'runs',
+  auditFile: process.env.AUDIT_FILE || 'audit/audit-log.jsonl'
 };

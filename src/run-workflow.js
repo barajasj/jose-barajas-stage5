@@ -12,6 +12,9 @@ async function main() {
   const ticket = fs.readFileSync(ticketPath, 'utf8');
 
   const result = await executeWorkflow(ticket);
+  if (!['COMPLETED', 'COMPLETED_AFTER_HUMAN_APPROVAL'].includes(result.status)) {
+    process.exitCode = 1;
+  }
   const jsonOutput = JSON.stringify(result, null, 2);
 
   if (outputPath) {
@@ -22,4 +25,11 @@ async function main() {
   console.log(jsonOutput);
 }
 
-main();
+main().catch(() => {
+  process.exitCode = 1;
+  console.error(JSON.stringify({
+    status: 'WORKFLOW_FAILURE',
+    disposition: 'FAIL',
+    reason: 'Unable to read workflow inputs or persist workflow output.'
+  }));
+});

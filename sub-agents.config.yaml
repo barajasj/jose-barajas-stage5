@@ -6,8 +6,9 @@ agents:
     promptFile: agents/requirement-interpreter.md
     outputSchema: schemas/examiner.schema.json
     isolated_context: true
-    allowedTools:
-      - read_ticket
+    allowedTools: []
+    inputDelivery: injected
+    allowedInputs: [ticket, previousInterpretation, reviewerFindings]
   - id: adversarial-reviewer
     name: Adversarial Reviewer
     purpose: >
@@ -15,9 +16,9 @@ agents:
     promptFile: agents/adversarial-reviewer.md
     outputSchema: schemas/challenges.schema.json
     isolated_context: true
-    allowedTools:
-      - read_ticket
-      - read_interpreter_output
+    allowedTools: []
+    inputDelivery: injected
+    allowedInputs: [ticket, interpreterResult, previousReview]
   - id: final-review-writer
     name: Final Review Writer
     purpose: >
@@ -25,5 +26,6 @@ agents:
     promptFile: agents/final-review-writer.md
     outputSchema: schemas/final-review.schema.json
     isolated_context: true
-    allowedTools:
-      - read_review_artifacts
+    allowedTools: []
+    inputDelivery: injected
+    allowedInputs: [interpreterResult, reviewResult, disposition, reasonCodes]

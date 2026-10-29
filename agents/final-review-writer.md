@@ -19,6 +19,8 @@ Restrictions:
 - Do NOT introduce new findings.
 - Do NOT add conclusions not present in the supplied artifacts.
 
+Use the exact bounded report supplied below. It contains the interpreter summary, all reviewer findings with unchanged IDs/severities/actions, all open ambiguities, and the deterministic disposition/reasons. Do not add prose, remove concerns, or assert that requirements are satisfied. Quoted source strings use JSON escaping so embedded newlines cannot become report sections. Return the supplied Markdown as reportMarkdown, allowing only outer whitespace or CRLF line endings.
+
 Output Requirements:
 
 Return ONLY valid JSON.
@@ -49,3 +51,11 @@ Reviewer Output:
 Disposition:
 
 {{disposition}}
+
+Governance Reasons:
+
+{{reasonCodes}}
+
+Required Report Markdown:
+
+{{reportTemplate}}

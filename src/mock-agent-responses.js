@@ -1,3 +1,5 @@
+const { reportTemplate } = require('./report-contract');
+
 module.exports = {
   'requirement-interpreter': {
     requirementSummary:
@@ -16,32 +18,29 @@ module.exports = {
     confidence: 'HIGH'
   },
 
-  'adversarial-reviewer': {
+  'adversarial-reviewer': input => ({
     status: 'FAIL',
+    rationale: 'Mock review deliberately retains a concern to exercise fail-closed routing.',
     findings: [
       {
+        id: 'MOCK-F1',
         severity: 'HIGH',
+        kind: 'MISSING_REQUIREMENT',
         description:
-          'Behavior when no cooling circuits exist is undefined.'
+          'Mock concern retained for runtime routing tests, not a real HVAC assessment.',
+        action: 'Inspect this mock concern; do not treat mock execution as certification evidence.',
+        sourceRefs: [{
+          artifact: 'interpreter',
+          pointer: '/requirementSummary',
+          quote: input.interpreterResult.requirementSummary
+        }],
+        ambiguityRefs: []
       }
-    ]
-  },
+    ],
+    resolutions: []
+  }),
 
-'final-review-writer': {
-  reportMarkdown: `
-# FAIL
-
-## Summary
-
-Critical findings remain unresolved.
-
-## Reviewer Findings
-
-- Behavior when no cooling circuits exist is undefined.
-
-## Final Disposition
-
-FAIL
-`
-}
+  'final-review-writer': input => ({
+    reportMarkdown: reportTemplate(input)
+  })
 };
