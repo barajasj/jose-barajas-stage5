@@ -330,7 +330,8 @@ async function executeWorkflow(ticket, options = {}) {
       status: error.code || 'WORKFLOW_FAILURE',
       disposition: 'FAIL',
       runtimeMode: options.runtimeMode || config.runtimeMode,
-      reason: error.code ? error.message : 'Workflow execution failed.'
+      reason: error.code ? error.message : 'Workflow execution failed.',
+      ...(error.details ? { details: error.details } : {})
     };
     writeAuditEntry({
       ...result,

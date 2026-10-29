@@ -1,0 +1,18 @@
+{
+  "ticket": "# Test Ticket\n\nCalculate the DX Coil Height as the sum\nof all Cooling Circuit Heights.",
+  "interpreterResult": {
+    "requirementSummary": "DX Coil Height is calculated as the sum of all Cooling Circuit Heights.",
+    "hvacTerminology": [
+      "DX Coil",
+      "Cooling Circuit"
+    ],
+    "businessRules": [
+      "DX Coil Height equals the sum of all Cooling Circuit Heights."
+    ],
+    "developerConsiderations": [
+      "Implement automatic recalculation."
+    ],
+    "ambiguities": [],
+    "confidence": "HIGH"
+  }
+}

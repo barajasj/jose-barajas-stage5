@@ -52,7 +52,7 @@
     },
     "adversarial-reviewer": {
       "promptFile": "agents/adversarial-reviewer.md",
-      "promptSha256": "fec55507fe0351522eafa04d52e4e266c5fc324ab7c43ad68d94c249c27a4f10",
+      "promptSha256": "53f57078237383f4e4ef97e6a70a334e723936adbd360604a26c1ebb3765cc70",
       "examinerBaseline": { "mapped": 8, "total": 12 },
       "units": {
         "R01": ["unsupportedAssumptionDetection", "ticketGrounding"],
@@ -70,6 +70,7 @@
         "R13": ["concernContinuity"],
         "R14": ["ambiguityResolutionVerification"],
         "R15": ["rawResponseFormat", "schemaConformance"],
+        "R16": ["schemaConformance", "findingActionability"],
         "input:ticket": ["ticketGrounding"],
         "input:interpreterResult": ["interpreterGrounding", "reviewerAmbiguityCoverage"],
         "input:previousReview": ["concernContinuity"]

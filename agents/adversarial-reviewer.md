@@ -15,6 +15,7 @@
 - [R13] Preserve prior finding IDs for concerns that remain. Each disappearing prior finding needs a resolutions entry containing findingId, rationale, and sourceRefs showing the correction in current artifacts.
 - [R14] Independently verify interpreter ambiguityResolutions against the ticket. A quotation that does not answer the removed question is not a resolution; flag unsupported removal as UNSUPPORTED_ASSUMPTION.
 - [R15] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/challenges.schema.json. Root fields are status, rationale, findings, and resolutions; no extra fields. Use the finding and resolution structures above.
+- [R16] Every finding must include all of its fields; a missing action or sourceRefs entry is invalid. Example of one complete finding: {"id":"F1","severity":"MEDIUM","kind":"OPEN_AMBIGUITY","description":"The ticket does not define the rounding tie-break policy.","action":"Obtain clarification from the ticket owner on the tie-break policy.","sourceRefs":[{"artifact":"interpreter","pointer":"/ambiguities/0","quote":"The ticket does not define the rounding tie-break policy."}],"ambiguityRefs":["/ambiguities/0"]}
 
 ## Ticket
 

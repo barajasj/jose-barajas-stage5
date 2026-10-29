@@ -1,0 +1,127 @@
+{
+  "interpreterResult": {
+    "requirementSummary": "When a Cooling Package is entered, the system must populate the Cooling Circuits, sum the height of each circuit, and place that total into the DX Coil Height field in the DX Coil Information. If a user changes any circuit's height, the form must recalculate the sum and update the DX Coil Height accordingly.",
+    "hvacTerminology": [
+      "DX Coil",
+      "Cooling Package",
+      "Cooling Circuit",
+      "DX Coil Information",
+      "Circuit Height"
+    ],
+    "businessRules": [
+      "When a Cooling Package is entered, the system runs calculations to obtain starting values and populates the Cooling Circuits.",
+      "The DX Coil Height field is initially empty and must be set to the sum of the heights of all populated Cooling Circuits.",
+      "If a user modifies the height of any Cooling Circuit, the system must recalculate the sum of all Circuit heights and update the DX Coil Height field in the DX Coil Information."
+    ],
+    "developerConsiderations": [
+      "Implement dynamic recalculation of the DX Coil Height whenever a Circuit Height field is edited.",
+      "Ensure that Cooling Circuits are populated before performing the height summation.",
+      "Update the DX Coil Height value in the DX Coil Information UI in real time."
+    ],
+    "ambiguities": [
+      "The specific event that triggers the initial population of Cooling Circuits and the first height calculation (e.g., selection of Cooling Package, form load) is not defined.",
+      "The unit of measurement for Circuit Height and DX Coil Height is not specified.",
+      "The required rounding or precision for the summed height is not defined.",
+      "Behavior when there are zero Cooling Circuits (e.g., set height to zero or leave empty) is not described.",
+      "Handling of multiple DX Coils or multiple Cooling Packages is not addressed."
+    ],
+    "confidence": "MEDIUM"
+  },
+  "reviewResult": {
+    "status": "FAIL",
+    "rationale": "The interpreter correctly captured the functional intent of the ticket, but it identified five unresolved ambiguities that are essential for a reliable implementation (trigger event, measurement units, rounding/precision, behavior with zero circuits, and handling of multiple DX Coils or Cooling Packages). According to the review policy, any open ambiguity blocks a PASS. Clarification is required for each listed ambiguity before implementation can proceed.",
+    "findings": [
+      {
+        "id": "F1",
+        "severity": "HIGH",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "The ticket does not define the specific event that triggers the initial population of Cooling Circuits and the first DX Coil Height calculation.",
+        "action": "Obtain clarification from the ticket owner on which user action or system event (e.g., selection of Cooling Package, form load) should trigger the initial population of Cooling Circuits and the first height summation.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/0",
+            "quote": "The specific event that triggers the initial population of Cooling Circuits and the first height calculation (e.g., selection of Cooling Package, form load) is not defined."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/0"
+        ]
+      },
+      {
+        "id": "F2",
+        "severity": "HIGH",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "The ticket does not specify the unit of measurement for Circuit Height and DX Coil Height.",
+        "action": "Obtain clarification from the ticket owner on the required unit of measurement (e.g., inches, centimeters) for both Circuit Height inputs and the resulting DX Coil Height.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/1",
+            "quote": "The unit of measurement for Circuit Height and DX Coil Height is not specified."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/1"
+        ]
+      },
+      {
+        "id": "F3",
+        "severity": "HIGH",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "The ticket does not define the required rounding or precision for the summed DX Coil Height.",
+        "action": "Obtain clarification from the ticket owner on the rounding rules or decimal precision (e.g., nearest 0.1, two decimal places) to apply to the summed height.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/2",
+            "quote": "The required rounding or precision for the summed height is not defined."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/2"
+        ]
+      },
+      {
+        "id": "F4",
+        "severity": "HIGH",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "The ticket does not describe the behavior when there are zero Cooling Circuits.",
+        "action": "Obtain clarification from the ticket owner on the expected DX Coil Height value (e.g., zero, empty, or a default) when no Cooling Circuits are present.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/3",
+            "quote": "Behavior when there are zero Cooling Circuits (e.g., set height to zero or leave empty) is not described."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/3"
+        ]
+      },
+      {
+        "id": "F5",
+        "severity": "HIGH",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "The ticket does not address handling of multiple DX Coils or multiple Cooling Packages.",
+        "action": "Obtain clarification from the ticket owner on how the system should behave if multiple DX Coils or multiple Cooling Packages are present (e.g., aggregate per coil, separate calculations).",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/4",
+            "quote": "Handling of multiple DX Coils or multiple Cooling Packages is not addressed."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/4"
+        ]
+      }
+    ],
+    "resolutions": []
+  },
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ]
+}

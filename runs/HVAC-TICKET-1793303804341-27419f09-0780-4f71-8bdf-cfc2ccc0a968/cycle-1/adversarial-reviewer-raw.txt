@@ -1,0 +1,77 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains several unresolved ambiguities that are essential for a reliable implementation of the DX Coil Height calculation. Each ambiguity blocks a PASS according to the review policy and must be clarified before development can proceed.",
+  "findings": [
+    {
+      "id": "F001",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "HIGH",
+      "description": "The event that triggers the initial population of Cooling Circuits and the first height calculation is not defined.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The specific event that triggers the initial population of Cooling Circuits and the first height calculation (e.g., selection of Cooling Package, form load) is not defined."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/0"]
+    },
+    {
+      "id": "F002",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "HIGH",
+      "description": "The unit of measurement for Circuit Height and DX Coil Height is not specified.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The unit of measurement for Circuit Height and DX Coil Height is not specified."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/1"]
+    },
+    {
+      "id": "F003",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "HIGH",
+      "description": "The required rounding or precision for the summed height is not defined.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The required rounding or precision for the summed height is not defined."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/2"]
+    },
+    {
+      "id": "F004",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "HIGH",
+      "description": "Behavior when there are zero Cooling Circuits (e.g., set height to zero or leave empty) is not described.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Behavior when there are zero Cooling Circuits (e.g., set height to zero or leave empty) is not described."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/3"]
+    },
+    {
+      "id": "F005",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "HIGH",
+      "description": "Handling of multiple DX Coils or multiple Cooling Packages is not addressed.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "Handling of multiple DX Coils or multiple Cooling Packages is not addressed."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/4"]
+    }
+  ],
+  "resolutions": []
+}

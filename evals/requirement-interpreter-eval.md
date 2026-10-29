@@ -7,7 +7,7 @@ The legacy scoring methodology, results, and iteration log below are historical 
 | Prompt Artifact | Examiner Coverage | New Local Coverage | Required Coverage | Previously Missing Criteria |
 |---|---|---|---|---|
 | Requirement Interpreter | 8/12 = 66.7% | 16/16 = 100% | >=90% independently; local preflight requires every retained unit | Summary, grounded developer considerations, readiness confidence; substantive validation and behavior |
-| Adversarial Reviewer | 8/12 = 66.7% | 18/18 = 100% | >=90% independently | HVAC errors, missed/open ambiguities, ticket and interpreter grounding, severity impact |
+| Adversarial Reviewer | 8/12 = 66.7% | 19/19 = 100% | >=90% independently | HVAC errors, missed/open ambiguities, ticket and interpreter grounding, severity impact |
 | Final Review Writer | 6/8 = 75% | 12/12 = 100% | >=90% independently | Interpreter grounding, unsupported conclusions, substantive findings/disposition fidelity |
 
 These are different inventories, not like-for-like performance deltas. The local denominator includes numbered instruction bullets, input slots, and appended re-dispatch instructions. It excludes Markdown headings used only as labels. The examiner's exact Markdown disassembler is unavailable; local 100% does not assert an official grader result.
@@ -23,7 +23,7 @@ These are different inventories, not like-for-like performance deltas. The local
 
 Each applicable assertion is Boolean: valid counterpart accepted AND every targeted violation rejected. No empty-denominator recall credit is used. Content mutations must remain schema-valid; explicit JSON/schema/status violations are separately identified. A case without applicable labels is an evaluation-configuration error, not a pass.
 
-Observed on this revision: all **61 valid counterparts accepted** and all **139 negative controls rejected** across the three agents. These are authored criterion-sensitivity measurements, not model executions. Gold proposition wording is deliberately conservative, with case/whitespace normalization only; broader paraphrase grading and integration with the legacy scoring pipeline remain Deliverable 4 work.
+Observed on this revision: all **61 valid counterparts accepted** and all **152 negative controls rejected** across the three agents. These are authored criterion-sensitivity measurements, not model executions. Gold proposition wording is deliberately conservative, with case/whitespace normalization only; broader paraphrase grading and integration with the legacy scoring pipeline remain Deliverable 4 work.
 
 ### Interpreter instruction map
 

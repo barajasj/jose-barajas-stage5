@@ -320,7 +320,13 @@ for (const context of [dx, open, writerFail]) {
   check(`${context.agent}-schema`, 'schemaConformance', context, [
     replace('extra-field', 'unexpected', true, false),
     ...Object.keys(context.output).map(field =>
-      replace(`wrong-type-${field}`, field, 42, false))
+      replace(`wrong-type-${field}`, field, 42, false)),
+    ...Object.keys(context.output).map(field =>
+      mutation(`missing-required-${field}`, output => { delete output[field]; }, false)),
+    ...(context.agent === 'adversarial-reviewer' ? [
+      mutation('missing-action', output => { delete output.findings[0].action; }, false),
+      mutation('missing-source-refs', output => { delete output.findings[0].sourceRefs; }, false)
+    ] : [])
   ]);
 }
 

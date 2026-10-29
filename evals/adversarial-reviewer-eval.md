@@ -10,7 +10,7 @@ node src/run-load-bearing-audit.js --json
 node --test tests/load-bearing.test.js
 ```
 
-Local coverage is **18/18 = 100%**: fifteen explicit instruction units and three input slots, versus the examiner's historical 8/12. Different denominators are not a performance improvement claim. The exact examiner parser is unavailable; this is a conservative local preflight, not an official grading result.
+Local coverage is **19/19 = 100%**: sixteen explicit instruction units and three input slots, versus the examiner's historical 8/12. Different denominators are not a performance improvement claim. The exact examiner parser is unavailable; this is a conservative local preflight, not an official grading result.
 
 The definitions are discoverable through `evals/test-cases.json.loadBearingAudit`. `evals/load-bearing-map.json` maps each unit to named functions in `src/load-bearing-criteria.js`; `evals/load-bearing-cases.js` supplies frozen ticket/interpreter pairs and their authored expected findings. Each criterion must accept valid output and reject its targeted violations before it counts as measured coverage.
 
@@ -33,6 +33,7 @@ The definitions are discoverable through `evals/test-cases.json.loadBearingAudit
 | R13 prior finding continuity | concernContinuity | `retained-continuity`, `resolved-continuity`: renamed/dropped concern, absent or irrelevant resolution rejected |
 | R14 verify removed questions | ambiguityResolutionVerification | `bad-resolution-detection`: a real range quotation does not resolve rounding ties |
 | R15 raw JSON/schema | rawResponseFormat, schemaConformance | `adversarial-reviewer-raw/schema`: fences, prose, wrong root/type, or extra field |
+| R16 complete finding example | schemaConformance, findingActionability | Field omission rejected by schema (observed live: audit `HVAC-TICKET-1793313465729-*` missing `action`); generic or invented action rejected by `actionability` |
 | Ticket input slot | ticketGrounding | Assertions tied to the fixed ticket, not expected accusation keywords alone |
 | Interpreter input slot | interpreterGrounding, reviewerAmbiguityCoverage | Actual clean/defective output determines expected challenges |
 | Previous-review input slot | concernContinuity | Remaining IDs preserved; each correction is explicitly supported |
@@ -50,6 +51,8 @@ The definitions are discoverable through `evals/test-cases.json.loadBearingAudit
 | 10, 11, 12: LOW/MEDIUM/HIGH | Enum membership only | **Rewrite + test** impact-specific severity classes, including a LOW-only concern |
 
 Removed prose: “Be skeptical” and “Assume the interpreter may be wrong.” These unobservable exhortations are replaced by R01–R08's concrete detection/grounding duties. Repeated JSON directives and contradictory/redundant examples were consolidated into R09/R11/R15. No substantive review responsibility was pruned to reduce the denominator.
+
+R16 was added after a live real-mode run (`HVAC-TICKET-1793313465729-3ff8ae74-b994-455a-8023-234fc290f717`, audit `details`: `missingProperty: action`) produced a substantively correct five-finding review that omitted the required `action` field on every finding and was correctly rejected as SCHEMA_FAILURE. The prompt is the model's only contract — the agent has no tools and cannot read the schema file — so R16 supplies a valid complete-finding example rather than relying on field names alone.
 
 The suite validates criterion sensitivity, not the model's detection rate. Schema-valid missing-finding controls change status consistently, so detection cannot pass merely by noticing an invalid JSON contract. Grounding labels require supported full descriptions/actions and exact sources; quotation existence alone is insufficient. Clean controls explicitly penalize invented accusations.
 

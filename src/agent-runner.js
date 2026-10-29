@@ -196,7 +196,10 @@ function createAgentRunner({ invokeModel = invokeLlm } = {}) {
         failure.details = error.details;
       }
       writeAuditEntry(failure, auditFile);
-      throw Object.assign(contractError(failure.reason, failure.status), { correlationId });
+      throw Object.assign(contractError(failure.reason, failure.status), {
+        correlationId,
+        ...(error.details ? { details: error.details } : {})
+      });
     }
   };
 }

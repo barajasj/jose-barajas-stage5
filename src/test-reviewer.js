@@ -61,7 +61,8 @@ async function main() {
       reviewerTemplate,
       {
         ticket,
-        interpreterResult
+        interpreterResult,
+        previousReview: null
       }
     );
 
