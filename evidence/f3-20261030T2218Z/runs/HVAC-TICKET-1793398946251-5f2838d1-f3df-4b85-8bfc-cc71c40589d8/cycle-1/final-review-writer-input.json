@@ -1,0 +1,109 @@
+{
+  "interpreterResult": {
+    "requirementSummary": "DX Coil Height must be set to the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are pre‑validated and no other behavior is required.",
+    "hvacTerminology": [
+      "DX Coil",
+      "Cooling Circuit",
+      "Height"
+    ],
+    "businessRules": [
+      "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+      "Recalculate DX Coil Height immediately after a height edit.",
+      "If the circuit list is empty, DX Coil Height is set to 0 inches.",
+      "All inputs are already validated; no additional validation is in scope."
+    ],
+    "developerConsiderations": [
+      "Implement calculation that sums all Cooling Circuit Height values (in inches) and assigns the total to DX Coil Height.",
+      "Trigger the calculation immediately after any edit to a Cooling Circuit Height.",
+      "When the list of Cooling Circuits is empty, set DX Coil Height to 0 inches.",
+      "Assume input values are pre‑validated; do not add extra validation logic."
+    ],
+    "ambiguities": [
+      "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+      "No rounding or precision rules are specified for the sum of heights.",
+      "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.",
+      "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+    ],
+    "confidence": "MEDIUM"
+  },
+  "reviewResult": {
+    "status": "FAIL",
+    "rationale": "The interpreter identified several unresolved ambiguities that are not addressed in the ticket. Clarification is required for each ambiguity before implementation can proceed.",
+    "findings": [
+      {
+        "id": "F1",
+        "severity": "MEDIUM",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "Unclear whether recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+        "action": "Obtain clarification from the ticket owner on which height edits should trigger the DX Coil Height recalculation.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/0",
+            "quote": "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/0"
+        ]
+      },
+      {
+        "id": "F2",
+        "severity": "MEDIUM",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "No rounding or precision rules are specified for the sum of heights.",
+        "action": "Obtain clarification from the ticket owner on the rounding or precision policy for the summed DX Coil Height.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/1",
+            "quote": "No rounding or precision rules are specified for the sum of heights."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/1"
+        ]
+      },
+      {
+        "id": "F3",
+        "severity": "MEDIUM",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "Unclear whether only active/enabled Cooling Circuits should be included in the sum.",
+        "action": "Obtain clarification from the ticket owner on whether the calculation should consider only active/enabled Cooling Circuits.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/2",
+            "quote": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/2"
+        ]
+      },
+      {
+        "id": "F4",
+        "severity": "MEDIUM",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.",
+        "action": "Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation after a height edit.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/3",
+            "quote": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/3"
+        ]
+      }
+    ],
+    "resolutions": []
+  },
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ]
+}

@@ -76,6 +76,7 @@ function createAgentRunner({ invokeModel = invokeLlm } = {}) {
       const variables = { ...input, reviewCycle: cycle };
       if (agentId === 'adversarial-reviewer') {
         variables.previousReview = input.previousReview || null;
+        variables.outputSchema = JSON.parse(fs.readFileSync(schemaFile, 'utf8'));
       }
       if (agentId === 'final-review-writer') {
         variables.reportTemplate = reportTemplate(input);

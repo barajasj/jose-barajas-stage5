@@ -1,0 +1,14 @@
+{
+  "startedAt": "2026-10-30T22:50:23.340Z",
+  "scope": "One real interpreter redispatch probe; not a workflow attempt.",
+  "inputSource": "evidence/f3-20261030T2225Z/runs/HVAC-TICKET-1793399289234-fa1f13c9-0d5a-4be7-828f-b20b19021313/cycle-2/requirement-interpreter-input.json",
+  "sourceInputHash": "c381a1ec346a241d3f7545a41d7c62072b4c67c5c6a540ef986374dd9ce28501",
+  "priorFailure": {
+    "correlationId": "HVAC-TICKET-1793399289234-fa1f13c9-0d5a-4be7-828f-b20b19021313",
+    "reason": "Ambiguity resolution must identify a removed prior ambiguity and explain the correction."
+  },
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "temperature": 0,
+  "maxModelInvocations": 1,
+  "noRetryOrRepair": true
+}

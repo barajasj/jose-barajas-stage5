@@ -1,0 +1,22 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter correctly captured the primary business behavior described in the ticket, but the ticket does not define the unit of measurement for circuit heights and the resulting DX Coil Height. Without this validation constraint, implementation cannot reliably perform the required summation and display. The missing unit specification is a validation gap that must be clarified before the behavior can be implemented.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "MISSING_VALIDATION",
+      "description": "The ticket does not specify the unit of measurement for Circuit Height values and the resulting DX Coil Height.",
+      "action": "Obtain clarification from the ticket owner on the unit (e.g., inches, millimeters) to be used for Circuit Height and DX Coil Height, and any rounding or formatting rules associated with that unit.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "each with a height of 7.5"
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

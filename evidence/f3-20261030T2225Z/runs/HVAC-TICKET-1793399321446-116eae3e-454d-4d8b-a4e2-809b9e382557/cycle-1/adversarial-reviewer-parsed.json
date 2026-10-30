@@ -1,0 +1,109 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter accurately captured the ticket's requirements and business rules, but six ambiguities remain unresolved, each requiring clarification from the ticket owner before implementation can proceed.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The exact set of roof type option labels (beyond \"dark\" and \"light\") and how parapet/shrouding is represented is not defined.",
+      "action": "Obtain clarification on the full list of roof type option labels and the representation format for parapet/shrouding.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The exact set of roof type option labels (beyond \"dark\" and \"light\") and how parapet/shrouding is represented is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The catalog of valid EC Model values is referenced but not listed.",
+      "action": "Provide the complete catalog of permissible EC Model values.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The catalog of valid EC Model values is referenced but not listed."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Units for Design Ambient default are given as 95°F; conversion to °C is implied but not specified.",
+      "action": "Specify the exact conversion rule or value for the default Design Ambient when expressed in °C.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Units for Design Ambient default are given as 95°F; conversion to °C is implied but not specified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The acceptable range or validation rules for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature are not provided.",
+      "action": "Define the valid ranges and any validation constraints for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The acceptable range or validation rules for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature are not provided."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The format and content of the output \"condenser and circuit‑level configuration\" for ECS calculation are unspecified.",
+      "action": "Clarify the required structure, fields, and data format of the condenser and circuit‑level configuration output used for ECS calculation.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "The format and content of the output \"condenser and circuit‑level configuration\" for ECS calculation are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The definition of \"coil geometry\" required for AC condenser recording is not detailed.",
+      "action": "Provide a detailed definition and required data elements for \"coil geometry\" when recording AC condenser parameters.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/5",
+          "quote": "The definition of \"coil geometry\" required for AC condenser recording is not detailed."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/5"
+      ]
+    }
+  ],
+  "resolutions": []
+}

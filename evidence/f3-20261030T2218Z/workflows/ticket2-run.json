@@ -1,0 +1,1007 @@
+{
+  "runtimeMode": "real",
+  "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+  "status": "COMPLETED",
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ],
+  "reviewCycles": [
+    {
+      "cycle": 1,
+      "interpreterResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+        "agentId": "requirement-interpreter",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown should be populated with options filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown should be populated with options filtered by the selected Refrigerant and Unit Type.",
+          "hvacTerminology": [
+            "Condenser Type",
+            "Refrigerant",
+            "Unit Type",
+            "Unit Size",
+            "SDCommonUnitTypeRefrigerant",
+            "SDCommonUnitModelSizes"
+          ],
+          "businessRules": [
+            "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant whose parent array contains the selected Refrigerant (and, as stated, the selected Condenser Type).",
+            "If a user selects a Unit Type, the system must populate the Unit Size dropdown with entries from SDCommonUnitModelSizes whose parent array contains both the selected Refrigerant and the selected Unit Type.",
+            "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API.",
+            "Only entries where isActive is true should be considered for filtering."
+          ],
+          "developerConsiderations": [
+            "Call the unitdesign API GET /dropdowns to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes data.",
+            "Filter Unit Type options by checking each entry's parent array for inclusion of the selected Refrigerant (and Condenser Type if applicable).",
+            "Filter Unit Size options by checking each entry's parent array for inclusion of both the selected Refrigerant and the selected Unit Type.",
+            "Exclude any entries where isActive is false from the filtered results.",
+            "Update the Unit Type and Unit Size dropdowns dynamically in the UI when the relevant selections change."
+          ],
+          "ambiguities": [
+            "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+            "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+            "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+            "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+            "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+            "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+          ],
+          "confidence": "MEDIUM"
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+          "workflow": "hvac-ticket-governance",
+          "agent": "requirement-interpreter",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-30T22:20:35.890Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "3b03a93c0ab616680c1a2b1a7812d09ce6aa31516d45612e4864d4217eb5debb",
+          "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+          "promptHash": "89cd164750843ef0804602733429731bcce69237e32e07806805ebeb562776c2",
+          "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 1051,
+          "completionTokens": 1610,
+          "totalTokens": 2661,
+          "cost": 0.00455,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "dbb6e3c9ffd9933051914d01d25eae0e6c034f7af12b0260dc8fe13541dfb0e4",
+          "outputHash": "21c6c2ab139aeba59f29843d6227292911c3ad8cdc06b991a96314adb457c5ba",
+          "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-1\\requirement-interpreter-raw.txt",
+          "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-1\\requirement-interpreter-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "reviewResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+        "agentId": "adversarial-reviewer",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "status": "FAIL",
+          "rationale": "The interpreter introduced an unsupported assumption by enforcing filtering based on the isActive flag, which is not required by the ticket. Additionally, the interpreter left several open ambiguities unresolved, each of which blocks a PASS result per review policy.",
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "HIGH",
+              "kind": "UNSUPPORTED_ASSUMPTION",
+              "description": "The interpreter adds a filtering rule based on the isActive flag, which is not specified in the ticket.",
+              "action": "Remove the unsupported isActive filtering rule or obtain clarification from the ticket owner whether inactive items should be excluded.",
+              "sourceRefs": [
+                {
+                  "artifact": "ticket",
+                  "pointer": "",
+                  "quote": "\"isActive\": true"
+                },
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/businessRules/3",
+                  "quote": "Only entries where isActive is true should be considered for filtering."
+                }
+              ],
+              "ambiguityRefs": []
+            },
+            {
+              "id": "F2",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+              "action": "Obtain clarification from the ticket owner on whether and how Condenser Type participates in Unit Type filtering.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/0",
+                  "quote": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/0"
+              ]
+            },
+            {
+              "id": "F3",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+              "action": "Clarify from the ticket owner if Condenser Type is expected to be present in the parent array or if another mapping is needed.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/1",
+                  "quote": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/1"
+              ]
+            },
+            {
+              "id": "F4",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+              "action": "Ask the ticket owner to define UI behavior for empty filter results.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/2",
+                  "quote": "What should be displayed or how the UI should behave when no entries match the filter criteria."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/2"
+              ]
+            },
+            {
+              "id": "F5",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+              "action": "Clarify from the ticket owner whether inactive items should ever be presented to the user.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/3",
+                  "quote": "Whether the isActive flag must always be enforced or if inactive items can ever be shown."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/3"
+              ]
+            },
+            {
+              "id": "F6",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+              "action": "Obtain clarification on whether Condenser Type is part of the Unit Size filtering criteria.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/4",
+                  "quote": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/4"
+              ]
+            },
+            {
+              "id": "F7",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined.",
+              "action": "Request detailed API contract information for the /dropdowns endpoint, including response format, pagination, and error handling.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/5",
+                  "quote": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/5"
+              ]
+            }
+          ],
+          "resolutions": []
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+          "workflow": "hvac-ticket-governance",
+          "agent": "adversarial-reviewer",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-30T22:20:47.853Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "921bf72a071f28d3a13a3cab25853d0c49dcf41e029aa9ffdb73a262ba9341e0",
+          "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+          "promptHash": "5beb08832b303033b8d2b3f790efce7e4826fccda4b1972a472af0633ae29555",
+          "promptTemplateHash": "35ad5d92ceebef8a1a15de0b9b4a2ac9d776a4a8e7b1fa9f688d5a6463d3f628",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 2284,
+          "completionTokens": 2449,
+          "totalTokens": 4733,
+          "cost": 0.007264,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "1ccbaa5dcf7eca52c9ccdd2616a23c5f537e8ef7a8b799b41aeb4bdf42acd06a",
+          "outputHash": "5068da0b9227fb0442e5c4fe2fe714afd55d93ddc5bd2219323d27a58e150c5f",
+          "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-1\\adversarial-reviewer-raw.txt",
+          "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-1\\adversarial-reviewer-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    },
+    {
+      "cycle": 2,
+      "interpreterResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+        "agentId": "requirement-interpreter",
+        "cycle": 2,
+        "runtimeMode": "real",
+        "output": {
+          "requirementSummary": "When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be populated with options filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown must be populated with options filtered by the selected Refrigerant and Unit Type.",
+          "hvacTerminology": [
+            "Condenser Type",
+            "Refrigerant",
+            "Unit Type",
+            "Unit Size",
+            "SDCommonUnitTypeRefrigerant",
+            "SDCommonUnitModelSizes"
+          ],
+          "businessRules": [
+            "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant whose parent array contains the selected Refrigerant and the selected Condenser Type.",
+            "If a user selects a Unit Type, the system must populate the Unit Size dropdown with entries from SDCommonUnitModelSizes whose parent array contains both the selected Refrigerant and the selected Unit Type.",
+            "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API."
+          ],
+          "developerConsiderations": [
+            "Call the unitdesign API GET /dropdowns to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes data.",
+            "Filter Unit Type options by checking each entry's parent array for inclusion of the selected Refrigerant and Condenser Type.",
+            "Filter Unit Size options by checking each entry's parent array for inclusion of both the selected Refrigerant and the selected Unit Type.",
+            "Update the Unit Type and Unit Size dropdowns dynamically in the UI when the relevant selections change."
+          ],
+          "ambiguities": [
+            "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+            "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+            "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+            "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+            "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+            "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+          ],
+          "confidence": "MEDIUM"
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+          "workflow": "hvac-ticket-governance",
+          "agent": "requirement-interpreter",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 2,
+          "timestamp": "2026-10-30T22:20:58.371Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "e23a13013304145ca6e323437248206954009fb0ba9003d221e9530a93b21c88",
+          "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+          "promptHash": "00ea3c002f96d557dfb99ef9284104ce71cb2fdcaffd28022536237c22d3fe14",
+          "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 2768,
+          "completionTokens": 1146,
+          "totalTokens": 3914,
+          "cost": 0.004249,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "9c47db61dd7b820439f3e31f01688f6a8e2f290633f74feb1e772c8b918a1391",
+          "outputHash": "423bd6aa10a1572f991c59ed9cd812209b2ab7bd6f3ad3c93af9669621c05f11",
+          "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\requirement-interpreter-raw.txt",
+          "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\requirement-interpreter-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "reviewResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+        "agentId": "adversarial-reviewer",
+        "cycle": 2,
+        "runtimeMode": "real",
+        "output": {
+          "status": "FAIL",
+          "rationale": "The interpreter output still contains unresolved ambiguities regarding how Condenser Type participates in filtering, handling of empty results, isActive flag usage, and API response details. These open ambiguities block a PASS result per review policy.",
+          "findings": [
+            {
+              "id": "F2",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+              "action": "Obtain clarification from the ticket owner on whether and how Condenser Type participates in Unit Type filtering.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/0",
+                  "quote": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/0"
+              ]
+            },
+            {
+              "id": "F3",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+              "action": "Clarify from the ticket owner if Condenser Type is expected to be present in the parent array or if another mapping is needed.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/1",
+                  "quote": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/1"
+              ]
+            },
+            {
+              "id": "F4",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+              "action": "Ask the ticket owner to define UI behavior for empty filter results.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/2",
+                  "quote": "What should be displayed or how the UI should behave when no entries match the filter criteria."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/2"
+              ]
+            },
+            {
+              "id": "F5",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+              "action": "Clarify from the ticket owner whether inactive items should ever be presented to the user.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/3",
+                  "quote": "Whether the isActive flag must always be enforced or if inactive items can ever be shown."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/3"
+              ]
+            },
+            {
+              "id": "F6",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+              "action": "Obtain clarification on whether Condenser Type is part of the Unit Size filtering criteria.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/4",
+                  "quote": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/4"
+              ]
+            },
+            {
+              "id": "F7",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined.",
+              "action": "Request detailed API contract information for the /dropdowns endpoint, including response format, pagination, and error handling.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/5",
+                  "quote": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/5"
+              ]
+            }
+          ],
+          "resolutions": [
+            {
+              "findingId": "F1",
+              "rationale": "The interpreter output no longer contains a rule that filters entries based on the isActive flag, so the previously reported unsupported assumption has been removed.",
+              "sourceRefs": [
+                {
+                  "artifact": "ticket",
+                  "pointer": "",
+                  "quote": "\"isActive\": true"
+                },
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/businessRules/2",
+                  "quote": "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API."
+                }
+              ]
+            }
+          ]
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+          "workflow": "hvac-ticket-governance",
+          "agent": "adversarial-reviewer",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 2,
+          "timestamp": "2026-10-30T22:21:02.944Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "21cb4b2d41c977aa4ba9ef4bfc78aad4aeb202c0982fda20d1f2ee997c662de4",
+          "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+          "promptHash": "0ab672362956d65029536cfc9aeee2a9e9d09bbbbbc3a3165b01e0135087f3f5",
+          "promptTemplateHash": "35ad5d92ceebef8a1a15de0b9b4a2ac9d776a4a8e7b1fa9f688d5a6463d3f628",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 3402,
+          "completionTokens": 2180,
+          "totalTokens": 5582,
+          "cost": 0.007151,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "2e58569293f4a3c5361a1e55597ac5d6e34bcdf0cbba90787f5896fcecd6b203",
+          "outputHash": "c097ec335e7b0768b13ce077e8e0a461da2754dd3c94a0bdb7d61e436889653f",
+          "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\adversarial-reviewer-raw.txt",
+          "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\adversarial-reviewer-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    }
+  ],
+  "totalCost": 0.028691,
+  "humanGovernance": null,
+  "auditSummary": {
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "stepsExecuted": 5,
+    "reDispatched": true,
+    "reviewCyclesExecuted": 2,
+    "reviewLimitReached": false,
+    "totalPromptTokens": 12333,
+    "totalCompletionTokens": 9010,
+    "totalTokens": 21343,
+    "totalCost": 0.028691,
+    "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)"
+  },
+  "interpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown should be populated with options filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown should be populated with options filtered by the selected Refrigerant and Unit Type.",
+      "hvacTerminology": [
+        "Condenser Type",
+        "Refrigerant",
+        "Unit Type",
+        "Unit Size",
+        "SDCommonUnitTypeRefrigerant",
+        "SDCommonUnitModelSizes"
+      ],
+      "businessRules": [
+        "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant whose parent array contains the selected Refrigerant (and, as stated, the selected Condenser Type).",
+        "If a user selects a Unit Type, the system must populate the Unit Size dropdown with entries from SDCommonUnitModelSizes whose parent array contains both the selected Refrigerant and the selected Unit Type.",
+        "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API.",
+        "Only entries where isActive is true should be considered for filtering."
+      ],
+      "developerConsiderations": [
+        "Call the unitdesign API GET /dropdowns to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes data.",
+        "Filter Unit Type options by checking each entry's parent array for inclusion of the selected Refrigerant (and Condenser Type if applicable).",
+        "Filter Unit Size options by checking each entry's parent array for inclusion of both the selected Refrigerant and the selected Unit Type.",
+        "Exclude any entries where isActive is false from the filtered results.",
+        "Update the Unit Type and Unit Size dropdowns dynamically in the UI when the relevant selections change."
+      ],
+      "ambiguities": [
+        "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+        "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+        "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+        "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+        "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+        "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:20:35.890Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "3b03a93c0ab616680c1a2b1a7812d09ce6aa31516d45612e4864d4217eb5debb",
+      "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+      "promptHash": "89cd164750843ef0804602733429731bcce69237e32e07806805ebeb562776c2",
+      "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1051,
+      "completionTokens": 1610,
+      "totalTokens": 2661,
+      "cost": 0.00455,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "dbb6e3c9ffd9933051914d01d25eae0e6c034f7af12b0260dc8fe13541dfb0e4",
+      "outputHash": "21c6c2ab139aeba59f29843d6227292911c3ad8cdc06b991a96314adb457c5ba",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "reviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter introduced an unsupported assumption by enforcing filtering based on the isActive flag, which is not required by the ticket. Additionally, the interpreter left several open ambiguities unresolved, each of which blocks a PASS result per review policy.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "HIGH",
+          "kind": "UNSUPPORTED_ASSUMPTION",
+          "description": "The interpreter adds a filtering rule based on the isActive flag, which is not specified in the ticket.",
+          "action": "Remove the unsupported isActive filtering rule or obtain clarification from the ticket owner whether inactive items should be excluded.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "\"isActive\": true"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/3",
+              "quote": "Only entries where isActive is true should be considered for filtering."
+            }
+          ],
+          "ambiguityRefs": []
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+          "action": "Obtain clarification from the ticket owner on whether and how Condenser Type participates in Unit Type filtering.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+          "action": "Clarify from the ticket owner if Condenser Type is expected to be present in the parent array or if another mapping is needed.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+          "action": "Ask the ticket owner to define UI behavior for empty filter results.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "What should be displayed or how the UI should behave when no entries match the filter criteria."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F5",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+          "action": "Clarify from the ticket owner whether inactive items should ever be presented to the user.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Whether the isActive flag must always be enforced or if inactive items can ever be shown."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "F6",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+          "action": "Obtain clarification on whether Condenser Type is part of the Unit Size filtering criteria.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        },
+        {
+          "id": "F7",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined.",
+          "action": "Request detailed API contract information for the /dropdowns endpoint, including response format, pagination, and error handling.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/5",
+              "quote": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/5"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:20:47.853Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "921bf72a071f28d3a13a3cab25853d0c49dcf41e029aa9ffdb73a262ba9341e0",
+      "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+      "promptHash": "5beb08832b303033b8d2b3f790efce7e4826fccda4b1972a472af0633ae29555",
+      "promptTemplateHash": "35ad5d92ceebef8a1a15de0b9b4a2ac9d776a4a8e7b1fa9f688d5a6463d3f628",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2284,
+      "completionTokens": 2449,
+      "totalTokens": 4733,
+      "cost": 0.007264,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "1ccbaa5dcf7eca52c9ccdd2616a23c5f537e8ef7a8b799b41aeb4bdf42acd06a",
+      "outputHash": "5068da0b9227fb0442e5c4fe2fe714afd55d93ddc5bd2219323d27a58e150c5f",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalInterpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+    "agentId": "requirement-interpreter",
+    "cycle": 2,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be populated with options filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown must be populated with options filtered by the selected Refrigerant and Unit Type.",
+      "hvacTerminology": [
+        "Condenser Type",
+        "Refrigerant",
+        "Unit Type",
+        "Unit Size",
+        "SDCommonUnitTypeRefrigerant",
+        "SDCommonUnitModelSizes"
+      ],
+      "businessRules": [
+        "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant whose parent array contains the selected Refrigerant and the selected Condenser Type.",
+        "If a user selects a Unit Type, the system must populate the Unit Size dropdown with entries from SDCommonUnitModelSizes whose parent array contains both the selected Refrigerant and the selected Unit Type.",
+        "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API."
+      ],
+      "developerConsiderations": [
+        "Call the unitdesign API GET /dropdowns to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes data.",
+        "Filter Unit Type options by checking each entry's parent array for inclusion of the selected Refrigerant and Condenser Type.",
+        "Filter Unit Size options by checking each entry's parent array for inclusion of both the selected Refrigerant and the selected Unit Type.",
+        "Update the Unit Type and Unit Size dropdowns dynamically in the UI when the relevant selections change."
+      ],
+      "ambiguities": [
+        "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+        "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+        "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+        "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+        "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+        "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 2,
+      "timestamp": "2026-10-30T22:20:58.371Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "e23a13013304145ca6e323437248206954009fb0ba9003d221e9530a93b21c88",
+      "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+      "promptHash": "00ea3c002f96d557dfb99ef9284104ce71cb2fdcaffd28022536237c22d3fe14",
+      "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2768,
+      "completionTokens": 1146,
+      "totalTokens": 3914,
+      "cost": 0.004249,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "9c47db61dd7b820439f3e31f01688f6a8e2f290633f74feb1e772c8b918a1391",
+      "outputHash": "423bd6aa10a1572f991c59ed9cd812209b2ab7bd6f3ad3c93af9669621c05f11",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+    "agentId": "adversarial-reviewer",
+    "cycle": 2,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter output still contains unresolved ambiguities regarding how Condenser Type participates in filtering, handling of empty results, isActive flag usage, and API response details. These open ambiguities block a PASS result per review policy.",
+      "findings": [
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+          "action": "Obtain clarification from the ticket owner on whether and how Condenser Type participates in Unit Type filtering.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+          "action": "Clarify from the ticket owner if Condenser Type is expected to be present in the parent array or if another mapping is needed.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+          "action": "Ask the ticket owner to define UI behavior for empty filter results.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "What should be displayed or how the UI should behave when no entries match the filter criteria."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F5",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+          "action": "Clarify from the ticket owner whether inactive items should ever be presented to the user.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Whether the isActive flag must always be enforced or if inactive items can ever be shown."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "F6",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+          "action": "Obtain clarification on whether Condenser Type is part of the Unit Size filtering criteria.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        },
+        {
+          "id": "F7",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined.",
+          "action": "Request detailed API contract information for the /dropdowns endpoint, including response format, pagination, and error handling.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/5",
+              "quote": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/5"
+          ]
+        }
+      ],
+      "resolutions": [
+        {
+          "findingId": "F1",
+          "rationale": "The interpreter output no longer contains a rule that filters entries based on the isActive flag, so the previously reported unsupported assumption has been removed.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "\"isActive\": true"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/2",
+              "quote": "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API."
+            }
+          ]
+        }
+      ]
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 2,
+      "timestamp": "2026-10-30T22:21:02.944Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "21cb4b2d41c977aa4ba9ef4bfc78aad4aeb202c0982fda20d1f2ee997c662de4",
+      "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+      "promptHash": "0ab672362956d65029536cfc9aeee2a9e9d09bbbbbc3a3165b01e0135087f3f5",
+      "promptTemplateHash": "35ad5d92ceebef8a1a15de0b9b4a2ac9d776a4a8e7b1fa9f688d5a6463d3f628",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 3402,
+      "completionTokens": 2180,
+      "totalTokens": 5582,
+      "cost": 0.007151,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "2e58569293f4a3c5361a1e55597ac5d6e34bcdf0cbba90787f5896fcecd6b203",
+      "outputHash": "c097ec335e7b0768b13ce077e8e0a461da2754dd3c94a0bdb7d61e436889653f",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReport": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+    "agentId": "final-review-writer",
+    "cycle": 2,
+    "runtimeMode": "real",
+    "output": {
+      "reportMarkdown": "# FAIL\n\n## Requirement Summary\n\n\"When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be populated with options filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown must be populated with options filtered by the selected Refrigerant and Unit Type.\"\n\n## Reviewer Findings\n\n- F2 | MEDIUM | OPEN_AMBIGUITY | \"How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.\" | \"Obtain clarification from the ticket owner on whether and how Condenser Type participates in Unit Type filtering.\"\n- F3 | MEDIUM | OPEN_AMBIGUITY | \"Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.\" | \"Clarify from the ticket owner if Condenser Type is expected to be present in the parent array or if another mapping is needed.\"\n- F4 | MEDIUM | OPEN_AMBIGUITY | \"What should be displayed or how the UI should behave when no entries match the filter criteria.\" | \"Ask the ticket owner to define UI behavior for empty filter results.\"\n- F5 | MEDIUM | OPEN_AMBIGUITY | \"Whether the isActive flag must always be enforced or if inactive items can ever be shown.\" | \"Clarify from the ticket owner whether inactive items should ever be presented to the user.\"\n- F6 | MEDIUM | OPEN_AMBIGUITY | \"If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.\" | \"Obtain clarification on whether Condenser Type is part of the Unit Size filtering criteria.\"\n- F7 | MEDIUM | OPEN_AMBIGUITY | \"The exact structure, pagination, and error handling of the /dropdowns API response is not defined.\" | \"Request detailed API contract information for the /dropdowns endpoint, including response format, pagination, and error handling.\"\n\n## Open Ambiguities\n\n- /ambiguities/0 | \"How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.\"\n- /ambiguities/1 | \"Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.\"\n- /ambiguities/2 | \"What should be displayed or how the UI should behave when no entries match the filter criteria.\"\n- /ambiguities/3 | \"Whether the isActive flag must always be enforced or if inactive items can ever be shown.\"\n- /ambiguities/4 | \"If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.\"\n- /ambiguities/5 | \"The exact structure, pagination, and error handling of the /dropdowns API response is not defined.\"\n\n## Final Disposition\n\nFAIL\n\n## Governance Reasons\n\n- OPEN_FINDINGS\n- OPEN_AMBIGUITIES"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+      "workflow": "hvac-ticket-governance",
+      "agent": "final-review-writer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 2,
+      "timestamp": "2026-10-30T22:21:13.046Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "4be4912aab6455b2f408e912dab67a6301b1fcf769362b36f03aff03219385d6",
+      "ticketHash": null,
+      "promptHash": "610c5fb0638e8500c033c542a02cad22cf78690cd1256d2bc07c5d3287fd77c5",
+      "promptTemplateHash": "c33b8409dc37f3b823d8b814a592b0c43f9f1aaedeb21be302f5e110b82236ff",
+      "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2828,
+      "completionTokens": 1625,
+      "totalTokens": 4453,
+      "cost": 0.005477,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "ad46628879484dc7ecb7b7b0008239e00465e74eb89d52ddd810f6eca0ef0ed0",
+      "outputHash": "ad46628879484dc7ecb7b7b0008239e00465e74eb89d52ddd810f6eca0ef0ed0",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\final-review-writer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85\\cycle-2\\final-review-writer-validated.json",
+      "status": "SUCCESS"
+    }
+  }
+}

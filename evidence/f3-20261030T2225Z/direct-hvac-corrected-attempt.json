@@ -1,0 +1,11 @@
+{
+  "caseId": "hvac-corrected",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-hvac-corrected-fcd4f0e6-bcad-4b9f-83d1-d935a510d594",
+  "status": "SUCCESS",
+  "beforeStatus": "SUCCESS",
+  "pairedIdentity": true,
+  "beforePromptHash": "093272c00b2e03b7350999661574e7d128976ef45e7d5433292fccb650a034d2",
+  "afterPromptHash": "afd47fb301587e73ffff2d8292dbf03cb4be72eaef2258045d57d797baba08fa"
+}

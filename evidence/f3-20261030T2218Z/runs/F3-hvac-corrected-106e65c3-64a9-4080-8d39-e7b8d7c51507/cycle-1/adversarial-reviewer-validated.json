@@ -1,0 +1,92 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains several unresolved ambiguities that were not addressed in the ticket. Each ambiguity must be clarified before the implementation can be considered complete, thus the review fails.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter reports an ambiguity regarding the exact Roof Type option list, which is not defined in the ticket.",
+      "action": "Obtain clarification from the ticket owner on the Roof Type option list.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The exact Roof Type option list is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter reports an ambiguity regarding the EC Model catalog entries, which are not specified in the ticket.",
+      "action": "Obtain clarification from the ticket owner on the EC Model catalog entries.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The EC Model catalog entries are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter reports an ambiguity regarding numeric validation ranges, which are not defined in the ticket.",
+      "action": "Obtain clarification from the ticket owner on the required numeric validation ranges for all inputs.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Numeric validation ranges are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter reports an ambiguity regarding temperature conversion and unit selection behavior, which is not defined in the ticket.",
+      "action": "Obtain clarification from the ticket owner on how temperature units should be handled and whether automatic conversion is required.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Temperature conversion and unit selection behavior are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter reports an ambiguity regarding the detailed per-circuit configuration fields, which are not specified in the ticket.",
+      "action": "Obtain clarification from the ticket owner on the required per-circuit configuration fields and their formats.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "The detailed per-circuit configuration fields are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    }
+  ],
+  "resolutions": []
+}

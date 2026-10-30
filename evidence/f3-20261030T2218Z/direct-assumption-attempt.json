@@ -1,0 +1,11 @@
+{
+  "caseId": "assumption",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-assumption-ef6f1b7e-6055-499e-ab3b-ffe3a86fb1ea",
+  "status": "SUCCESS",
+  "beforeStatus": "SCHEMA_FAILURE",
+  "pairedIdentity": true,
+  "beforePromptHash": "e990c909d636518f33d0281189fb3275a0ce162aa2b082af0b383bddffcb4863",
+  "afterPromptHash": "aeaa01bc6e05a69e6ff4dfbc3400018134c8872fecc2d81022e5ff43086ba238"
+}

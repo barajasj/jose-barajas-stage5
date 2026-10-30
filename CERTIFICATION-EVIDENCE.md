@@ -1,5 +1,21 @@
 # Stage 5 Evidence Index
 
+## F3 Runtime Follow-Up - 2026-10-30
+
+F3-only report: `evidence/f3-20261030T2225Z/F3-REPORT.md`.
+Both original batches and subsequent Ticket 2 follow-ups are retained:
+`evidence/f3-ticket2-20261030T2247Z/F3-TICKET2-FOLLOWUP.md` and
+`evidence/f3-ticket2-redispatch-20261030T2250Z/REDISPATCH-PROBE.md`.
+After the Ticket 2 workflow rerun, completion is 8/11 (72.7%) over all new
+workflow attempts, 5/6 (83.3%) over the latest cohort plus rerun, versus original
+1/5 (20%). Ticket 2 has completed 2/3 attempts. The rerun completed in one cycle,
+so it did not itself exercise redispatch. A separate direct probe replayed the
+preserved failing cycle-2 input: exact prior ambiguity identity passed; one
+ticket-answered ambiguity was removed, five unanswered ambiguities were retained.
+The probe is not counted as a workflow. All completed reports remain FAIL,
+including the positive control; this does not establish semantic accuracy, F4
+closure, or certification readiness. F6 remains untouched; original package unchanged.
+
 ## Current Evidence - 2026-10-30
 
 Authoritative package: `evidence/d5-20261030T1940Z/`.

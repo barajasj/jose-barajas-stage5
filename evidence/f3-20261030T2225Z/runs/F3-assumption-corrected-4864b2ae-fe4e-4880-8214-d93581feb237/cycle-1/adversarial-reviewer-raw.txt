@@ -1,0 +1,58 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains three unresolved ambiguities that were not clarified in the ticket. According to the review policy, each open ambiguity must be reported as an OPEN_AMBIGUITY finding, and any such finding blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F0",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The mapping between Condenser Type and Unit Type is unclear because the example parent data contains only refrigerants.",
+      "action": "Obtain clarification from the ticket owner on how Condenser Type should be used to filter Unit Type and provide the appropriate data mapping.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The Condenser Type mapping is unclear because the example parent data contains refrigerants."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The behavior when a filter yields no results (empty filter-result) is unspecified.",
+      "action": "Clarify the expected UI and system behavior when filtering produces an empty result set.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "Empty filter-result behavior is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Case sensitivity and downstream selection reset behavior are unspecified.",
+      "action": "Clarify whether dropdown filtering should be case‑sensitive and how selections should be reset when upstream choices change.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Case sensitivity and downstream selection reset behavior are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    }
+  ],
+  "resolutions": []
+}

@@ -53,6 +53,7 @@ test('review schema rejects inconsistent status, blank findings, and extra field
     { ...review([finding()]), status: 'PASS' },
     { ...review(), status: 'FAIL' },
     review([finding({ description: '   ' })]),
+    review([finding({ ambiguityRefs: undefined })]),
     review([finding({ unexpected: true })]),
     { ...review(), status: 'INVALID' }
   ]) {
@@ -60,6 +61,20 @@ test('review schema rejects inconsistent status, blank findings, and extra field
   }
   assert.equal(validateSchema(review(), 'schemas/challenges.schema.json').valid, true);
   assert.equal(validateSchema(review([finding()]), 'schemas/challenges.schema.json').valid, true);
+});
+
+test('agent prompts state the exact reviewer and writer contract details that caused workflow rejection', () => {
+  const reviewerPrompt = fs.readFileSync(path.join(
+    __dirname, '../agents/adversarial-reviewer.md'
+  ), 'utf8');
+  assert.match(reviewerPrompt, /Copy each source quote verbatim/);
+  assert.match(reviewerPrompt, /ALWAYS include ambiguityRefs: \[\]/);
+
+  const writerPrompt = fs.readFileSync(path.join(
+    __dirname, '../agents/final-review-writer.md'
+  ), 'utf8');
+  assert.match(writerPrompt, /Copy the bounded reportTemplate/);
+  assert.match(writerPrompt, /JSON\.parse\(\) of your response produces the original template text/);
 });
 
 test('all findings block PASS regardless of model-declared status or severity', () => {
@@ -136,6 +151,54 @@ test('redispatch cannot erase ambiguities without an explicit sourced resolution
       sourceQuote: 'Use an invented default.'
     }]
   }, { ticket, previousInterpretation }), /source/i);
+});
+
+test('interpreter prompt keys resolutions to exact prior ambiguities and retains unanswered policy', () => {
+  const prompt = fs.readFileSync(path.join(
+    __dirname, '../agents/requirement-interpreter.md'
+  ), 'utf8');
+  assert.match(prompt, /copy ambiguity byte-for-byte from previousInterpretation\.ambiguities/);
+  assert.match(prompt, /Removing an unsupported business rule does not resolve an ambiguity/);
+  assert.match(prompt, /Reviewer paraphrase:/);
+
+  const ticket2 = fs.readFileSync(path.join(__dirname, '../fixtures/hvac-ticket-2.md'), 'utf8');
+  const previous = [
+    'If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.',
+    'How should entries with isActive:false be handled?'
+  ];
+  const unitSizeQuote =
+    'When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.';
+  const output = {
+    ...interpretation([previous[1]]),
+    businessRules: [unitSizeQuote],
+    ambiguityResolutions: [{
+      ambiguity: previous[0],
+      rationale: 'The ticket specifies the Unit Size filter as Refrigerant + Unit Type.',
+      sourceQuote: unitSizeQuote
+    }]
+  };
+  const input = { ticket: ticket2, previousInterpretation: interpretation(previous) };
+  assert.equal(validateSchema(output, 'schemas/examiner.schema.json').valid, true);
+  assert.doesNotThrow(() => validateInterpretationTransition(output, input));
+
+  assert.throws(() => validateInterpretationTransition({
+    ...output,
+    ambiguityResolutions: [{
+      ...output.ambiguityResolutions[0],
+      ambiguity: 'Unclear if Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.'
+    }]
+  }, input), /identify a removed prior ambiguity/i);
+  assert.throws(() => validateInterpretationTransition({
+    ...output,
+    ambiguities: [],
+    ambiguityResolutions: output.ambiguityResolutions
+  }, input), /without a sourced resolution/i);
+  assert.throws(() => validateInterpretationTransition({
+    ...output,
+    ambiguityResolutions: [...output.ambiguityResolutions, output.ambiguityResolutions[0]]
+  }, input), /duplicate/i);
+  assert.deepEqual(output.ambiguities, [previous[1]]);
+  assert.equal(output.businessRules.some(rule => /isActive/.test(rule)), false);
 });
 
 test('report contract preserves all inputs and rejects unsupported or opposing conclusions', () => {

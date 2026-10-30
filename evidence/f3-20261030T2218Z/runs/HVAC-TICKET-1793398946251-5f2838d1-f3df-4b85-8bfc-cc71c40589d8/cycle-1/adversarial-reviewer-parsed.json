@@ -1,0 +1,75 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter identified several unresolved ambiguities that are not addressed in the ticket. Clarification is required for each ambiguity before implementation can proceed.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Unclear whether recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+      "action": "Obtain clarification from the ticket owner on which height edits should trigger the DX Coil Height recalculation.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "No rounding or precision rules are specified for the sum of heights.",
+      "action": "Obtain clarification from the ticket owner on the rounding or precision policy for the summed DX Coil Height.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "No rounding or precision rules are specified for the sum of heights."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Unclear whether only active/enabled Cooling Circuits should be included in the sum.",
+      "action": "Obtain clarification from the ticket owner on whether the calculation should consider only active/enabled Cooling Circuits.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.",
+      "action": "Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation after a height edit.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    }
+  ],
+  "resolutions": []
+}

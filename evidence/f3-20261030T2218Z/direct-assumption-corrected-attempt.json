@@ -1,0 +1,11 @@
+{
+  "caseId": "assumption-corrected",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-assumption-corrected-e6dd5068-a35b-4af1-81ac-42fb7b8c3ad4",
+  "status": "SUCCESS",
+  "beforeStatus": "SUCCESS",
+  "pairedIdentity": true,
+  "beforePromptHash": "9a1b7cd3935dbef62f1b70b511e54bc65119d8a230ad1ba02114afcebcdfd3d1",
+  "afterPromptHash": "c1a76689dc00e2cdc87330019d9dbd796531060b47d768c97200f6b41a6ca2f5"
+}

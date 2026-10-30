@@ -1,0 +1,72 @@
+{
+  "originalBefore": {
+    "attempts": 5,
+    "successes": 1,
+    "failures": 4,
+    "completionRate": 0.2,
+    "failureRate": 0.8
+  },
+  "beforeLatestFive": {
+    "attempts": 5,
+    "successes": 4,
+    "failures": 1,
+    "completionRate": 0.8,
+    "failureRate": 0.2
+  },
+  "beforeAllNew": {
+    "attempts": 10,
+    "successes": 7,
+    "failures": 3,
+    "completionRate": 0.7,
+    "failureRate": 0.3
+  },
+  "thisTicket2Attempt": {
+    "attempts": 1,
+    "successes": 1,
+    "failures": 0
+  },
+  "afterAllNew": {
+    "attempts": 11,
+    "successes": 8,
+    "failures": 3,
+    "completionRate": 0.7272727272727273,
+    "failureRate": 0.2727272727272727
+  },
+  "afterLatestSix": {
+    "attempts": 6,
+    "successes": 5,
+    "failures": 1,
+    "completionRate": 0.8333333333333334,
+    "failureRate": 0.16666666666666666
+  },
+  "ticket2Attempts": [
+    "COMPLETED",
+    "GOVERNANCE_FAILURE",
+    "COMPLETED"
+  ],
+  "ticket2PriorWorkflows": [
+    {
+      "batch": "evidence/f3-20261030T2218Z",
+      "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+      "status": "COMPLETED",
+      "disposition": "FAIL"
+    },
+    {
+      "batch": "evidence/f3-20261030T2225Z",
+      "correlationId": "HVAC-TICKET-1793399289234-fa1f13c9-0d5a-4be7-828f-b20b19021313",
+      "status": "GOVERNANCE_FAILURE",
+      "disposition": "FAIL"
+    }
+  ],
+  "ticket2AfterRate": {
+    "attempts": 3,
+    "successes": 2,
+    "failures": 1,
+    "completionRate": 0.6666666666666666,
+    "failureRate": 0.3333333333333333
+  },
+  "ticket2After": {
+    "status": "COMPLETED",
+    "disposition": "FAIL"
+  }
+}

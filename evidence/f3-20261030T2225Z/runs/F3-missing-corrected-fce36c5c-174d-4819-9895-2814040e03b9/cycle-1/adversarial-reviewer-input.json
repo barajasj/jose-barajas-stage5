@@ -1,0 +1,29 @@
+{
+  "ticket": "# Ticket 01\r\n\r\n## Title\r\n\r\nCalculate the DX Coil Height\r\n\r\n## Description\r\n\r\nAs we enter in the Cooling Package (e.g. R-454B FW 43 ) - the system will run to Calculations and get the starting values.\r\nThe DX Coil Height is empty.\r\nWhat we want to happen is:\r\n- The Cooling Circuits are populated\r\n- Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information.\r\n- For exmaple We have 3 circuits, each with a height of 7.5\r\n- so 7.5 + 7.5 + 7.5 = 22.5\r\n- and should the user alter the Circuit Height - the form should react to this edit - resum all heights and update the Height field in DX Coil Information\r\n",
+  "interpreterResult": {
+    "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+    "hvacTerminology": [
+      "DX Coil",
+      "Cooling Package",
+      "Cooling Circuits",
+      "Circuit Height",
+      "DX Coil Information",
+      "R-454B"
+    ],
+    "businessRules": [
+      "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+      "DX Coil Height is the sum of all populated Cooling Circuit heights.",
+      "Editing any Circuit Height recalculates the sum and updates DX Coil Information."
+    ],
+    "developerConsiderations": [
+      "Update DX Coil Information when a Circuit Height is edited."
+    ],
+    "ambiguities": [
+      "Height units are unspecified.",
+      "Valid height ranges and precision are unspecified.",
+      "The source and format of starting circuit values are unspecified.",
+      "Behavior when circuits are added or removed is unspecified."
+    ],
+    "confidence": "MEDIUM"
+  }
+}

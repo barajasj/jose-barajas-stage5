@@ -1,0 +1,153 @@
+{
+  "startedAt": "2026-10-30T22:17:15.238Z",
+  "scope": "F3 runtime contracts only; no F6 work or semantic scoring.",
+  "historicalPackage": "evidence/d5-20261030T1940Z",
+  "directCases": [
+    {
+      "id": "assumption",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "844148820d9bede976294c7581d927e3f1ab95034315764df55e2e6147fb7b85"
+    },
+    {
+      "id": "missing",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "a2329678935c63e16fc35269959a10e8d684d5efa68304bda3bdbea045ac82af"
+    },
+    {
+      "id": "hvac",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "af6bf4551382f0ecf3637787a691c16a24ba2357e7cbae2cd174d168172c1e0d"
+    },
+    {
+      "id": "validation",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "1ff086ebb84512bba05e4659db8101ace42dfd58f408bf3bddc81b9c0a723317"
+    },
+    {
+      "id": "missed-ambiguity",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "5a2973cce48c468811c105631e165b902f44e6b41800093472621aba64188111"
+    },
+    {
+      "id": "open",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c"
+    },
+    {
+      "id": "boundary",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c"
+    },
+    {
+      "id": "clean-review",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "3e61e4407f94acf12336ae3b46b6136a1eff942c26036b5ebdf0341ef5717dce"
+    },
+    {
+      "id": "minor-label",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "d35397a24582e25f60b239684367975805f5de516fc24566ca23a11f7f1b7b81"
+    },
+    {
+      "id": "retained",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "641cedcbc499ea2b75d1f511a4be954fb29191a1cb9e188ffd21fcb764f6da44"
+    },
+    {
+      "id": "resolved",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "7f2297424c86e1f2f7b74bde88da8b7dcc7839fa4500f8c3e36c7384bad4ac3a"
+    },
+    {
+      "id": "bad-resolution",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "6dd8cea7f8b266b241b628dd9239f2a2bd19e61ea9f593d0acaed3bbe9d2b1b2"
+    },
+    {
+      "id": "missing-corrected",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "074205509514bdfc1c18d1a38795dfd58ab8890431ddbcd67462a7b634286d3c"
+    },
+    {
+      "id": "assumption-corrected",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "0c07130ff7de88a48b8d7f2ded3c6431aa42c321b2dfff1c691501f23e573895"
+    },
+    {
+      "id": "hvac-corrected",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "2fd792c9b0da33a7168a81ecc54c18f14c2d581c640caaa6fc51b6f74a427d2e"
+    },
+    {
+      "id": "validation-corrected",
+      "agent": "adversarial-reviewer",
+      "group": "directReviewer",
+      "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c"
+    },
+    {
+      "id": "ticket2-adversarial-reviewer",
+      "agent": "adversarial-reviewer",
+      "group": "frozenReviewer",
+      "inputHash": "921bf72a071f28d3a13a3cab25853d0c49dcf41e029aa9ffdb73a262ba9341e0"
+    },
+    {
+      "id": "ticket3-adversarial-reviewer",
+      "agent": "adversarial-reviewer",
+      "group": "frozenReviewer",
+      "inputHash": "9726e66e4aba6a157ac51d5c6e69613afd0cfc59ff1f92e7d57e2adea8389b28"
+    },
+    {
+      "id": "ticket4-final-review-writer",
+      "agent": "final-review-writer",
+      "group": "frozenWriter",
+      "inputHash": "7ee5cb71512b76bd60b9b8ec2214f7c4abdf2b1167667aca467dddd5c8f570e1"
+    },
+    {
+      "id": "ticket5-final-review-writer",
+      "agent": "final-review-writer",
+      "group": "frozenWriter",
+      "inputHash": "d0ab982cee09f23ca3e1398db39c7ef807e5072937a15bfb99945835f9be7db2"
+    }
+  ],
+  "workflowTickets": [
+    {
+      "id": "ticket1",
+      "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282"
+    },
+    {
+      "id": "ticket2",
+      "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085"
+    },
+    {
+      "id": "ticket3",
+      "ticketHash": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce"
+    },
+    {
+      "id": "ticket4",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215"
+    },
+    {
+      "id": "ticket5",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1"
+    }
+  ],
+  "maxModelInvocations": 45,
+  "maxReviewCycles": 2,
+  "runtimeMode": "real",
+  "policy": "One attempt per case and workflow, all retained; no response repair or collection retries. SDK transport retries may occur."
+}

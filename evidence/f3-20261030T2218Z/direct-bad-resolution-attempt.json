@@ -1,0 +1,23 @@
+{
+  "caseId": "bad-resolution",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-bad-resolution-51295866-90bc-4bbf-a3de-4c6ef1d5f65f",
+  "status": "SCHEMA_FAILURE",
+  "reason": "Schema validation failed for adversarial-reviewer",
+  "details": [
+    {
+      "instancePath": "/findings/1/ambiguityRefs/0",
+      "schemaPath": "#/properties/findings/items/properties/ambiguityRefs/items/pattern",
+      "keyword": "pattern",
+      "params": {
+        "pattern": "^/ambiguities/(0|[1-9][0-9]*)$"
+      },
+      "message": "must match pattern \"^/ambiguities/(0|[1-9][0-9]*)$\""
+    }
+  ],
+  "beforeStatus": "GOVERNANCE_FAILURE",
+  "pairedIdentity": true,
+  "beforePromptHash": "03c151bbec14840aa6975ff55def6957c16c1b1dcf83404c26dbf075d9433336",
+  "afterPromptHash": "6f149370b45eeb1fc10b6ab81d7e1c1461bdb03de8b34b20768721997734cc92"
+}

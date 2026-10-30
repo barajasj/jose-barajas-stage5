@@ -1,0 +1,11 @@
+{
+  "caseId": "boundary",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-boundary-4f01f53d-da44-4f0e-abaf-f0817e464f23",
+  "status": "SUCCESS",
+  "beforeStatus": "SUCCESS",
+  "pairedIdentity": true,
+  "beforePromptHash": "fa4fe358964b8cb2adb126f90d69e39a33dfeafb9d25ec47ec237c44b118e626",
+  "afterPromptHash": "309d18b7d64ea90aad04f47d6a613b41810ffb829f5ab97100772258025ad37f"
+}

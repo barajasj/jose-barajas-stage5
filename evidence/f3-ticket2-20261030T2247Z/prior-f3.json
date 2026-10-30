@@ -1,0 +1,47 @@
+{
+  "originalEvidenceSealSha256": "9633fe1b207e6b9d1245664c86454180103017a52024b18432e093011dd356d3",
+  "batches": [
+    {
+      "directory": "evidence/f3-20261030T2218Z",
+      "manifestFile": "manifest.json",
+      "manifestSha256": "e6bd52902ff8b7bd12ae5b851eeb03a106162cee0c66acb8d3b4d1c23a49bd2a",
+      "workflowSummary": {
+        "before": {
+          "attempts": 5,
+          "successes": 1,
+          "failures": 4,
+          "completionRate": 0.2,
+          "failureRate": 0.8
+        },
+        "after": {
+          "attempts": 5,
+          "successes": 3,
+          "failures": 2,
+          "completionRate": 0.6,
+          "failureRate": 0.4
+        }
+      }
+    },
+    {
+      "directory": "evidence/f3-20261030T2225Z",
+      "manifestFile": "manifest-final.json",
+      "manifestSha256": "b57a1ad3db586f8a136b0daed0f8470ec387e32d89b67d6f65a3f6e69c21de08",
+      "workflowSummary": {
+        "before": {
+          "attempts": 5,
+          "successes": 1,
+          "failures": 4,
+          "completionRate": 0.2,
+          "failureRate": 0.8
+        },
+        "after": {
+          "attempts": 5,
+          "successes": 4,
+          "failures": 1,
+          "completionRate": 0.8,
+          "failureRate": 0.2
+        }
+      }
+    }
+  ]
+}

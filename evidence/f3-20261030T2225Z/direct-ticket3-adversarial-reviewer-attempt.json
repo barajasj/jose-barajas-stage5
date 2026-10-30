@@ -1,0 +1,11 @@
+{
+  "caseId": "ticket3-adversarial-reviewer",
+  "group": "frozenReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-ticket3-adversarial-reviewer-52b7e220-36ff-4bfc-baf3-6f5f39ca25e4",
+  "status": "SUCCESS",
+  "beforeStatus": "GOVERNANCE_FAILURE",
+  "pairedIdentity": true,
+  "beforePromptHash": "89e4282916f8660f1595cc74d741d5ef8d59b2d80d00a3c1b79ff23a5eaa8ff4",
+  "afterPromptHash": "eeac1e30cc8c6409656358486a84171d5a60e47f5160bc5c94ba2b91c39b9a9e"
+}

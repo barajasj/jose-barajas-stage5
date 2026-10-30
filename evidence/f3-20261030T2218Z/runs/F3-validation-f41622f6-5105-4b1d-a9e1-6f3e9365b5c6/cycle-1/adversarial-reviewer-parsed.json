@@ -1,0 +1,27 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter omitted the explicit business rule that Coil Height must be within the valid range of 1.25\" to 100\" as required by the ticket. This missing validation is a core requirement for correct UI input handling.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter does not include a business rule stating the required valid range of 1.25\" to 100\" for Coil Height.",
+      "action": "Add a business rule specifying that Coil Height must be within the range 1.25\" to 100\".",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Valid range: 1.25\" to 100\""
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/requirementSummary",
+          "quote": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

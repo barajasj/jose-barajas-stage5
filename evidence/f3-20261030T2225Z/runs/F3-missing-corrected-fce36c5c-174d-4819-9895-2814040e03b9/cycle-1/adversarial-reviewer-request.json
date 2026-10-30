@@ -1,0 +1,19 @@
+{
+  "correlationId": "F3-missing-corrected-fce36c5c-174d-4819-9895-2814040e03b9",
+  "workflow": "hvac-ticket-governance",
+  "agent": "adversarial-reviewer",
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "runtimeMode": "real",
+  "cycle": 1,
+  "timestamp": "2026-10-30T22:26:21.589Z",
+  "modelSettings": {
+    "temperature": 0
+  },
+  "inputHash": "074205509514bdfc1c18d1a38795dfd58ab8890431ddbcd67462a7b634286d3c",
+  "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282",
+  "promptHash": "06366f4d4d18df79d546078d453e1c3c93419f11d6b330bb81f054744fef24ed",
+  "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+  "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+  "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+  "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5"
+}

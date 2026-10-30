@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "checked": {
+    "requests": 73,
+    "accepted": 65,
+    "rejected": 8,
+    "exactWriterReports": 11
+  },
+  "frozenInputModelSettingsContractPairs": 40,
+  "historicalPackageUnchanged": true,
+  "firstBatchUnchanged": true,
+  "collectionManifestEntriesUnchanged": true,
+  "runtimeValidatorsUnchanged": true,
+  "command": "node evidence/f3-20261030T2225Z/verify-f3.js",
+  "note": "Original collection entries checked here; use evidence-package.js for the final inventory seal."
+}

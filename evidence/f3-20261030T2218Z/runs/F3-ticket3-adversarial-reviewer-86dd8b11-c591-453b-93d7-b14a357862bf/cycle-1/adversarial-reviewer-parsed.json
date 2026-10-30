@@ -1,0 +1,160 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter identified several ambiguities that remain unresolved. Each ambiguity requires clarification from the ticket owner before a complete and reliable implementation can be defined. Consequently, the review contains multiple OPEN_AMBIGUITY findings, preventing a PASS status.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The exact list of Roof Type options (beyond \"dark\" and \"light\") and how parapet/shrouding is represented (separate flags or combined options) is not specified.",
+      "action": "Obtain clarification on the full set of Roof Type options and the representation method for parapet/shrouding.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The exact list of Roof Type options (beyond \"dark\" and \"light\") and how parapet/shrouding is represented (separate flags or combined options) is not specified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The catalog of valid EC Model values is referenced but not enumerated in the ticket.",
+      "action": "Provide the complete list of permissible EC Model values or a reference to the catalog containing them.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The catalog of valid EC Model values is referenced but not enumerated in the ticket."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Unit handling for fields that accept both °F and °C is not defined (e.g., conversion rules, display format).",
+      "action": "Define how the system should handle unit selection, conversion, and display for temperature fields that accept both °F and °C.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Unit handling for fields that accept both °F and °C is not defined (e.g., conversion rules, display format)."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The purpose and validation rules for the \"Copies of this Bank\" numeric input are not described.",
+      "action": "Clarify the intended use of the \"Copies of this Bank\" field and specify any validation constraints (e.g., allowed range, integer requirement).",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The purpose and validation rules for the \"Copies of this Bank\" numeric input are not described."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The functional effect of the \"Default Condenser\" and \"High Amb. / Altit. Cond.\" checkboxes is not explained.",
+      "action": "Explain what selecting each of these checkboxes should trigger in the system and any downstream effects on calculations or UI.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "The functional effect of the \"Default Condenser\" and \"High Amb. / Altit. Cond.\" checkboxes is not explained."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The trigger for the \"When processed\" step (e.g., a submit button, auto‑save, or other event) is not defined.",
+      "action": "Specify the user action or system event that initiates the processing of entered condenser parameters.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/5",
+          "quote": "The trigger for the \"When processed\" step (e.g., a submit button, auto‑save, or other event) is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/5"
+      ]
+    },
+    {
+      "id": "F7",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Details of the \"per‑circuit cooling configurations\" referenced in the acceptance criteria are missing.",
+      "action": "Provide the required fields, formats, and validation rules for per‑circuit cooling configurations.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/6",
+          "quote": "Details of the \"per‑circuit cooling configurations\" referenced in the acceptance criteria are missing."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/6"
+      ]
+    },
+    {
+      "id": "F8",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The meaning of \"coil geometry\" mentioned in an acceptance criterion is not linked to any input field in the tables.",
+      "action": "Clarify which input(s) represent coil geometry and how they should be captured.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/7",
+          "quote": "The meaning of \"coil geometry\" mentioned in an acceptance criterion is not linked to any input field in the tables."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/7"
+      ]
+    },
+    {
+      "id": "F9",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Reference to \"output 3.7\" for echoing Design Ambient lacks context about where or how this output is presented.",
+      "action": "Explain the location, format, and purpose of output 3.7 within the system.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/8",
+          "quote": "Reference to \"output 3.7\" for echoing Design Ambient lacks context about where or how this output is presented."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/8"
+      ]
+    }
+  ],
+  "resolutions": []
+}

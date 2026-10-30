@@ -1,0 +1,161 @@
+# Final Review Writer
+
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
+- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Template fragment: `- /ambiguities/0 | "Select 3/8\" tube with 1\" spacing."`. Correct JSON fragment: `{"reportMarkdown":"- /ambiguities/0 | \"Select 3/8\\\" tube with 1\\\" spacing.\""}`. Parsing this JSON once preserves the template's literal backslashes before the inch marks; do not decode the JSON strings embedded inside the Markdown.
+- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `"No rounding or precision rules are specified for the sum of heights."`. Correct JSON fragment: `{"reportMarkdown":"\"No rounding or precision rules are specified for the sum of heights.\""}`. Preserve "or"; changing it to "and" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.
+
+## Interpreter Output
+
+{
+  "requirementSummary": "DX Coil Height must be set to the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are pre‑validated and no other behavior is required.",
+  "hvacTerminology": [
+    "DX Coil",
+    "Cooling Circuit",
+    "Height"
+  ],
+  "businessRules": [
+    "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+    "Recalculate DX Coil Height immediately after a height edit.",
+    "If the circuit list is empty, DX Coil Height is set to 0 inches.",
+    "All inputs are already validated; no additional validation is in scope."
+  ],
+  "developerConsiderations": [
+    "Implement calculation that sums all Cooling Circuit Height values (in inches) and assigns the total to DX Coil Height.",
+    "Trigger the calculation immediately after any edit to a Cooling Circuit Height.",
+    "When the list of Cooling Circuits is empty, set DX Coil Height to 0 inches.",
+    "Assume input values are pre‑validated; do not add extra validation logic."
+  ],
+  "ambiguities": [
+    "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+    "No rounding or precision rules are specified for the sum of heights.",
+    "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.",
+    "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Reviewer Output
+
+{
+  "status": "FAIL",
+  "rationale": "The interpreter identified four ambiguities that are not addressed by the ticket. Each represents missing clarification required to implement the behavior unambiguously, and therefore each blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+      "action": "Obtain clarification from the ticket owner on which edits should trigger the recalculation.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "No rounding or precision rules are specified for the sum of heights.",
+      "action": "Obtain clarification from the ticket owner on rounding and precision requirements for the summed height.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "No rounding or precision rules are specified for the sum of heights."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.",
+      "action": "Obtain clarification from the ticket owner on whether inactive or disabled Cooling Circuits should be excluded from the sum.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.",
+      "action": "Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    }
+  ],
+  "resolutions": []
+}
+
+## Disposition
+
+FAIL
+
+## Governance Reasons
+
+[
+  "OPEN_FINDINGS",
+  "OPEN_AMBIGUITIES"
+]
+
+## Required Report Markdown:
+
+# FAIL
+
+## Requirement Summary
+
+"DX Coil Height must be set to the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are pre‑validated and no other behavior is required."
+
+## Reviewer Findings
+
+- F1 | MEDIUM | OPEN_AMBIGUITY | "Unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both." | "Obtain clarification from the ticket owner on which edits should trigger the recalculation."
+- F2 | MEDIUM | OPEN_AMBIGUITY | "No rounding or precision rules are specified for the sum of heights." | "Obtain clarification from the ticket owner on rounding and precision requirements for the summed height."
+- F3 | MEDIUM | OPEN_AMBIGUITY | "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum." | "Obtain clarification from the ticket owner on whether inactive or disabled Cooling Circuits should be excluded from the sum."
+- F4 | MEDIUM | OPEN_AMBIGUITY | "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined." | "Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation."
+
+## Open Ambiguities
+
+- /ambiguities/0 | "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both."
+- /ambiguities/1 | "No rounding or precision rules are specified for the sum of heights."
+- /ambiguities/2 | "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum."
+- /ambiguities/3 | "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+
+## Final Disposition
+
+FAIL
+
+## Governance Reasons
+
+- OPEN_FINDINGS
+- OPEN_AMBIGUITIES

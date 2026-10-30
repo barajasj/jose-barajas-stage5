@@ -1,0 +1,42 @@
+{
+  "requirementSummary": "When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be populated with options filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown must be populated with options filtered by the selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant filtered by the selected Condenser Type and Refrigerant.",
+    "If a user selects a Unit Type (after selecting Condenser Type and Refrigerant), the system must populate the Unit Size dropdown with entries from SDCommonUnitModelSizes filtered by the selected Refrigerant and Unit Type.",
+    "The Refrigerant list is obtained via a GET request to the unitdesign API endpoint /dropdowns.",
+    "Filtering of Unit Type entries uses the \"parent\" array of each SDCommonUnitTypeRefrigerant item to match the selected Refrigerant (and Condenser Type as required).",
+    "Filtering of Unit Size entries uses the \"parent\" array of each SDCommonUnitModelSizes item to match both the selected Refrigerant and the selected Unit Type."
+  ],
+  "developerConsiderations": [
+    "Call the unitdesign API GET /dropdowns to retrieve SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes data.",
+    "When filtering Unit Type options, include items whose parent array contains the selected Refrigerant (and apply any required Condenser Type logic as defined by the data model).",
+    "When filtering Unit Size options, include items whose parent array contains both the selected Refrigerant and the selected Unit Type.",
+    "Update the Unit Type and Unit Size dropdowns dynamically in the UI whenever the relevant selections change."
+  ],
+  "ambiguities": [
+    "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+    "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+    "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+  ],
+  "ambiguityResolutions": [
+    {
+      "ambiguity": "Unclear if Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+      "rationale": "The ticket explicitly states that Unit Size filtering is based on Refrigerant + Unit Type only, so Condenser Type is not part of that filter.",
+      "sourceQuote": "When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected."
+    },
+    {
+      "ambiguity": "It is unclear whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+      "rationale": "The ticket provides example data containing an \"isActive\" field but does not specify any rule for using it; therefore no policy can be inferred.",
+      "sourceQuote": "\"isActive\": true"
+    }
+  ],
+  "confidence": "MEDIUM"
+}

@@ -1,0 +1,506 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-30T22:50:31.511Z",
+  "collection": {
+    "modelInvocations": 1,
+    "sourceInputHash": "c381a1ec346a241d3f7545a41d7c62072b4c67c5c6a540ef986374dd9ce28501"
+  },
+  "files": [
+    {
+      "file": "REDISPATCH-PROBE.md",
+      "bytes": 754,
+      "sha256": "e7bfe05c61db2bcb84551bf8358f6e576f56f6feb6a44b4d1d4638889d7fb8db"
+    },
+    {
+      "file": "audit.jsonl",
+      "bytes": 1541,
+      "sha256": "cf8a14a8ddb897266ab1bb24ad8df12eb5761f5f75082401849c0041578793b0"
+    },
+    {
+      "file": "preservation-check.json",
+      "bytes": 131,
+      "sha256": "2a54c87396f6cc7c35079faeedc810088ee9b34af404176cbe02f8d689ba5d55"
+    },
+    {
+      "file": "probe-plan.json",
+      "bytes": 715,
+      "sha256": "f6426828575498d2d6b8954afaa56af9a4dba68e862bdf258516ec9537684be3"
+    },
+    {
+      "file": "probe-result.json",
+      "bytes": 4953,
+      "sha256": "1be781e63a4a334c96b448eff38caab35e1bd57ee8796dfa96ae49f7b7a08773"
+    },
+    {
+      "file": "receipts/1.json",
+      "bytes": 436,
+      "sha256": "431a70f80acc088a8989b5693d4de90b0dc49d3dc3b543e96fa7b18dcd2e7085"
+    },
+    {
+      "file": "run-probe.js",
+      "bytes": 8294,
+      "sha256": "8075cd2dcdd14c79c3a0ac6cdbd5c3282b39c537a03d2cc36a8c96486dcfa3ae"
+    },
+    {
+      "file": "runs/F3-TICKET2-REDISPATCH-1793400622926/cycle-2/requirement-interpreter-input.json",
+      "bytes": 10840,
+      "sha256": "5c8fd1286b951ff5b7df144a2ed6ba1dce387adc69cfa8afe08d591bf5e22f69"
+    },
+    {
+      "file": "runs/F3-TICKET2-REDISPATCH-1793400622926/cycle-2/requirement-interpreter-manifest.json",
+      "bytes": 1650,
+      "sha256": "505dab3f562bb281f865200102697ba950cdd09d29a0eed61176479cc589d346"
+    },
+    {
+      "file": "runs/F3-TICKET2-REDISPATCH-1793400622926/cycle-2/requirement-interpreter-parsed.json",
+      "bytes": 2748,
+      "sha256": "27d0de902229797c7e8b51c1e5fd1a966999c1c452485d04a85764ad5d2adaf2"
+    },
+    {
+      "file": "runs/F3-TICKET2-REDISPATCH-1793400622926/cycle-2/requirement-interpreter-prompt.txt",
+      "bytes": 14860,
+      "sha256": "3068823f95da13125c8944deca9ca5f4175ecb0e2e417a70bde9ec1daabbdb33"
+    },
+    {
+      "file": "runs/F3-TICKET2-REDISPATCH-1793400622926/cycle-2/requirement-interpreter-raw.txt",
+      "bytes": 2748,
+      "sha256": "27d0de902229797c7e8b51c1e5fd1a966999c1c452485d04a85764ad5d2adaf2"
+    },
+    {
+      "file": "runs/F3-TICKET2-REDISPATCH-1793400622926/cycle-2/requirement-interpreter-request.json",
+      "bytes": 933,
+      "sha256": "1ce1b04e9081deea40bd41b97a93d8dfd95bb5a1a27a9de3cc008678d254d16d"
+    },
+    {
+      "file": "runs/F3-TICKET2-REDISPATCH-1793400622926/cycle-2/requirement-interpreter-validated.json",
+      "bytes": 2748,
+      "sha256": "27d0de902229797c7e8b51c1e5fd1a966999c1c452485d04a85764ad5d2adaf2"
+    },
+    {
+      "file": "source-state.json",
+      "bytes": 2339,
+      "sha256": "9ad502552605d63de1461764dfc1c89c8e979cff857651eb6d5d500ceb866be1"
+    },
+    {
+      "file": "source/CERTIFICATION-EVIDENCE.md",
+      "bytes": 7058,
+      "sha256": "12a4a168f2a19074727a5dcb2fb68857e728601a2db62178ccadf832baab15fc"
+    },
+    {
+      "file": "source/GIT-HISTORY.md",
+      "bytes": 3533,
+      "sha256": "71ac15a76ba364775a5ce7848999517446052a5896ce6d815c69ec96e4ee2232"
+    },
+    {
+      "file": "source/NEXT-STEPS.md",
+      "bytes": 2377,
+      "sha256": "22fbde17b55b9404f494dd801e21410e4b260fae0c0636c2d72d994eb54315df"
+    },
+    {
+      "file": "source/README.md",
+      "bytes": 9455,
+      "sha256": "3d26c46cbc134dcd7115be46184136fe2c06485fa6670e526f2dec3a8e83bebc"
+    },
+    {
+      "file": "source/agents/adversarial-reviewer.md",
+      "bytes": 6559,
+      "sha256": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713"
+    },
+    {
+      "file": "source/agents/final-review-writer.md",
+      "bytes": 2756,
+      "sha256": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e"
+    },
+    {
+      "file": "source/agents/requirement-interpreter.md",
+      "bytes": 4131,
+      "sha256": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2"
+    },
+    {
+      "file": "source/coordinator/coordinator-decision-flow.md",
+      "bytes": 2591,
+      "sha256": "0d7f4fb097296e2138f547a7234841adc16dd0150556009bfdef44b10bab3ece"
+    },
+    {
+      "file": "source/coordinator/coordinator-design.md",
+      "bytes": 1942,
+      "sha256": "bbc1100423b4fb58594df2c0e55bc38e5cddf47b8cdf5e89b897f05c8dedfd6f"
+    },
+    {
+      "file": "source/coordinator/coordinator-tools.json",
+      "bytes": 132,
+      "sha256": "651220e92b4d562abbc687138d1276f4defe84a34362967aebe07ef0208312de"
+    },
+    {
+      "file": "source/coordinator/disposition-matrix.md",
+      "bytes": 1517,
+      "sha256": "26d3db43bdc9cb82f901e701437e7baa80a4e21d6ed34e83523da0e0fcaf7094"
+    },
+    {
+      "file": "source/coordinator/redispatch-example.md",
+      "bytes": 895,
+      "sha256": "737170a798bb4c54a97cd80d867205aa7f544d1d4d897e4c472f74124646938e"
+    },
+    {
+      "file": "source/coordinator/runtime-sequence.md",
+      "bytes": 1365,
+      "sha256": "ff3cbac25375144e332be7bf15fec6d2de48cf8001534c38ad9774b8d6a68eab"
+    },
+    {
+      "file": "source/coordinator/sequence-diagram.md",
+      "bytes": 594,
+      "sha256": "0d7dac0e5953612387d5c1173058bee2cf06a88f8d1db2cd853dce2ae0534391"
+    },
+    {
+      "file": "source/evals/adversarial-reviewer-eval.md",
+      "bytes": 14963,
+      "sha256": "47fb877715e0ec9c6b1c737475a798e67591a6c3dc9f554ac3d03999a09a169d"
+    },
+    {
+      "file": "source/evals/final-review-writer-eval.md",
+      "bytes": 11154,
+      "sha256": "7540eb3fc03cd0b6a8b1afef62647a0bebaae5869defd4ec279b7670432b405d"
+    },
+    {
+      "file": "source/evals/load-bearing-cases.js",
+      "bytes": 35391,
+      "sha256": "0ef025da8c54ba71154c37b9ed13a71c5b6ea168397c6bdad89f8fa51d7d3364"
+    },
+    {
+      "file": "source/evals/load-bearing-map.json",
+      "bytes": 5162,
+      "sha256": "9e3c4f0797d196b8a4917091e835f310a92068fc18f9127060939f472e9bdd7d"
+    },
+    {
+      "file": "source/evals/requirement-interpreter-eval.md",
+      "bytes": 18854,
+      "sha256": "f694b9a3e2d89242d68a9b7c7aa85f00298f04e786a5305f1047606111b58cbd"
+    },
+    {
+      "file": "source/evals/step-cases.js",
+      "bytes": 8145,
+      "sha256": "59fa6ec390db8900021b16923c4687443e5631ef7a0236e48558321306d26e99"
+    },
+    {
+      "file": "source/evals/test-cases.json",
+      "bytes": 2494,
+      "sha256": "271a9e3ae3a793bd1a81cefcb6888811328a8c191e4c4fae7b85e32b12aeb4d6"
+    },
+    {
+      "file": "source/evals/workflow-label-equivalents.js",
+      "bytes": 1742,
+      "sha256": "9d6e4e2396582394f199c92ef51c4eb5a0dbb82124727fe2e1a04ee06be15bd0"
+    },
+    {
+      "file": "source/fixtures/hvac-ticket-1.md",
+      "bytes": 650,
+      "sha256": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282"
+    },
+    {
+      "file": "source/fixtures/hvac-ticket-2.md",
+      "bytes": 1940,
+      "sha256": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085"
+    },
+    {
+      "file": "source/fixtures/hvac-ticket-3.md",
+      "bytes": 2675,
+      "sha256": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce"
+    },
+    {
+      "file": "source/fixtures/hvac-ticket-4.md",
+      "bytes": 1160,
+      "sha256": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215"
+    },
+    {
+      "file": "source/package-lock.json",
+      "bytes": 3831,
+      "sha256": "cc72f7bc39a776b73965cee8f4472a905234ed976957a1770a813cafd71f71a7"
+    },
+    {
+      "file": "source/package.json",
+      "bytes": 315,
+      "sha256": "81719b5c869ee5aee760a939e64c6b2400817b7753eefc444dc48302fc0201c9"
+    },
+    {
+      "file": "source/prompts/prompt-evolution.md",
+      "bytes": 2754,
+      "sha256": "652b59ef2f0fc25412f183b6835a6a98848f5687b5add7b4e7d6a567a1d67d13"
+    },
+    {
+      "file": "source/schemas/challenges.schema.json",
+      "bytes": 2929,
+      "sha256": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3"
+    },
+    {
+      "file": "source/schemas/examiner.schema.json",
+      "bytes": 1437,
+      "sha256": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9"
+    },
+    {
+      "file": "source/schemas/final-review.schema.json",
+      "bytes": 289,
+      "sha256": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c"
+    },
+    {
+      "file": "source/src/agent-contract.md",
+      "bytes": 867,
+      "sha256": "6a48dcd46d8ee4e8b9b2f65fcf72cb05caf965b81546d0a9b7e7f5c71e428750"
+    },
+    {
+      "file": "source/src/agent-registry.js",
+      "bytes": 1167,
+      "sha256": "b179c227896d5c26dbaaeb5384a34a03fc81d703798fdcb22d44a88e8e6e24c6"
+    },
+    {
+      "file": "source/src/agent-runner.js",
+      "bytes": 7781,
+      "sha256": "ce84c19a23e48589e382911ffaba4b74f3d41c47d5756b10b7446457b28c4cba"
+    },
+    {
+      "file": "source/src/artifact-writer.js",
+      "bytes": 1039,
+      "sha256": "174583dd849cfec45fbf89412b5396f1a47ca59418d39722c612500d981e215b"
+    },
+    {
+      "file": "source/src/audit-logger.js",
+      "bytes": 349,
+      "sha256": "840b337162c716d3bb24fb24b6d13da0fa64c4b59423e8b558598a10620933ca"
+    },
+    {
+      "file": "source/src/collect-eval-evidence.js",
+      "bytes": 9013,
+      "sha256": "e7cf0698a7905402a139f7139393e55fa75d45760c3bb30a5be9f7b4176c8165"
+    },
+    {
+      "file": "source/src/collect-f3-evidence.js",
+      "bytes": 12015,
+      "sha256": "e21c4717d6d6681f7bd33a44907451f2ecbd01997056e0eaad848e309d1de35f"
+    },
+    {
+      "file": "source/src/config.js",
+      "bytes": 419,
+      "sha256": "79a363588617da8cfece40e4e82aed037c35f07c0ef90742bcde40e9add8f81c"
+    },
+    {
+      "file": "source/src/constants.js",
+      "bytes": 161,
+      "sha256": "573fe771466ebbc1beefdb186268566da2e72d5c25421b133aec86be82f31f99"
+    },
+    {
+      "file": "source/src/coordinator.js",
+      "bytes": 10323,
+      "sha256": "c8b22ff0d57660a0aadc2cf205e07adfe1adfb6eafc5436a5cc7728ed440f996"
+    },
+    {
+      "file": "source/src/correlation-id.js",
+      "bytes": 188,
+      "sha256": "1102957cfeb4c38f6344ce8e0d0b9ff569db3ce4f3dae4c628f70ab85701ca85"
+    },
+    {
+      "file": "source/src/cost-estimator.js",
+      "bytes": 377,
+      "sha256": "f0c64cca835ee3e219b25fb59b65d5b26a1dadae8b0913d5d469768b832545bb"
+    },
+    {
+      "file": "source/src/diagnose-eval-evidence.js",
+      "bytes": 8464,
+      "sha256": "85b7c51da1873a275ff849758662bab27d730dcf163dab75fc6d18091e713022"
+    },
+    {
+      "file": "source/src/eval-evidence.js",
+      "bytes": 7804,
+      "sha256": "456630463f1bf4b495e76da98d88c4edd0a26dff5891a62a540af13afd73c497"
+    },
+    {
+      "file": "source/src/eval-runner.js",
+      "bytes": 13762,
+      "sha256": "69f756ab2d8e47bd6e1bb621821a822d2d7fea5acec19e12319a65d095314be7"
+    },
+    {
+      "file": "source/src/eval-scorer.js",
+      "bytes": 13752,
+      "sha256": "14c057ea260e18ded76ca07be00534facd58391a19ae7c33a4af7799c42dc11a"
+    },
+    {
+      "file": "source/src/evidence-package.js",
+      "bytes": 5399,
+      "sha256": "e4cd6b750cb184fc765225f28d5c8f38dd2130457ed8cd9e1623eda57a34179c"
+    },
+    {
+      "file": "source/src/governance-policy.js",
+      "bytes": 5917,
+      "sha256": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88"
+    },
+    {
+      "file": "source/src/human-review.js",
+      "bytes": 2413,
+      "sha256": "d780f3a6532c30f6c58e5a18995ae9273763eefc885e626f5b6ed41edef84a23"
+    },
+    {
+      "file": "source/src/load-bearing-criteria.js",
+      "bytes": 15303,
+      "sha256": "e36fdda458a216463c080915a3169dba881c401a731ac781894f38a0bd936b0b"
+    },
+    {
+      "file": "source/src/mock-agent-responses.js",
+      "bytes": 1358,
+      "sha256": "6bc9319e7b014c2766319804f3690d89ccbe0145a78b4feb534e9c3490c14d06"
+    },
+    {
+      "file": "source/src/models/fireworks-client.js",
+      "bytes": 788,
+      "sha256": "60fdd5942251d0051024931d5e9c2e74bad3d9358344643b7ec5bf43c1b6a64a"
+    },
+    {
+      "file": "source/src/models/model-client.js",
+      "bytes": 363,
+      "sha256": "039b84d9b6ffd778acd6bace2afa081eb7cceb803f74fcfaaf65a4e123fcea7c"
+    },
+    {
+      "file": "source/src/models/model-config.js",
+      "bytes": 121,
+      "sha256": "d64da4149b19b6635f56ab6be73a1843f6522d23e1b52a4eb5a25af0afbeab38"
+    },
+    {
+      "file": "source/src/models/model-contract.md",
+      "bytes": 451,
+      "sha256": "22acd1ff076806c5cbe4332ca3ef637aaf6b764a92d3d497a86c6c743d444936"
+    },
+    {
+      "file": "source/src/prompt-builder.js",
+      "bytes": 1508,
+      "sha256": "ad1d214fb80432904a5137e9103e6168cb336fd206b9ddad380176ced5ad9adf"
+    },
+    {
+      "file": "source/src/prompt-loader.js",
+      "bytes": 155,
+      "sha256": "2283873eda35403b7e555b51c357f1e8a7d149e27d04b816d42bb2627783fc1e"
+    },
+    {
+      "file": "source/src/report-contract.js",
+      "bytes": 1857,
+      "sha256": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5"
+    },
+    {
+      "file": "source/src/run-evals.js",
+      "bytes": 130,
+      "sha256": "f7d078ead4048e2302f28fdfcec6fd863a848e61e4cc787a8363bff1b4ad2159"
+    },
+    {
+      "file": "source/src/run-load-bearing-audit.js",
+      "bytes": 9179,
+      "sha256": "5a7110e2cd1b621fdec84c996418f3b35ef64dae568aac7f1a115fa6a5b3586b"
+    },
+    {
+      "file": "source/src/run-workflow.js",
+      "bytes": 960,
+      "sha256": "1db3fca90a16911d971076a7023c8de494c14b21d412e47ea93b4898ddced14b"
+    },
+    {
+      "file": "source/src/schema-validator.js",
+      "bytes": 396,
+      "sha256": "b2d54c2f237a6b4fcf918db46570a6a29c51dc2cfd7ced0fd897d96d0e001064"
+    },
+    {
+      "file": "source/src/substance-gate.js",
+      "bytes": 751,
+      "sha256": "10c1a22914b301562e464a758b6a4843c224f9162ad6733fde8cc819946bec3c"
+    },
+    {
+      "file": "source/src/test-fireworks-1.js",
+      "bytes": 712,
+      "sha256": "0f4250705f0f4d12e9bbbd568cd864bfc6ca2d2a6e4ab2ec4f4ef6d312de9b66"
+    },
+    {
+      "file": "source/src/test-fireworks.js",
+      "bytes": 383,
+      "sha256": "746db74a3f92940360ae1beb406efa0a98d4058c0f6918d77009ae003fd821f2"
+    },
+    {
+      "file": "source/src/test-interpreter.js",
+      "bytes": 740,
+      "sha256": "1e59895965f2b87192031d2a537074174fa4c47b3b5ecbd67bc57a1c698dd75f"
+    },
+    {
+      "file": "source/src/test-punchout.js",
+      "bytes": 7518,
+      "sha256": "1459f8d10aaec2d77ca976ad22072c566da42cfa43f79dd5c5fe8749ae7fe277"
+    },
+    {
+      "file": "source/src/test-reviewer-schema.js",
+      "bytes": 296,
+      "sha256": "b35655f379cec1120d486d5717c7c3be9843d5adfb5593febf13e6a10970dfa8"
+    },
+    {
+      "file": "source/src/test-reviewer.js",
+      "bytes": 1540,
+      "sha256": "9f179b9b487b4ea35dd4c2b28deab5e027bd74715d82da20d66add344d7f234a"
+    },
+    {
+      "file": "source/src/test-writer-schema.js",
+      "bytes": 292,
+      "sha256": "ddb7956f6c7812c72fb63a2258589e9a85fb6c741b8fdc4676f2936fa57ce4b7"
+    },
+    {
+      "file": "source/src/test-writer.js",
+      "bytes": 885,
+      "sha256": "5aee0afdaadf37f9b17f6ef299bb09f0ede99a9d33ea2573a66b0651dcf48576"
+    },
+    {
+      "file": "source/stage5-summary.md",
+      "bytes": 3646,
+      "sha256": "e9d102e6c5e595eb76e5be0bc7bfed1dcc89667b6c2af6618362c55ad6cfeffa"
+    },
+    {
+      "file": "source/sub-agents.config.yaml",
+      "bytes": 1163,
+      "sha256": "eac5cec53f739a2acbdc735ae439f7a75481aedaeaf8b904790ca15d545e4a5d"
+    },
+    {
+      "file": "source/substance-assessment.json",
+      "bytes": 942,
+      "sha256": "ebdc7d06a432f1501843712113f54e416e2e46b44f39d5da2ab21323fcef4d13"
+    },
+    {
+      "file": "source/tests/eval-runner.test.js",
+      "bytes": 16223,
+      "sha256": "9004cc6e506c1349bcce40a42f6806d5165adec11c18d21615ff365e002f443d"
+    },
+    {
+      "file": "source/tests/eval-scorer.test.js",
+      "bytes": 12022,
+      "sha256": "512ac7300f3e3a8ec55453897b14d6ba7c2d5f3fc9fd2abc8b072430f2a46ff6"
+    },
+    {
+      "file": "source/tests/evidence-package.test.js",
+      "bytes": 5551,
+      "sha256": "e105b8ddf05723fa6c22374de354e727ec2d5a47211c696af72007f064f4d705"
+    },
+    {
+      "file": "source/tests/f3-evidence.test.js",
+      "bytes": 5139,
+      "sha256": "aa2f9e7f5c7aea8fc292ffbdab6c51ac80a10f559ba080de865bfca7d3072812"
+    },
+    {
+      "file": "source/tests/f3-regression.test.js",
+      "bytes": 6977,
+      "sha256": "82196ad7975b4b7386f3a24b47019c7406375859566827d3316fb3741b1d272f"
+    },
+    {
+      "file": "source/tests/load-bearing.test.js",
+      "bytes": 5057,
+      "sha256": "bc36aea6077834f53129117a5dbd0c2ae17e65263dc9d1196d6088ac9a82d89e"
+    },
+    {
+      "file": "source/tests/reviewer-smoke.test.js",
+      "bytes": 2560,
+      "sha256": "8edb91aa448d3df16a0c16b3c07ba005f6e73b752f6c0d09383924f5d8bd115a"
+    },
+    {
+      "file": "source/tests/runtime-governance.test.js",
+      "bytes": 26103,
+      "sha256": "5d54090ac664b05d8779ddb56f796f221558817b73fb2cde7fa39c726c0f1ae5"
+    }
+  ],
+  "integrity": "SHA-256 detects changes relative to this manifest; not an independent provider attestation."
+}

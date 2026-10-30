@@ -1,0 +1,11 @@
+{
+  "caseId": "minor-label",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-minor-label-15901117-58b0-4e20-b230-defc36de88d0",
+  "status": "SUCCESS",
+  "beforeStatus": "SUCCESS",
+  "pairedIdentity": true,
+  "beforePromptHash": "e0b0c506e8346e5d84bf9173816d25a387a43ffc795f72a102a638eb6c9dbbf1",
+  "afterPromptHash": "c0cee74f1ae71b90a1efcbd7a905b84fb27cdc12243459f6de202aba1502f4e9"
+}

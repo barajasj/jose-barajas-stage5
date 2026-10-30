@@ -1,0 +1,10 @@
+{
+  "modelInvocations": 3,
+  "authorizedLimit": 5,
+  "receipts": 3,
+  "tokens": {
+    "prompt": 6897,
+    "completion": 5898,
+    "total": 12795
+  }
+}

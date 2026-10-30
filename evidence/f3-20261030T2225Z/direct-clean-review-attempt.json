@@ -1,0 +1,11 @@
+{
+  "caseId": "clean-review",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-clean-review-c5be241e-70eb-41df-9272-8f9edee12c02",
+  "status": "SUCCESS",
+  "beforeStatus": "SUCCESS",
+  "pairedIdentity": true,
+  "beforePromptHash": "5e26a102b334234b732e41e17e91da78f9399ef0846aa221e2bec4662a199302",
+  "afterPromptHash": "17d072937616811f56279caccd8a4ec9961a2a59119954657ddf1e46c605e865"
+}

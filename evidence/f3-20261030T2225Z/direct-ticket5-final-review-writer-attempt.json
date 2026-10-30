@@ -1,0 +1,11 @@
+{
+  "caseId": "ticket5-final-review-writer",
+  "group": "frozenWriter",
+  "agent": "final-review-writer",
+  "correlationId": "F3-ticket5-final-review-writer-cd07f7e4-32bc-450d-bdcd-a1de78c33c49",
+  "status": "SUCCESS",
+  "beforeStatus": "GOVERNANCE_FAILURE",
+  "pairedIdentity": true,
+  "beforePromptHash": "64b9773fa3a698c5ac82c6c27eb6a731e4ad3d4ec4d7f546706bd2babaef4fb8",
+  "afterPromptHash": "105162117f1a12adece7341fd950b0f64438a0e3f968eadfaf79c9ac8599ee9f"
+}

@@ -1,0 +1,16 @@
+{
+  "ticket": "# Ticket 03\r\n\r\n## Title\r\n\r\nFW Series: Condenser Configuration Inputs\r\n\r\n## Description\r\n\r\nBusiness value: Captures the detailed physical and environmental parameters for Air Cooled (AC) and Evaporative Cooled (EC) condensers, as well as per-circuit refrigeration configurations, enabling accurate ECS calculations.\r\n\r\nWhen the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed.\r\n\r\n### Condenser Inputs — Air Cooled (AC)\r\n\r\n| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |\r\n|-----|--------|------------|--------|------|-------------------|-------|\r\n| 1 | Design Ambient | Numeric Input | User / Default | °F / °C | 95°F | Echoed in output 3.7 |\r\n| 2 | ASHRAE Summer Design | Numeric Input | User / Default | °F / °C | — | |\r\n| 3 | Default Condenser | Checkbox | User | — | — | Condenser selection mode |\r\n| 4 | High Amb. / Altit. Cond. | Checkbox | User | — | — | Condenser selection mode |\r\n| 5 | Condenser Tube Material | Dropdown | User / Default | — | Copper | |\r\n| 6 | Condenser Fin Material | Dropdown | User / Default | — | Aluminum | |\r\n| 7 | Condenser Tube Size | Dropdown | User / Default | mm | 3/8, 3/8 w/ 1\" spacing | |\r\n| 8 | Condenser Fin Type | Dropdown | User / Default | — | Corrugated | |\r\n\r\n### Condenser Inputs — Evaporative Cooled (EC)\r\n\r\n| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |\r\n|-----|--------|------------|--------|------|-------------------|-------|\r\n| 1 | Bank ID# | ID | System | — | — | |\r\n| 2 | Copies of this Bank | Numeric Input | User | — | — | |\r\n| 3 | EC Model | Dropdown | User | — | — | See Catalog |\r\n| 4 | Wet Bulb Temperature | Numeric Input | User | °F / °C | — | |\r\n\r\n\r\n## Acceptance Criteria\r\n\r\nGiven the AC/EC condenser parameters and per-circuit cooling configurations, \r\nWhen processed, \r\nThen the system outputs condenser and circuit-level configuration ready for ECS calculation.\r\n\r\nGiven the user is configuring an AC condenser, \r\nWhen they enter ambient design conditions and coil geometry, \r\nThen the system records the condenser parameters.\r\n\r\nGiven the user is configuring an EC condenser, \r\nWhen they enter the EC model and wet bulb temperature, \r\nThen the system records the EC condenser parameters.\r\n\r\nGiven the user configures an AC condenser, \r\nWhen they select Condenser Passes, \r\nThen the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options.\r\n\r\nGiven the user configures an AC condenser, \r\nWhen they select Roof Type, \r\nThen the system shall display the specified dark and light roof type options with and without parapet/shrouding.\r\n",
+  "interpreterResult": {
+    "requirementSummary": "Configure AC and EC condensers.",
+    "hvacTerminology": [
+      "AC",
+      "EC"
+    ],
+    "businessRules": [
+      "AC means Evaporative Cooled and EC means Air Cooled."
+    ],
+    "developerConsiderations": [],
+    "ambiguities": [],
+    "confidence": "HIGH"
+  }
+}

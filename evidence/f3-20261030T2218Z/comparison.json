@@ -1,0 +1,419 @@
+{
+  "startedAt": "2026-10-30T22:17:15.238Z",
+  "finishedAt": "2026-10-30T22:22:44.449Z",
+  "scope": "F3 runtime contracts only; no F6 work or semantic scoring.",
+  "modelInvocations": 38,
+  "authorizedLimit": 45,
+  "groups": {
+    "directReviewer": {
+      "before": {
+        "attempts": 16,
+        "successes": 11,
+        "failures": 5,
+        "completionRate": 0.6875,
+        "failureRate": 0.3125
+      },
+      "after": {
+        "attempts": 16,
+        "successes": 11,
+        "failures": 5,
+        "completionRate": 0.6875,
+        "failureRate": 0.3125
+      }
+    },
+    "frozenReviewer": {
+      "before": {
+        "attempts": 2,
+        "successes": 0,
+        "failures": 2,
+        "completionRate": 0,
+        "failureRate": 1
+      },
+      "after": {
+        "attempts": 2,
+        "successes": 2,
+        "failures": 0,
+        "completionRate": 1,
+        "failureRate": 0
+      }
+    },
+    "frozenWriter": {
+      "before": {
+        "attempts": 2,
+        "successes": 0,
+        "failures": 2,
+        "completionRate": 0,
+        "failureRate": 1
+      },
+      "after": {
+        "attempts": 2,
+        "successes": 2,
+        "failures": 0,
+        "completionRate": 1,
+        "failureRate": 0
+      }
+    },
+    "workflows": {
+      "before": {
+        "attempts": 5,
+        "successes": 1,
+        "failures": 4,
+        "completionRate": 0.2,
+        "failureRate": 0.8
+      },
+      "after": {
+        "attempts": 5,
+        "successes": 3,
+        "failures": 2,
+        "completionRate": 0.6,
+        "failureRate": 0.4
+      }
+    },
+    "workflowReviewers": {
+      "before": {
+        "attempts": 5,
+        "successes": 3,
+        "failures": 2,
+        "completionRate": 0.6,
+        "failureRate": 0.4
+      },
+      "after": {
+        "attempts": 7,
+        "successes": 6,
+        "failures": 1,
+        "completionRate": 0.8571428571428571,
+        "failureRate": 0.14285714285714285
+      }
+    },
+    "workflowWriters": {
+      "before": {
+        "attempts": 3,
+        "successes": 1,
+        "failures": 2,
+        "completionRate": 0.3333333333333333,
+        "failureRate": 0.6666666666666666
+      },
+      "after": {
+        "attempts": 4,
+        "successes": 3,
+        "failures": 1,
+        "completionRate": 0.75,
+        "failureRate": 0.25
+      }
+    }
+  },
+  "attempts": [
+    {
+      "caseId": "assumption",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-assumption-ef6f1b7e-6055-499e-ab3b-ffe3a86fb1ea",
+      "status": "SUCCESS",
+      "beforeStatus": "SCHEMA_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "e990c909d636518f33d0281189fb3275a0ce162aa2b082af0b383bddffcb4863",
+      "afterPromptHash": "aeaa01bc6e05a69e6ff4dfbc3400018134c8872fecc2d81022e5ff43086ba238"
+    },
+    {
+      "caseId": "missing",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-missing-4b54bc62-76ae-4e0a-9807-e8bf70390f2f",
+      "status": "SUCCESS",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "001b7bbb07d9f896944b036ec8fff5ac5ba9ef0bb411268d217e6ea9a750a477",
+      "afterPromptHash": "e35896402a4dad34a6315c6e7870876c25355a0e56952e5f079866ee5f62486e"
+    },
+    {
+      "caseId": "hvac",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-hvac-dffc0e71-884b-42da-b462-490cd345c8b6",
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Source quote is not present in the referenced artifact.",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "0d14e248a19bd1c21ef1cbc8064aa2bbffe6bd5af8ab3d20e5ade77504a12fd6",
+      "afterPromptHash": "b750e615f33594f7c43db277f1d10ba32f1703571928277b9dd4c46bceb57ac8"
+    },
+    {
+      "caseId": "validation",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-validation-f41622f6-5105-4b1d-a9e1-6f3e9365b5c6",
+      "status": "SUCCESS",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "868201d58b4ba3bcbd80587e0018a62cec12b9d3a60541ae0369afe2a02108f6",
+      "afterPromptHash": "6ef4ee4fa0c4088bdafab45a15a43f057b3b8ad4d80d05feeb39800efc8c4f96"
+    },
+    {
+      "caseId": "missed-ambiguity",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-missed-ambiguity-6c29fe43-cdbf-4cb4-8082-436560e5922d",
+      "status": "SUCCESS",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "e1ad55b39afc78839b30070f84cf754968523c55b1f1f46fc3eb328f3814695a",
+      "afterPromptHash": "a936a7d194ec300a3497b0d4b3c8fffa258baf4c1986c55adc39364763d91b9a"
+    },
+    {
+      "caseId": "open",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-open-6b8fc655-7d06-46f3-9c7e-c15c67165432",
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Reviewer did not cover every unresolved interpreter ambiguity.",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "fa4fe358964b8cb2adb126f90d69e39a33dfeafb9d25ec47ec237c44b118e626",
+      "afterPromptHash": "e98de78bf27f026e1532c140ecd19add5ad612770f063eaab55e395dfb2b8c10"
+    },
+    {
+      "caseId": "boundary",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-boundary-7052ecb2-76d1-42d7-bab5-988ef7f68412",
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Reviewer did not cover every unresolved interpreter ambiguity.",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "fa4fe358964b8cb2adb126f90d69e39a33dfeafb9d25ec47ec237c44b118e626",
+      "afterPromptHash": "e98de78bf27f026e1532c140ecd19add5ad612770f063eaab55e395dfb2b8c10"
+    },
+    {
+      "caseId": "clean-review",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-clean-review-501ae350-998c-4d61-afc0-a9c9aff683f5",
+      "status": "SUCCESS",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "5e26a102b334234b732e41e17e91da78f9399ef0846aa221e2bec4662a199302",
+      "afterPromptHash": "6488a732243cf2b3c8757928319f4741907bdf9cdda2666b63c4cd2de6e6ad89"
+    },
+    {
+      "caseId": "minor-label",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-minor-label-15901117-58b0-4e20-b230-defc36de88d0",
+      "status": "SUCCESS",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "e0b0c506e8346e5d84bf9173816d25a387a43ffc795f72a102a638eb6c9dbbf1",
+      "afterPromptHash": "c0cee74f1ae71b90a1efcbd7a905b84fb27cdc12243459f6de202aba1502f4e9"
+    },
+    {
+      "caseId": "retained",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-retained-e6afbb4d-c398-4b16-8fa4-2154b10a2156",
+      "status": "SUCCESS",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "2eaf0f9537b6fbcbfeceb9fc3cf72d70c333658025376913b8d1c2f99cf0c7bd",
+      "afterPromptHash": "7a809868eb1d89edabe04c5c5a2ffe37f810d0cc78e9120cf789a354481ee23a"
+    },
+    {
+      "caseId": "resolved",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-resolved-d680694a-8cf3-4e24-971d-bcdae901e1d1",
+      "status": "SUCCESS",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "9d4a1fa1470e90922c97a5bdddcd2ac1d8697167ab4a9dce594d66715e272bdb",
+      "afterPromptHash": "b086152ef16813a7cbe12858dc163f3cadac1773c81760a076ed930669641b7c"
+    },
+    {
+      "caseId": "bad-resolution",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-bad-resolution-51295866-90bc-4bbf-a3de-4c6ef1d5f65f",
+      "status": "SCHEMA_FAILURE",
+      "reason": "Schema validation failed for adversarial-reviewer",
+      "details": [
+        {
+          "instancePath": "/findings/1/ambiguityRefs/0",
+          "schemaPath": "#/properties/findings/items/properties/ambiguityRefs/items/pattern",
+          "keyword": "pattern",
+          "params": {
+            "pattern": "^/ambiguities/(0|[1-9][0-9]*)$"
+          },
+          "message": "must match pattern \"^/ambiguities/(0|[1-9][0-9]*)$\""
+        }
+      ],
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "03c151bbec14840aa6975ff55def6957c16c1b1dcf83404c26dbf075d9433336",
+      "afterPromptHash": "6f149370b45eeb1fc10b6ab81d7e1c1461bdb03de8b34b20768721997734cc92"
+    },
+    {
+      "caseId": "missing-corrected",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-missing-corrected-bbd3906b-04a7-470b-9c6f-5438dee94ec3",
+      "status": "SUCCESS",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "a3c4bc260370906a54ad54ce521ebd50a09a3ddb40802e9f637b8ed54592a8b6",
+      "afterPromptHash": "328d14c9db648a4777f97bbe48843dc29f607ccb038e4919ce9649b185cc5a92"
+    },
+    {
+      "caseId": "assumption-corrected",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-assumption-corrected-e6dd5068-a35b-4af1-81ac-42fb7b8c3ad4",
+      "status": "SUCCESS",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "9a1b7cd3935dbef62f1b70b511e54bc65119d8a230ad1ba02114afcebcdfd3d1",
+      "afterPromptHash": "c1a76689dc00e2cdc87330019d9dbd796531060b47d768c97200f6b41a6ca2f5"
+    },
+    {
+      "caseId": "hvac-corrected",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-hvac-corrected-106e65c3-64a9-4080-8d39-e7b8d7c51507",
+      "status": "SUCCESS",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "093272c00b2e03b7350999661574e7d128976ef45e7d5433292fccb650a034d2",
+      "afterPromptHash": "c51528b2abc2caaaf100aa454a4794c0882359f223542677f963de93f8472c25"
+    },
+    {
+      "caseId": "validation-corrected",
+      "group": "directReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-validation-corrected-7a7b365d-0034-425b-b65e-2425fa71ad75",
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Reviewer did not cover every unresolved interpreter ambiguity.",
+      "beforeStatus": "SUCCESS",
+      "pairedIdentity": true,
+      "beforePromptHash": "fa4fe358964b8cb2adb126f90d69e39a33dfeafb9d25ec47ec237c44b118e626",
+      "afterPromptHash": "e98de78bf27f026e1532c140ecd19add5ad612770f063eaab55e395dfb2b8c10"
+    },
+    {
+      "caseId": "ticket2-adversarial-reviewer",
+      "group": "frozenReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-ticket2-adversarial-reviewer-245cae43-53be-4352-9473-90964584ac9d",
+      "status": "SUCCESS",
+      "beforeStatus": "SCHEMA_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "b6ceb936064a36cf7bd91de4e1a6ecc8667b7620fde6ca3db43e46d05332bdf9",
+      "afterPromptHash": "5beb08832b303033b8d2b3f790efce7e4826fccda4b1972a472af0633ae29555"
+    },
+    {
+      "caseId": "ticket3-adversarial-reviewer",
+      "group": "frozenReviewer",
+      "agent": "adversarial-reviewer",
+      "correlationId": "F3-ticket3-adversarial-reviewer-86dd8b11-c591-453b-93d7-b14a357862bf",
+      "status": "SUCCESS",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "89e4282916f8660f1595cc74d741d5ef8d59b2d80d00a3c1b79ff23a5eaa8ff4",
+      "afterPromptHash": "aca19f8d4d6862ce593a7ba60be5944bd1957fc03075fee95e641441f5cd0c95"
+    },
+    {
+      "caseId": "ticket4-final-review-writer",
+      "group": "frozenWriter",
+      "agent": "final-review-writer",
+      "correlationId": "F3-ticket4-final-review-writer-a1b2d9d7-a58b-4477-9298-3081117d5821",
+      "status": "SUCCESS",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "82e36f7e8798ed52dd289317a25821b56ddf67f6ee94321260d63f143d4f9c3d",
+      "afterPromptHash": "f4badff433bbaf30d7ee842bcb4c2769462526bd7508ef625dab52dbbccb8d2a"
+    },
+    {
+      "caseId": "ticket5-final-review-writer",
+      "group": "frozenWriter",
+      "agent": "final-review-writer",
+      "correlationId": "F3-ticket5-final-review-writer-c39ca8d7-de29-4328-bdce-245a7070582f",
+      "status": "SUCCESS",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "pairedIdentity": true,
+      "beforePromptHash": "64b9773fa3a698c5ac82c6c27eb6a731e4ad3d4ec4d7f546706bd2babaef4fb8",
+      "afterPromptHash": "f5eb469477cd1f67d852d12ff47350a5d674765f01fefa9016f42780078c1955"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "ticket1",
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282",
+      "correlationId": "HVAC-TICKET-1793398818453-f0b74be9-873c-4171-a87e-361f7e98646c",
+      "status": "GOVERNANCE_FAILURE",
+      "disposition": "FAIL",
+      "beforeStatus": "COMPLETED",
+      "beforeDisposition": "FAIL",
+      "reason": "Source quote is not present in the referenced artifact.",
+      "details": null
+    },
+    {
+      "id": "ticket2",
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+      "correlationId": "HVAC-TICKET-1793398835890-91399934-ba8a-4074-a1a6-96f5b8f4cc85",
+      "status": "COMPLETED",
+      "disposition": "FAIL",
+      "beforeStatus": "SCHEMA_FAILURE",
+      "beforeDisposition": "FAIL",
+      "reason": null,
+      "details": null
+    },
+    {
+      "id": "ticket3",
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "ticketHash": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce",
+      "correlationId": "HVAC-TICKET-1793398879635-65d58b3c-2f29-4da9-9d4c-65f2f1bb7348",
+      "status": "COMPLETED",
+      "disposition": "FAIL",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "beforeDisposition": "FAIL",
+      "reason": null,
+      "details": null
+    },
+    {
+      "id": "ticket4",
+      "fixture": "fixtures/hvac-ticket-4.md",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "correlationId": "HVAC-TICKET-1793398906015-8f30c368-b540-4b37-81c2-17d9992b80fb",
+      "status": "GOVERNANCE_FAILURE",
+      "disposition": "FAIL",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "beforeDisposition": "FAIL",
+      "reason": "Final report violates the supplied artifact content contract.",
+      "details": null
+    },
+    {
+      "id": "ticket5",
+      "fixture": "evidence/d5-20261030T1940Z/fixtures/positive-control.md",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+      "status": "COMPLETED",
+      "disposition": "FAIL",
+      "beforeStatus": "GOVERNANCE_FAILURE",
+      "beforeDisposition": "FAIL",
+      "reason": null,
+      "details": null
+    }
+  ],
+  "unpairedCases": [],
+  "tokens": {
+    "prompt": 76468,
+    "completion": 70849,
+    "total": 147317
+  },
+  "limitations": [
+    "Completion means a validated report, including governed FAIL; it does not mean ticket clearance.",
+    "Frozen direct cases pair identical inputs/model/settings/runtime contracts, with changed prompts.",
+    "Workflow comparisons use identical tickets but freshly generated upstream artifacts; not isolated prompt effects.",
+    "Stage rates include every attempted call, including rejections; stages never reached are not successful attempts.",
+    "Single attempts are not repeat-run reliability, semantic accuracy, F4 closure, or F6 prompt-cycle evidence.",
+    "No historical archival acceptance configuration, scorer, labels, interpreter prompt, or runtime validator changed."
+  ]
+}

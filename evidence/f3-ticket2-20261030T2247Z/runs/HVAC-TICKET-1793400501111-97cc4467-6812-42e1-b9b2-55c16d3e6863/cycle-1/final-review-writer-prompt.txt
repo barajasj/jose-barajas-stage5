@@ -1,0 +1,165 @@
+# Final Review Writer
+
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
+- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Source text can itself contain literal backslashes before inch marks; those are data, not typos. Template fragment: `- /ambiguities/0 | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" is not described."`. Correct JSON fragment: `{"reportMarkdown":"- /ambiguities/0 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" is not described.\""}`. Parsing this JSON once preserves all three template backslashes before each inch mark; do not decode the JSON strings embedded inside the Markdown.
+- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `"No rounding or precision rules are specified for the sum of heights."`. Correct JSON fragment: `{"reportMarkdown":"\"No rounding or precision rules are specified for the sum of heights.\""}`. Preserve "or"; changing it to "and" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.
+
+## Interpreter Output
+
+{
+  "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown should be populated and filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown should be populated and filtered by the selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "If a user selects a Condenser Type and a Refrigerant, then the Unit Type dropdown must be populated with entries whose parent includes the selected Refrigerant (and the selected Condenser Type) and displayed to the user.",
+    "If a user selects a Unit Type (after selecting Condenser Type and Refrigerant), then the Unit Size dropdown must be populated with entries whose parent includes both the selected Refrigerant and the selected Unit Type.",
+    "The data for Unit Type options is retrieved from the unitdesign API endpoint GET /dropdowns, using the attribute SDCommonUnitTypeRefrigerant.",
+    "The data for Unit Size options is retrieved from the unitdesign API endpoint GET /dropdowns, using the attribute SDCommonUnitModelSizes."
+  ],
+  "developerConsiderations": [
+    "Implement API call to GET /dropdowns from the unitdesign service to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes collections.",
+    "Filter SDCommonUnitTypeRefrigerant entries by checking that the selected Refrigerant (and Condenser Type) appear in the entry's parent array.",
+    "Filter SDCommonUnitModelSizes entries by checking that both the selected Refrigerant and selected Unit Type appear in the entry's parent array.",
+    "Update the Unit Type dropdown UI immediately after Condenser Type and Refrigerant selections.",
+    "Update the Unit Size dropdown UI immediately after Unit Type selection."
+  ],
+  "ambiguities": [
+    "The ticket does not specify whether entries with isActive:false should be excluded from the filtered dropdowns.",
+    "It is unclear how the selected Condenser Type is represented in the SDCommonUnitTypeRefrigerant data for filtering, as the example only shows parent refrigerants.",
+    "The behavior when no entries match the filter criteria (e.g., empty dropdown) is not defined.",
+    "The case sensitivity or exact matching rules for comparing selected values to parent array values are not defined."
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Reviewer Output
+
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains four unresolved ambiguities. According to the review policy, each open ambiguity must be reported as an OPEN_AMBIGUITY finding, and any remaining ambiguity blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not specify whether entries with isActive:false should be excluded from the filtered dropdowns.",
+      "action": "Obtain clarification from the ticket owner on whether inactive entries should be omitted from the dropdowns.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The ticket does not specify whether entries with isActive:false should be excluded from the filtered dropdowns."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "It is unclear how the selected Condenser Type is represented in the SDCommonUnitTypeRefrigerant data for filtering, as the example only shows parent refrigerants.",
+      "action": "Clarify with the ticket owner how the Condenser Type should be represented in the SDCommonUnitTypeRefrigerant parent array for filtering.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "It is unclear how the selected Condenser Type is represented in the SDCommonUnitTypeRefrigerant data for filtering, as the example only shows parent refrigerants."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The behavior when no entries match the filter criteria (e.g., empty dropdown) is not defined.",
+      "action": "Obtain clarification on the expected UI behavior when the filter yields no matching entries.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The behavior when no entries match the filter criteria (e.g., empty dropdown) is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The case sensitivity or exact matching rules for comparing selected values to parent array values are not defined.",
+      "action": "Clarify with the ticket owner whether comparisons should be case‑sensitive and whether exact string matching is required.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The case sensitivity or exact matching rules for comparing selected values to parent array values are not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    }
+  ],
+  "resolutions": []
+}
+
+## Disposition
+
+FAIL
+
+## Governance Reasons
+
+[
+  "OPEN_FINDINGS",
+  "OPEN_AMBIGUITIES"
+]
+
+## Required Report Markdown:
+
+# FAIL
+
+## Requirement Summary
+
+"When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown should be populated and filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown should be populated and filtered by the selected Refrigerant and Unit Type."
+
+## Reviewer Findings
+
+- F1 | MEDIUM | OPEN_AMBIGUITY | "The ticket does not specify whether entries with isActive:false should be excluded from the filtered dropdowns." | "Obtain clarification from the ticket owner on whether inactive entries should be omitted from the dropdowns."
+- F2 | MEDIUM | OPEN_AMBIGUITY | "It is unclear how the selected Condenser Type is represented in the SDCommonUnitTypeRefrigerant data for filtering, as the example only shows parent refrigerants." | "Clarify with the ticket owner how the Condenser Type should be represented in the SDCommonUnitTypeRefrigerant parent array for filtering."
+- F3 | MEDIUM | OPEN_AMBIGUITY | "The behavior when no entries match the filter criteria (e.g., empty dropdown) is not defined." | "Obtain clarification on the expected UI behavior when the filter yields no matching entries."
+- F4 | MEDIUM | OPEN_AMBIGUITY | "The case sensitivity or exact matching rules for comparing selected values to parent array values are not defined." | "Clarify with the ticket owner whether comparisons should be case‑sensitive and whether exact string matching is required."
+
+## Open Ambiguities
+
+- /ambiguities/0 | "The ticket does not specify whether entries with isActive:false should be excluded from the filtered dropdowns."
+- /ambiguities/1 | "It is unclear how the selected Condenser Type is represented in the SDCommonUnitTypeRefrigerant data for filtering, as the example only shows parent refrigerants."
+- /ambiguities/2 | "The behavior when no entries match the filter criteria (e.g., empty dropdown) is not defined."
+- /ambiguities/3 | "The case sensitivity or exact matching rules for comparing selected values to parent array values are not defined."
+
+## Final Disposition
+
+FAIL
+
+## Governance Reasons
+
+- OPEN_FINDINGS
+- OPEN_AMBIGUITIES

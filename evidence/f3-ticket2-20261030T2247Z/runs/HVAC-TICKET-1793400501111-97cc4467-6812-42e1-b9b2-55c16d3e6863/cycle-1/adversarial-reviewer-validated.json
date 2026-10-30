@@ -1,0 +1,75 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains four unresolved ambiguities. According to the review policy, each open ambiguity must be reported as an OPEN_AMBIGUITY finding, and any remaining ambiguity blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not specify whether entries with isActive:false should be excluded from the filtered dropdowns.",
+      "action": "Obtain clarification from the ticket owner on whether inactive entries should be omitted from the dropdowns.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The ticket does not specify whether entries with isActive:false should be excluded from the filtered dropdowns."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "It is unclear how the selected Condenser Type is represented in the SDCommonUnitTypeRefrigerant data for filtering, as the example only shows parent refrigerants.",
+      "action": "Clarify with the ticket owner how the Condenser Type should be represented in the SDCommonUnitTypeRefrigerant parent array for filtering.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "It is unclear how the selected Condenser Type is represented in the SDCommonUnitTypeRefrigerant data for filtering, as the example only shows parent refrigerants."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The behavior when no entries match the filter criteria (e.g., empty dropdown) is not defined.",
+      "action": "Obtain clarification on the expected UI behavior when the filter yields no matching entries.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The behavior when no entries match the filter criteria (e.g., empty dropdown) is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The case sensitivity or exact matching rules for comparing selected values to parent array values are not defined.",
+      "action": "Clarify with the ticket owner whether comparisons should be case‑sensitive and whether exact string matching is required.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The case sensitivity or exact matching rules for comparing selected values to parent array values are not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    }
+  ],
+  "resolutions": []
+}

@@ -1,0 +1,78 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter omitted a core requirement to use the SDCommonUnitTypeRefrigerant attribute for retrieving and filtering Unit Type options, and it left three ambiguities from the ticket unresolved: mapping of Condenser Type, behavior when filters return no results, and case sensitivity/reset behavior. These gaps prevent a reliable implementation.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter does not mention using the SDCommonUnitTypeRefrigerant attribute to retrieve and filter Unit Type options as required by the ticket.",
+      "action": "Add handling to retrieve Unit Type data from SDCommonUnitTypeRefrigerant and filter by the selected Condenser Type and Refrigerant.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "the attribute to get Unit Type is SDCommonUnitTypeRefrigerant"
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/developerConsiderations/0",
+          "quote": "Retrieve dropdown data from unitdesign GET /dropdowns."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not define how Condenser Type should be used to filter Unit Type options.",
+      "action": "Clarify the mapping logic for Condenser Type in relation to Unit Type filtering.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The Condenser Type mapping is unclear because the example parent data contains refrigerants."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not specify what should happen when a filter yields no results.",
+      "action": "Define the expected UI behavior when filtering returns an empty list.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "Empty filter-result behavior is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not specify case sensitivity handling and whether downstream selections should be reset when a parent selection changes.",
+      "action": "Provide clarification on case sensitivity and selection reset rules.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Case sensitivity and downstream selection reset behavior are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    }
+  ],
+  "resolutions": []
+}

@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "threshold": 0.9,
+  "measurement": "Local prompt-inventory and authored positive/negative criterion sensitivity audit; not live-model accuracy or the examiner's parser.",
+  "sourceHashes": {
+    "fixtures/hvac-ticket-1.md": "9213fde66d55e591c419db6faace48e2af2e1f86b0970dd51a69b816126423f4",
+    "fixtures/hvac-ticket-2.md": "7a678f38e9e7c34cb101208b668995b83692ca8a31cf398a6697855fd913cb54",
+    "fixtures/hvac-ticket-3.md": "4f5ab672a0ec2ae8601d0eb4680e7db31eed771139b5ee30afb05ffd36ff75d1",
+    "fixtures/hvac-ticket-4.md": "03b8e109c3c5254e095c36fc5a9775784d0d4b4a88b6ee632bb349d9ea123915"
+  },
+  "agents": {
+    "requirement-interpreter": {
+      "promptFile": "agents/requirement-interpreter.md",
+      "promptSha256": "c96023d7906f54b504e0df73fbc77d366876abfaf503c6b44e3a1a403b46f275",
+      "examinerBaseline": { "mapped": 8, "total": 12 },
+      "units": {
+        "I01": ["summaryAccuracy"],
+        "I02": ["hvacTerminologyAccuracy", "sourceGrounding"],
+        "I03": ["businessRuleAccuracy"],
+        "I04": ["validationRuleAccuracy", "sourceGrounding", "ambiguityAccuracy"],
+        "I05": ["functionalBehaviorAccuracy"],
+        "I06": ["ambiguityAccuracy"],
+        "I07": ["developerConsiderationGrounding"],
+        "I08": ["confidencePolicyConsistency"],
+        "I09": ["sourceGrounding"],
+        "I10": ["emptyArrayDiscipline"],
+        "I11": ["redispatchSafety"],
+        "I12": ["rawResponseFormat", "schemaConformance"],
+        "input:ticket": ["summaryAccuracy", "sourceGrounding"]
+      },
+      "runtimeSource": {
+        "file": "src/prompt-builder.js",
+        "sha256": "439edb02396d1b9b2876e7b623f3bbad117fa916de7f40123b42a69bf5fbfc63",
+        "units": [
+          {
+            "id": "runtime:previousInterpretation",
+            "anchor": "Previous Interpretation:",
+            "criteria": ["redispatchSafety"]
+          },
+          {
+            "id": "runtime:reviewerFeedback",
+            "anchor": "Adversarial Reviewer Findings (address actionable HIGH interpretation defects without inventing unsupported requirements; preserve missing ticket facts as ambiguities):",
+            "criteria": ["redispatchSafety", "sourceGrounding"]
+          },
+          {
+            "id": "runtime:ambiguityPreservation",
+            "anchor": "Preserve each previous ambiguity verbatim unless the original ticket explicitly answers it.",
+            "criteria": ["redispatchSafety"]
+          }
+        ]
+      }
+    },
+    "adversarial-reviewer": {
+      "promptFile": "agents/adversarial-reviewer.md",
+      "promptSha256": "1ea4f5333d45b7f2c730adac9f04f93cbe6e1af2b3fe8ecc71b9390188a5e937",
+      "examinerBaseline": { "mapped": 8, "total": 12 },
+      "units": {
+        "R01": ["unsupportedAssumptionDetection", "ticketGrounding"],
+        "R02": ["missingRequirementDetection", "interpreterGrounding"],
+        "R03": ["hvacInterpretationErrorDetection"],
+        "R04": ["missingValidationDetection"],
+        "R05": ["reviewerAmbiguityCoverage"],
+        "R06": ["reviewerAmbiguityCoverage", "statusConsistency"],
+        "R07": ["boundaryChallengeCoverage", "ticketGrounding"],
+        "R08": ["ticketGrounding", "interpreterGrounding"],
+        "R09": ["schemaConformance", "findingActionability", "reviewerAmbiguityCoverage"],
+        "R10": ["severityAppropriateness", "statusConsistency"],
+        "R11": ["statusConsistency"],
+        "R12": ["reviewRationaleQuality"],
+        "R13": ["concernContinuity"],
+        "R14": ["ambiguityResolutionVerification"],
+        "R15": ["rawResponseFormat", "schemaConformance"],
+        "R16": ["schemaConformance", "findingActionability", "ticketGrounding", "interpreterGrounding"],
+        "R17": ["schemaConformance", "findingActionability", "ticketGrounding", "interpreterGrounding"],
+        "input:ticket": ["ticketGrounding"],
+        "input:interpreterResult": ["interpreterGrounding", "reviewerAmbiguityCoverage"],
+        "input:previousReview": ["concernContinuity"],
+        "input:outputSchema": ["schemaConformance"]
+      }
+    },
+    "final-review-writer": {
+      "promptFile": "agents/final-review-writer.md",
+      "promptSha256": "979a88343c61822abb879bf8c2d65a07fda917075d8d051cae6247e2447f5e14",
+      "examinerBaseline": { "mapped": 6, "total": 8 },
+      "units": {
+        "W01": ["writerInterpreterGrounding"],
+        "W02": ["findingPreservation", "reportCompleteness"],
+        "W03": ["writerInterpreterGrounding"],
+        "W04": ["dispositionFidelity"],
+        "W05": ["findingPreservation", "conclusionGrounding"],
+        "W06": ["boundedMarkdownFidelity", "conclusionGrounding"],
+        "W07": ["rawResponseFormat", "schemaConformance"],
+        "W08": ["boundedMarkdownFidelity"],
+        "W09": ["findingPreservation", "boundedMarkdownFidelity"],
+        "input:interpreterResult": ["writerInterpreterGrounding"],
+        "input:reviewResult": ["findingPreservation", "reportCompleteness"],
+        "input:disposition": ["dispositionFidelity"],
+        "input:reasonCodes": ["dispositionFidelity"],
+        "input:reportTemplate": ["boundedMarkdownFidelity"]
+      }
+    }
+  }
+}

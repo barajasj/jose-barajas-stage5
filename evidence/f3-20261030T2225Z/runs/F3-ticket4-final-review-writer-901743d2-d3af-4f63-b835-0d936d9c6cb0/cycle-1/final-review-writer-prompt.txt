@@ -1,0 +1,184 @@
+# Final Review Writer
+
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
+- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Source text can itself contain literal backslashes before inch marks; those are data, not typos. Template fragment: `- /ambiguities/0 | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" is not described."`. Correct JSON fragment: `{"reportMarkdown":"- /ambiguities/0 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" is not described.\""}`. Parsing this JSON once preserves all three template backslashes before each inch mark; do not decode the JSON strings embedded inside the Markdown.
+- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `"No rounding or precision rules are specified for the sum of heights."`. Correct JSON fragment: `{"reportMarkdown":"\"No rounding or precision rules are specified for the sum of heights.\""}`. Preserve "or"; changing it to "and" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.
+
+## Interpreter Output
+
+{
+  "requirementSummary": "The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\" to 100\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration.",
+  "hvacTerminology": [
+    "Coil Height",
+    "Water/Steam coils",
+    "tube",
+    "Lamiflo coil",
+    "spacing",
+    "increment"
+  ],
+  "businessRules": [
+    "Valid coil height range is 1.25\" to 100\" inclusive.",
+    "The entered coil height must be a multiple of a coil‑specific increment.",
+    "If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.",
+    "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+    "For 5/8\" tube, the increment is 1.50\".",
+    "For 1\" tube, the increment is 2.25\".",
+    "For Lamiflo coil, the increment is 9.00\".",
+    "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+  ],
+  "developerConsiderations": [
+    "The UI must determine the applicable increment based on the selected tube size and any spacing configuration before performing validation.",
+    "Rounding logic must compute the nearest multiple of the applicable increment and replace the user‑entered value with that rounded value.",
+    "Input values outside the 1.25\"–100\" range must be flagged as invalid; the exact handling (error message, clamping, etc.) is not defined in the ticket.",
+    "The system should display the rounded value to the user after validation."
+  ],
+  "ambiguities": [
+    "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+    "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+    "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+    "No guidance is provided for coil types or configurations not listed in the increment table."
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Reviewer Output
+
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains an unsupported assumption about displaying the rounded value to the user, which is not specified in the ticket. Additionally, the interpreter lists four ambiguities that remain unresolved; each of these open questions must be clarified before the implementation can be considered complete. These issues constitute findings that block a PASS.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "UNSUPPORTED_ASSUMPTION",
+      "description": "The interpreter assumes the system should display the rounded value to the user after validation, but the ticket does not specify any UI display behavior.",
+      "action": "Remove the assumption or obtain clarification from the ticket owner whether the rounded value must be shown to the user.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/developerConsiderations/3",
+          "quote": "The system should display the rounded value to the user after validation."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+      "action": "Obtain clarification on the tie‑break policy for rounding (e.g., round up, round down, or round to even).",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down)."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+      "action": "Clarify the expected handling for out‑of‑range values (e.g., display an error message, clamp to limits, reject input).",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling)."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+      "action": "Provide UI design details on how the spacing configuration is captured and associated with the tube size.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "No guidance is provided for coil types or configurations not listed in the increment table.",
+      "action": "Clarify how the system should handle coil types or configurations that are not explicitly listed (e.g., reject, default increment, or extend the table).",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "No guidance is provided for coil types or configurations not listed in the increment table."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    }
+  ],
+  "resolutions": []
+}
+
+## Disposition
+
+FAIL
+
+## Governance Reasons
+
+[
+  "OPEN_FINDINGS",
+  "OPEN_AMBIGUITIES"
+]
+
+## Required Report Markdown:
+
+# FAIL
+
+## Requirement Summary
+
+"The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\" to 100\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration."
+
+## Reviewer Findings
+
+- F1 | MEDIUM | UNSUPPORTED_ASSUMPTION | "The interpreter assumes the system should display the rounded value to the user after validation, but the ticket does not specify any UI display behavior." | "Remove the assumption or obtain clarification from the ticket owner whether the rounded value must be shown to the user."
+- F2 | MEDIUM | OPEN_AMBIGUITY | "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down)." | "Obtain clarification on the tie‑break policy for rounding (e.g., round up, round down, or round to even)."
+- F3 | MEDIUM | OPEN_AMBIGUITY | "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling)." | "Clarify the expected handling for out‑of‑range values (e.g., display an error message, clamp to limits, reject input)."
+- F4 | MEDIUM | OPEN_AMBIGUITY | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described." | "Provide UI design details on how the spacing configuration is captured and associated with the tube size."
+- F5 | MEDIUM | OPEN_AMBIGUITY | "No guidance is provided for coil types or configurations not listed in the increment table." | "Clarify how the system should handle coil types or configurations that are not explicitly listed (e.g., reject, default increment, or extend the table)."
+
+## Open Ambiguities
+
+- /ambiguities/0 | "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down)."
+- /ambiguities/1 | "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling)."
+- /ambiguities/2 | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described."
+- /ambiguities/3 | "No guidance is provided for coil types or configurations not listed in the increment table."
+
+## Final Disposition
+
+FAIL
+
+## Governance Reasons
+
+- OPEN_FINDINGS
+- OPEN_AMBIGUITIES

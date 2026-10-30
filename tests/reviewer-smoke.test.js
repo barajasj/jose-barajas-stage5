@@ -29,6 +29,9 @@ test('reviewer smoke script supplies null previousReview on the initial review',
   const dependencies = {
     dotenv: { config: () => {} },
     fs: { readFileSync: file => {
+      if (file === 'schemas/challenges.schema.json') {
+        return fs.readFileSync(path.join(root, file), 'utf8');
+      }
       assert.equal(file, 'fixtures/hvac-ticket-1.md');
       return ticket;
     } },
@@ -53,7 +56,10 @@ test('reviewer smoke script supplies null previousReview on the initial review',
   assert.deepEqual(errors, []);
   assert.equal(calls.length, 2);
   assert.ok(calls[1].prompt.includes(ticket));
-  assert.match(calls[1].prompt, /## Previous Review \(null on the initial cycle\)\s+null\s*$/);
+  assert.match(calls[1].prompt, /## Previous Review \(null on the initial cycle\)\s+null\s+## Required Output JSON Schema/);
+  assert.deepEqual(JSON.parse(calls[1].prompt.replace(/\r\n/g, '\n')
+    .split('## Required Output JSON Schema\n\n')[1]),
+    JSON.parse(fs.readFileSync(path.join(root, 'schemas/challenges.schema.json'), 'utf8')));
   assert.equal(calls[1].prompt.includes('{{previousReview}}'), false);
   assert.deepEqual(logs.map(value => JSON.parse(value)), [review]);
 });

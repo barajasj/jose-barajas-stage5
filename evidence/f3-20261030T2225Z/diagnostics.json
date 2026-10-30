@@ -1,0 +1,143 @@
+[
+  {
+    "batch": "evidence/f3-20261030T2218Z",
+    "agent": "adversarial-reviewer",
+    "correlationId": "F3-hvac-dffc0e71-884b-42da-b462-490cd345c8b6",
+    "cycle": 1,
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Source quote is not present in the referenced artifact.",
+    "rawArtifact": "evidence/f3-20261030T2218Z/runs/F3-hvac-dffc0e71-884b-42da-b462-490cd345c8b6/cycle-1/adversarial-reviewer-raw.txt",
+    "details": null,
+    "uncoveredAmbiguities": []
+  },
+  {
+    "batch": "evidence/f3-20261030T2218Z",
+    "agent": "adversarial-reviewer",
+    "correlationId": "F3-open-6b8fc655-7d06-46f3-9c7e-c15c67165432",
+    "cycle": 1,
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Reviewer did not cover every unresolved interpreter ambiguity.",
+    "rawArtifact": "evidence/f3-20261030T2218Z/runs/F3-open-6b8fc655-7d06-46f3-9c7e-c15c67165432/cycle-1/adversarial-reviewer-raw.txt",
+    "details": null,
+    "uncoveredAmbiguities": [
+      {
+        "pointer": "/ambiguities/1",
+        "quote": "The source of the 1-inch spacing configuration is unspecified."
+      }
+    ]
+  },
+  {
+    "batch": "evidence/f3-20261030T2218Z",
+    "agent": "adversarial-reviewer",
+    "correlationId": "F3-boundary-7052ecb2-76d1-42d7-bab5-988ef7f68412",
+    "cycle": 1,
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Reviewer did not cover every unresolved interpreter ambiguity.",
+    "rawArtifact": "evidence/f3-20261030T2218Z/runs/F3-boundary-7052ecb2-76d1-42d7-bab5-988ef7f68412/cycle-1/adversarial-reviewer-raw.txt",
+    "details": null,
+    "uncoveredAmbiguities": [
+      {
+        "pointer": "/ambiguities/1",
+        "quote": "The source of the 1-inch spacing configuration is unspecified."
+      }
+    ]
+  },
+  {
+    "batch": "evidence/f3-20261030T2218Z",
+    "agent": "adversarial-reviewer",
+    "correlationId": "F3-bad-resolution-51295866-90bc-4bbf-a3de-4c6ef1d5f65f",
+    "cycle": 1,
+    "status": "SCHEMA_FAILURE",
+    "reason": "Schema validation failed for adversarial-reviewer",
+    "rawArtifact": "evidence/f3-20261030T2218Z/runs/F3-bad-resolution-51295866-90bc-4bbf-a3de-4c6ef1d5f65f/cycle-1/adversarial-reviewer-raw.txt",
+    "details": [
+      {
+        "instancePath": "/findings/1/ambiguityRefs/0",
+        "schemaPath": "#/properties/findings/items/properties/ambiguityRefs/items/pattern",
+        "keyword": "pattern",
+        "params": {
+          "pattern": "^/ambiguities/(0|[1-9][0-9]*)$"
+        },
+        "message": "must match pattern \"^/ambiguities/(0|[1-9][0-9]*)$\""
+      }
+    ],
+    "uncoveredAmbiguities": []
+  },
+  {
+    "batch": "evidence/f3-20261030T2218Z",
+    "agent": "adversarial-reviewer",
+    "correlationId": "F3-validation-corrected-7a7b365d-0034-425b-b65e-2425fa71ad75",
+    "cycle": 1,
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Reviewer did not cover every unresolved interpreter ambiguity.",
+    "rawArtifact": "evidence/f3-20261030T2218Z/runs/F3-validation-corrected-7a7b365d-0034-425b-b65e-2425fa71ad75/cycle-1/adversarial-reviewer-raw.txt",
+    "details": null,
+    "uncoveredAmbiguities": [
+      {
+        "pointer": "/ambiguities/1",
+        "quote": "The source of the 1-inch spacing configuration is unspecified."
+      }
+    ]
+  },
+  {
+    "batch": "evidence/f3-20261030T2218Z",
+    "agent": "adversarial-reviewer",
+    "correlationId": "HVAC-TICKET-1793398818453-f0b74be9-873c-4171-a87e-361f7e98646c",
+    "cycle": 1,
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Source quote is not present in the referenced artifact.",
+    "rawArtifact": "evidence/f3-20261030T2218Z/runs/HVAC-TICKET-1793398818453-f0b74be9-873c-4171-a87e-361f7e98646c/cycle-1/adversarial-reviewer-raw.txt",
+    "details": null,
+    "uncoveredAmbiguities": []
+  },
+  {
+    "batch": "evidence/f3-20261030T2218Z",
+    "agent": "final-review-writer",
+    "correlationId": "HVAC-TICKET-1793398906015-8f30c368-b540-4b37-81c2-17d9992b80fb",
+    "cycle": 2,
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Final report violates the supplied artifact content contract.",
+    "rawArtifact": "evidence/f3-20261030T2218Z/runs/HVAC-TICKET-1793398906015-8f30c368-b540-4b37-81c2-17d9992b80fb/cycle-2/final-review-writer-raw.txt",
+    "details": null,
+    "difference": {
+      "offset": 1560,
+      "actual": "es/2 | \"The method for indicating \\\"3/8\\\" tube with 1\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not descri",
+      "expected": "es/2 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not de"
+    }
+  },
+  {
+    "batch": "evidence/f3-20261030T2225Z",
+    "agent": "requirement-interpreter",
+    "correlationId": "HVAC-TICKET-1793399289234-fa1f13c9-0d5a-4be7-828f-b20b19021313",
+    "cycle": 2,
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Ambiguity resolution must identify a removed prior ambiguity and explain the correction.",
+    "rawArtifact": "evidence/f3-20261030T2225Z/runs/HVAC-TICKET-1793399289234-fa1f13c9-0d5a-4be7-828f-b20b19021313/cycle-2/requirement-interpreter-raw.txt",
+    "details": null,
+    "previousAmbiguities": [
+      "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+      "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+      "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+      "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+      "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+      "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+    ],
+    "currentAmbiguities": [
+      "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+      "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+      "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+    ],
+    "ambiguityResolutions": [
+      {
+        "ambiguity": "Unclear if Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+        "rationale": "The ticket explicitly states that Unit Size filtering is based on Refrigerant + Unit Type only, so Condenser Type is not part of that filter.",
+        "sourceQuote": "When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected."
+      },
+      {
+        "ambiguity": "It is unclear whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+        "rationale": "The ticket provides example data containing an \"isActive\" field but does not specify any rule for using it; therefore no policy can be inferred.",
+        "sourceQuote": "\"isActive\": true"
+      }
+    ]
+  }
+]

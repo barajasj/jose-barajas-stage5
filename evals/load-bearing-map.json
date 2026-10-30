@@ -11,7 +11,7 @@
   "agents": {
     "requirement-interpreter": {
       "promptFile": "agents/requirement-interpreter.md",
-      "promptSha256": "c96023d7906f54b504e0df73fbc77d366876abfaf503c6b44e3a1a403b46f275",
+      "promptSha256": "4cd0f26739baced24d9ea591f8104058faf4dfdb38a9619f4097bc52e3a9bad6",
       "examinerBaseline": { "mapped": 8, "total": 12 },
       "units": {
         "I01": ["summaryAccuracy"],
@@ -26,6 +26,7 @@
         "I10": ["emptyArrayDiscipline"],
         "I11": ["redispatchSafety"],
         "I12": ["rawResponseFormat", "schemaConformance"],
+        "I13": ["redispatchSafety"],
         "input:ticket": ["summaryAccuracy", "sourceGrounding"]
       },
       "runtimeSource": {
@@ -52,7 +53,7 @@
     },
     "adversarial-reviewer": {
       "promptFile": "agents/adversarial-reviewer.md",
-      "promptSha256": "53f57078237383f4e4ef97e6a70a334e723936adbd360604a26c1ebb3765cc70",
+      "promptSha256": "1ea4f5333d45b7f2c730adac9f04f93cbe6e1af2b3fe8ecc71b9390188a5e937",
       "examinerBaseline": { "mapped": 8, "total": 12 },
       "units": {
         "R01": ["unsupportedAssumptionDetection", "ticketGrounding"],
@@ -70,15 +71,17 @@
         "R13": ["concernContinuity"],
         "R14": ["ambiguityResolutionVerification"],
         "R15": ["rawResponseFormat", "schemaConformance"],
-        "R16": ["schemaConformance", "findingActionability"],
+        "R16": ["schemaConformance", "findingActionability", "ticketGrounding", "interpreterGrounding"],
+        "R17": ["schemaConformance", "findingActionability", "ticketGrounding", "interpreterGrounding"],
         "input:ticket": ["ticketGrounding"],
         "input:interpreterResult": ["interpreterGrounding", "reviewerAmbiguityCoverage"],
-        "input:previousReview": ["concernContinuity"]
+        "input:previousReview": ["concernContinuity"],
+        "input:outputSchema": ["schemaConformance"]
       }
     },
     "final-review-writer": {
       "promptFile": "agents/final-review-writer.md",
-      "promptSha256": "57db0596394403c8727ad53ba294a6ed083eb3e0b82c007ca56533d434f812d6",
+      "promptSha256": "979a88343c61822abb879bf8c2d65a07fda917075d8d051cae6247e2447f5e14",
       "examinerBaseline": { "mapped": 6, "total": 8 },
       "units": {
         "W01": ["writerInterpreterGrounding"],
@@ -88,6 +91,8 @@
         "W05": ["findingPreservation", "conclusionGrounding"],
         "W06": ["boundedMarkdownFidelity", "conclusionGrounding"],
         "W07": ["rawResponseFormat", "schemaConformance"],
+        "W08": ["boundedMarkdownFidelity"],
+        "W09": ["findingPreservation", "boundedMarkdownFidelity"],
         "input:interpreterResult": ["writerInterpreterGrounding"],
         "input:reviewResult": ["findingPreservation", "reportCompleteness"],
         "input:disposition": ["dispositionFidelity"],

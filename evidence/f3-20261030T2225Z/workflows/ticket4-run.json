@@ -1,0 +1,616 @@
+{
+  "runtimeMode": "real",
+  "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+  "status": "COMPLETED",
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ],
+  "reviewCycles": [
+    {
+      "cycle": 1,
+      "interpreterResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+        "agentId": "requirement-interpreter",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "requirementSummary": "The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\" to 100\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration.",
+          "hvacTerminology": [
+            "Coil Height",
+            "Water/Steam coils",
+            "tube",
+            "Lamiflo coil",
+            "spacing",
+            "increment"
+          ],
+          "businessRules": [
+            "Valid coil height range is 1.25\" to 100\" inclusive.",
+            "The entered coil height must be a multiple of a coil‑specific increment.",
+            "If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.",
+            "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+            "For 5/8\" tube, the increment is 1.50\".",
+            "For 1\" tube, the increment is 2.25\".",
+            "For Lamiflo coil, the increment is 9.00\".",
+            "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+          ],
+          "developerConsiderations": [
+            "The UI must determine the applicable increment based on the selected tube size and any spacing configuration before performing validation.",
+            "Rounding logic must compute the nearest multiple of the applicable increment and replace the user‑entered value with that rounded value.",
+            "Input values outside the 1.25\"–100\" range must be flagged as invalid; the exact handling (error message, clamping, etc.) is not defined in the ticket.",
+            "The system should display the rounded value to the user after validation."
+          ],
+          "ambiguities": [
+            "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+            "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+            "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+            "No guidance is provided for coil types or configurations not listed in the increment table."
+          ],
+          "confidence": "MEDIUM"
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+          "workflow": "hvac-ticket-governance",
+          "agent": "requirement-interpreter",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-30T22:29:13.225Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+          "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+          "promptHash": "f683de33ae643d7e5adae0f9b881f4528adac73d6ff213bae752aed909852611",
+          "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 947,
+          "completionTokens": 1359,
+          "totalTokens": 2306,
+          "cost": 0.003871,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "f96a896050e0c77ab4b3b714f8147896c72c09df06fb7966ae3924586d0ac246",
+          "outputHash": "e78c00150b191ec5a9a2a21e2a4a172e64da3fc0add684b901aa8c6c9422272e",
+          "rawArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\requirement-interpreter-raw.txt",
+          "validatedArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\requirement-interpreter-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "reviewResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+        "agentId": "adversarial-reviewer",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "status": "FAIL",
+          "rationale": "The interpreter output contains four unresolved ambiguities that require clarification before the implementation can be completed. Each ambiguity is reported as an OPEN_AMBIGUITY finding, which blocks a PASS status.",
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+              "action": "Obtain clarification from the ticket owner on the tie‑break policy for rounding halfway values.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/0",
+                  "quote": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down)."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/0"
+              ]
+            },
+            {
+              "id": "F2",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+              "action": "Obtain clarification from the ticket owner on how to handle out‑of‑range coil height inputs.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/1",
+                  "quote": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling)."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/1"
+              ]
+            },
+            {
+              "id": "F3",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+              "action": "Obtain clarification from the ticket owner on how the UI should capture the \"3/8\\\" tube with 1\\\" spacing\" configuration.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/2",
+                  "quote": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/2"
+              ]
+            },
+            {
+              "id": "F4",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "No guidance is provided for coil types or configurations not listed in the increment table.",
+              "action": "Obtain clarification from the ticket owner on how to handle coil types or configurations that are not covered by the listed increments.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/3",
+                  "quote": "No guidance is provided for coil types or configurations not listed in the increment table."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/3"
+              ]
+            }
+          ],
+          "resolutions": []
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+          "workflow": "hvac-ticket-governance",
+          "agent": "adversarial-reviewer",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-30T22:29:18.655Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "07dc3f5c9b488a2a426f8991706821848d8dc751903e3bcaf9adb3e7a5cc59a1",
+          "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+          "promptHash": "7bdacf698db4f1aa3fc127ef8f5c16d29d8b9cfc8f280f50a6bac1f0fc3ac99f",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 3126,
+          "completionTokens": 1445,
+          "totalTokens": 4571,
+          "cost": 0.005176,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "85af3059165d9ea5a6bb2590fdeb9fdbeab612704c5b60e6e6fcabcb12467ec3",
+          "outputHash": "35594b7b67903d8a8670ec9a582b66228de41a2d90fe1077e1150df9d3b470a3",
+          "rawArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\adversarial-reviewer-raw.txt",
+          "validatedArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\adversarial-reviewer-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    }
+  ],
+  "totalCost": 0.021157,
+  "humanGovernance": null,
+  "auditSummary": {
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "stepsExecuted": 3,
+    "reDispatched": false,
+    "reviewCyclesExecuted": 1,
+    "reviewLimitReached": false,
+    "totalPromptTokens": 6514,
+    "totalCompletionTokens": 7160,
+    "totalTokens": 13674,
+    "totalCost": 0.021157,
+    "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)"
+  },
+  "interpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\" to 100\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration.",
+      "hvacTerminology": [
+        "Coil Height",
+        "Water/Steam coils",
+        "tube",
+        "Lamiflo coil",
+        "spacing",
+        "increment"
+      ],
+      "businessRules": [
+        "Valid coil height range is 1.25\" to 100\" inclusive.",
+        "The entered coil height must be a multiple of a coil‑specific increment.",
+        "If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.",
+        "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+        "For 5/8\" tube, the increment is 1.50\".",
+        "For 1\" tube, the increment is 2.25\".",
+        "For Lamiflo coil, the increment is 9.00\".",
+        "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+      ],
+      "developerConsiderations": [
+        "The UI must determine the applicable increment based on the selected tube size and any spacing configuration before performing validation.",
+        "Rounding logic must compute the nearest multiple of the applicable increment and replace the user‑entered value with that rounded value.",
+        "Input values outside the 1.25\"–100\" range must be flagged as invalid; the exact handling (error message, clamping, etc.) is not defined in the ticket.",
+        "The system should display the rounded value to the user after validation."
+      ],
+      "ambiguities": [
+        "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+        "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+        "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+        "No guidance is provided for coil types or configurations not listed in the increment table."
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:29:13.225Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "promptHash": "f683de33ae643d7e5adae0f9b881f4528adac73d6ff213bae752aed909852611",
+      "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 947,
+      "completionTokens": 1359,
+      "totalTokens": 2306,
+      "cost": 0.003871,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "f96a896050e0c77ab4b3b714f8147896c72c09df06fb7966ae3924586d0ac246",
+      "outputHash": "e78c00150b191ec5a9a2a21e2a4a172e64da3fc0add684b901aa8c6c9422272e",
+      "rawArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "reviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter output contains four unresolved ambiguities that require clarification before the implementation can be completed. Each ambiguity is reported as an OPEN_AMBIGUITY finding, which blocks a PASS status.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+          "action": "Obtain clarification from the ticket owner on the tie‑break policy for rounding halfway values.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down)."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+          "action": "Obtain clarification from the ticket owner on how to handle out‑of‑range coil height inputs.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling)."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+          "action": "Obtain clarification from the ticket owner on how the UI should capture the \"3/8\\\" tube with 1\\\" spacing\" configuration.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "No guidance is provided for coil types or configurations not listed in the increment table.",
+          "action": "Obtain clarification from the ticket owner on how to handle coil types or configurations that are not covered by the listed increments.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "No guidance is provided for coil types or configurations not listed in the increment table."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:29:18.655Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "07dc3f5c9b488a2a426f8991706821848d8dc751903e3bcaf9adb3e7a5cc59a1",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "promptHash": "7bdacf698db4f1aa3fc127ef8f5c16d29d8b9cfc8f280f50a6bac1f0fc3ac99f",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 3126,
+      "completionTokens": 1445,
+      "totalTokens": 4571,
+      "cost": 0.005176,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "85af3059165d9ea5a6bb2590fdeb9fdbeab612704c5b60e6e6fcabcb12467ec3",
+      "outputHash": "35594b7b67903d8a8670ec9a582b66228de41a2d90fe1077e1150df9d3b470a3",
+      "rawArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalInterpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\" to 100\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration.",
+      "hvacTerminology": [
+        "Coil Height",
+        "Water/Steam coils",
+        "tube",
+        "Lamiflo coil",
+        "spacing",
+        "increment"
+      ],
+      "businessRules": [
+        "Valid coil height range is 1.25\" to 100\" inclusive.",
+        "The entered coil height must be a multiple of a coil‑specific increment.",
+        "If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.",
+        "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+        "For 5/8\" tube, the increment is 1.50\".",
+        "For 1\" tube, the increment is 2.25\".",
+        "For Lamiflo coil, the increment is 9.00\".",
+        "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+      ],
+      "developerConsiderations": [
+        "The UI must determine the applicable increment based on the selected tube size and any spacing configuration before performing validation.",
+        "Rounding logic must compute the nearest multiple of the applicable increment and replace the user‑entered value with that rounded value.",
+        "Input values outside the 1.25\"–100\" range must be flagged as invalid; the exact handling (error message, clamping, etc.) is not defined in the ticket.",
+        "The system should display the rounded value to the user after validation."
+      ],
+      "ambiguities": [
+        "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+        "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+        "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+        "No guidance is provided for coil types or configurations not listed in the increment table."
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:29:13.225Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "promptHash": "f683de33ae643d7e5adae0f9b881f4528adac73d6ff213bae752aed909852611",
+      "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 947,
+      "completionTokens": 1359,
+      "totalTokens": 2306,
+      "cost": 0.003871,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "f96a896050e0c77ab4b3b714f8147896c72c09df06fb7966ae3924586d0ac246",
+      "outputHash": "e78c00150b191ec5a9a2a21e2a4a172e64da3fc0add684b901aa8c6c9422272e",
+      "rawArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter output contains four unresolved ambiguities that require clarification before the implementation can be completed. Each ambiguity is reported as an OPEN_AMBIGUITY finding, which blocks a PASS status.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+          "action": "Obtain clarification from the ticket owner on the tie‑break policy for rounding halfway values.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down)."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+          "action": "Obtain clarification from the ticket owner on how to handle out‑of‑range coil height inputs.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling)."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+          "action": "Obtain clarification from the ticket owner on how the UI should capture the \"3/8\\\" tube with 1\\\" spacing\" configuration.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "No guidance is provided for coil types or configurations not listed in the increment table.",
+          "action": "Obtain clarification from the ticket owner on how to handle coil types or configurations that are not covered by the listed increments.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "No guidance is provided for coil types or configurations not listed in the increment table."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:29:18.655Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "07dc3f5c9b488a2a426f8991706821848d8dc751903e3bcaf9adb3e7a5cc59a1",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "promptHash": "7bdacf698db4f1aa3fc127ef8f5c16d29d8b9cfc8f280f50a6bac1f0fc3ac99f",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 3126,
+      "completionTokens": 1445,
+      "totalTokens": 4571,
+      "cost": 0.005176,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "85af3059165d9ea5a6bb2590fdeb9fdbeab612704c5b60e6e6fcabcb12467ec3",
+      "outputHash": "35594b7b67903d8a8670ec9a582b66228de41a2d90fe1077e1150df9d3b470a3",
+      "rawArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReport": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+    "agentId": "final-review-writer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "reportMarkdown": "# FAIL\n\n## Requirement Summary\n\n\"The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\\\" to 100\\\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration.\"\n\n## Reviewer Findings\n\n- F1 | MEDIUM | OPEN_AMBIGUITY | \"The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).\" | \"Obtain clarification from the ticket owner on the tie‑break policy for rounding halfway values.\"\n- F2 | MEDIUM | OPEN_AMBIGUITY | \"The required behavior for inputs below 1.25\\\" or above 100\\\" is not defined (error, clamp, or other handling).\" | \"Obtain clarification from the ticket owner on how to handle out‑of‑range coil height inputs.\"\n- F3 | MEDIUM | OPEN_AMBIGUITY | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not described.\" | \"Obtain clarification from the ticket owner on how the UI should capture the \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" configuration.\"\n- F4 | MEDIUM | OPEN_AMBIGUITY | \"No guidance is provided for coil types or configurations not listed in the increment table.\" | \"Obtain clarification from the ticket owner on how to handle coil types or configurations that are not covered by the listed increments.\"\n\n## Open Ambiguities\n\n- /ambiguities/0 | \"The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).\"\n- /ambiguities/1 | \"The required behavior for inputs below 1.25\\\" or above 100\\\" is not defined (error, clamp, or other handling).\"\n- /ambiguities/2 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not described.\"\n- /ambiguities/3 | \"No guidance is provided for coil types or configurations not listed in the increment table.\"\n\n## Final Disposition\n\nFAIL\n\n## Governance Reasons\n\n- OPEN_FINDINGS\n- OPEN_AMBIGUITIES"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443",
+      "workflow": "hvac-ticket-governance",
+      "agent": "final-review-writer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:29:25.276Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "9b6fe4035e062544b3e46f7e6ee8f5aefd8c3dbfedfc3b3546f83af02642fa43",
+      "ticketHash": null,
+      "promptHash": "e56d0f4d2e07d7f347a8574b9e5f2a4d99bbf6418683add48bd28bac2c970ba1",
+      "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+      "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2441,
+      "completionTokens": 4356,
+      "totalTokens": 6797,
+      "cost": 0.01211,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "25116d54e3934fa642635065d7fedbdc8ddace9db250891c30be5b6dcec324a7",
+      "outputHash": "36da3a36220db59d29a37c4828e6a0c22d76143d50ea68e3420aeabea0e400e7",
+      "rawArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\final-review-writer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2225Z\\runs\\HVAC-TICKET-1793399353225-ae7b889d-9b25-4155-bd3a-e252c7458443\\cycle-1\\final-review-writer-validated.json",
+      "status": "SUCCESS"
+    }
+  }
+}

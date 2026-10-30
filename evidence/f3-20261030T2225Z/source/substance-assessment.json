@@ -1,0 +1,27 @@
+{
+  "systemName": "HVAC Ticket Governance System",
+  "assessmentDate": "2026-10-12",
+  "workflows": [
+    {
+      "name": "HVAC Requirement Interpreter",
+      "classification": "CORE",
+      "reason": "Interpreting software requirements and business rules for client-facing HVAC applications is directly billable consulting work."
+    },
+    {
+      "name": "Adversarial Reviewer",
+      "classification": "CORE",
+      "reason": "Reviewing requirement interpretations for gaps, assumptions, and implementation risk is a real software delivery activity."
+    },
+    {
+      "name": "Final Review Writer",
+      "classification": "PERIPHERAL",
+      "reason": "Produces stakeholder-ready documentation but does not independently provide billable consulting value."
+    }
+  ],
+  "overallAssessment": {
+    "coreWorkflows": 2,
+    "peripheralWorkflows": 1,
+    "toyWorkflows": 0,
+    "humanReviewRequired": false
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains unresolved ambiguities. According to the review policy, every ambiguity listed in the interpreter's /ambiguities array must be reported as an OPEN_AMBIGUITY finding. These open items prevent a PASS status until clarification is obtained.",
+  "findings": [
+    {
+      "id": "F0",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The unit of measurement for Circuit Height and DX Coil Height is not specified.",
+      "action": "Obtain clarification from the ticket owner on the required unit of measurement for Circuit Height and DX Coil Height.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The unit of measurement for Circuit Height and DX Coil Height is not specified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Rounding or precision requirements for the summed DX Coil Height are not defined.",
+      "action": "Clarify from the ticket owner the rounding or precision policy to apply to the summed DX Coil Height.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "Rounding or precision requirements for the summed DX Coil Height are not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Validation rules for acceptable Circuit Height values (e.g., non‑negative, maximum) are not provided.",
+      "action": "Request the ticket owner to specify validation constraints for Circuit Height values, such as allowed range and sign.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Validation rules for acceptable Circuit Height values (e.g., non‑negative, maximum) are not provided."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Behavior when Cooling Circuits are added or removed after the initial calculation is not described.",
+      "action": "Clarify how the system should handle addition or removal of Cooling Circuits after the initial sum calculation.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Behavior when Cooling Circuits are added or removed after the initial calculation is not described."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Whether the DX Coil Height field should be editable by the user or strictly read‑only is unclear.",
+      "action": "Obtain clarification on whether the DX Coil Height field is read‑only or can be edited by the user.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "Whether the DX Coil Height field should be editable by the user or strictly read‑only is unclear."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    }
+  ],
+  "resolutions": []
+}

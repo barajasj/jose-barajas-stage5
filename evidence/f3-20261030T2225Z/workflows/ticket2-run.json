@@ -1,0 +1,7 @@
+{
+  "correlationId": "HVAC-TICKET-1793399289234-fa1f13c9-0d5a-4be7-828f-b20b19021313",
+  "status": "GOVERNANCE_FAILURE",
+  "disposition": "FAIL",
+  "runtimeMode": "real",
+  "reason": "Ambiguity resolution must identify a removed prior ambiguity and explain the correction."
+}

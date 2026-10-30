@@ -1,0 +1,131 @@
+{
+  "interpreterResult": {
+    "requirementSummary": "The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\" to 100\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration.",
+    "hvacTerminology": [
+      "Coil Height",
+      "Water/Steam coils",
+      "tube",
+      "Lamiflo coil",
+      "spacing",
+      "increment"
+    ],
+    "businessRules": [
+      "Valid coil height range is 1.25\" to 100\" inclusive.",
+      "The entered coil height must be a multiple of a coil‑specific increment.",
+      "If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.",
+      "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+      "For 5/8\" tube, the increment is 1.50\".",
+      "For 1\" tube, the increment is 2.25\".",
+      "For Lamiflo coil, the increment is 9.00\".",
+      "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+    ],
+    "developerConsiderations": [
+      "The UI must determine the applicable increment based on the selected tube size and any spacing configuration before performing validation.",
+      "Rounding logic must compute the nearest multiple of the applicable increment and replace the user‑entered value with that rounded value."
+    ],
+    "ambiguities": [
+      "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+      "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+      "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+      "No guidance is provided for coil types or configurations not listed in the increment table."
+    ],
+    "confidence": "MEDIUM"
+  },
+  "reviewResult": {
+    "status": "FAIL",
+    "rationale": "The interpreter output does not contain the unsupported UI display behavior previously flagged, so that finding is removed. However, four ambiguities remain unresolved, each requiring clarification before implementation can proceed.",
+    "findings": [
+      {
+        "id": "F2",
+        "severity": "MEDIUM",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "Tie-breaking policy for rounding when the entered value is exactly halfway between two valid increments is undefined.",
+        "action": "Obtain clarification from the ticket owner on the tie‑break policy.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/0",
+            "quote": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down)."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/0"
+        ]
+      },
+      {
+        "id": "F3",
+        "severity": "MEDIUM",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "Out‑of‑range handling for values below 1.25\" or above 100\" is undefined.",
+        "action": "Clarify the required behavior for out‑of‑range inputs (error, clamp, etc.).",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/1",
+            "quote": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling)."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/1"
+        ]
+      },
+      {
+        "id": "F4",
+        "severity": "MEDIUM",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "UI representation for \"3/8\" tube with 1\" spacing\" configuration is undefined.",
+        "action": "Clarify how to capture and display the spacing configuration in the UI.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/2",
+            "quote": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/2"
+        ]
+      },
+      {
+        "id": "F5",
+        "severity": "MEDIUM",
+        "kind": "OPEN_AMBIGUITY",
+        "description": "Behavior for coil types or configurations not listed in the increment table is undefined.",
+        "action": "Obtain clarification on handling of unspecified coil types/configurations.",
+        "sourceRefs": [
+          {
+            "artifact": "interpreter",
+            "pointer": "/ambiguities/3",
+            "quote": "No guidance is provided for coil types or configurations not listed in the increment table."
+          }
+        ],
+        "ambiguityRefs": [
+          "/ambiguities/3"
+        ]
+      }
+    ],
+    "resolutions": [
+      {
+        "findingId": "F1",
+        "rationale": "The interpreter output does not contain any statement about displaying the rounded value to the user; the previously identified developerConsiderations entry does not exist, so the unsupported assumption is removed.",
+        "sourceRefs": [
+          {
+            "artifact": "ticket",
+            "pointer": "",
+            "quote": "If the entered value is not an exact multiple, round it to the nearest valid increment."
+          },
+          {
+            "artifact": "interpreter",
+            "pointer": "/developerConsiderations/0",
+            "quote": "The UI must determine the applicable increment based on the selected tube size and any spacing configuration before performing validation."
+          }
+        ]
+      }
+    ]
+  },
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ]
+}

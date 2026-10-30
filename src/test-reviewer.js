@@ -62,7 +62,8 @@ async function main() {
       {
         ticket,
         interpreterResult,
-        previousReview: null
+        previousReview: null,
+        outputSchema: JSON.parse(fs.readFileSync('schemas/challenges.schema.json', 'utf8'))
       }
     );
 

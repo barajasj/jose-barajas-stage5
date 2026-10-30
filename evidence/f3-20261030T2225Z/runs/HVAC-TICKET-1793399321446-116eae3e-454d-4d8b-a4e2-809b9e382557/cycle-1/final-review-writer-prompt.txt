@@ -1,0 +1,226 @@
+# Final Review Writer
+
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
+- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Source text can itself contain literal backslashes before inch marks; those are data, not typos. Template fragment: `- /ambiguities/0 | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" is not described."`. Correct JSON fragment: `{"reportMarkdown":"- /ambiguities/0 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" is not described.\""}`. Parsing this JSON once preserves all three template backslashes before each inch mark; do not decode the JSON strings embedded inside the Markdown.
+- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `"No rounding or precision rules are specified for the sum of heights."`. Correct JSON fragment: `{"reportMarkdown":"\"No rounding or precision rules are specified for the sum of heights.\""}`. Preserve "or"; changing it to "and" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.
+
+## Interpreter Output
+
+{
+  "requirementSummary": "When the user selects a condenser type of Air Cooled (AC) or Evaporative Cooled (EC), the system must display the corresponding input fields, capture the entered parameters (including design ambient, ASHRAE summer design, tube/fin materials and sizes for AC, and bank ID, copies, EC model, wet bulb temperature for EC), record these parameters, and upon processing output a condenser and circuit‑level configuration ready for ECS calculation. For AC condensers, selecting Condenser Passes must present options AutoOdd, AutoEven, and numeric values 2 through 41 in increments of 1, and selecting Roof Type must present dark and light roof options with and without parapet/shrouding.",
+  "hvacTerminology": [
+    "Air Cooled",
+    "Evaporative Cooled",
+    "Condenser",
+    "Design Ambient",
+    "ASHRAE Summer Design",
+    "Condenser Tube Material",
+    "Condenser Fin Material",
+    "Condenser Tube Size",
+    "Condenser Fin Type",
+    "Bank ID#",
+    "EC Model",
+    "Wet Bulb Temperature",
+    "Condenser Passes",
+    "AutoOdd",
+    "AutoEven",
+    "Roof Type",
+    "ECS",
+    "per-circuit refrigeration",
+    "coil geometry"
+  ],
+  "businessRules": [
+    "When the user selects the Condenser Type \"AC\" or \"EC\", the system shall display the corresponding input fields.",
+    "Design Ambient shall default to 95°F (or equivalent in °C) and be echoed in output 3.7.",
+    "Condenser Tube Material shall default to Copper.",
+    "Condenser Fin Material shall default to Aluminum.",
+    "Condenser Tube Size shall default to \"3/8, 3/8 w/ 1\" spacing\".",
+    "Condenser Fin Type shall default to Corrugated.",
+    "Given AC/EC condenser parameters and per‑circuit cooling configurations, when processed, the system shall output condenser and circuit‑level configuration ready for ECS calculation.",
+    "Given the user is configuring an AC condenser, when they enter ambient design conditions and coil geometry, the system shall record the condenser parameters.",
+    "Given the user is configuring an EC condenser, when they enter the EC model and wet bulb temperature, the system shall record the EC condenser parameters.",
+    "Given the user configures an AC condenser, when they select Condenser Passes, the system shall display the options AutoOdd, AutoEven, and numeric values 2 through 41 in increments of 1.",
+    "Given the user configures an AC condenser, when they select Roof Type, the system shall display the specified dark and light roof type options with and without parapet/shrouding."
+  ],
+  "developerConsiderations": [
+    "Implement conditional UI logic to show AC‑specific fields when Condenser Type = AC and EC‑specific fields when Condenser Type = EC.",
+    "Provide default values for Design Ambient, Condenser Tube Material, Fin Material, Tube Size, and Fin Type as specified.",
+    "Populate the Condenser Passes selector with the exact option list: AutoOdd, AutoEven, and integers 2‑41.",
+    "Populate the Roof Type selector with dark and light options, each having variants with and without parapet/shrouding.",
+    "Capture and store all user‑entered values for later ECS calculation processing.",
+    "Ensure numeric inputs accept both °F and °C units where applicable."
+  ],
+  "ambiguities": [
+    "The exact set of roof type option labels (beyond \"dark\" and \"light\") and how parapet/shrouding is represented is not defined.",
+    "The catalog of valid EC Model values is referenced but not listed.",
+    "Units for Design Ambient default are given as 95°F; conversion to °C is implied but not specified.",
+    "The acceptable range or validation rules for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature are not provided.",
+    "The format and content of the output \"condenser and circuit‑level configuration\" for ECS calculation are unspecified.",
+    "The definition of \"coil geometry\" required for AC condenser recording is not detailed."
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Reviewer Output
+
+{
+  "status": "FAIL",
+  "rationale": "The interpreter accurately captured the ticket's requirements and business rules, but six ambiguities remain unresolved, each requiring clarification from the ticket owner before implementation can proceed.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The exact set of roof type option labels (beyond \"dark\" and \"light\") and how parapet/shrouding is represented is not defined.",
+      "action": "Obtain clarification on the full list of roof type option labels and the representation format for parapet/shrouding.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The exact set of roof type option labels (beyond \"dark\" and \"light\") and how parapet/shrouding is represented is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The catalog of valid EC Model values is referenced but not listed.",
+      "action": "Provide the complete catalog of permissible EC Model values.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The catalog of valid EC Model values is referenced but not listed."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Units for Design Ambient default are given as 95°F; conversion to °C is implied but not specified.",
+      "action": "Specify the exact conversion rule or value for the default Design Ambient when expressed in °C.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Units for Design Ambient default are given as 95°F; conversion to °C is implied but not specified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The acceptable range or validation rules for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature are not provided.",
+      "action": "Define the valid ranges and any validation constraints for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The acceptable range or validation rules for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature are not provided."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The format and content of the output \"condenser and circuit‑level configuration\" for ECS calculation are unspecified.",
+      "action": "Clarify the required structure, fields, and data format of the condenser and circuit‑level configuration output used for ECS calculation.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "The format and content of the output \"condenser and circuit‑level configuration\" for ECS calculation are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The definition of \"coil geometry\" required for AC condenser recording is not detailed.",
+      "action": "Provide a detailed definition and required data elements for \"coil geometry\" when recording AC condenser parameters.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/5",
+          "quote": "The definition of \"coil geometry\" required for AC condenser recording is not detailed."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/5"
+      ]
+    }
+  ],
+  "resolutions": []
+}
+
+## Disposition
+
+FAIL
+
+## Governance Reasons
+
+[
+  "OPEN_FINDINGS",
+  "OPEN_AMBIGUITIES"
+]
+
+## Required Report Markdown:
+
+# FAIL
+
+## Requirement Summary
+
+"When the user selects a condenser type of Air Cooled (AC) or Evaporative Cooled (EC), the system must display the corresponding input fields, capture the entered parameters (including design ambient, ASHRAE summer design, tube/fin materials and sizes for AC, and bank ID, copies, EC model, wet bulb temperature for EC), record these parameters, and upon processing output a condenser and circuit‑level configuration ready for ECS calculation. For AC condensers, selecting Condenser Passes must present options AutoOdd, AutoEven, and numeric values 2 through 41 in increments of 1, and selecting Roof Type must present dark and light roof options with and without parapet/shrouding."
+
+## Reviewer Findings
+
+- F1 | MEDIUM | OPEN_AMBIGUITY | "The exact set of roof type option labels (beyond \"dark\" and \"light\") and how parapet/shrouding is represented is not defined." | "Obtain clarification on the full list of roof type option labels and the representation format for parapet/shrouding."
+- F2 | MEDIUM | OPEN_AMBIGUITY | "The catalog of valid EC Model values is referenced but not listed." | "Provide the complete catalog of permissible EC Model values."
+- F3 | MEDIUM | OPEN_AMBIGUITY | "Units for Design Ambient default are given as 95°F; conversion to °C is implied but not specified." | "Specify the exact conversion rule or value for the default Design Ambient when expressed in °C."
+- F4 | MEDIUM | OPEN_AMBIGUITY | "The acceptable range or validation rules for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature are not provided." | "Define the valid ranges and any validation constraints for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature."
+- F5 | MEDIUM | OPEN_AMBIGUITY | "The format and content of the output \"condenser and circuit‑level configuration\" for ECS calculation are unspecified." | "Clarify the required structure, fields, and data format of the condenser and circuit‑level configuration output used for ECS calculation."
+- F6 | MEDIUM | OPEN_AMBIGUITY | "The definition of \"coil geometry\" required for AC condenser recording is not detailed." | "Provide a detailed definition and required data elements for \"coil geometry\" when recording AC condenser parameters."
+
+## Open Ambiguities
+
+- /ambiguities/0 | "The exact set of roof type option labels (beyond \"dark\" and \"light\") and how parapet/shrouding is represented is not defined."
+- /ambiguities/1 | "The catalog of valid EC Model values is referenced but not listed."
+- /ambiguities/2 | "Units for Design Ambient default are given as 95°F; conversion to °C is implied but not specified."
+- /ambiguities/3 | "The acceptable range or validation rules for ASHRAE Summer Design, Copies of this Bank, and Wet Bulb Temperature are not provided."
+- /ambiguities/4 | "The format and content of the output \"condenser and circuit‑level configuration\" for ECS calculation are unspecified."
+- /ambiguities/5 | "The definition of \"coil geometry\" required for AC condenser recording is not detailed."
+
+## Final Disposition
+
+FAIL
+
+## Governance Reasons
+
+- OPEN_FINDINGS
+- OPEN_AMBIGUITIES

@@ -1,0 +1,34 @@
+{
+  "ticket": "# Ticket 02\r\n\r\n## Title\r\n\r\nAutopopulate Unit Type and Unit Size\r\n\r\n## Description\r\n\r\nIn the \"CONDENSER TYPE\" section:\r\n- When a user selects the Condenser Type and the Refrigerant from their dropdowns, we should populate the Unit Type dropdown filtered by the condenser type and the refrigerant that was selected.\r\n- After a user selects a Unit Type, we should populate the Unit Size dropdown filtered by the Refrigerant + Unit Type that was selected\r\n\r\n## Acceptance Criteria\r\n\r\nWhen we select the Condenser Type and the Refrigerant we should see the Unit Type dropdown filtered by Condenser Type + Refrigerant selected.\r\nWhen we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.\r\n\r\n## Relevant Discussion\r\nThe Refrigerants comes from an unitdesign api GET /dropdowns\r\nthe attribute to get Unit Type is SDCommonUnitTypeRefrigerant\r\nfor example, we sould filter by the \"parent\" that contains the refrigerant selected.\r\n  \"SDCommonUnitTypeRefrigerant\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"CU\",\r\n      \"value\": \"CU\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"display\": \"CUE\",\r\n      \"value\": \"CUE\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"R-513A\"\r\n      ],\r\n      \"isActive\": true\r\n    },..\r\n]\r\n\r\nThe attribute for Unit Size is SDCommonUnitModelSizes\r\nfor example, we sould filter by the \"parent\" that contains both the refrigerant and the Unit Type selected.\r\n\t\r\n\"SDCommonUnitModelSizes\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"101\",\r\n      \"value\": \"101\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 1,\r\n      \"display\": \"103\",\r\n      \"value\": \"103\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },...\r\n]",
+  "interpreterResult": {
+    "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown should be populated and filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown should be populated and filtered by the selected Refrigerant and Unit Type.",
+    "hvacTerminology": [
+      "Condenser Type",
+      "Refrigerant",
+      "Unit Type",
+      "Unit Size",
+      "SDCommonUnitTypeRefrigerant",
+      "SDCommonUnitModelSizes"
+    ],
+    "businessRules": [
+      "If a user selects a Condenser Type and a Refrigerant, then the Unit Type dropdown must be populated with entries whose parent includes the selected Refrigerant (and the selected Condenser Type) and displayed to the user.",
+      "If a user selects a Unit Type (after selecting Condenser Type and Refrigerant), then the Unit Size dropdown must be populated with entries whose parent includes both the selected Refrigerant and the selected Unit Type.",
+      "The data for Unit Type options is retrieved from the unitdesign API endpoint GET /dropdowns, using the attribute SDCommonUnitTypeRefrigerant.",
+      "The data for Unit Size options is retrieved from the unitdesign API endpoint GET /dropdowns, using the attribute SDCommonUnitModelSizes."
+    ],
+    "developerConsiderations": [
+      "Implement API call to GET /dropdowns from the unitdesign service to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes collections.",
+      "Filter SDCommonUnitTypeRefrigerant entries by checking that the selected Refrigerant (and Condenser Type) appear in the entry's parent array.",
+      "Filter SDCommonUnitModelSizes entries by checking that both the selected Refrigerant and selected Unit Type appear in the entry's parent array.",
+      "Update the Unit Type dropdown UI immediately after Condenser Type and Refrigerant selections.",
+      "Update the Unit Size dropdown UI immediately after Unit Type selection."
+    ],
+    "ambiguities": [
+      "The ticket does not specify whether entries with isActive:false should be excluded from the filtered dropdowns.",
+      "It is unclear how the selected Condenser Type is represented in the SDCommonUnitTypeRefrigerant data for filtering, as the example only shows parent refrigerants.",
+      "The behavior when no entries match the filter criteria (e.g., empty dropdown) is not defined.",
+      "The case sensitivity or exact matching rules for comparing selected values to parent array values are not defined."
+    ],
+    "confidence": "MEDIUM"
+  }
+}

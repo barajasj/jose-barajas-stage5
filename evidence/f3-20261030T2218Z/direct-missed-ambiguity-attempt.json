@@ -1,0 +1,11 @@
+{
+  "caseId": "missed-ambiguity",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-missed-ambiguity-6c29fe43-cdbf-4cb4-8082-436560e5922d",
+  "status": "SUCCESS",
+  "beforeStatus": "SUCCESS",
+  "pairedIdentity": true,
+  "beforePromptHash": "e1ad55b39afc78839b30070f84cf754968523c55b1f1f46fc3eb328f3814695a",
+  "afterPromptHash": "a936a7d194ec300a3497b0d4b3c8fffa258baf4c1986c55adc39364763d91b9a"
+}

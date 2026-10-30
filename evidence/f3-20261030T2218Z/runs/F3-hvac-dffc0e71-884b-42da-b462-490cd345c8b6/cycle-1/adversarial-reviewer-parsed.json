@@ -1,0 +1,172 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains several critical issues: it incorrectly defines the meanings of AC and EC, and it omits all business rules required by the ticket, including display logic, recording of parameters, option lists, and validation constraints. These gaps prevent reliable implementation of the condenser configuration functionality.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "HVAC_ERROR",
+      "description": "The interpreter reverses the definitions of AC and EC; it states \"AC means Evaporative Cooled and EC means Air Cooled.\" which contradicts the ticket.",
+      "action": "Correct the mapping to \"AC means Air Cooled and EC means Evaporative Cooled.\"",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Inputs — Air Cooled (AC)"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Inputs — Evaporative Cooled (EC)"
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F2",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter does not include a rule to display Air Cooled (AC) input fields when the user selects Condenser Type \"AC\".",
+      "action": "Add a business rule: When Condenser Type is \"AC\", display the Air Cooled input fields.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F3",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter does not include a rule to display Evaporative Cooled (EC) input fields when the user selects Condenser Type \"EC\".",
+      "action": "Add a business rule: When Condenser Type is \"EC\", display the Evaporative Cooled input fields.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F4",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter omits the requirement to record AC condenser parameters (ambient design conditions and coil geometry) entered by the user.",
+      "action": "Add a business rule: When the user configures an AC condenser and enters ambient design conditions and coil geometry, the system shall record those condenser parameters.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When they enter ambient design conditions and coil geometry, Then the system records the condenser parameters."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F5",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter omits the requirement to record EC condenser parameters (EC model and wet bulb temperature) entered by the user.",
+      "action": "Add a business rule: When the user configures an EC condenser and enters the EC model and wet bulb temperature, the system shall record those EC condenser parameters.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When they enter the EC model and wet bulb temperature, Then the system records the EC condenser parameters."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F6",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter does not include the rule to display Condenser Passes options (AutoOdd, AutoEven, and 2 through 41 in increments of 1) when configuring an AC condenser.",
+      "action": "Add a business rule: When configuring an AC condenser and the user selects Condenser Passes, display AutoOdd, AutoEven, and numbers 2 through 41 in increments of 1 as options.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When they select Condenser Passes, Then the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F7",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter omits the rule to display roof type options (dark and light, with and without parapet/shrouding) when configuring an AC condenser.",
+      "action": "Add a business rule: When configuring an AC condenser and the user selects Roof Type, display the specified dark and light roof type options with and without parapet/shrouding.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When they select Roof Type, Then the system shall display the specified dark and light roof type options with and without parapet/shrouding."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F8",
+      "severity": "HIGH",
+      "kind": "MISSING_VALIDATION",
+      "description": "The interpreter does not capture any validation constraints such as units, default values, or allowed options for the condenser input fields.",
+      "action": "Add validation rules for each input field, e.g., Design Ambient default 95°F with units °F/°C, required numeric ranges, and allowed dropdown options as specified in the ticket tables.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Design Ambient | Numeric Input | User / Default | °F / °C | 95°F"
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

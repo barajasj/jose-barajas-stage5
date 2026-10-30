@@ -1,0 +1,252 @@
+# HVAC Requirement Interpreter
+
+- [I01] requirementSummary: summarize the ticket's requested behavior, affected HVAC objects, and conditions without changing quantities, units, or intent.
+- [I02] hvacTerminology: list HVAC terms explicitly present in the ticket; do not add terminology or change its meaning.
+- [I03] businessRules: capture every explicitly stated business requirement as a complete proposition.
+- [I04] Include explicit validation constraints in businessRules, preserving both range limits, units, rounding behavior, and every coil-specific increment/configuration mapping, including specific overrides. Unspecified validation policy belongs in ambiguities, not invented rules.
+- [I05] Preserve functional behavior in businessRules as the stated trigger, dependent action, and resulting field or output.
+- [I06] ambiguities: identify source gaps, contradictions, unclear behavior, and unanswered implementation questions. Do not label explicitly answered details as missing.
+- [I07] developerConsiderations: report only technical constraints supported by the ticket, not preferred architectures or invented validation, defaults, reset, persistence, or conversion policies.
+- [I08] confidence describes ticket readiness, not confidence in your extraction: HIGH only when the source defines the requested behavior and no ambiguity remains; MEDIUM when core behavior is clear but localized details remain unspecified; LOW when core behavior is missing or contradictory.
+- [I09] Ground every summary, term, rule, and technical constraint in the supplied ticket. A plausible domain convention or sample-data attribute is not an explicit business policy.
+- [I10] Use empty arrays for terms, rules, or developer considerations without source support; missing or unclear behavior must still appear as questions in ambiguities.
+- [I11] On re-dispatch, correct supported reviewer challenges without inventing facts. Preserve previous ambiguities verbatim unless the original ticket answers them; each removed question requires ambiguityResolutions containing its exact ambiguity text, a rationale, and an exact nonempty ticket sourceQuote.
+- [I12] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/examiner.schema.json: requirementSummary is a nonblank string; hvacTerminology, businessRules, developerConsiderations, and ambiguities are string arrays; confidence is LOW, MEDIUM, or HIGH; ambiguityResolutions is optional as defined above. No other fields.
+
+## Ticket
+
+# Ticket 02
+
+## Title
+
+Autopopulate Unit Type and Unit Size
+
+## Description
+
+In the "CONDENSER TYPE" section:
+- When a user selects the Condenser Type and the Refrigerant from their dropdowns, we should populate the Unit Type dropdown filtered by the condenser type and the refrigerant that was selected.
+- After a user selects a Unit Type, we should populate the Unit Size dropdown filtered by the Refrigerant + Unit Type that was selected
+
+## Acceptance Criteria
+
+When we select the Condenser Type and the Refrigerant we should see the Unit Type dropdown filtered by Condenser Type + Refrigerant selected.
+When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.
+
+## Relevant Discussion
+The Refrigerants comes from an unitdesign api GET /dropdowns
+the attribute to get Unit Type is SDCommonUnitTypeRefrigerant
+for example, we sould filter by the "parent" that contains the refrigerant selected.
+  "SDCommonUnitTypeRefrigerant": [
+    {
+      "id": 0,
+      "display": "CU",
+      "value": "CU",
+      "parent": [
+        "R-410A",
+        "R-454B"
+      ],
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "display": "CUE",
+      "value": "CUE",
+      "parent": [
+        "R-410A",
+        "R-454B",
+        "R-513A"
+      ],
+      "isActive": true
+    },..
+]
+
+The attribute for Unit Size is SDCommonUnitModelSizes
+for example, we sould filter by the "parent" that contains both the refrigerant and the Unit Type selected.
+	
+"SDCommonUnitModelSizes": [
+    {
+      "id": 0,
+      "display": "101",
+      "value": "101",
+      "parent": [
+        "R-410A",
+        "R-454B",
+        "CU"
+      ],
+      "isActive": true
+    },
+    {
+      "id": 1,
+      "display": "103",
+      "value": "103",
+      "parent": [
+        "R-410A",
+        "R-454B",
+        "CU"
+      ],
+      "isActive": true
+    },...
+]
+
+Previous Interpretation:
+{
+  "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown should be populated with options filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown should be populated with options filtered by the selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant whose parent array contains the selected Refrigerant (and, as stated, the selected Condenser Type).",
+    "If a user selects a Unit Type, the system must populate the Unit Size dropdown with entries from SDCommonUnitModelSizes whose parent array contains both the selected Refrigerant and the selected Unit Type.",
+    "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API.",
+    "Only entries where isActive is true should be considered for filtering."
+  ],
+  "developerConsiderations": [
+    "Call the unitdesign API GET /dropdowns to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes data.",
+    "Filter Unit Type options by checking each entry's parent array for inclusion of the selected Refrigerant (and Condenser Type if applicable).",
+    "Filter Unit Size options by checking each entry's parent array for inclusion of both the selected Refrigerant and the selected Unit Type.",
+    "Exclude any entries where isActive is false from the filtered results.",
+    "Update the Unit Type and Unit Size dropdowns dynamically in the UI when the relevant selections change."
+  ],
+  "ambiguities": [
+    "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+    "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+    "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+    "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+    "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+    "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+  ],
+  "confidence": "MEDIUM"
+}
+
+Review cycle 2. Adversarial Reviewer Findings (address actionable HIGH interpretation defects without inventing unsupported requirements; preserve missing ticket facts as ambiguities):
+[
+  {
+    "id": "F1",
+    "severity": "HIGH",
+    "kind": "UNSUPPORTED_ASSUMPTION",
+    "description": "The interpreter adds a filtering rule based on the isActive flag, which is not specified in the ticket.",
+    "action": "Remove the unsupported isActive filtering rule or obtain clarification from the ticket owner whether inactive items should be excluded.",
+    "sourceRefs": [
+      {
+        "artifact": "ticket",
+        "pointer": "",
+        "quote": "\"isActive\": true"
+      },
+      {
+        "artifact": "interpreter",
+        "pointer": "/businessRules/3",
+        "quote": "Only entries where isActive is true should be considered for filtering."
+      }
+    ],
+    "ambiguityRefs": []
+  },
+  {
+    "id": "F2",
+    "severity": "MEDIUM",
+    "kind": "OPEN_AMBIGUITY",
+    "description": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+    "action": "Obtain clarification from the ticket owner on whether and how Condenser Type participates in Unit Type filtering.",
+    "sourceRefs": [
+      {
+        "artifact": "interpreter",
+        "pointer": "/ambiguities/0",
+        "quote": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants."
+      }
+    ],
+    "ambiguityRefs": [
+      "/ambiguities/0"
+    ]
+  },
+  {
+    "id": "F3",
+    "severity": "MEDIUM",
+    "kind": "OPEN_AMBIGUITY",
+    "description": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+    "action": "Clarify from the ticket owner if Condenser Type is expected to be present in the parent array or if another mapping is needed.",
+    "sourceRefs": [
+      {
+        "artifact": "interpreter",
+        "pointer": "/ambiguities/1",
+        "quote": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping."
+      }
+    ],
+    "ambiguityRefs": [
+      "/ambiguities/1"
+    ]
+  },
+  {
+    "id": "F4",
+    "severity": "MEDIUM",
+    "kind": "OPEN_AMBIGUITY",
+    "description": "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+    "action": "Ask the ticket owner to define UI behavior for empty filter results.",
+    "sourceRefs": [
+      {
+        "artifact": "interpreter",
+        "pointer": "/ambiguities/2",
+        "quote": "What should be displayed or how the UI should behave when no entries match the filter criteria."
+      }
+    ],
+    "ambiguityRefs": [
+      "/ambiguities/2"
+    ]
+  },
+  {
+    "id": "F5",
+    "severity": "MEDIUM",
+    "kind": "OPEN_AMBIGUITY",
+    "description": "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+    "action": "Clarify from the ticket owner whether inactive items should ever be presented to the user.",
+    "sourceRefs": [
+      {
+        "artifact": "interpreter",
+        "pointer": "/ambiguities/3",
+        "quote": "Whether the isActive flag must always be enforced or if inactive items can ever be shown."
+      }
+    ],
+    "ambiguityRefs": [
+      "/ambiguities/3"
+    ]
+  },
+  {
+    "id": "F6",
+    "severity": "MEDIUM",
+    "kind": "OPEN_AMBIGUITY",
+    "description": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+    "action": "Obtain clarification on whether Condenser Type is part of the Unit Size filtering criteria.",
+    "sourceRefs": [
+      {
+        "artifact": "interpreter",
+        "pointer": "/ambiguities/4",
+        "quote": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type."
+      }
+    ],
+    "ambiguityRefs": [
+      "/ambiguities/4"
+    ]
+  },
+  {
+    "id": "F7",
+    "severity": "MEDIUM",
+    "kind": "OPEN_AMBIGUITY",
+    "description": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined.",
+    "action": "Request detailed API contract information for the /dropdowns endpoint, including response format, pagination, and error handling.",
+    "sourceRefs": [
+      {
+        "artifact": "interpreter",
+        "pointer": "/ambiguities/5",
+        "quote": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+      }
+    ],
+    "ambiguityRefs": [
+      "/ambiguities/5"
+    ]
+  }
+]
+
+Preserve each previous ambiguity verbatim unless the original ticket explicitly answers it. For each removed ambiguity, return ambiguityResolutions with ambiguity (exact previous text), rationale, and sourceQuote (an exact nonempty ticket quotation). Do not erase an unanswered question or choose missing business policy to obtain PASS.

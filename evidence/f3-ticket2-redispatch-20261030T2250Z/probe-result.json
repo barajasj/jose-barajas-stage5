@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-10-30T22:50:31.498Z",
+  "correlationId": "F3-TICKET2-REDISPATCH-1793400622926",
+  "outcome": {
+    "status": "SUCCESS",
+    "promptHash": "3068823f95da13125c8944deca9ca5f4175ecb0e2e417a70bde9ec1daabbdb33"
+  },
+  "sourceFailure": {
+    "correlationId": "HVAC-TICKET-1793399289234-fa1f13c9-0d5a-4be7-828f-b20b19021313",
+    "inputHash": "c381a1ec346a241d3f7545a41d7c62072b4c67c5c6a540ef986374dd9ce28501",
+    "priorAmbiguities": [
+      "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+      "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+      "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+      "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+      "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+      "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+    ],
+    "reviewerFindingIds": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8"
+    ]
+  },
+  "generatedOutput": {
+    "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown must be populated filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected (with Refrigerant already chosen), the Unit Size dropdown must be populated filtered by the selected Refrigerant and Unit Type.",
+    "hvacTerminology": [
+      "Condenser Type",
+      "Refrigerant",
+      "Unit Type",
+      "Unit Size",
+      "SDCommonUnitTypeRefrigerant",
+      "SDCommonUnitModelSizes"
+    ],
+    "businessRules": [
+      "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant filtered by the selected Condenser Type and Refrigerant (the exact filtering mechanism is not defined in the ticket).",
+      "If a user selects a Unit Type (after selecting a Refrigerant), the system must populate the Unit Size dropdown with entries from SDCommonUnitModelSizes filtered by the selected Refrigerant and Unit Type.",
+      "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API."
+    ],
+    "developerConsiderations": [
+      "Call the unitdesign API GET /dropdowns to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes data.",
+      "For Unit Type filtering, apply the selected Condenser Type and Refrigerant to the SDCommonUnitTypeRefrigerant dataset (filtering logic to be defined based on the data model).",
+      "For Unit Size filtering, apply the selected Refrigerant and Unit Type to the SDCommonUnitModelSizes dataset using the parent array.",
+      "Update the Unit Type and Unit Size dropdowns dynamically in the UI when the relevant selections change."
+    ],
+    "ambiguities": [
+      "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+      "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+      "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+      "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+      "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+    ],
+    "ambiguityResolutions": [
+      {
+        "ambiguity": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+        "rationale": "The ticket explicitly states that Unit Size filtering is based on Refrigerant + Unit Type only.",
+        "sourceQuote": "When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected."
+      }
+    ],
+    "confidence": "MEDIUM"
+  },
+  "transitionChecks": {
+    "priorAmbiguities": 6,
+    "currentAmbiguities": 5,
+    "removedPriorAmbiguities": [
+      "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type."
+    ],
+    "resolutionCount": 1,
+    "identityChecks": [
+      {
+        "resolution": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+        "exactPreviousIdentity": true,
+        "exactRemovedIdentity": true,
+        "sourceQuotePresentInTicket": true
+      }
+    ],
+    "duplicateResolutionIds": [],
+    "unansweredPriorAmbiguitiesNotPreserved": [],
+    "acceptedByUnchangedSchemaAndTransitionValidator": true
+  },
+  "limitation": "One direct redispatch probe, not a workflow; excluded from workflow completion rates."
+}

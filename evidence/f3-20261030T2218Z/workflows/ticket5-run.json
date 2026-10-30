@@ -1,0 +1,595 @@
+{
+  "runtimeMode": "real",
+  "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+  "status": "COMPLETED",
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ],
+  "reviewCycles": [
+    {
+      "cycle": 1,
+      "interpreterResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+        "agentId": "requirement-interpreter",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "requirementSummary": "DX Coil Height must be set to the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are pre‑validated and no other behavior is required.",
+          "hvacTerminology": [
+            "DX Coil",
+            "Cooling Circuit",
+            "Height"
+          ],
+          "businessRules": [
+            "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+            "Recalculate DX Coil Height immediately after a height edit.",
+            "If the circuit list is empty, DX Coil Height is set to 0 inches.",
+            "All inputs are already validated; no additional validation is in scope."
+          ],
+          "developerConsiderations": [
+            "Implement calculation that sums all Cooling Circuit Height values (in inches) and assigns the total to DX Coil Height.",
+            "Trigger the calculation immediately after any edit to a Cooling Circuit Height.",
+            "When the list of Cooling Circuits is empty, set DX Coil Height to 0 inches.",
+            "Assume input values are pre‑validated; do not add extra validation logic."
+          ],
+          "ambiguities": [
+            "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+            "No rounding or precision rules are specified for the sum of heights.",
+            "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.",
+            "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+          ],
+          "confidence": "MEDIUM"
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+          "workflow": "hvac-ticket-governance",
+          "agent": "requirement-interpreter",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-30T22:22:26.251Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+          "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+          "promptHash": "a393a9fa7f946f4ba877dac3180492bd18b4eb53952a19d7ca0d16824ee4987f",
+          "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 599,
+          "completionTokens": 1199,
+          "totalTokens": 1798,
+          "cost": 0.003297,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "cada272a858a6d8e89bec854ec0ab3801683369f10f5f1a3c8c92542188673c0",
+          "outputHash": "feed1ca40099bb16eb7bf01fa618e94a9a593a724b926c69fc31e91e0d9cf8c3",
+          "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\requirement-interpreter-raw.txt",
+          "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\requirement-interpreter-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "reviewResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+        "agentId": "adversarial-reviewer",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "status": "FAIL",
+          "rationale": "The interpreter identified several unresolved ambiguities that are not addressed in the ticket. Clarification is required for each ambiguity before implementation can proceed.",
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Unclear whether recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+              "action": "Obtain clarification from the ticket owner on which height edits should trigger the DX Coil Height recalculation.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/0",
+                  "quote": "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/0"
+              ]
+            },
+            {
+              "id": "F2",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "No rounding or precision rules are specified for the sum of heights.",
+              "action": "Obtain clarification from the ticket owner on the rounding or precision policy for the summed DX Coil Height.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/1",
+                  "quote": "No rounding or precision rules are specified for the sum of heights."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/1"
+              ]
+            },
+            {
+              "id": "F3",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Unclear whether only active/enabled Cooling Circuits should be included in the sum.",
+              "action": "Obtain clarification from the ticket owner on whether the calculation should consider only active/enabled Cooling Circuits.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/2",
+                  "quote": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/2"
+              ]
+            },
+            {
+              "id": "F4",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.",
+              "action": "Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation after a height edit.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/3",
+                  "quote": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/3"
+              ]
+            }
+          ],
+          "resolutions": []
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+          "workflow": "hvac-ticket-governance",
+          "agent": "adversarial-reviewer",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-30T22:22:31.102Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "7bec1d8b67e8c4b4cad9f0c870495ba6ae1475bead72df3aa0d7718033c30126",
+          "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+          "promptHash": "9b5bbc807f07cb475cb410bea28769c3916e54e5ad6072841572ad89e794cf4d",
+          "promptTemplateHash": "35ad5d92ceebef8a1a15de0b9b4a2ac9d776a4a8e7b1fa9f688d5a6463d3f628",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 1637,
+          "completionTokens": 1642,
+          "totalTokens": 3279,
+          "cost": 0.004923,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "add3314085835a50f2d5710807278bc6ebdaeb324831f1dccb6d086f2a38729d",
+          "outputHash": "80e9b1ea8f01bd2dfa7cd6005ae52732bb69cec5fdf7ba45221b6bd707179178",
+          "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\adversarial-reviewer-raw.txt",
+          "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\adversarial-reviewer-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    }
+  ],
+  "totalCost": 0.013415,
+  "humanGovernance": null,
+  "auditSummary": {
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "stepsExecuted": 3,
+    "reDispatched": false,
+    "reviewCyclesExecuted": 1,
+    "reviewLimitReached": false,
+    "totalPromptTokens": 4271,
+    "totalCompletionTokens": 4512,
+    "totalTokens": 8783,
+    "totalCost": 0.013415,
+    "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)"
+  },
+  "interpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "DX Coil Height must be set to the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are pre‑validated and no other behavior is required.",
+      "hvacTerminology": [
+        "DX Coil",
+        "Cooling Circuit",
+        "Height"
+      ],
+      "businessRules": [
+        "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+        "Recalculate DX Coil Height immediately after a height edit.",
+        "If the circuit list is empty, DX Coil Height is set to 0 inches.",
+        "All inputs are already validated; no additional validation is in scope."
+      ],
+      "developerConsiderations": [
+        "Implement calculation that sums all Cooling Circuit Height values (in inches) and assigns the total to DX Coil Height.",
+        "Trigger the calculation immediately after any edit to a Cooling Circuit Height.",
+        "When the list of Cooling Circuits is empty, set DX Coil Height to 0 inches.",
+        "Assume input values are pre‑validated; do not add extra validation logic."
+      ],
+      "ambiguities": [
+        "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+        "No rounding or precision rules are specified for the sum of heights.",
+        "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.",
+        "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:22:26.251Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "promptHash": "a393a9fa7f946f4ba877dac3180492bd18b4eb53952a19d7ca0d16824ee4987f",
+      "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 599,
+      "completionTokens": 1199,
+      "totalTokens": 1798,
+      "cost": 0.003297,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "cada272a858a6d8e89bec854ec0ab3801683369f10f5f1a3c8c92542188673c0",
+      "outputHash": "feed1ca40099bb16eb7bf01fa618e94a9a593a724b926c69fc31e91e0d9cf8c3",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "reviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter identified several unresolved ambiguities that are not addressed in the ticket. Clarification is required for each ambiguity before implementation can proceed.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Unclear whether recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+          "action": "Obtain clarification from the ticket owner on which height edits should trigger the DX Coil Height recalculation.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "No rounding or precision rules are specified for the sum of heights.",
+          "action": "Obtain clarification from the ticket owner on the rounding or precision policy for the summed DX Coil Height.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "No rounding or precision rules are specified for the sum of heights."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Unclear whether only active/enabled Cooling Circuits should be included in the sum.",
+          "action": "Obtain clarification from the ticket owner on whether the calculation should consider only active/enabled Cooling Circuits.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.",
+          "action": "Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation after a height edit.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:22:31.102Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "7bec1d8b67e8c4b4cad9f0c870495ba6ae1475bead72df3aa0d7718033c30126",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "promptHash": "9b5bbc807f07cb475cb410bea28769c3916e54e5ad6072841572ad89e794cf4d",
+      "promptTemplateHash": "35ad5d92ceebef8a1a15de0b9b4a2ac9d776a4a8e7b1fa9f688d5a6463d3f628",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1637,
+      "completionTokens": 1642,
+      "totalTokens": 3279,
+      "cost": 0.004923,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "add3314085835a50f2d5710807278bc6ebdaeb324831f1dccb6d086f2a38729d",
+      "outputHash": "80e9b1ea8f01bd2dfa7cd6005ae52732bb69cec5fdf7ba45221b6bd707179178",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalInterpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "DX Coil Height must be set to the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are pre‑validated and no other behavior is required.",
+      "hvacTerminology": [
+        "DX Coil",
+        "Cooling Circuit",
+        "Height"
+      ],
+      "businessRules": [
+        "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+        "Recalculate DX Coil Height immediately after a height edit.",
+        "If the circuit list is empty, DX Coil Height is set to 0 inches.",
+        "All inputs are already validated; no additional validation is in scope."
+      ],
+      "developerConsiderations": [
+        "Implement calculation that sums all Cooling Circuit Height values (in inches) and assigns the total to DX Coil Height.",
+        "Trigger the calculation immediately after any edit to a Cooling Circuit Height.",
+        "When the list of Cooling Circuits is empty, set DX Coil Height to 0 inches.",
+        "Assume input values are pre‑validated; do not add extra validation logic."
+      ],
+      "ambiguities": [
+        "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+        "No rounding or precision rules are specified for the sum of heights.",
+        "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.",
+        "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:22:26.251Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "promptHash": "a393a9fa7f946f4ba877dac3180492bd18b4eb53952a19d7ca0d16824ee4987f",
+      "promptTemplateHash": "9cc1954eab38c022bc9d5685d4f06d303e2cfc2a16bdb43b864ae6cc1c9490b3",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 599,
+      "completionTokens": 1199,
+      "totalTokens": 1798,
+      "cost": 0.003297,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "cada272a858a6d8e89bec854ec0ab3801683369f10f5f1a3c8c92542188673c0",
+      "outputHash": "feed1ca40099bb16eb7bf01fa618e94a9a593a724b926c69fc31e91e0d9cf8c3",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter identified several unresolved ambiguities that are not addressed in the ticket. Clarification is required for each ambiguity before implementation can proceed.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Unclear whether recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+          "action": "Obtain clarification from the ticket owner on which height edits should trigger the DX Coil Height recalculation.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "No rounding or precision rules are specified for the sum of heights.",
+          "action": "Obtain clarification from the ticket owner on the rounding or precision policy for the summed DX Coil Height.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "No rounding or precision rules are specified for the sum of heights."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Unclear whether only active/enabled Cooling Circuits should be included in the sum.",
+          "action": "Obtain clarification from the ticket owner on whether the calculation should consider only active/enabled Cooling Circuits.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.",
+          "action": "Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation after a height edit.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:22:31.102Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "7bec1d8b67e8c4b4cad9f0c870495ba6ae1475bead72df3aa0d7718033c30126",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "promptHash": "9b5bbc807f07cb475cb410bea28769c3916e54e5ad6072841572ad89e794cf4d",
+      "promptTemplateHash": "35ad5d92ceebef8a1a15de0b9b4a2ac9d776a4a8e7b1fa9f688d5a6463d3f628",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1637,
+      "completionTokens": 1642,
+      "totalTokens": 3279,
+      "cost": 0.004923,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "add3314085835a50f2d5710807278bc6ebdaeb324831f1dccb6d086f2a38729d",
+      "outputHash": "80e9b1ea8f01bd2dfa7cd6005ae52732bb69cec5fdf7ba45221b6bd707179178",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReport": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+    "agentId": "final-review-writer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "reportMarkdown": "# FAIL\n\n## Requirement Summary\n\n\"DX Coil Height must be set to the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are pre‑validated and no other behavior is required.\"\n\n## Reviewer Findings\n\n- F1 | MEDIUM | OPEN_AMBIGUITY | \"Unclear whether recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.\" | \"Obtain clarification from the ticket owner on which height edits should trigger the DX Coil Height recalculation.\"\n- F2 | MEDIUM | OPEN_AMBIGUITY | \"No rounding or precision rules are specified for the sum of heights.\" | \"Obtain clarification from the ticket owner on the rounding or precision policy for the summed DX Coil Height.\"\n- F3 | MEDIUM | OPEN_AMBIGUITY | \"Unclear whether only active/enabled Cooling Circuits should be included in the sum.\" | \"Obtain clarification from the ticket owner on whether the calculation should consider only active/enabled Cooling Circuits.\"\n- F4 | MEDIUM | OPEN_AMBIGUITY | \"The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.\" | \"Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation after a height edit.\"\n\n## Open Ambiguities\n\n- /ambiguities/0 | \"It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.\"\n- /ambiguities/1 | \"No rounding or precision rules are specified for the sum of heights.\"\n- /ambiguities/2 | \"The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.\"\n- /ambiguities/3 | \"The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.\"\n\n## Final Disposition\n\nFAIL\n\n## Governance Reasons\n\n- OPEN_FINDINGS\n- OPEN_AMBIGUITIES"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+      "workflow": "hvac-ticket-governance",
+      "agent": "final-review-writer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-30T22:22:38.012Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "21edf3b5f003f430b0d69c0e734e1cb95e445ed97a64b316249189cc92ac18cc",
+      "ticketHash": null,
+      "promptHash": "22315d91c92641437cbdddd05871e93d2e67bd1e985cd03324ffa47cc8541eb6",
+      "promptTemplateHash": "c33b8409dc37f3b823d8b814a592b0c43f9f1aaedeb21be302f5e110b82236ff",
+      "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2035,
+      "completionTokens": 1671,
+      "totalTokens": 3706,
+      "cost": 0.005195,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "8540ab54a71ef6fefad66f2c6653bce49570854e5b54002563fc631e4e2cd8c9",
+      "outputHash": "8540ab54a71ef6fefad66f2c6653bce49570854e5b54002563fc631e4e2cd8c9",
+      "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\final-review-writer-raw.txt",
+      "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\final-review-writer-validated.json",
+      "status": "SUCCESS"
+    }
+  }
+}

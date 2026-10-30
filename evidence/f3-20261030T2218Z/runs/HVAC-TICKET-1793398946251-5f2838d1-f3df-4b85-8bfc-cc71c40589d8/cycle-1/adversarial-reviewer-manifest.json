@@ -1,0 +1,29 @@
+{
+  "correlationId": "HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8",
+  "workflow": "hvac-ticket-governance",
+  "agent": "adversarial-reviewer",
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "runtimeMode": "real",
+  "cycle": 1,
+  "timestamp": "2026-10-30T22:22:31.102Z",
+  "modelSettings": {
+    "temperature": 0
+  },
+  "inputHash": "7bec1d8b67e8c4b4cad9f0c870495ba6ae1475bead72df3aa0d7718033c30126",
+  "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+  "promptHash": "9b5bbc807f07cb475cb410bea28769c3916e54e5ad6072841572ad89e794cf4d",
+  "promptTemplateHash": "35ad5d92ceebef8a1a15de0b9b4a2ac9d776a4a8e7b1fa9f688d5a6463d3f628",
+  "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+  "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+  "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+  "promptTokens": 1637,
+  "completionTokens": 1642,
+  "totalTokens": 3279,
+  "cost": 0.004923,
+  "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+  "rawHash": "add3314085835a50f2d5710807278bc6ebdaeb324831f1dccb6d086f2a38729d",
+  "outputHash": "80e9b1ea8f01bd2dfa7cd6005ae52732bb69cec5fdf7ba45221b6bd707179178",
+  "rawArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\adversarial-reviewer-raw.txt",
+  "validatedArtifact": "evidence\\f3-20261030T2218Z\\runs\\HVAC-TICKET-1793398946251-5f2838d1-f3df-4b85-8bfc-cc71c40589d8\\cycle-1\\adversarial-reviewer-validated.json",
+  "status": "SUCCESS"
+}

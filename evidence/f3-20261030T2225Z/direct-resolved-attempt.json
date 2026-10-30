@@ -1,0 +1,11 @@
+{
+  "caseId": "resolved",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-resolved-bbdaad99-e146-458e-ae5f-3791466b4d7f",
+  "status": "SUCCESS",
+  "beforeStatus": "GOVERNANCE_FAILURE",
+  "pairedIdentity": true,
+  "beforePromptHash": "9d4a1fa1470e90922c97a5bdddcd2ac1d8697167ab4a9dce594d66715e272bdb",
+  "afterPromptHash": "6adaa9b8c1d9d2838f90e47e93015c1f00563018a1b98fa1214972c49b3fa937"
+}

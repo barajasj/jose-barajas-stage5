@@ -1,0 +1,25 @@
+{
+  "startedAt": "2026-10-30T22:48:21.103Z",
+  "scope": "One prospective F3 Ticket 2 workflow; no F6 changes or scorer/evaluator execution.",
+  "fixture": "fixtures/hvac-ticket-2.md",
+  "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+  "runtimeMode": "real",
+  "maxReviewCycles": 2,
+  "maxModelInvocations": 5,
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "temperature": 0,
+  "sourcePromptHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+  "priorF3Manifests": [
+    {
+      "directory": "evidence/f3-20261030T2218Z",
+      "manifestFile": "manifest.json",
+      "manifestSha256": "e6bd52902ff8b7bd12ae5b851eeb03a106162cee0c66acb8d3b4d1c23a49bd2a"
+    },
+    {
+      "directory": "evidence/f3-20261030T2225Z",
+      "manifestFile": "manifest-final.json",
+      "manifestSha256": "b57a1ad3db586f8a136b0daed0f8470ec387e32d89b67d6f65a3f6e69c21de08"
+    }
+  ],
+  "policy": "One workflow attempt; coordinator review cycles only; no collection-level retry or output repair."
+}

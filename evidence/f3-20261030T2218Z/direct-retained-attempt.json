@@ -1,0 +1,11 @@
+{
+  "caseId": "retained",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-retained-e6afbb4d-c398-4b16-8fa4-2154b10a2156",
+  "status": "SUCCESS",
+  "beforeStatus": "SUCCESS",
+  "pairedIdentity": true,
+  "beforePromptHash": "2eaf0f9537b6fbcbfeceb9fc3cf72d70c333658025376913b8d1c2f99cf0c7bd",
+  "afterPromptHash": "7a809868eb1d89edabe04c5c5a2ffe37f810d0cc78e9120cf789a354481ee23a"
+}

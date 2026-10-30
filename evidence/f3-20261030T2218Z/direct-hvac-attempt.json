@@ -1,0 +1,12 @@
+{
+  "caseId": "hvac",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-hvac-dffc0e71-884b-42da-b462-490cd345c8b6",
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Source quote is not present in the referenced artifact.",
+  "beforeStatus": "GOVERNANCE_FAILURE",
+  "pairedIdentity": true,
+  "beforePromptHash": "0d14e248a19bd1c21ef1cbc8064aa2bbffe6bd5af8ab3d20e5ade77504a12fd6",
+  "afterPromptHash": "b750e615f33594f7c43db277f1d10ba32f1703571928277b9dd4c46bceb57ac8"
+}

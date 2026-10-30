@@ -1,0 +1,11 @@
+{
+  "caseId": "missing",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-missing-4b54bc62-76ae-4e0a-9807-e8bf70390f2f",
+  "status": "SUCCESS",
+  "beforeStatus": "SUCCESS",
+  "pairedIdentity": true,
+  "beforePromptHash": "001b7bbb07d9f896944b036ec8fff5ac5ba9ef0bb411268d217e6ea9a750a477",
+  "afterPromptHash": "e35896402a4dad34a6315c6e7870876c25355a0e56952e5f079866ee5f62486e"
+}

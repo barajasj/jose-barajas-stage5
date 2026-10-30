@@ -1,0 +1,11 @@
+{
+  "caseId": "validation",
+  "group": "directReviewer",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F3-validation-cf6aa7e7-3aea-44ed-b06f-29cad73d52bc",
+  "status": "SUCCESS",
+  "beforeStatus": "GOVERNANCE_FAILURE",
+  "pairedIdentity": true,
+  "beforePromptHash": "868201d58b4ba3bcbd80587e0018a62cec12b9d3a60541ae0369afe2a02108f6",
+  "afterPromptHash": "87abca9e3169393fcc825d41a75424f2e3c40212a3f8337733ed130bd6317d2f"
+}
