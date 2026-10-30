@@ -1,346 +1,35 @@
 {
-  "description": "Test case definitions for per-step evaluations. Each expected item is matched when ANY keyword in anyOf appears (case-insensitive substring) in the relevant output field of the evaluated step.",
+  "version": 2,
+  "description": "Frozen full-proposition labels and ticket/interpreter pairs. Authored controls are separate from persisted real-model observations; unsupported paraphrases receive no semantic credit.",
+  "directCases": "evals/step-cases.js",
   "loadBearingAudit": {
     "map": "evals/load-bearing-map.json",
     "cases": "evals/load-bearing-cases.js",
     "criteria": "src/load-bearing-criteria.js",
     "command": "node src/run-load-bearing-audit.js",
     "jsonCommand": "node src/run-load-bearing-audit.js --json",
-    "scope": "Supplemental Deliverable 3 instruction coverage and criterion-sensitivity checks; not legacy metric repair or live-model performance."
+    "scope": "Deliverable 3 instruction coverage and criterion sensitivity; required by the Deliverable 4 runner but not model-performance evidence."
   },
   "fixtures": [
     {
       "fixture": "fixtures/hvac-ticket-1.md",
       "evidenceFile": "evidence/ticket1-run.json",
-      "baselineEvidenceFile": "evidence/run1/ticket1-run.json",
-      "requirementInterpreter": {
-        "expectedBusinessRules": [
-          {
-            "id": "t1-r1",
-            "expectation": "DX Coil Height equals the sum of all Cooling Circuit heights",
-            "anyOf": ["sum of", "summed", "summing"]
-          },
-          {
-            "id": "t1-r2",
-            "expectation": "Cooling Circuits are populated when a Cooling Package is entered",
-            "anyOf": ["cooling package"]
-          },
-          {
-            "id": "t1-r3",
-            "expectation": "Editing a circuit height recalculates and updates the DX Coil Height",
-            "anyOf": ["recalculat", "react", "updated"]
-          }
-        ],
-        "expectedHvacTerms": [
-          "DX Coil",
-          "Cooling Circuit",
-          "Cooling Package",
-          "R-454B",
-          "Circuit Height",
-          "DX Coil Information"
-        ],
-        "expectedAmbiguities": [
-          {
-            "id": "t1-a1",
-            "expectation": "No validation rules for circuit heights are defined",
-            "anyOf": ["validation"]
-          },
-          {
-            "id": "t1-a2",
-            "expectation": "Units of measurement are not defined",
-            "anyOf": ["unit"]
-          },
-          {
-            "id": "t1-a3",
-            "expectation": "Behavior when circuits are added or removed after initial load is unclear",
-            "anyOf": ["added or removed", "add or remove", "added/removed", "removed"]
-          },
-          {
-            "id": "t1-a4",
-            "expectation": "Source/format of initial circuit data is unspecified",
-            "anyOf": ["source", "initial"]
-          }
-        ]
-      },
-      "adversarialReviewer": {
-        "expectedUnsupportedAssumptions": [
-          {
-            "id": "t1-ua1",
-            "expectation": "Interpreter assumes validation behavior the ticket does not specify",
-            "anyOf": ["validation", "numeric"]
-          }
-        ],
-        "expectedMissingRequirements": [
-          {
-            "id": "t1-mr1",
-            "expectation": "Missing validation rules (range, precision, format) for circuit heights",
-            "anyOf": ["validation", "range", "precision"]
-          },
-          {
-            "id": "t1-mr2",
-            "expectation": "Missing handling for dynamic circuit add/remove",
-            "anyOf": ["added or removed", "dynamic", "add or remove", "removed"]
-          }
-        ]
-      },
-      "finalReviewWriter": {
-        "mustContainDisposition": true
-      }
+      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket1-run.json" }
     },
     {
       "fixture": "fixtures/hvac-ticket-2.md",
       "evidenceFile": "evidence/ticket2-run.json",
-      "baselineEvidenceFile": "evidence/run1/ticket2-run.json",
-      "requirementInterpreter": {
-        "expectedBusinessRules": [
-          {
-            "id": "t2-r1",
-            "expectation": "Unit Type dropdown filtered by selected Condenser Type and Refrigerant",
-            "anyOf": ["unit type", "filtered"]
-          },
-          {
-            "id": "t2-r2",
-            "expectation": "Unit Size dropdown filtered by selected Refrigerant and Unit Type",
-            "anyOf": ["unit size"]
-          },
-          {
-            "id": "t2-r3",
-            "expectation": "Filtering uses the 'parent' attribute of dropdown data",
-            "anyOf": ["parent"]
-          }
-        ],
-        "expectedHvacTerms": [
-          "Condenser Type",
-          "Refrigerant",
-          "Unit Type",
-          "Unit Size",
-          "SDCommonUnitTypeRefrigerant",
-          "SDCommonUnitModelSizes"
-        ],
-        "expectedAmbiguities": [
-          {
-            "id": "t2-a1",
-            "expectation": "How Condenser Type participates in the Unit Type filter is unclear given the parent data",
-            "anyOf": ["condenser type", "parent"]
-          },
-          {
-            "id": "t2-a2",
-            "expectation": "Behavior when filtering yields no matching options",
-            "anyOf": ["no matching", "empty"]
-          },
-          {
-            "id": "t2-a3",
-            "expectation": "Case sensitivity of filtering is undefined",
-            "anyOf": ["case"]
-          },
-          {
-            "id": "t2-a4",
-            "expectation": "Whether downstream selections persist or reset on upstream change",
-            "anyOf": ["persist", "reset", "retained"]
-          }
-        ]
-      },
-      "adversarialReviewer": {
-        "expectedUnsupportedAssumptions": [
-          {
-            "id": "t2-ua1",
-            "expectation": "Interpreter assumes Condenser Type is part of the parent filter data",
-            "anyOf": ["condenser type"]
-          }
-        ],
-        "expectedMissingRequirements": [
-          {
-            "id": "t2-mr1",
-            "expectation": "UI behavior for empty filter results is unspecified",
-            "anyOf": ["no matching", "empty", "no matching unit"]
-          },
-          {
-            "id": "t2-mr2",
-            "expectation": "isActive flag handling for dropdown entries",
-            "anyOf": ["isactive", "inactive"]
-          }
-        ]
-      },
-      "finalReviewWriter": {
-        "mustContainDisposition": true
-      }
+      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket2-run.json" }
     },
     {
       "fixture": "fixtures/hvac-ticket-3.md",
       "evidenceFile": "evidence/ticket3-run.json",
-      "baselineEvidenceFile": "evidence/run1/ticket3-run.json",
-      "requirementInterpreter": {
-        "expectedBusinessRules": [
-          {
-            "id": "t3-r1",
-            "expectation": "Selecting Condenser Type AC or EC displays the corresponding input fields",
-            "anyOf": ["ac", "ec", "corresponding input"]
-          },
-          {
-            "id": "t3-r2",
-            "expectation": "Condenser Passes options are AutoOdd, AutoEven, and 2 through 41",
-            "anyOf": ["autoodd", "autoeven", "2 through 41", "2-41", "2 through 41"]
-          },
-          {
-            "id": "t3-r3",
-            "expectation": "Roof Type options include dark/light variants with and without parapet/shrouding",
-            "anyOf": ["roof type", "parapet", "shrouding"]
-          },
-          {
-            "id": "t3-r4",
-            "expectation": "Configuration output is prepared for ECS calculation",
-            "anyOf": ["ecs"]
-          }
-        ],
-        "expectedHvacTerms": [
-          "Air Cooled",
-          "Evaporative Cooled",
-          "condenser",
-          "wet bulb",
-          "ASHRAE",
-          "Bank ID",
-          "EC model",
-          "condenser passes",
-          "roof type",
-          "ECS"
-        ],
-        "expectedAmbiguities": [
-          {
-            "id": "t3-a1",
-            "expectation": "Exact roof type option list is not provided",
-            "anyOf": ["roof type", "parapet", "shrouding"]
-          },
-          {
-            "id": "t3-a2",
-            "expectation": "EC Model catalog entries are not enumerated",
-            "anyOf": ["catalog", "ec model"]
-          },
-          {
-            "id": "t3-a3",
-            "expectation": "Validation ranges for numeric inputs are not specified",
-            "anyOf": ["range", "validation"]
-          },
-          {
-            "id": "t3-a4",
-            "expectation": "Unit handling (deg F vs deg C) is not clarified",
-            "anyOf": ["°f", "°c", "unit"]
-          }
-        ]
-      },
-      "adversarialReviewer": {
-        "expectedUnsupportedAssumptions": [],
-        "expectedMissingRequirements": [
-          {
-            "id": "t3-mr1",
-            "expectation": "Bank ID and Copies of this Bank fields are not captured",
-            "anyOf": ["bank id", "bank"]
-          },
-          {
-            "id": "t3-mr2",
-            "expectation": "Default Condenser and High Amb./Altit. checkboxes are omitted",
-            "anyOf": ["checkbox", "default condenser", "high amb"]
-          },
-          {
-            "id": "t3-mr3",
-            "expectation": "Validation rules/ranges for numeric inputs are missing",
-            "anyOf": ["validation", "range"]
-          },
-          {
-            "id": "t3-mr4",
-            "expectation": "Per-circuit cooling configuration inputs are not mentioned",
-            "anyOf": ["per-circuit", "per circuit", "circuit"]
-          }
-        ]
-      },
-      "finalReviewWriter": {
-        "mustContainDisposition": true
-      }
+      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket3-run.json" }
     },
     {
       "fixture": "fixtures/hvac-ticket-4.md",
       "evidenceFile": "evidence/ticket4-run.json",
-      "baselineEvidenceFile": "evidence/run1/ticket4-run.json",
-      "requirementInterpreter": {
-        "expectedBusinessRules": [
-          {
-            "id": "t4-r1",
-            "expectation": "Valid coil height range is 1.25 in to 100 in",
-            "anyOf": ["1.25", "range"]
-          },
-          {
-            "id": "t4-r2",
-            "expectation": "Entered value must be a multiple of a coil-specific increment",
-            "anyOf": ["multiple"]
-          },
-          {
-            "id": "t4-r3",
-            "expectation": "Non-multiple values are rounded to the nearest valid increment",
-            "anyOf": ["nearest", "round"]
-          },
-          {
-            "id": "t4-r4",
-            "expectation": "Increment mapping covers Lamiflo coil at 9.00 in",
-            "anyOf": ["lamiflo", "9.00", "9\""]
-          },
-          {
-            "id": "t4-r5",
-            "expectation": "Increment mapping covers 1 in tube at 2.25 in",
-            "anyOf": ["2.25"]
-          }
-        ],
-        "expectedHvacTerms": [
-          "Coil Height",
-          "tube",
-          "Lamiflo",
-          "increment",
-          "Water/Steam"
-        ],
-        "expectedAmbiguities": [
-          {
-            "id": "t4-a1",
-            "expectation": "Tie-breaking when value is exactly between increments",
-            "anyOf": ["tie", "halfway"]
-          },
-          {
-            "id": "t4-a2",
-            "expectation": "How the 1-inch-spacing configuration is detected",
-            "anyOf": ["spacing"]
-          },
-          {
-            "id": "t4-a3",
-            "expectation": "Behavior for out-of-range inputs",
-            "anyOf": ["below", "above", "clamp", "error"]
-          },
-          {
-            "id": "t4-a4",
-            "expectation": "Handling for coil types not in the increment mapping",
-            "anyOf": ["not listed", "unrecognized", "not in"]
-          }
-        ]
-      },
-      "adversarialReviewer": {
-        "expectedUnsupportedAssumptions": [],
-        "expectedMissingRequirements": [
-          {
-            "id": "t4-mr1",
-            "expectation": "Tie-breaking/rounding direction at exact half increments is unresolved",
-            "anyOf": ["tie", "halfway", "round"]
-          },
-          {
-            "id": "t4-mr2",
-            "expectation": "Detection of the 1-inch-spacing configuration is undefined",
-            "anyOf": ["spacing"]
-          },
-          {
-            "id": "t4-mr3",
-            "expectation": "Out-of-range behavior (error vs clamp) is unspecified",
-            "anyOf": ["range", "clamp", "error", "below", "above"]
-          }
-        ]
-      },
-      "finalReviewWriter": {
-        "mustContainDisposition": true
-      }
+      "baseline": { "state": "not-in-baseline", "reason": "Ticket 4 was added after commit 4fcbf47." }
     }
   ]
 }

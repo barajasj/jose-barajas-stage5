@@ -316,7 +316,20 @@ sub-agents-results.json
 
 Eval runner:
 
+```text
+npm test
+npm run eval:controls
 node src/run-evals.js
+```
+
+`eval:controls` checks authored controls and instruction coverage, not live-model accuracy.
+The default evaluator validates persisted real-model evidence and exits nonzero for missing
+direct responses, incompatible historical artifacts, hard-gate violations, or missed thresholds.
+It prints JSON without overwriting historical `sub-agents-results.json`.
+Use `--responses FILE` for fixed direct-step observations and `--definitions FILE` for
+compatible workflow/baseline paths. Full contracts and `content-v2` scoring rules:
+`evals/requirement-interpreter-eval.md`, "Current scorer - Deliverable 4".
+Fresh model runs, evidence repair, and prompt-evolution measurements remain deferred.
 
 ---
 

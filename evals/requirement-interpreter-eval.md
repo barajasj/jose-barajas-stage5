@@ -1,5 +1,50 @@
 # HVAC Requirement Interpreter Evaluation
 
+## Current scorer - Deliverable 4
+
+`src/eval-scorer.js` now uses `content-v2`, replacing substring and two-word-overlap credit. Existing thresholds remain unchanged. `evals/test-cases.json` identifies workflow artifacts; `evals/step-cases.js` supplies 26 fixed direct-step cases with authored labels, including all four HVAC fixtures, sparse/conflicting tickets, corrected reviewer counterparts, and clean PASS/concern-bearing FAIL reports.
+
+Commands (offline, no model invocation):
+
+```text
+npm test
+node src/run-evals.js --self-test
+node src/run-evals.js
+```
+
+`--self-test` checks authored full-step controls plus the Deliverable 3 coverage/sensitivity audit. It reports `mode: authored-controls` and `modelPerformanceMeasured: false`; its PASS is not a model score. The test suite also exercises all 152 D3 mutations against the integrated scorer and the original false-credit counterexamples.
+
+Without `--self-test`, missing direct responses, incomplete workflows, incompatible old artifacts, missing required baselines, and unmeasured mandatory criteria fail with exit code 1. Current historical evidence does not meet the new contracts; a failing default command is expected until compatible evidence and fixed-input labels are supplied. No legacy artifact is upgraded, repaired, or given a fabricated default.
+
+Content rules:
+
+- Business rules, terms, and ambiguities match complete field-specific gold propositions (case/whitespace normalization only). Changed quantities, units, conditions, polarity, and unsupported additions fail. Unlabeled paraphrases require reviewed gold variants, not keyword fallback.
+- Summary, developer considerations, confidence policy, grounding, and re-dispatch preservation are executed, not presence checks.
+- Applicable metrics have positive denominators. Source categories absent from an explicitly labeled case are NA (`score: null`, reason), never 1.0. Missing labels are configuration failures.
+- Schema, runtime consistency, source grounding, false positives, and report integrity are non-compensable gates. Every required case must pass; pooled recall cannot hide a contract violation. Decisions use full precision.
+
+### Persisted observation contract
+
+`node src/run-evals.js --responses direct-responses.json` consumes a JSON object with an `observations` array, one entry for every ID in `evals/step-cases.js`. Each entry contains:
+
+```text
+caseId, agent, input, rawResponse,
+provenance: {
+  runtimeMode: "real", model, modelSettings: { temperature },
+  correlationId, timestamp, inputHash, rawHash, promptHash, schemaHash
+}
+```
+
+`input` must equal the frozen case input. `rawResponse` is the untouched response string, including malformed JSON if returned; do not strip fences. Hashes are SHA-256: `inputHash` uses `JSON.stringify(input)`, `rawHash` uses the response bytes. Parsed-only, mock, duplicate, unknown, or missing observations fail. Provenance records are consistency checks, not independent proof that a provider was contacted. Collection/live calls and prompt-evolution measurements remain deferred.
+
+Workflow evidence additionally requires completed status, explicit real mode, contiguous cycles, matching initial/final artifacts, and persisted per-step input, prompt, raw, validated output, and SUCCESS manifests. Hashes and cross-artifact governance are verified before scoring. Unknown interpreter/reviewer input contexts require frozen labels; expectations are never inferred from the candidate output or ticket ID alone.
+
+`--definitions FILE` can select compatible workflow/baseline artifacts using the version-2 definition format. `baseline.state` is `required` (file, optionally immutable Git ref) or `not-in-baseline` with a reason. Tickets 1-3 still reference the original `4fcbf47` baseline; ticket 4 explicitly did not exist there. Missing/corrupt required baselines fail, rather than silently becoming null.
+
+`--baseline-responses FILE` optionally compares the same direct cases. Deltas require identical case/fixture identity, exact step input, model/settings, and current scorer hash. Expanded/unmatched cases are reported separately with no delta. Old keyword scores are never compared to content-v2 scores.
+
+Output is JSON on stdout. Optional `--output NEW_FILE` writes a new file only; existing files and `sub-agents-results.json` are protected. Historical results below remain historical, not refreshed measurements.
+
 ## Stage 3 load-bearing coverage — Deliverable 3
 
 The legacy scoring methodology, results, and iteration log below are historical and have not been revalidated. This section measures instruction coverage and whether the new criteria distinguish authored valid outputs from targeted violations. It does not claim improved live-model accuracy or satisfy the separate prompt-evolution evidence requirement.

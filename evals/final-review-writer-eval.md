@@ -1,5 +1,13 @@
 # Final Review Writer Evaluation
 
+## Current scorer - Deliverable 4
+
+`src/eval-scorer.js` now parses bounded reports through the independent section/row parser in `src/load-bearing-criteria.js`. It measures exact per-finding ID, severity, kind, description, and action; duplicates, missing concerns, invented concerns, altered summaries/ambiguities, contradictory heading/body dispositions, and unsupported conclusions fail. The runtime report template is an additional non-compensable contract/drift check, not the sole semantic scorer.
+
+Clean PASS has real assertions with denominator 1, never 0/0 success. No reviewer findings plus unresolved interpreter ambiguities is invalid upstream input. Incidental "below" is not LOW severity. An altered or invented finding cannot be preserved by sharing two words with a HIGH concern elsewhere.
+
+Existing preservation/completeness minima remain 1.00 and output quality 0.95. Run `node src/run-evals.js --self-test` for authored controls and `npm test` for adversarial regressions. Real model evidence and CLI contracts are documented in `evals/requirement-interpreter-eval.md`. Historical scores below remain unrefreshed.
+
 ## Stage 3 load-bearing coverage — Deliverable 3
 
 Local instruction coverage is **12/12 = 100%**: seven numbered instructions plus five input slots. The examiner's historical count was 6/8 = 75%; its eight substantive families now have explicit content checks, but the local denominator is different and does not claim parser equivalence.
@@ -40,7 +48,7 @@ The checks are field-specific: correct section labels cannot compensate for an e
 
 Repeated JSON-format prose and duplicate example text were consolidated into W07. Interpreter input, no-new-conclusion restrictions, and substantive concern/disposition requirements were retained rather than removed.
 
-These are authored criterion-sensitivity measurements, not live writer executions or a prompt-evolution delta. The legacy results/log below are preserved and have not been revalidated; repairs to the old scorer/aggregation and fresh model evidence remain deferred.
+These are authored criterion-sensitivity measurements, not live writer executions or a prompt-evolution delta. The legacy results/log below are preserved and have not been revalidated. Deliverable 4 repairs the scorer/aggregation; fresh model evidence remains deferred.
 
 ## Historical evaluation record — not refreshed by Deliverable 3
 

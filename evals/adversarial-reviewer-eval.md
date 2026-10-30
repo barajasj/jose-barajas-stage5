@@ -1,5 +1,15 @@
 # Adversarial Reviewer Evaluation
 
+## Current scorer - Deliverable 4
+
+`src/eval-scorer.js` now evaluates reviews against frozen **ticket + actual interpreter output + prior review** inputs in `evals/step-cases.js`. Assumptions, explicit omissions, HVAC errors, missing validation, missed/already-listed ambiguities, boundary/configuration questions, and unsupported resolutions have separate applicable metrics. Corrected counterparts reject stale accusations; `isActive` sample data is not relabeled as a mandatory filter.
+
+Recall requires a complete supported description, concrete action, correct severity/kind, and matching source/ambiguity references. Real quotations do not excuse false accusations. A clean review must earn its rationale/false-positive checks; absent challenge categories are NA, not vacuous 1.0. Schema, PASS/FAIL consistency, ambiguity coverage, rationale grounding, and concern continuity remain hard gates, independently of pooled metrics. Existing 0.85 detection and 0.90 challenge-quality minima are unchanged.
+
+Run `node src/run-evals.js --self-test` for authored controls only; `npm test` also locks all 152 mutation controls and the scorer/runner regressions. Model evidence requires `--responses FILE` and compatible workflow evidence; missing responses or old contracts fail. The observation format, provenance rules, baseline comparison policy, and CLI options are documented in `evals/requirement-interpreter-eval.md` under "Current scorer - Deliverable 4".
+
+No new model accuracy, historical 0.727 replacement, or prompt-evolution result is claimed.
+
 ## Stage 3 load-bearing coverage — Deliverable 3
 
 The legacy metrics and iteration history below are preserved as historical records, not revalidated claims. The supplemental instruction audit is independently executable:
@@ -56,7 +66,7 @@ R16 was added after a live real-mode run (`HVAC-TICKET-1793313465729-3ff8ae74-b9
 
 The suite validates criterion sensitivity, not the model's detection rate. Schema-valid missing-finding controls change status consistently, so detection cannot pass merely by noticing an invalid JSON contract. Grounding labels require supported full descriptions/actions and exact sources; quotation existence alone is insufficient. Clean controls explicitly penalize invented accusations.
 
-**Still deferred:** repairs to `src/eval-scorer.js` and `src/run-evals.js`, the historical 0.727 metric, baseline provenance, live re-runs, and genuine measured prompt-evolution iterations. This audit does not relabel those as resolved.
+**Current status:** scorer/runner repairs are implemented in Deliverable 4 above. The historical 0.727 measurement, baseline evidence regeneration, live re-runs, and genuine measured prompt-evolution iterations remain unrefreshed. The D3 audit does not relabel them as resolved.
 
 ## Historical evaluation record — not refreshed by Deliverable 3
 
