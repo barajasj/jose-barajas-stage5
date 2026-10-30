@@ -10,19 +10,23 @@ const io = (summary, terms, rules, considerations, ambiguities, confidence) => (
   developerConsiderations: considerations, ambiguities, confidence
 });
 const ref = (artifact, pointer, quote) => ({ artifact, pointer, quote });
-const finding = (id, category, kind, severity, description, action, sourceRefs, ambiguityRefs = []) => ({
-  id, category, kind, severity, description, action, sourceRefs, ambiguityRefs
+const finding = (id, category, kind, severity, description, action, sourceRefs, ambiguityRefs = [], equivalents = {}) => ({
+  id, category, kind, severity, description, action, sourceRefs, ambiguityRefs, equivalents
 });
 const reviewOutput = (findings, rationale, resolutions = []) => ({
   status: findings.length ? 'FAIL' : 'PASS', rationale,
-  findings: findings.map(({ category, ...value }) => clone(value)), resolutions
+  findings: findings.map(({ category, equivalents, ...value }) => clone(value)), resolutions
 });
 const contexts = [];
 
 function interpreterCase(id, ticket, output, readiness, extra = {}) {
   const context = {
     id, agent: 'requirement-interpreter', input: { ticket }, output: clone(output),
-    gold: { interpreter: clone(output), readiness, ...extra },
+    gold: {
+      interpreter: clone(output), readiness,
+      equivalents: clone(extra.equivalents || {}),
+      ...extra
+    },
     provenance: 'Authored full-proposition gold; not a model response or legacy scorer result.'
   };
   contexts.push(context);
@@ -35,7 +39,11 @@ function reviewerCase(id, ticket, interpreterResult, findings, rationale, extra 
     id, agent: 'adversarial-reviewer',
     input: { ticket, interpreterResult: clone(interpreterResult), ...extra.input },
     output: reviewOutput(findings, rationale, resolutions),
-    gold: { findings: clone(findings), rationale, resolutions: clone(resolutions) },
+    gold: {
+      findings: clone(findings), rationale,
+      rationaleEquivalents: clone(extra.rationaleEquivalents || []),
+      resolutions: clone(resolutions)
+    },
     provenance: 'Frozen ticket/interpreter pair with authored supported findings and clean controls.'
   };
   contexts.push(context);
@@ -85,7 +93,38 @@ const coil = interpreterCase('coil', fixture(4), io(
     'The response to out-of-range input is unspecified.',
     'Behavior for an unlisted coil configuration is unspecified.'
   ], 'MEDIUM'
-), 'LOCAL_GAPS', { validationRules: coilRules });
+), 'LOCAL_GAPS', {
+  validationRules: coilRules,
+  equivalents: {
+    requirementSummary: [
+      'The UI must validate Water/Steam Coil Height from 1.25 to 100 inches and round non-multiples to the nearest increment for the selected coil configuration.'
+    ],
+    hvacTerminology: [[], [], [], [], [], []],
+    businessRules: [
+      ['Valid coil height range is 1.25" to 100" inclusive.'],
+      [],
+      ['If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.'],
+      [],
+      [],
+      [],
+      [],
+      ['For 3/8" tube with 1" spacing, the increment is 1.00".']
+    ],
+    ambiguities: [
+      ['The tie-breaking rule for a value exactly halfway between two valid increments is not specified.'],
+      ['The ticket does not specify how the 3/8-inch tube with 1-inch spacing configuration is selected or represented.'],
+      [],
+      []
+    ]
+  }
+});
+const coilReviewerInput = clone(coil.output);
+coil.output.hvacTerminology = [
+  'Coil Height', 'Water/Steam coils', 'tube', 'Lamiflo coil', 'spacing', 'increment'
+];
+coil.output.ambiguities[1] =
+  'The ticket does not specify how the 3/8-inch tube with 1-inch spacing configuration is selected or represented.';
+coil.gold.interpreter = clone(coil.output);
 coil.sourceQuotes = [
   'Valid range: 1.25" to 100"',
   '3/8" tube with 1" spacing: Increment = 1.00"',
@@ -167,34 +206,179 @@ const assumption = reviewerCase('assumption', filters.input.ticket, {
 const missing = reviewerCase('missing', dx.input.ticket, {
   ...clone(dx.output), businessRules: dxRules.slice(0, 2), ambiguities: []
 }, [finding(
-  'DX-F1', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'HIGH',
-  'The interpreter omits recalculation and updating DX Coil Information after Circuit Height edits.',
-  'Restore the ticket requirement to recompute the sum and update DX Coil Information on edit.',
-  [ref('ticket', '', 'should the user alter the Circuit Height')]
-)], 'The stated edit-triggered recalculation is missing.');
+  'DX-F1', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'LOW',
+  'The edit-triggered recalculation is recorded only as a developer consideration, not as an explicit business rule.',
+  'Record the ticket-stated recalculation and DX Coil Information update as a business rule.',
+  [
+    ref('ticket', '', 'should the user alter the Circuit Height'),
+    ref('interpreter', '/developerConsiderations/0',
+      'Update DX Coil Information when a Circuit Height is edited.')
+  ],
+  [],
+  {
+    description: [
+      'The rule to recalculate on a Circuit Height edit is absent from businessRules; it appears only in developerConsiderations.'
+    ],
+    action: [
+      'Move the supported edit-triggered recalculation behavior into businessRules; keep the developer note only if useful.'
+    ]
+  }
+)], 'The ticket behavior is summarized and noted for developers, but is missing from the required businessRules field.', {
+  rationaleEquivalents: [
+    'The summary and developer note mention recalculation, but businessRules does not capture the edit-triggered rule.'
+  ]
+});
 
+const previousMissingReview = {
+  status: 'FAIL',
+  rationale: 'The stated edit-triggered recalculation is missing.',
+  findings: [{
+    id: 'DX-F1',
+    kind: 'MISSING_REQUIREMENT',
+    severity: 'HIGH',
+    description: 'The interpreter omits recalculation and updating DX Coil Information after Circuit Height edits.',
+    action: 'Restore the ticket requirement to recompute the sum and update DX Coil Information on edit.',
+    sourceRefs: [ref('ticket', '', 'should the user alter the Circuit Height')],
+    ambiguityRefs: []
+  }],
+  resolutions: []
+};
+
+const hvacFindings = [
+  finding(
+    'H1', 'HVAC_ERROR', 'HVAC_ERROR', 'HIGH',
+    'The interpreter swaps AC and EC meanings; the ticket defines Air Cooled as AC and Evaporative Cooled as EC.',
+    'Restore Air Cooled (AC) and Evaporative Cooled (EC).',
+    [
+      ref('ticket', '', 'Air Cooled (AC) and Evaporative Cooled (EC)'),
+      ref('interpreter', '/businessRules/0',
+        'AC means Evaporative Cooled and EC means Air Cooled.')
+    ]
+  ),
+  finding(
+    'H2', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'HIGH',
+    'The conditional display of the AC/EC-specific input fields is absent from the interpretation.',
+    'Capture that selecting AC or EC displays the corresponding input fields.',
+    [
+      ref('ticket', '', 'When the user selects the Condenser Type "AC" or "EC", the corresponding input fields should be displayed.'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  ),
+  finding(
+    'H3', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'HIGH',
+    'The interpretation omits the stated AC defaults and tube-size options.',
+    'Capture the 95°F Design Ambient default, Copper tube material, Aluminum fin material, Corrugated fin type, and both stated tube-size options.',
+    [
+      ref('ticket', '', '95°F'),
+      ref('ticket', '', 'Copper'),
+      ref('ticket', '', 'Aluminum'),
+      ref('ticket', '', 'Corrugated'),
+      ref('ticket', '', '3/8, 3/8 w/ 1" spacing'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  ),
+  finding(
+    'H4', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'MEDIUM',
+    'The interpretation omits the listed temperature and tube-size units.',
+    'Capture the stated °F/°C temperature units and mm tube-size unit without inventing conversion behavior.',
+    [
+      ref('ticket', '', 'Design Ambient | Numeric Input | User / Default | °F / °C'),
+      ref('ticket', '', 'Condenser Tube Size | Dropdown | User / Default | mm'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  ),
+  finding(
+    'H5', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'HIGH',
+    'The interpretation omits the EC Bank ID, Copies of this Bank, EC Model, and Wet Bulb Temperature inputs.',
+    'Capture the listed EC fields and their stated sources/units.',
+    [
+      ref('ticket', '', 'Bank ID#'),
+      ref('ticket', '', 'Copies of this Bank'),
+      ref('ticket', '', 'EC Model'),
+      ref('ticket', '', 'Wet Bulb Temperature'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  ),
+  finding(
+    'H6', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'HIGH',
+    'The output requirement for condenser and per-circuit configuration ready for ECS calculation is absent.',
+    'Capture the stated ECS-ready condenser and circuit-level output.',
+    [
+      ref('ticket', '', 'Then the system outputs condenser and circuit-level configuration ready for ECS calculation.'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  ),
+  finding(
+    'H7', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'MEDIUM',
+    'The interpretation omits the AC requirement to record ambient design conditions and coil geometry; the ticket does not enumerate the geometry fields.',
+    'Capture the stated record behavior and ask the ticket owner to identify the required coil-geometry fields.',
+    [
+      ref('ticket', '', 'When they enter ambient design conditions and coil geometry,'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  ),
+  finding(
+    'H8', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'HIGH',
+    'The interpretation omits the EC requirement to record the selected model and wet bulb temperature.',
+    'Capture the stated EC parameter-recording behavior.',
+    [
+      ref('ticket', '', 'Then the system records the EC condenser parameters.'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  ),
+  finding(
+    'H9', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'HIGH',
+    'The interpretation omits the specified AutoOdd, AutoEven, and 2-through-41 Condenser Passes options.',
+    'Capture the complete Condenser Passes option set and increment.',
+    [
+      ref('ticket', '', 'AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options.'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  ),
+  finding(
+    'H10', 'MISSING_REQUIREMENT', 'MISSING_REQUIREMENT', 'MEDIUM',
+    'The ticket requires Roof Type choices but does not enumerate the exact dark/light and parapet/shrouding options.',
+    'Record the stated option dimensions and obtain the missing exact Roof Type choices from the ticket owner.',
+    [
+      ref('ticket', '', 'specified dark and light roof type options with and without parapet/shrouding.'),
+      ref('interpreter', '/requirementSummary', 'Configure AC and EC condensers.')
+    ]
+  )
+];
 const hvac = reviewerCase('hvac', fixture(3), io(
   'Configure AC and EC condensers.', ['AC', 'EC'],
   ['AC means Evaporative Cooled and EC means Air Cooled.'], [], [], 'HIGH'
-), [finding(
-  'H1', 'HVAC_ERROR', 'HVAC_ERROR', 'HIGH',
-  'The interpreter swaps AC and EC meanings; the ticket defines Air Cooled as AC and Evaporative Cooled as EC.',
-  'Restore Air Cooled (AC) and Evaporative Cooled (EC).',
-  [ref('ticket', '', 'Air Cooled (AC) and Evaporative Cooled (EC)'),
-    ref('interpreter', '/businessRules/0', 'AC means Evaporative Cooled and EC means Air Cooled.')]
-)], 'The HVAC condenser meanings are reversed.');
+), hvacFindings,
+  'The interpretation reverses AC/EC meanings and omits multiple explicit input, recording, and output requirements.');
 
 const invalidRange = reviewerCase('validation', coil.input.ticket, {
-  ...clone(coil.output), businessRules: coilRules.slice(1), ambiguities: []
+  ...clone(coilReviewerInput), businessRules: coilRules.slice(1), ambiguities: []
 }, [finding(
   'V1', 'MISSING_VALIDATION', 'MISSING_VALIDATION', 'MEDIUM',
-  'The explicit 1.25-to-100-inch Coil Height range is absent from the interpretation.',
-  'Restore both stated range limits and inches as the unit.',
-  [ref('ticket', '', 'Valid range: 1.25" to 100"')]
-)], 'The stated range limits and unit are missing.');
+  'The 1.25-to-100-inch constraint appears in the summary but is missing from businessRules, where explicit validation constraints belong.',
+  'Record both stated range limits and inches as an explicit business rule.',
+  [
+    ref('ticket', '', 'Valid range: 1.25" to 100"'),
+    ref('interpreter', '/requirementSummary',
+      'Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.')
+  ],
+  [],
+  {
+    description: [
+      'The ticket range is summarized, but the explicit 1.25-to-100-inch validation rule is absent from businessRules.'
+    ],
+    action: [
+      'Add the ticket-stated lower and upper limits, with inches, to businessRules.'
+    ]
+  }
+)], 'The range is mentioned in the summary but is absent from the required businessRules field.', {
+  rationaleEquivalents: [
+    'The stated limits appear in the summary, but the structured business-rule list does not preserve them.'
+  ]
+});
 
 const missed = reviewerCase('missed-ambiguity', coil.input.ticket, {
-  ...clone(coil.output), ambiguities: []
+  ...clone(coilReviewerInput), ambiguities: []
 }, [finding(
   'Q1', 'MISSED_AMBIGUITY', 'MISSING_VALIDATION', 'MEDIUM',
   'The interpreter misses the unanswered rounding tie question; nearest rounding does not define ties.',
@@ -202,13 +386,13 @@ const missed = reviewerCase('missed-ambiguity', coil.input.ticket, {
   [ref('ticket', '', 'round it to the nearest valid increment.')]
 )], 'A missing tie-breaking policy was not surfaced as a question.');
 
-const openFindings = coil.output.ambiguities.map((text, index) => finding(
+const openFindings = coilReviewerInput.ambiguities.map((text, index) => finding(
   `O${index + 1}`, 'OPEN_AMBIGUITY', 'OPEN_AMBIGUITY',
   ['MEDIUM', 'LOW', 'MEDIUM', 'HIGH'][index],
   text, 'Obtain clarification from the ticket owner.',
   [ref('interpreter', `/ambiguities/${index}`, text)], [`/ambiguities/${index}`]
 ));
-const open = reviewerCase('open', coil.input.ticket, coil.output, openFindings,
+const open = reviewerCase('open', coil.input.ticket, coilReviewerInput, openFindings,
   'All four listed questions remain unresolved and prevent readiness clearance.');
 
 const categories = ['ROUNDING_TIE', 'CONFIGURATION', 'BOUNDARY', 'UNKNOWN_CONFIGURATION'];
@@ -220,11 +404,16 @@ boundaryFindings.push(finding(
   [ref('ticket', '', 'Valid range: 1.25" to 100"'),
     ref('ticket', '', 'round it to the nearest valid increment.')]
 ));
-const boundary = reviewerCase('boundary', coil.input.ticket, coil.output, boundaryFindings,
+const boundary = reviewerCase('boundary', coil.input.ticket, coilReviewerInput, boundaryFindings,
   'Boundary, configuration, tie, unknown-option, and range/increment questions remain unresolved.');
 
 const cleanReview = reviewerCase('clean-review', cleanTicket, clean.output, [],
-  'The sum, inches, immediate edit update, empty-list result, and validated-input scope are captured without open questions.');
+  'The sum, inches, immediate edit update, empty-list result, and validated-input scope are captured without open questions.',
+  {
+    rationaleEquivalents: [
+      "The ticket's calculation, units, edit trigger, empty-list result, and prevalidated-input scope are all represented; no clarification remains."
+    ]
+  });
 
 const low = reviewerCase('minor-label',
   'Display the calculated height using the exact label "DX Coil Height". The calculation is already correct.',
@@ -239,7 +428,7 @@ const low = reviewerCase('minor-label',
   )], 'The requested display label needs a minor wording correction.');
 
 const retained = reviewerCase('retained', missing.input.ticket, missing.input.interpreterResult,
-  missing.gold.findings, missing.output.rationale, { input: { previousReview: clone(missing.output) } });
+  missing.gold.findings, missing.output.rationale, { input: { previousReview: clone(previousMissingReview) } });
 const resolvedFindings = dx.output.ambiguities.map((text, index) => finding(
   `D${index + 1}`, 'OPEN_AMBIGUITY', 'OPEN_AMBIGUITY', 'MEDIUM', text,
   'Obtain clarification from the ticket owner.',
@@ -247,7 +436,7 @@ const resolvedFindings = dx.output.ambiguities.map((text, index) => finding(
 ));
 const resolved = reviewerCase('resolved', dx.input.ticket, dx.output, resolvedFindings,
   'Edit-triggered recalculation is restored, but the remaining ticket questions still prevent clearance.', {
-  input: { previousReview: clone(missing.output) },
+  input: { previousReview: clone(previousMissingReview) },
   resolutions: [{
     findingId: 'DX-F1',
     rationale: 'The current business rule explicitly restores recalculation and the DX Coil Information update.',
@@ -255,7 +444,7 @@ const resolved = reviewerCase('resolved', dx.input.ticket, dx.output, resolvedFi
   }]
 });
 
-const badResolutionIO = clone(coil.output);
+const badResolutionIO = clone(coilReviewerInput);
 badResolutionIO.ambiguities = [];
 badResolutionIO.ambiguityResolutions = [{
   ambiguity: coil.output.ambiguities[0],
@@ -289,7 +478,7 @@ function writerCase(id, interpreterResult, reviewResult, disposition, reasonCode
   return context;
 }
 
-const writerFail = writerCase('writer-fail', coil.output, open.output, 'FAIL',
+const writerFail = writerCase('writer-fail', coilReviewerInput, open.output, 'FAIL',
   ['OPEN_FINDINGS', 'OPEN_AMBIGUITIES']);
 const writerPass = writerCase('writer-pass', clean.output, cleanReview.output, 'PASS', ['NO_OPEN_CONCERNS']);
 
@@ -497,4 +686,4 @@ for (const context of [writerFail, writerPass]) {
   ]);
 }
 
-module.exports = { contexts, checks };
+module.exports = { contexts, checks, reviewInputs: { coil: coilReviewerInput } };

@@ -57,6 +57,64 @@ test('field-specific full propositions permit only case/whitespace normalization
   assert.equal(score('dx', output).pass, false);
 });
 
+test('reviewed semantic equivalents pass without accepting changed quantities or negation', () => {
+  const output = clone(context('coil').output);
+  output.requirementSummary = context('coil').gold.equivalents.requirementSummary[0];
+  output.businessRules[0] = context('coil').gold.equivalents.businessRules[0][0];
+  output.businessRules[2] = context('coil').gold.equivalents.businessRules[2][0];
+  output.ambiguities[0] = context('coil').gold.equivalents.ambiguities[0][0];
+  const result = score('coil', output);
+  assert.equal(result.gates.sourceGrounding, true);
+  assert.equal(result.thresholds.requirementExtractionAccuracy.pass, true);
+  assert.equal(result.thresholds.ambiguityDetection.pass, true);
+  assert.equal(result.pass, true);
+
+  output.businessRules[0] = 'Valid coil height range is 1.25" to 1000" inclusive.';
+  const changedQuantity = score('coil', output);
+  assert.equal(changedQuantity.gates.sourceGrounding, false);
+  assert.equal(changedQuantity.thresholds.requirementExtractionAccuracy.pass, false);
+  output.businessRules[0] = 'Valid coil height range is not 1.25" to 100" inclusive.';
+  const changedPolarity = score('coil', output);
+  assert.equal(changedPolarity.gates.sourceGrounding, false);
+  assert.equal(changedPolarity.thresholds.requirementExtractionAccuracy.pass, false);
+});
+
+test('reviewer accepts reviewed description/action paraphrases and order-insensitive exact citations', () => {
+  const output = clone(context('missing').output);
+  output.findings[0].description = context('missing').gold.findings[0].equivalents.description[0];
+  output.findings[0].action = context('missing').gold.findings[0].equivalents.action[0];
+  output.findings[0].sourceRefs.reverse();
+  assert.equal(score('missing', output).pass, true);
+
+  output.findings[0].sourceRefs[0].quote = 'The ticket says some height behavior.';
+  assert.equal(score('missing', output).pass, false);
+
+  const clean = clone(context('clean-review').output);
+  clean.rationale = context('clean-review').gold.rationaleEquivalents[0];
+  assert.equal(score('clean-review', clean).pass, true);
+});
+
+test('complete reviewer gold accepts multiple valid concerns but rejects unlabelled extras', () => {
+  const result = score('hvac');
+  assert.equal(result.pass, true);
+  assert.equal(result.metrics.hvacInterpretationErrorDetection.matched, 1);
+  assert.equal(result.metrics.missingRequirementDetection.matched,
+    context('hvac').gold.findings.filter(f => f.category === 'MISSING_REQUIREMENT').length);
+
+  const output = clone(context('hvac').output);
+  output.findings.push({
+    id: 'FP-EXTRA',
+    kind: 'MISSING_REQUIREMENT',
+    severity: 'HIGH',
+    description: 'The ticket omits the default Aluminum fin material.',
+    action: 'Ask the ticket owner to clarify the missing fin-material default.',
+    sourceRefs: [{ artifact: 'ticket', pointer: '', quote: 'Aluminum' }],
+    ambiguityRefs: []
+  });
+  assert.equal(score('hvac', output).gates.runtimeContract, true);
+  assert.equal(score('hvac', output).gates.falsePositiveControl, false);
+});
+
 test('empty expectations are NA, not success; missing mandatory labels fail configuration', () => {
   const result = score('clean-review');
   assert.deepEqual(result.metrics.unsupportedAssumptionDetection, {
@@ -102,7 +160,7 @@ test('invalid status, missing action, invented evidence, and meaningless long fi
     output => { output.findings[0].sourceRefs[0].quote = 'Invented evidence'; },
     output => { output.findings[0].description = 'Meaningless general observations '.repeat(5); },
     output => { output.findings[0].action = 'Fix it.'; },
-    output => { output.findings[0].severity = 'LOW'; }
+    output => { output.findings[0].severity = output.findings[0].severity === 'HIGH' ? 'LOW' : 'HIGH'; }
   ]) {
     const output = clone(context('missing').output);
     mutate(output);

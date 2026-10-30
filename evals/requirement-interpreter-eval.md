@@ -28,7 +28,7 @@ Historical files below remain historical; no new prompt-iteration delta is claim
 
 ## Current scorer - Deliverable 4
 
-`src/eval-scorer.js` now uses `content-v2`, replacing substring and two-word-overlap credit. Existing thresholds remain unchanged. `evals/test-cases.json` identifies workflow artifacts; `evals/step-cases.js` supplies 26 fixed direct-step cases with authored labels, including all four HVAC fixtures, sparse/conflicting tickets, corrected reviewer counterparts, and clean PASS/concern-bearing FAIL reports.
+`src/eval-scorer.js` now uses `content-v3-reviewed-equivalents`, replacing exact-only semantic wording checks with independently reviewed proposition-equivalent phrasings while retaining exact schema, source-quote, reference, numeric, and polarity checks. Reviewer findings are matched one-to-one against complete authored concern labels: supported additional concerns are accepted only when labeled; ungrounded extras remain a hard failure. Existing thresholds remain unchanged. `evals/test-cases.json` identifies workflow artifacts; `evals/step-cases.js` supplies fixed direct-step cases with authored labels, including all four HVAC fixtures, sparse/conflicting tickets, corrected reviewer counterparts, and clean PASS/concern-bearing FAIL reports.
 
 Commands (offline, no model invocation):
 
@@ -67,7 +67,7 @@ Workflow evidence additionally requires completed status, explicit real mode, co
 
 `--definitions FILE` can select workflow/baseline artifacts using the version-2 format. Optional `responseFile` and `workflowLabelsFile` paths are repository-relative. Workflow labels contain `cases`, each with `id`, `agent`, `input` (or `inputFile`), `inputHash`, `gold`, and `provenance`; changed hashes, duplicate contexts, and overrides of fixed cases fail configuration. `baseline.state` is `required` (file, optionally immutable Git ref) or `not-in-baseline` with a reason. Tickets 1-3 now use byte-exact exports of `4fcbf47`, with Git origin metadata, so offline replay does not need `.git`. Ticket 4 and the new positive control have no historical baseline. Missing, corrupt, or contract-incompatible required baselines still fail.
 
-`--baseline-responses FILE` optionally compares the same direct cases. Deltas require identical case/fixture identity, exact step input, model/settings, and current scorer hash. Expanded/unmatched cases are reported separately with no delta. Old keyword scores are never compared to content-v2 scores.
+`--baseline-responses FILE` optionally compares the same direct cases. Deltas require identical case/fixture identity, exact step input, model/settings, and current scorer hash. Expanded/unmatched cases are reported separately with no delta. Old keyword and content-v2 scores are never compared to content-v3-reviewed-equivalents scores.
 
 Output is JSON on stdout. Optional `--output NEW_FILE` writes a new file only; existing files and `sub-agents-results.json` are protected. Historical results below remain historical, not refreshed measurements.
 

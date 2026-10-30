@@ -6,7 +6,10 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { cases } = require('../evals/step-cases');
 const definitions = require('../evals/test-cases.json');
-const { runEvaluation, evaluateDirect, readBaseline, evaluateWorkflow } = require('../src/eval-runner');
+const workflowGoldEquivalents = require('../evals/workflow-label-equivalents');
+const {
+  runEvaluation, evaluateDirect, readBaseline, evaluateWorkflow, applyWorkflowLabelEquivalents
+} = require('../src/eval-runner');
 const { hash, inputHash, validateObservation, workflowObservations, comparePaired } = require('../src/eval-evidence');
 const { scoreStep, metric } = require('../src/eval-scorer');
 const { createAgentRunner } = require('../src/agent-runner');
@@ -76,6 +79,30 @@ test('unknown gold contexts are configuration failures, never inferred from cand
   const testCase = context('missing');
   assert.throws(() => scoreStep(testCase.agent, testCase.output, testCase.input, {}), /labels/);
   assert.throws(() => workflowObservations({ disposition: 'PASS' }, 'ticket'), /completed status/);
+});
+
+test('workflow semantic equivalents are bound to frozen inputs and declared gold findings', () => {
+  const fixed = {
+    id: 'd5-ticket1-review-cycle1',
+    inputHash: workflowGoldEquivalents['d5-ticket1-review-cycle1'].inputHash,
+    gold: {
+      findings: Array.from({ length: 5 }, (_, index) => ({
+        id: `GOLD-OPEN-${index}`,
+        description: `Finding ${index}`
+      }))
+    }
+  };
+  const enriched = applyWorkflowLabelEquivalents(fixed);
+  assert.ok(enriched.gold.rationaleEquivalents.length > 0);
+  assert.ok(enriched.gold.findings[0].equivalents.description.length > 0);
+  assert.equal(fixed.gold.findings[0].equivalents, undefined);
+  assert.throws(() => applyWorkflowLabelEquivalents({
+    ...fixed, inputHash: '0'.repeat(64)
+  }), /different input/);
+  assert.throws(() => applyWorkflowLabelEquivalents({
+    ...fixed,
+    gold: { ...fixed.gold, findings: [{ id: 'UNKNOWN' }] }
+  }), /Unknown finding/);
 });
 
 test('required missing/corrupt baselines fail; intentional post-baseline fixture absence is explicit', t => {

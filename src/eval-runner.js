@@ -3,6 +3,7 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 const { cases } = require('../evals/step-cases');
 const defaults = require('../evals/test-cases.json');
+const workflowLabelEquivalents = require('../evals/workflow-label-equivalents');
 const { VERSION, THRESHOLDS, scoreStep, aggregate, configured } = require('./eval-scorer');
 const { runAudit } = require('./run-load-bearing-audit');
 const { hash, inputHash, readJson, validateObservation, workflowObservations, comparePaired } = require('./eval-evidence');
@@ -10,7 +11,9 @@ const { hash, inputHash, readJson, validateObservation, workflowObservations, co
 const root = path.resolve(__dirname, '..');
 const scorerFiles = ['src/eval-scorer.js', 'src/load-bearing-criteria.js', 'src/governance-policy.js',
   'src/report-contract.js', 'src/schema-validator.js', 'schemas/examiner.schema.json',
-  'schemas/challenges.schema.json', 'schemas/final-review.schema.json'];
+  'schemas/challenges.schema.json', 'schemas/final-review.schema.json',
+  'evals/step-cases.js', 'evals/load-bearing-cases.js',
+  'evals/workflow-label-equivalents.js'];
 const scorerHash = () => hash(JSON.stringify(scorerFiles.map(file => [file, hash(fs.readFileSync(path.join(root, file)))])));
 
 function readBaseline(definition) {
@@ -79,6 +82,37 @@ function evaluateWorkflow(run, ticket, fixtureId, versionHash, workflowCases = [
   });
 }
 
+function applyWorkflowLabelEquivalents(value) {
+  const equivalents = workflowLabelEquivalents[value.id];
+  if (!equivalents) return value;
+  configured(equivalents.inputHash === value.inputHash,
+    `Workflow label equivalences are bound to a different input: ${value.id}`);
+  configured(Array.isArray(equivalents.rationale)
+    && equivalents.rationale.every(item => typeof item === 'string' && item.trim()),
+  `Invalid rationale equivalences: ${value.id}`);
+  const expectedIds = new Set(value.gold.findings.map(finding => finding.id));
+  const variantIds = Object.keys(equivalents.findings || {});
+  configured(variantIds.every(id => expectedIds.has(id)),
+    `Unknown finding equivalence label: ${value.id}`);
+  const findings = value.gold.findings.map(finding => {
+    const variant = equivalents.findings?.[finding.id];
+    if (!variant) return finding;
+    configured(Object.keys(variant).every(key => ['description', 'action'].includes(key))
+      && Object.values(variant).every(items =>
+        Array.isArray(items) && items.every(item => typeof item === 'string' && item.trim())),
+    `Invalid finding equivalences: ${value.id}/${finding.id}`);
+    return { ...finding, equivalents: variant };
+  });
+  return {
+    ...value,
+    gold: {
+      ...value.gold,
+      findings,
+      rationaleEquivalents: equivalents.rationale
+    }
+  };
+}
+
 function runEvaluation({ selfTest = false, responses, baselineResponses, definitions = defaults, coverage = runAudit() } = {}) {
   const versionHash = scorerHash();
   const errors = [];
@@ -102,9 +136,10 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
       workflowCases = labels.cases.map(value => {
         configured(value && !(value.inputFile && Object.hasOwn(value, 'input')),
           'Workflow labels must select one fixed input source.');
-        return value.inputFile
+        const materialized = value.inputFile
           ? { ...value, input: readJson(path.resolve(root, value.inputFile)) }
           : value;
+        return applyWorkflowLabelEquivalents(materialized);
       });
       const identities = new Set(cases.map(value => JSON.stringify([value.agent, inputHash(value.input)])));
       for (const value of workflowCases) {
@@ -218,4 +253,7 @@ function main(argv = process.argv.slice(2)) {
   }
 }
 
-module.exports = { runEvaluation, evaluateDirect, evaluateWorkflow, readBaseline, main };
+module.exports = {
+  runEvaluation, evaluateDirect, evaluateWorkflow, readBaseline, main,
+  applyWorkflowLabelEquivalents
+};

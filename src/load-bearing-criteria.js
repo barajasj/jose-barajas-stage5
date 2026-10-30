@@ -23,36 +23,82 @@ function label(gold, key) {
   return gold[key];
 }
 
-function sameStatements(actual, expected) {
-  return Array.isArray(actual) && Array.isArray(expected)
-    && actual.length === expected.length
-    && new Set(actual.map(normalized)).size === actual.length
-    && expected.every(item => actual.some(value => equalText(value, item)));
+function matchesText(actual, expected, equivalents = []) {
+  return [expected, ...equivalents].some(value => equalText(actual, value));
 }
 
-function containsStatements(actual, expected) {
+function matchOneToOne(actual, expected, matches) {
+  const actualToExpected = new Map();
+  const assign = (expectedIndex, seen) => {
+    for (let actualIndex = 0; actualIndex < actual.length; actualIndex++) {
+      if (seen.has(actualIndex) || !matches(actual[actualIndex], expected[expectedIndex], expectedIndex)) {
+        continue;
+      }
+      seen.add(actualIndex);
+      const previous = actualToExpected.get(actualIndex);
+      if (previous === undefined || assign(previous, seen)) {
+        actualToExpected.set(actualIndex, expectedIndex);
+        return true;
+      }
+    }
+    return false;
+  };
+  for (let expectedIndex = 0; expectedIndex < expected.length; expectedIndex++) {
+    assign(expectedIndex, new Set());
+  }
+  const expectedToActual = new Array(expected.length).fill(-1);
+  for (const [actualIndex, expectedIndex] of actualToExpected) {
+    expectedToActual[expectedIndex] = actualIndex;
+  }
+  return expectedToActual;
+}
+
+function sameStatements(actual, expected, equivalents = []) {
+  if (!Array.isArray(actual) || !Array.isArray(expected)
+    || actual.length !== expected.length
+    || new Set(actual.map(normalized)).size !== actual.length) {
+    return false;
+  }
+  return matchOneToOne(actual, expected, (value, item, index) =>
+    matchesText(value, item, equivalents[index] || [])).every(index => index >= 0);
+}
+
+function containsStatements(actual, expected, equivalents = []) {
   if (!Array.isArray(expected) || expected.length === 0) {
     throw Object.assign(new Error('Missing applicable proposition labels.'), { code: 'EVAL_CONFIGURATION_FAILURE' });
   }
-  return Array.isArray(actual) && expected.every(item => actual.some(value => equalText(value, item)));
+  if (!Array.isArray(actual)) {
+    return false;
+  }
+  return matchOneToOne(actual, expected, (value, item, index) =>
+    matchesText(value, item, equivalents[index] || [])).every(index => index >= 0);
 }
 
 function interpreterGrounded(output, gold) {
   const expected = label(gold, 'interpreter');
-  return equalText(output.requirementSummary, expected.requirementSummary)
+  const equivalents = gold.equivalents || {};
+  return matchesText(output.requirementSummary, expected.requirementSummary,
+    equivalents.requirementSummary)
     && ['hvacTerminology', 'businessRules', 'developerConsiderations', 'ambiguities']
-      .every(field => sameStatements(output[field], expected[field]));
-}
-
-function matchesFinding(actual, expected) {
-  return actual.kind === expected.kind && equalText(actual.description, expected.description);
+      .every(field => sameStatements(output[field], expected[field], equivalents[field]));
 }
 
 function exactFinding(actual, expected) {
-  return matchesFinding(actual, expected) && actual.severity === expected.severity
-    && equalText(actual.action, expected.action)
-    && equalValue(actual.sourceRefs, expected.sourceRefs)
-    && equalValue(actual.ambiguityRefs, expected.ambiguityRefs);
+  const equivalents = expected.equivalents || {};
+  const sameRefs = (actualRefs, expectedRefs) => Array.isArray(actualRefs)
+    && Array.isArray(expectedRefs)
+    && actualRefs.length === expectedRefs.length
+    && expectedRefs.every(ref => actualRefs.some(value =>
+      value.artifact === ref.artifact && value.pointer === ref.pointer && value.quote === ref.quote));
+  const sameAmbiguities = (actualRefs, expectedRefs) => Array.isArray(actualRefs)
+    && Array.isArray(expectedRefs)
+    && actualRefs.length === expectedRefs.length
+    && expectedRefs.every(ref => actualRefs.includes(ref));
+  return actual.kind === expected.kind && actual.severity === expected.severity
+    && matchesText(actual.description, expected.description, equivalents.description)
+    && matchesText(actual.action, expected.action, equivalents.action)
+    && sameRefs(actual.sourceRefs, expected.sourceRefs)
+    && sameAmbiguities(actual.ambiguityRefs, expected.ambiguityRefs);
 }
 
 function detect(output, gold, categories) {
@@ -60,8 +106,12 @@ function detect(output, gold, categories) {
   if (!expected.length) {
     throw Object.assign(new Error('Missing applicable finding labels.'), { code: 'EVAL_CONFIGURATION_FAILURE' });
   }
-  return Array.isArray(output.findings)
-    && expected.every(item => output.findings.some(f => matchesFinding(f, item)));
+  const actual = Array.isArray(output.findings) ? output.findings : [];
+  return matchFindings(actual, expected).every(index => index >= 0);
+}
+
+function matchFindings(actual, expected) {
+  return matchOneToOne(actual, expected, exactFinding);
 }
 
 function groundedFindings(output, input, gold) {
@@ -70,10 +120,12 @@ function groundedFindings(output, input, gold) {
     || new Set(output.findings.map(f => f.id)).size !== output.findings.length) {
     return false;
   }
+  const assignments = matchFindings(output.findings, expected);
+  if (output.findings.length > expected.length
+    || output.findings.some((_, index) => !assignments.includes(index))) {
+    return false;
+  }
   for (const finding of output.findings) {
-    if (!expected.some(item => exactFinding(finding, item))) {
-      return false;
-    }
     for (const ref of finding.sourceRefs) {
       let source = input.ticket;
       if (ref.artifact === 'interpreter') {
@@ -170,19 +222,26 @@ const criteria = {
   schemaConformance: (output, input, gold, agent) =>
     validateSchema(output, path.join(__dirname, '../schemas', schemas[agent])).valid,
   summaryAccuracy: (output, input, gold) =>
-    equalText(output.requirementSummary, label(gold, 'interpreter').requirementSummary),
+    matchesText(output.requirementSummary, label(gold, 'interpreter').requirementSummary,
+      gold.equivalents?.requirementSummary),
   hvacTerminologyAccuracy: (output, input, gold) =>
-    sameStatements(output.hvacTerminology, label(gold, 'interpreter').hvacTerminology),
+    sameStatements(output.hvacTerminology, label(gold, 'interpreter').hvacTerminology,
+      gold.equivalents?.hvacTerminology),
   businessRuleAccuracy: (output, input, gold) =>
-    sameStatements(output.businessRules, label(gold, 'interpreter').businessRules),
+    sameStatements(output.businessRules, label(gold, 'interpreter').businessRules,
+      gold.equivalents?.businessRules),
   validationRuleAccuracy: (output, input, gold) =>
-    containsStatements(output.businessRules, label(gold, 'validationRules')),
+    containsStatements(output.businessRules, label(gold, 'validationRules'),
+      gold.equivalents?.validationRules),
   functionalBehaviorAccuracy: (output, input, gold) =>
-    containsStatements(output.businessRules, label(gold, 'functionalRules')),
+    containsStatements(output.businessRules, label(gold, 'functionalRules'),
+      gold.equivalents?.functionalRules),
   ambiguityAccuracy: (output, input, gold) =>
-    sameStatements(output.ambiguities, label(gold, 'interpreter').ambiguities),
+    sameStatements(output.ambiguities, label(gold, 'interpreter').ambiguities,
+      gold.equivalents?.ambiguities),
   developerConsiderationGrounding: (output, input, gold) =>
-    sameStatements(output.developerConsiderations, label(gold, 'interpreter').developerConsiderations),
+    sameStatements(output.developerConsiderations, label(gold, 'interpreter').developerConsiderations,
+      gold.equivalents?.developerConsiderations),
   confidencePolicyConsistency: (output, input, gold) => {
     const state = label(gold, 'readiness');
     const expected = { COMPLETE: 'HIGH', LOCAL_GAPS: 'MEDIUM', CORE_GAPS: 'LOW' }[state];
@@ -201,7 +260,7 @@ const criteria = {
       throw Object.assign(new Error('Missing empty-array labels.'), { code: 'EVAL_CONFIGURATION_FAILURE' });
     }
     return fields.every(field => Array.isArray(output[field]) && output[field].length === 0)
-      && sameStatements(output.ambiguities, expected.ambiguities);
+      && sameStatements(output.ambiguities, expected.ambiguities, gold.equivalents?.ambiguities);
   },
   redispatchSafety: (output, input, gold) => {
     validateInterpretationTransition(output, input);
@@ -229,21 +288,21 @@ const criteria = {
     if (!expected.length) {
       throw Object.assign(new Error('Missing actionable finding labels.'), { code: 'EVAL_CONFIGURATION_FAILURE' });
     }
-    return expected.every(item => output.findings.some(f => exactFinding(f, item)));
+    return matchFindings(output.findings, expected).every(index => index >= 0);
   },
   severityAppropriateness: (output, input, gold) => {
     const expected = label(gold, 'findings');
     if (!expected.length) {
       throw Object.assign(new Error('Missing severity labels.'), { code: 'EVAL_CONFIGURATION_FAILURE' });
     }
-    return expected.every(item => output.findings.some(f =>
-      matchesFinding(f, item) && f.severity === item.severity));
+    return matchFindings(output.findings, expected).every(index => index >= 0);
   },
   statusConsistency: (output, input) =>
     ['PASS', 'FAIL'].includes(output.status)
     && output.status === (output.findings.length ? 'FAIL' : 'PASS')
     && (output.status !== 'PASS' || input.interpreterResult.ambiguities.length === 0),
-  reviewRationaleQuality: (output, input, gold) => equalText(output.rationale, label(gold, 'rationale')),
+  reviewRationaleQuality: (output, input, gold) =>
+    matchesText(output.rationale, label(gold, 'rationale'), gold.rationaleEquivalents),
   concernContinuity: (output, input, gold) => {
     validateReview(output, input);
     return equalValue(output.resolutions, label(gold, 'resolutions'))
@@ -283,4 +342,4 @@ function evaluateCriterion(name, agent, input, raw, gold) {
   }
 }
 
-module.exports = { evaluateCriterion, criteria, parseReport };
+module.exports = { evaluateCriterion, criteria, parseReport, matchFindings };

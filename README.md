@@ -331,7 +331,7 @@ The default evaluator validates persisted real-model evidence and exits nonzero 
 direct responses, incompatible historical artifacts, hard-gate violations, or missed thresholds.
 It prints JSON without overwriting historical `sub-agents-results.json`.
 Use `--responses FILE` for fixed direct-step observations and `--definitions FILE` for
-compatible workflow/baseline paths. Full contracts and `content-v2` scoring rules:
+compatible workflow/baseline paths. Full contracts and `content-v3-reviewed-equivalents` scoring rules:
 `evals/requirement-interpreter-eval.md`, "Current scorer - Deliverable 4".
 Current live evidence is `evidence/d5-20261030T1940Z/`. On 2026-10-30, one authorized
 batch made 39 model invocations: all 26 direct responses were captured, 20 passed

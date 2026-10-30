@@ -1,10 +1,10 @@
 const path = require('path');
 const { validateSchema } = require('./schema-validator');
-const { evaluateCriterion, parseReport } = require('./load-bearing-criteria');
+const { evaluateCriterion, matchFindings, parseReport } = require('./load-bearing-criteria');
 const { validateReview, validateInterpretationTransition } = require('./governance-policy');
 const { reportTemplate } = require('./report-contract');
 
-const VERSION = 'content-v2';
+const VERSION = 'content-v3-reviewed-equivalents';
 const SCHEMAS = {
   'requirement-interpreter': 'examiner.schema.json',
   'adversarial-reviewer': 'challenges.schema.json',
@@ -18,12 +18,51 @@ const THRESHOLDS = {
   hvacInterpretationErrorDetection: 1, missingValidationDetection: 1, boundaryChallengeCoverage: 1
 };
 const normalized = text => typeof text === 'string' ? text.trim().replace(/\s+/g, ' ').toLowerCase() : null;
-const sameText = (a, b) => normalized(a) !== null && normalized(a) === normalized(b);
+const sameText = (a, b, equivalents = []) => [b, ...equivalents].some(value =>
+  normalized(a) !== null && normalized(a) === normalized(value));
 const sameValue = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const nonblank = value => typeof value === 'string' && Boolean(value.trim());
 
 function configured(condition, message) {
   if (!condition) throw Object.assign(new Error(message), { code: 'EVAL_CONFIGURATION_FAILURE' });
+}
+
+function validateTextVariants(value, message) {
+  configured(Array.isArray(value) && value.every(item => nonblank(item)), message);
+}
+
+function validateInterpreterEquivalents(gold) {
+  const equivalents = gold.equivalents || {};
+  const fields = [
+    'requirementSummary', 'hvacTerminology', 'businessRules',
+    'developerConsiderations', 'ambiguities', 'validationRules', 'functionalRules'
+  ];
+  configured(Object.keys(equivalents).every(field => fields.includes(field)),
+    'Unknown interpreter equivalence field.');
+  for (const [field, variants] of Object.entries(equivalents)) {
+    if (field === 'requirementSummary') {
+      validateTextVariants(variants, 'Invalid summary equivalences.');
+      continue;
+    }
+    const expected = field === 'validationRules' || field === 'functionalRules'
+      ? gold[field] : gold.interpreter[field];
+    configured(Array.isArray(expected) && Array.isArray(variants)
+      && variants.length === expected.length,
+    `Invalid equivalence count for ${field}.`);
+    variants.forEach(items => validateTextVariants(items, `Invalid ${field} equivalence.`));
+  }
+}
+
+function validateReviewerEquivalents(gold) {
+  validateTextVariants(gold.rationaleEquivalents || [], 'Invalid rationale equivalences.');
+  for (const finding of gold.findings) {
+    const equivalents = finding.equivalents || {};
+    configured(Object.keys(equivalents).every(field => ['description', 'action'].includes(field)),
+      `Unknown finding equivalence field: ${finding.id}`);
+    for (const variants of Object.values(equivalents)) {
+      validateTextVariants(variants, `Invalid finding equivalences: ${finding.id}`);
+    }
+  }
 }
 
 function attempt(check) {
@@ -43,9 +82,17 @@ function metric(checks, reason = 'No applicable source expectations in this fixe
     : { applicable: false, matched: 0, total: 0, score: null, reason };
 }
 
-function statements(actual, expected) {
+function statements(actual, expected, equivalents = []) {
   configured(Array.isArray(expected) && expected.every(nonblank), 'Missing mandatory proposition labels.');
-  return metric(expected.map(item => Array.isArray(actual) && actual.some(value => sameText(value, item))));
+  const matched = new Set();
+  return metric(expected.map((item, index) => {
+    if (!Array.isArray(actual)) return false;
+    const candidate = actual.findIndex((value, candidateIndex) =>
+      !matched.has(candidateIndex) && sameText(value, item, equivalents[index] || []));
+    if (candidate < 0) return false;
+    matched.add(candidate);
+    return true;
+  }));
 }
 
 function schemaValid(agent, output) {
@@ -62,27 +109,24 @@ function parseCandidate(candidate) {
   }
 }
 
-function findingMatches(actual, expected) {
-  return actual.kind === expected.kind && actual.severity === expected.severity
-    && sameText(actual.description, expected.description) && sameText(actual.action, expected.action)
-    && sameValue(actual.sourceRefs, expected.sourceRefs) && sameValue(actual.ambiguityRefs, expected.ambiguityRefs);
-}
-
 function validateLabels(agent, input, gold) {
   configured(input && typeof input === 'object' && gold && typeof gold === 'object', 'Missing eval context or gold.');
   if (agent !== 'final-review-writer') configured(nonblank(input.ticket), 'Missing fixed ticket input.');
   if (agent === 'requirement-interpreter') {
     configured(gold.interpreter && schemaValid(agent, gold.interpreter), 'Missing or invalid interpreter gold.');
     configured(['COMPLETE', 'LOCAL_GAPS', 'CORE_GAPS'].includes(gold.readiness), 'Missing readiness label.');
+    validateInterpreterEquivalents(gold);
     configured(attempt(() => { validateInterpretationTransition(gold.interpreter, input); return true; }),
       'Invalid gold interpretation transition.');
   } else if (agent === 'adversarial-reviewer') {
     configured(schemaValid('requirement-interpreter', input.interpreterResult), 'Missing fixed interpreter input.');
     configured(Array.isArray(gold.findings) && nonblank(gold.rationale) && Array.isArray(gold.resolutions),
       'Missing mandatory contextual review labels.');
+    validateReviewerEquivalents(gold);
     const reference = {
       status: gold.findings.length ? 'FAIL' : 'PASS', rationale: gold.rationale,
-      findings: gold.findings.map(({ category, ...finding }) => finding), resolutions: gold.resolutions
+      findings: gold.findings.map(({ category, equivalents, ...finding }) => finding),
+      resolutions: gold.resolutions
     };
     configured(schemaValid(agent, reference) && attempt(() => { validateReview(reference, input); return true; }),
       'Review gold must satisfy the runtime contract for its fixed input.');
@@ -110,9 +154,12 @@ function scoreStep(agent, candidate, input, gold) {
   if (agent === 'requirement-interpreter') {
     const expected = gold.interpreter;
     metrics = {
-      requirementExtractionAccuracy: statements(output?.businessRules, expected.businessRules),
-      hvacTerminologyRecognition: statements(output?.hvacTerminology, expected.hvacTerminology),
-      ambiguityDetection: statements(output?.ambiguities, expected.ambiguities),
+      requirementExtractionAccuracy: statements(output?.businessRules, expected.businessRules,
+        gold.equivalents?.businessRules),
+      hvacTerminologyRecognition: statements(output?.hvacTerminology, expected.hvacTerminology,
+        gold.equivalents?.hvacTerminology),
+      ambiguityDetection: statements(output?.ambiguities, expected.ambiguities,
+        gold.equivalents?.ambiguities),
       summaryAccuracy: metric([check('summaryAccuracy')]),
       developerConsiderationGrounding: metric([check('developerConsiderationGrounding')]),
       confidencePolicyConsistency: metric([check('confidencePolicyConsistency')])
@@ -123,8 +170,12 @@ function scoreStep(agent, candidate, input, gold) {
       return sameValue(output.ambiguityResolutions || [], expected.ambiguityResolutions || []);
     });
   } else if (agent === 'adversarial-reviewer') {
-    const detect = categories => metric(gold.findings.filter(f => categories.includes(f.category))
-      .map(expected => Boolean(output?.findings?.some(f => findingMatches(f, expected)))));
+    const detect = categories => {
+      const expected = gold.findings.filter(f => categories.includes(f.category));
+      return metric(matchFindings(output?.findings || [], expected).map(index => index >= 0));
+    };
+    const allExpectedFindingsMatched =
+      matchFindings(output?.findings || [], gold.findings).every(index => index >= 0);
     metrics = {
       unsupportedAssumptionDetection: detect(['UNSUPPORTED_ASSUMPTION', 'UNSUPPORTED_RESOLUTION']),
       missingRequirementDetection: detect(['MISSING_REQUIREMENT']),
@@ -134,14 +185,11 @@ function scoreStep(agent, candidate, input, gold) {
       boundaryChallengeCoverage: detect(['BOUNDARY', 'CONFIGURATION', 'ROUNDING_TIE', 'UNKNOWN_CONFIGURATION', 'RANGE_INCREMENT']),
       challengeQuality: metric([
         check('reviewRationaleQuality'),
-        ...(gold.findings.length ? gold.findings.map(expected =>
-          Boolean(output?.findings?.some(f => findingMatches(f, expected)))) : [output?.findings?.length === 0])
+        ...(gold.findings.length ? [allExpectedFindingsMatched] : [output?.findings?.length === 0])
       ])
     };
     gates.runtimeContract = attempt(() => { validateReview(output, input); return true; });
-    gates.falsePositiveControl = check('ticketGrounding') && check('interpreterGrounding')
-      && gold.findings.every(expected => !output
-        || output.findings.filter(f => findingMatches(f, expected)).length <= 1);
+    gates.falsePositiveControl = check('ticketGrounding') && check('interpreterGrounding');
     gates.rationaleGrounding = check('reviewRationaleQuality');
     gates.concernContinuity = gates.runtimeContract && sameValue(output?.resolutions, gold.resolutions);
   } else {
