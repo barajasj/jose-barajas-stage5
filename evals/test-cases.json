@@ -2,6 +2,8 @@
   "version": 2,
   "description": "Frozen full-proposition labels and ticket/interpreter pairs. Authored controls are separate from persisted real-model observations; unsupported paraphrases receive no semantic credit.",
   "directCases": "evals/step-cases.js",
+  "responseFile": "evidence/d5-20261030T1940Z/direct-responses.json",
+  "workflowLabelsFile": "evidence/d5-20261030T1940Z/workflow-labels.json",
   "loadBearingAudit": {
     "map": "evals/load-bearing-map.json",
     "cases": "evals/load-bearing-cases.js",
@@ -13,23 +15,40 @@
   "fixtures": [
     {
       "fixture": "fixtures/hvac-ticket-1.md",
-      "evidenceFile": "evidence/ticket1-run.json",
-      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket1-run.json" }
+      "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket1-run.json",
+      "baseline": {
+        "state": "required",
+        "file": "evidence/d5-20261030T1940Z/baselines/ticket1-run.json",
+        "origin": { "ref": "4fcbf47", "file": "evidence/run1/ticket1-run.json" }
+      }
     },
     {
       "fixture": "fixtures/hvac-ticket-2.md",
-      "evidenceFile": "evidence/ticket2-run.json",
-      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket2-run.json" }
+      "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket2-run.json",
+      "baseline": {
+        "state": "required",
+        "file": "evidence/d5-20261030T1940Z/baselines/ticket2-run.json",
+        "origin": { "ref": "4fcbf47", "file": "evidence/run1/ticket2-run.json" }
+      }
     },
     {
       "fixture": "fixtures/hvac-ticket-3.md",
-      "evidenceFile": "evidence/ticket3-run.json",
-      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket3-run.json" }
+      "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket3-run.json",
+      "baseline": {
+        "state": "required",
+        "file": "evidence/d5-20261030T1940Z/baselines/ticket3-run.json",
+        "origin": { "ref": "4fcbf47", "file": "evidence/run1/ticket3-run.json" }
+      }
     },
     {
       "fixture": "fixtures/hvac-ticket-4.md",
-      "evidenceFile": "evidence/ticket4-run.json",
+      "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket4-run.json",
       "baseline": { "state": "not-in-baseline", "reason": "Ticket 4 was added after commit 4fcbf47." }
+    },
+    {
+      "fixture": "evidence/d5-20261030T1940Z/fixtures/positive-control.md",
+      "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket5-run.json",
+      "baseline": { "state": "not-in-baseline", "reason": "New fully specified positive-control ticket; no historical run." }
     }
   ]
 }

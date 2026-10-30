@@ -1,0 +1,154 @@
+{
+  "startedAt": "2026-10-30T19:38:58.782Z",
+  "source": {
+    "commit": "8a09d443f28e0328e8065cb43ac65043acd11039",
+    "dirty": true,
+    "status": "?? additional-discussion-comments-related-to-the-review.md\n?? evidence/d5-20261030T1940Z/\n?? src/collect-eval-evidence.js\n?? src/evidence-package.js\n?? stage5-certification-examination-report.md\n?? tests/evidence-package.test.js",
+    "log": "8a09d443f28e0328e8065cb43ac65043acd11039 2026-10-30T13:27:23-06:00 fix(evals): replace keyword scoring with provenance-bound content checks\n374ed511c84b086695c9cf0842071ec2b75ddf0d 2026-10-29T16:59:14-06:00 Add complete-finding example and missing-field controls\nbae61b6062151e65285d14f174775b70cd93063e 2026-10-29T13:06:44-06:00 test(evals): audit prompt instruction coverage\n60c5af25aa0df775a3700b3c33b362fc3d698d55 2026-10-29T12:40:57-06:00 fix(runtime): prevent unsafe PASS dispositions\n3a6784262093c384f7daeb4e21d0dacef18811d0 2026-10-27T18:17:57-06:00 Refresh exported git history\n705b48d7ac842db12c19b0a34b58f18839609f9f 2026-10-27T14:50:51-06:00 Update README with instruction to restore node_modules\n64c601a8a84d0fe8ea55b25de1ad97b2fbe370c2 2026-10-22T12:59:17-06:00 Rename and move documentation to docs\n5d397dfc2cb05b300905e255f5ec7dfde7c02e46 2026-10-22T12:45:46-06:00 Refresh exported git history\n37fa3101ee3ad636184a15744cbcc690a08450c3 2026-10-22T12:43:25-06:00 Document workflow success rate and export repository history\n485959156eb17bb1ad2e1385983b26c722481882 2026-10-22T12:42:23-06:00 Add deterministic eval scorer, test cases, and iteration evidence\n27369cf313bfef31f5f57cb4b7b806aa0d404305 2026-10-22T12:37:42-06:00 Make human escalation gate explicit and test all decision paths\ndaef6bb5e7e8c3d24265428c5e64f6dd5210f511 2026-10-22T11:52:54-06:00 add refinement of js files and evidence files",
+    "scope": "Explicit source/config allowlist only; no dotenv files, node_modules, or hidden Git dependency."
+  },
+  "directCases": [
+    {
+      "id": "dx",
+      "agent": "requirement-interpreter",
+      "inputHash": "077a9f54373c5f65dfab00a9472bf9e72800e9694802462179b331701d15f125"
+    },
+    {
+      "id": "coil",
+      "agent": "requirement-interpreter",
+      "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610"
+    },
+    {
+      "id": "filters",
+      "agent": "requirement-interpreter",
+      "inputHash": "3b03a93c0ab616680c1a2b1a7812d09ce6aa31516d45612e4864d4217eb5debb"
+    },
+    {
+      "id": "clean",
+      "agent": "requirement-interpreter",
+      "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071"
+    },
+    {
+      "id": "sparse",
+      "agent": "requirement-interpreter",
+      "inputHash": "b166d8c83b46f2de7b52d6b296b686116d14e2e7af01230bcc943c5d427c7dcb"
+    },
+    {
+      "id": "conflict",
+      "agent": "requirement-interpreter",
+      "inputHash": "e0f26f168a99b9a85132bfc0cd8610160a73bd71bcba82cf37ae10cd39fee4ec"
+    },
+    {
+      "id": "redispatch",
+      "agent": "requirement-interpreter",
+      "inputHash": "44ef1b3a5d866384cef22c2a81b0ecb9064cf7450c66d0dd146a0e76c2213e65"
+    },
+    {
+      "id": "assumption",
+      "agent": "adversarial-reviewer",
+      "inputHash": "844148820d9bede976294c7581d927e3f1ab95034315764df55e2e6147fb7b85"
+    },
+    {
+      "id": "missing",
+      "agent": "adversarial-reviewer",
+      "inputHash": "a2329678935c63e16fc35269959a10e8d684d5efa68304bda3bdbea045ac82af"
+    },
+    {
+      "id": "hvac",
+      "agent": "adversarial-reviewer",
+      "inputHash": "af6bf4551382f0ecf3637787a691c16a24ba2357e7cbae2cd174d168172c1e0d"
+    },
+    {
+      "id": "validation",
+      "agent": "adversarial-reviewer",
+      "inputHash": "1ff086ebb84512bba05e4659db8101ace42dfd58f408bf3bddc81b9c0a723317"
+    },
+    {
+      "id": "missed-ambiguity",
+      "agent": "adversarial-reviewer",
+      "inputHash": "5a2973cce48c468811c105631e165b902f44e6b41800093472621aba64188111"
+    },
+    {
+      "id": "open",
+      "agent": "adversarial-reviewer",
+      "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c"
+    },
+    {
+      "id": "boundary",
+      "agent": "adversarial-reviewer",
+      "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c"
+    },
+    {
+      "id": "clean-review",
+      "agent": "adversarial-reviewer",
+      "inputHash": "3e61e4407f94acf12336ae3b46b6136a1eff942c26036b5ebdf0341ef5717dce"
+    },
+    {
+      "id": "minor-label",
+      "agent": "adversarial-reviewer",
+      "inputHash": "d35397a24582e25f60b239684367975805f5de516fc24566ca23a11f7f1b7b81"
+    },
+    {
+      "id": "retained",
+      "agent": "adversarial-reviewer",
+      "inputHash": "641cedcbc499ea2b75d1f511a4be954fb29191a1cb9e188ffd21fcb764f6da44"
+    },
+    {
+      "id": "resolved",
+      "agent": "adversarial-reviewer",
+      "inputHash": "7f2297424c86e1f2f7b74bde88da8b7dcc7839fa4500f8c3e36c7384bad4ac3a"
+    },
+    {
+      "id": "bad-resolution",
+      "agent": "adversarial-reviewer",
+      "inputHash": "6dd8cea7f8b266b241b628dd9239f2a2bd19e61ea9f593d0acaed3bbe9d2b1b2"
+    },
+    {
+      "id": "writer-fail",
+      "agent": "final-review-writer",
+      "inputHash": "6a80fa71623115be4fcd9eec4ad56db358288408120a01f08ae445abb2c6f9cc"
+    },
+    {
+      "id": "writer-pass",
+      "agent": "final-review-writer",
+      "inputHash": "e229fd36483eaace25e85131bc4ff54e305b0437e71942a6b64b4185ee37b423"
+    },
+    {
+      "id": "condenser",
+      "agent": "requirement-interpreter",
+      "inputHash": "48364f3e10a454ed63786474dca9a7bdeaa140317a0e51b303f8d65527783c87"
+    },
+    {
+      "id": "missing-corrected",
+      "agent": "adversarial-reviewer",
+      "inputHash": "074205509514bdfc1c18d1a38795dfd58ab8890431ddbcd67462a7b634286d3c"
+    },
+    {
+      "id": "assumption-corrected",
+      "agent": "adversarial-reviewer",
+      "inputHash": "0c07130ff7de88a48b8d7f2ded3c6431aa42c321b2dfff1c691501f23e573895"
+    },
+    {
+      "id": "hvac-corrected",
+      "agent": "adversarial-reviewer",
+      "inputHash": "2fd792c9b0da33a7168a81ecc54c18f14c2d581c640caaa6fc51b6f74a427d2e"
+    },
+    {
+      "id": "validation-corrected",
+      "agent": "adversarial-reviewer",
+      "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c"
+    }
+  ],
+  "workflowFixtures": [
+    "fixtures/hvac-ticket-1.md",
+    "fixtures/hvac-ticket-2.md",
+    "fixtures/hvac-ticket-3.md",
+    "fixtures/hvac-ticket-4.md",
+    "evidence/d5-20261030T1940Z/fixtures/positive-control.md"
+  ],
+  "maxModelInvocations": 51,
+  "maxReviewCycles": 2,
+  "runtimeMode": "real",
+  "policy": "One attempt per direct case and workflow; no repair, selection, or collection-level retries. Provider SDK may retry transport errors.",
+  "humanGate": "Existing substance assessment and decision policy retained."
+}

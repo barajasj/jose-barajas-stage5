@@ -1,0 +1,114 @@
+{
+  "methodology": "Post-collection source review of the frozen reviewer INPUT and original ticket, not the candidate review. Direct cases retain pre-collection gold. These labels provide workflow observability, not a blinded generalization estimate.",
+  "cases": [
+    {
+      "id": "d5-ticket1-review-cycle1",
+      "agent": "adversarial-reviewer",
+      "inputFile": "evidence/d5-20261030T1940Z/runs/HVAC-TICKET-1793389343718-8301b45d-4210-43aa-a851-bfae6584d0ed/cycle-1/adversarial-reviewer-input.json",
+      "inputHash": "68e81027a8b5a46e8eb07a424e8d3a0e8660be63e5959857a0738fb8341ecf03",
+      "provenance": "Authored 2026-10-30 after collection. Original ticket supports summation and edit-trigger recalculation, not a read-only restriction. All five input ambiguities concern policy absent from the ticket. Gold wording is independent of the candidate reviewer response.",
+      "gold": {
+        "rationale": "The calculation and edit trigger are captured, but editability is unsupported and the listed ticket questions remain unresolved.",
+        "resolutions": [],
+        "findings": [
+          {
+            "id": "GOLD-READONLY",
+            "category": "UNSUPPORTED_ASSUMPTION",
+            "kind": "UNSUPPORTED_ASSUMPTION",
+            "severity": "MEDIUM",
+            "description": "The interpretation requires a read-only DX Coil Height field, but the ticket does not specify editability.",
+            "action": "Remove the read-only requirement and retain editability as an unresolved question for the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/developerConsiderations/2",
+                "quote": "Treat the DX Coil Height field as a system\u2011generated value that updates automatically (read\u2011only from the user's perspective)."
+              }
+            ],
+            "ambiguityRefs": []
+          },
+          {
+            "id": "GOLD-OPEN-0",
+            "category": "OPEN_AMBIGUITY",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "MEDIUM",
+            "description": "The unit of measurement for Circuit Height and DX Coil Height is not specified.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/0",
+                "quote": "The unit of measurement for Circuit Height and DX Coil Height is not specified."
+              }
+            ],
+            "ambiguityRefs": ["/ambiguities/0"]
+          },
+          {
+            "id": "GOLD-OPEN-1",
+            "category": "OPEN_AMBIGUITY",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "MEDIUM",
+            "description": "Rounding or precision requirements for the summed DX Coil Height are not defined.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/1",
+                "quote": "Rounding or precision requirements for the summed DX Coil Height are not defined."
+              }
+            ],
+            "ambiguityRefs": ["/ambiguities/1"]
+          },
+          {
+            "id": "GOLD-OPEN-2",
+            "category": "OPEN_AMBIGUITY",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "MEDIUM",
+            "description": "Validation rules for acceptable Circuit Height values (e.g., non\u2011negative, maximum) are not provided.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/2",
+                "quote": "Validation rules for acceptable Circuit Height values (e.g., non\u2011negative, maximum) are not provided."
+              }
+            ],
+            "ambiguityRefs": ["/ambiguities/2"]
+          },
+          {
+            "id": "GOLD-OPEN-3",
+            "category": "OPEN_AMBIGUITY",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "MEDIUM",
+            "description": "Behavior when Cooling Circuits are added or removed after the initial calculation is not described.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/3",
+                "quote": "Behavior when Cooling Circuits are added or removed after the initial calculation is not described."
+              }
+            ],
+            "ambiguityRefs": ["/ambiguities/3"]
+          },
+          {
+            "id": "GOLD-OPEN-4",
+            "category": "OPEN_AMBIGUITY",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "MEDIUM",
+            "description": "Whether the DX Coil Height field should be editable by the user or strictly read\u2011only is unclear.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/4",
+                "quote": "Whether the DX Coil Height field should be editable by the user or strictly read\u2011only is unclear."
+              }
+            ],
+            "ambiguityRefs": ["/ambiguities/4"]
+          }
+        ]
+      }
+    }
+  ]
+}

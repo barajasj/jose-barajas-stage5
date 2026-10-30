@@ -1,0 +1,15 @@
+{
+  "requirementSummary": "The ticket mentions a planned UI request but does not specify the required behavior, fields, triggers, or any HVAC objects involved.",
+  "hvacTerminology": [],
+  "businessRules": [],
+  "developerConsiderations": [],
+  "ambiguities": [
+    "What specific UI behavior is required?",
+    "Which HVAC objects (e.g., zones, coils, thermostats) are affected?",
+    "What input fields, validation rules, or output values should the UI include?",
+    "What triggers (user actions, system events) should cause updates or actions?",
+    "Are there any units, ranges, or rounding requirements for numeric fields?",
+    "Is there any mapping or configuration specific to coil types or other components?"
+  ],
+  "confidence": "LOW"
+}

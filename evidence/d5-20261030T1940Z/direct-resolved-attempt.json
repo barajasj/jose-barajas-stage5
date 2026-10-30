@@ -1,0 +1,8 @@
+{
+  "caseId": "resolved",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-resolved-c7149ad2-257c-4585-903a-31f31ebbfe20",
+  "hasRawResponse": true,
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Interpreter source requires a JSON pointer."
+}

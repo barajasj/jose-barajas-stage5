@@ -25,6 +25,10 @@ HIGH findings → re-dispatch
 MEDIUM findings → continue
 
 LOW findings → continue
+
+Continue means produce a report, not approve the ticket. Any finding or open ambiguity
+keeps disposition FAIL. Only actionable HIGH interpretation defects trigger bounded
+re-dispatch; missing ticket facts are not resolved by retrying.
 ---
 
 # Setup
@@ -329,7 +333,35 @@ It prints JSON without overwriting historical `sub-agents-results.json`.
 Use `--responses FILE` for fixed direct-step observations and `--definitions FILE` for
 compatible workflow/baseline paths. Full contracts and `content-v2` scoring rules:
 `evals/requirement-interpreter-eval.md`, "Current scorer - Deliverable 4".
-Fresh model runs, evidence repair, and prompt-evolution measurements remain deferred.
+Current live evidence is `evidence/d5-20261030T1940Z/`. On 2026-10-30, one authorized
+batch made 39 model invocations: all 26 direct responses were captured, 20 passed
+runtime contracts, and only 2 met the strict unchanged full-step scorer. One of five
+workflows completed (ticket 1, disposition FAIL); the others failed closed.
+All 15 mandatory metric types now have direct observations. Default definitions
+select this batch, its frozen workflow-input labels, and byte-exact baseline exports.
+
+Evaluation remains FAIL: four current workflows did not complete, three historical
+baselines lack current provenance, and 26 scored steps miss gates/thresholds.
+Exact-wording misses are not proof of semantic errors. Writer aggregate 1.0 excludes
+two failed workflow writers; it is not end-to-end reliability.
+
+Package outputs: `before.json` (pre-collection), `after.json` (initial collection),
+`after-labeled.json` (current inputs labeled), `diagnostics.json` (every remaining
+failure), and `manifest-final.json` (all packaged file hashes). Original collection
+manifest and artifacts are retained. Verify offline:
+
+```text
+node src/run-evals.js
+node src/evidence-package.js evidence/d5-20261030T1940Z
+```
+
+No prompt changed in this batch; two measured prompt-change cycles per agent and
+repeated-run reliability remain unproven. Historical scores/logs are not current proof.
+Further collection requires separate live-call approval:
+
+```text
+node src/collect-eval-evidence.js --output evidence/NEW_DIRECTORY --allow-live
+```
 
 ---
 

@@ -1,0 +1,7 @@
+{
+  "correlationId": "HVAC-TICKET-1793389382486-b16566b4-71b2-4391-ad90-772b300360e5",
+  "status": "GOVERNANCE_FAILURE",
+  "disposition": "FAIL",
+  "runtimeMode": "real",
+  "reason": "Source quote is not present in the referenced artifact."
+}

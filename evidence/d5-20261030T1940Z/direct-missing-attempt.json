@@ -1,0 +1,7 @@
+{
+  "caseId": "missing",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-missing-b96172fb-9b05-44af-b350-629e6feb985d",
+  "hasRawResponse": true,
+  "status": "SUCCESS"
+}

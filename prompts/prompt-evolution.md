@@ -1,5 +1,24 @@
 # Prompt Evolution
 
+## Current Evidence Qualification - 2026-10-30
+
+The live batch in `evidence/d5-20261030T1940Z/` changed no prompts. It establishes
+neither a prompt-improvement delta nor two measured prompt-change cycles per agent.
+All 26 direct cases were measured against unchanged fixed labels; only two writer
+cases passed strict scoring. One of five workflows completed, with disposition FAIL.
+All attempts, including failures and the unsuccessful positive control, are retained.
+
+Historical baseline exports are original `4fcbf47` bytes and do not satisfy current
+status/cycle/provenance contracts. Old keyword scores cannot be compared with
+content-v2 scores as measured prompt improvement. Re-dispatch is not a reviewer
+prompt edit, and deterministic heading code is not writer prompt evolution.
+
+The historical narratives below remain for traceability only. Their deltas,
+21-success claim, and iteration counts are not revalidated certification evidence.
+See `diagnostics.json` and the current sections in `evals/*-eval.md`.
+
+## Historical Iteration Narratives
+
 Iteration 1
 
 Issue:

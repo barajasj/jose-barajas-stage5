@@ -1,0 +1,950 @@
+commit 8a09d443f28e0328e8065cb43ac65043acd11039
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-30T13:27:23-06:00
+
+    fix(evals): replace keyword scoring with provenance-bound content checks
+    Proposition labels, explicit NA, and matched baselines replace keyword credit and vacuous pass defaults.
+
+
+ README.md                             |  13 +
+ evals/adversarial-reviewer-eval.md    |  12 +-
+ evals/final-review-writer-eval.md     |  10 +-
+ evals/requirement-interpreter-eval.md |  45 ++++
+ evals/step-cases.js                   |  86 +++++++
+ evals/test-cases.json                 | 327 +----------------------
+ package.json                          |   6 +
+ src/eval-evidence.js                  | 129 ++++++++++
+ src/eval-runner.js                    | 189 ++++++++++++++
+ src/eval-scorer.js                    | 472 ++++++++++++++--------------------
+ src/run-evals.js                      | 292 +--------------------
+ src/test-api.js                       |   8 -
+ tests/eval-runner.test.js             | 203 +++++++++++++++
+ tests/eval-scorer.test.js             | 182 +++++++++++++
+ 14 files changed, 1074 insertions(+), 900 deletions(-)
+commit 374ed511c84b086695c9cf0842071ec2b75ddf0d
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-29T16:59:14-06:00
+
+    Add complete-finding example and missing-field controls
+    R16 example closes live action-omission failure; audit locks required fields; schema details surface in CLI results.
+
+
+ agents/adversarial-reviewer.md                     |   1 +
+ audit/audit-log.jsonl                              |  69 ++++++++
+ evals/adversarial-reviewer-eval.md                 |   5 +-
+ evals/load-bearing-cases.js                        |   8 +-
+ evals/load-bearing-map.json                        |   3 +-
+ evals/requirement-interpreter-eval.md              |   4 +-
+ .../cycle-1/adversarial-reviewer-input.json        |  18 +++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  46 ++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  21 +++
+ .../cycle-1/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  15 ++
+ .../cycle-2/adversarial-reviewer-input.json        |  40 +++++
+ .../cycle-2/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-2/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-2/adversarial-reviewer-prompt.txt        |  67 ++++++++
+ .../cycle-2/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-2/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-2/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-2/requirement-interpreter-input.json     |  35 ++++
+ .../cycle-2/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-2/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-2/requirement-interpreter-prompt.txt     |  59 +++++++
+ .../cycle-2/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-2/requirement-interpreter-request.json   |  19 +++
+ .../cycle-2/requirement-interpreter-validated.json |  15 ++
+ .../cycle-1/adversarial-reviewer-input.json        |  18 +++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  46 ++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  21 +++
+ .../cycle-1/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  15 ++
+ .../cycle-2/adversarial-reviewer-input.json        |  40 +++++
+ .../cycle-2/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-2/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-2/adversarial-reviewer-prompt.txt        |  67 ++++++++
+ .../cycle-2/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-2/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-2/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-2/requirement-interpreter-input.json     |  35 ++++
+ .../cycle-2/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-2/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-2/requirement-interpreter-prompt.txt     |  59 +++++++
+ .../cycle-2/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-2/requirement-interpreter-request.json   |  19 +++
+ .../cycle-2/requirement-interpreter-validated.json |  15 ++
+ .../cycle-1/adversarial-reviewer-input.json        |  18 +++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  46 ++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  21 +++
+ .../cycle-1/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  15 ++
+ .../cycle-2/adversarial-reviewer-input.json        |  40 +++++
+ .../cycle-2/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-2/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-2/adversarial-reviewer-prompt.txt        |  67 ++++++++
+ .../cycle-2/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-2/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-2/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-2/final-review-writer-input.json         |  43 +++++
+ .../cycle-2/final-review-writer-manifest.json      |  29 ++++
+ .../cycle-2/final-review-writer-parsed.json        |   3 +
+ .../cycle-2/final-review-writer-prompt.txt         |  86 ++++++++++
+ .../cycle-2/final-review-writer-raw.txt            |   1 +
+ .../cycle-2/final-review-writer-request.json       |  19 +++
+ .../cycle-2/final-review-writer-validated.json     |   3 +
+ .../cycle-2/requirement-interpreter-input.json     |  35 ++++
+ .../cycle-2/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-2/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-2/requirement-interpreter-prompt.txt     |  59 +++++++
+ .../cycle-2/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-2/requirement-interpreter-request.json   |  19 +++
+ .../cycle-2/requirement-interpreter-validated.json |  15 ++
+ .../cycle-1/adversarial-reviewer-input.json        |  18 +++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  46 ++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  21 +++
+ .../cycle-1/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  15 ++
+ .../cycle-2/adversarial-reviewer-input.json        |  40 +++++
+ .../cycle-2/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-2/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-2/adversarial-reviewer-prompt.txt        |  67 ++++++++
+ .../cycle-2/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-2/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-2/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-2/final-review-writer-input.json         |  43 +++++
+ .../cycle-2/final-review-writer-manifest.json      |  29 ++++
+ .../cycle-2/final-review-writer-parsed.json        |   3 +
+ .../cycle-2/final-review-writer-prompt.txt         |  86 ++++++++++
+ .../cycle-2/final-review-writer-raw.txt            |   1 +
+ .../cycle-2/final-review-writer-request.json       |  19 +++
+ .../cycle-2/final-review-writer-validated.json     |   3 +
+ .../cycle-2/requirement-interpreter-input.json     |  35 ++++
+ .../cycle-2/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-2/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-2/requirement-interpreter-prompt.txt     |  59 +++++++
+ .../cycle-2/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-2/requirement-interpreter-request.json   |  19 +++
+ .../cycle-2/requirement-interpreter-validated.json |  15 ++
+ .../cycle-1/adversarial-reviewer-input.json        |  18 +++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  46 ++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  21 +++
+ .../cycle-1/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  15 ++
+ .../cycle-2/adversarial-reviewer-input.json        |  40 +++++
+ .../cycle-2/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-2/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-2/adversarial-reviewer-prompt.txt        |  67 ++++++++
+ .../cycle-2/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-2/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-2/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-2/requirement-interpreter-input.json     |  35 ++++
+ .../cycle-2/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-2/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-2/requirement-interpreter-prompt.txt     |  59 +++++++
+ .../cycle-2/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-2/requirement-interpreter-request.json   |  19 +++
+ .../cycle-2/requirement-interpreter-validated.json |  15 ++
+ .../cycle-1/adversarial-reviewer-input.json        |  18 +++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  46 ++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  21 +++
+ .../cycle-1/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  15 ++
+ .../cycle-2/adversarial-reviewer-input.json        |  40 +++++
+ .../cycle-2/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-2/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-2/adversarial-reviewer-prompt.txt        |  67 ++++++++
+ .../cycle-2/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-2/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-2/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-2/requirement-interpreter-input.json     |  35 ++++
+ .../cycle-2/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-2/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-2/requirement-interpreter-prompt.txt     |  59 +++++++
+ .../cycle-2/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-2/requirement-interpreter-request.json   |  19 +++
+ .../cycle-2/requirement-interpreter-validated.json |  15 ++
+ .../cycle-1/adversarial-reviewer-input.json        |  18 +++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  46 ++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  21 +++
+ .../cycle-1/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  15 ++
+ .../cycle-2/adversarial-reviewer-input.json        |  40 +++++
+ .../cycle-2/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-2/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-2/adversarial-reviewer-prompt.txt        |  67 ++++++++
+ .../cycle-2/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-2/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-2/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-2/requirement-interpreter-input.json     |  35 ++++
+ .../cycle-2/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-2/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-2/requirement-interpreter-prompt.txt     |  59 +++++++
+ .../cycle-2/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-2/requirement-interpreter-request.json   |  19 +++
+ .../cycle-2/requirement-interpreter-validated.json |  15 ++
+ .../cycle-1/adversarial-reviewer-input.json        |  18 +++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  46 ++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  21 +++
+ .../cycle-1/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  15 ++
+ .../cycle-2/adversarial-reviewer-input.json        |  40 +++++
+ .../cycle-2/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-2/adversarial-reviewer-parsed.json       |  22 +++
+ .../cycle-2/adversarial-reviewer-prompt.txt        |  67 ++++++++
+ .../cycle-2/adversarial-reviewer-raw.txt           |   1 +
+ .../cycle-2/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-2/adversarial-reviewer-validated.json    |  22 +++
+ .../cycle-2/final-review-writer-input.json         |  43 +++++
+ .../cycle-2/final-review-writer-manifest.json      |  29 ++++
+ .../cycle-2/final-review-writer-parsed.json        |   3 +
+ .../cycle-2/final-review-writer-prompt.txt         |  86 ++++++++++
+ .../cycle-2/final-review-writer-raw.txt            |   1 +
+ .../cycle-2/final-review-writer-request.json       |  19 +++
+ .../cycle-2/final-review-writer-validated.json     |   3 +
+ .../cycle-2/requirement-interpreter-input.json     |  35 ++++
+ .../cycle-2/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-2/requirement-interpreter-parsed.json    |  15 ++
+ .../cycle-2/requirement-interpreter-prompt.txt     |  59 +++++++
+ .../cycle-2/requirement-interpreter-raw.txt        |   1 +
+ .../cycle-2/requirement-interpreter-request.json   |  19 +++
+ .../cycle-2/requirement-interpreter-validated.json |  15 ++
+ .../cycle-1/adversarial-reviewer-input.json        |  31 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  87 ++++++++++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  72 +++++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |  77 +++++++++
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  28 ++++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  33 ++++
+ .../cycle-1/requirement-interpreter-raw.txt        |  28 ++++
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  28 ++++
+ .../cycle-1/adversarial-reviewer-input.json        |  31 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  87 ++++++++++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  72 +++++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |  77 +++++++++
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  28 ++++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  33 ++++
+ .../cycle-1/requirement-interpreter-raw.txt        |  28 ++++
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  28 ++++
+ .../cycle-1/adversarial-reviewer-input.json        |  31 ++++
+ .../cycle-1/adversarial-reviewer-manifest.json     |  29 ++++
+ .../cycle-1/adversarial-reviewer-parsed.json       |  92 +++++++++++
+ .../cycle-1/adversarial-reviewer-prompt.txt        |  73 +++++++++
+ .../cycle-1/adversarial-reviewer-raw.txt           |  82 ++++++++++
+ .../cycle-1/adversarial-reviewer-request.json      |  19 +++
+ .../cycle-1/adversarial-reviewer-validated.json    |  92 +++++++++++
+ .../cycle-1/final-review-writer-input.json         | 127 +++++++++++++++
+ .../cycle-1/final-review-writer-manifest.json      |  29 ++++
+ .../cycle-1/final-review-writer-parsed.json        |   3 +
+ .../cycle-1/final-review-writer-prompt.txt         | 179 +++++++++++++++++++++
+ .../cycle-1/final-review-writer-raw.txt            |   1 +
+ .../cycle-1/final-review-writer-request.json       |  19 +++
+ .../cycle-1/final-review-writer-validated.json     |   3 +
+ .../cycle-1/requirement-interpreter-input.json     |   3 +
+ .../cycle-1/requirement-interpreter-manifest.json  |  29 ++++
+ .../cycle-1/requirement-interpreter-parsed.json    |  28 ++++
+ .../cycle-1/requirement-interpreter-prompt.txt     |  33 ++++
+ .../cycle-1/requirement-interpreter-raw.txt        |  28 ++++
+ .../cycle-1/requirement-interpreter-request.json   |  19 +++
+ .../cycle-1/requirement-interpreter-validated.json |  28 ++++
+ runs/punchout-test-results.json                    |   2 +-
+ runs/punchout-tests/S2-explicit-reject.jsonl       |   2 +-
+ runs/punchout-tests/S3-explicit-continue.jsonl     |   2 +-
+ runs/punchout-tests/S4-explicit-approve.jsonl      |   2 +-
+ runs/punchout-tests/S5-bypass-unknown-value.jsonl  |   2 +-
+ runs/punchout-tests/S6-bypass-missing-reason.jsonl |   2 +-
+ .../punchout-tests/S7-timeout-stale-decision.jsonl |   2 +-
+ .../punchout-tests/S8-fresh-decision-honored.jsonl |   2 +-
+ src/agent-runner.js                                |   5 +-
+ src/coordinator.js                                 |   3 +-
+ src/test-reviewer.js                               |   3 +-
+ tests/reviewer-smoke.test.js                       |  59 +++++++
+ 308 files changed, 7631 insertions(+), 16 deletions(-)
+commit bae61b6062151e65285d14f174775b70cd93063e
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-29T13:06:44-06:00
+
+    test(evals): audit prompt instruction coverage
+    Map retained instructions to content criteria and mutation controls. Keep legacy scoring and historical results unchanged.
+
+
+ agents/adversarial-reviewer.md        |  90 ++-----
+ agents/final-review-writer.md         |  56 +---
+ agents/requirement-interpreter.md     |  71 +----
+ evals/adversarial-reviewer-eval.md    |  57 ++++
+ evals/final-review-writer-eval.md     |  44 +++
+ evals/load-bearing-cases.js           | 494 ++++++++++++++++++++++++++++++++++
+ evals/load-bearing-map.json           |  98 +++++++
+ evals/requirement-interpreter-eval.md |  63 +++++
+ evals/test-cases.json                 |   8 +
+ src/load-bearing-criteria.js          | 286 ++++++++++++++++++++
+ src/run-load-bearing-audit.js         | 217 +++++++++++++++
+ tests/load-bearing.test.js            | 109 ++++++++
+ 12 files changed, 1421 insertions(+), 172 deletions(-)
+commit 60c5af25aa0df775a3700b3c33b362fc3d698d55
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-29T12:40:57-06:00
+
+    fix(runtime): prevent unsafe PASS dispositions
+    Enforce governance contracts, bounded reviews, and grounded reports. Reviewer outputs require rationale, citations, and resolutions.
+
+
+ agents/adversarial-reviewer.md   |  28 +-
+ agents/final-review-writer.md    |  12 +-
+ schemas/challenges.schema.json   |  79 +++++-
+ schemas/examiner.schema.json     |  20 +-
+ schemas/final-review.schema.json |   3 +-
+ src/agent-registry.js            |  18 +-
+ src/agent-runner.js              | 322 ++++++++++++----------
+ src/artifact-writer.js           |  32 ++-
+ src/audit-logger.js              |   7 +-
+ src/config.js                    |   6 +-
+ src/coordinator.js               | 218 ++++++++-------
+ src/correlation-id.js            |   4 +-
+ src/governance-policy.js         | 126 +++++++++
+ src/mock-agent-responses.js      |  41 ++-
+ src/models/fireworks-client.js   |  13 +-
+ src/prompt-builder.js            |  27 +-
+ src/report-contract.js           |  42 +++
+ src/run-workflow.js              |  12 +-
+ sub-agents.config.yaml           |  16 +-
+ tests/runtime-governance.test.js | 576 +++++++++++++++++++++++++++++++++++++++
+ 20 files changed, 1278 insertions(+), 324 deletions(-)
+commit 3a6784262093c384f7daeb4e21d0dacef18811d0
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-27T18:17:57-06:00
+
+    Refresh exported git history
+    Generated with [Devin](https://devin.ai)
+
+Co-Authored-By: Devin <158243242+devin-ai-integration[bot]@users.noreply.github.com>
+
+
+ git-log.txt | 29 +++++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+commit 705b48d7ac842db12c19b0a34b58f18839609f9f
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-27T14:50:51-06:00
+
+    Update README with instruction to restore node_modules
+    
+
+ README.md   | 20 ++++++++++++++++++++
+ env.example |  3 ++-
+ 2 files changed, 22 insertions(+), 1 deletion(-)
+commit 64c601a8a84d0fe8ea55b25de1ad97b2fbe370c2
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-22T12:59:17-06:00
+
+    Rename and move documentation to docs
+    
+
+ .../stage5-certification-examination-report-v1.md           |   0
+ stage5-requirements.png => docs/stage5-requirements.png     | Bin
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+commit 5d397dfc2cb05b300905e255f5ec7dfde7c02e46
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-22T12:45:46-06:00
+
+    Refresh exported git history
+    
+
+ git-log.txt | 122 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 122 insertions(+)
+commit 37fa3101ee3ad636184a15744cbcc690a08450c3
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-22T12:43:25-06:00
+
+    Document workflow success rate and export repository history
+    audit/workflow-success-rate.md reports 23/27 (85.2%) end-to-end
+completion with per-step rates; GIT-HISTORY.md + git-log.txt provide
+commit history evidence; README, CERTIFICATION-EVIDENCE.md,
+stage5-summary.md, and NEXT-STEPS.md updated; remaining run artifacts
+persisted.
+
+
+ CERTIFICATION-EVIDENCE.md                          |  77 +++-
+ GIT-HISTORY.md                                     |  42 +++
+ NEXT-STEPS.md                                      |   6 +-
+ README.md                                          |  42 ++-
+ audit/README.md                                    |  26 +-
+ audit/audit-log.jsonl                              | 132 +++++++
+ audit/workflow-success-rate.md                     |  66 ++++
+ git-log.txt                                        | 397 +++++++++++++++++++++
+ ...CKET-1792693686495-adversarial-reviewer-raw.txt |   4 +
+ ...ICKET-1792693686495-final-review-writer-raw.txt |   3 +
+ ...T-1792693686495-requirement-interpreter-raw.txt |  31 ++
+ .../adversarial-reviewer.json                      |   4 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  31 ++
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ runs/punchout-test-results.json                    |   2 +-
+ runs/punchout-tests/S2-explicit-reject.jsonl       |   2 +-
+ runs/punchout-tests/S3-explicit-continue.jsonl     |   2 +-
+ runs/punchout-tests/S4-explicit-approve.jsonl      |   2 +-
+ runs/punchout-tests/S5-bypass-unknown-value.jsonl  |   2 +-
+ runs/punchout-tests/S6-bypass-missing-reason.jsonl |   2 +-
+ .../punchout-tests/S7-timeout-stale-decision.jsonl |   2 +-
+ .../punchout-tests/S8-fresh-decision-honored.jsonl |   2 +-
+ stage5-summary.md                                  |  60 +++-
+ 93 files changed, 1708 insertions(+), 18 deletions(-)
+commit 485959156eb17bb1ad2e1385983b26c722481882
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-22T12:42:23-06:00
+
+    Add deterministic eval scorer, test cases, and iteration evidence
+    
+
+ evals/adversarial-reviewer-eval.md    |  132 +++-
+ evals/final-review-writer-eval.md     |  107 ++-
+ evals/requirement-interpreter-eval.md |  119 +++-
+ evals/test-cases.json                 |  338 +++++++++
+ prompts/prompt-evolution.md           |   57 +-
+ src/eval-scorer.js                    |  311 +++++++++
+ src/run-evals.js                      |  291 ++++++++
+ sub-agents-results.json               | 1224 ++++++++++++++++++++++++++++++++-
+ 8 files changed, 2549 insertions(+), 30 deletions(-)
+commit 27369cf313bfef31f5f57cb4b7b806aa0d404305
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-22T12:37:42-06:00
+
+    Make human escalation gate explicit and test all decision paths
+    
+
+ coordinator/coordinator-decision-flow.md           |  32 +-
+ coordinator/disposition-matrix.md                  |   8 +-
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ .../adversarial-reviewer-pass1.json                |   9 +
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  15 +
+ .../requirement-interpreter.json                   |  15 +
+ runs/continue-decision-evidence.md                 |  17 ++
+ runs/punchout-evidence.md                          |  81 ++++-
+ runs/punchout-test-results.json                    | 203 +++++++++++++
+ runs/punchout-tests/S2-explicit-reject.jsonl       |   1 +
+ runs/punchout-tests/S3-explicit-continue.jsonl     |   1 +
+ runs/punchout-tests/S4-explicit-approve.jsonl      |   1 +
+ runs/punchout-tests/S5-bypass-unknown-value.jsonl  |   1 +
+ runs/punchout-tests/S6-bypass-missing-reason.jsonl |   1 +
+ .../punchout-tests/S7-timeout-stale-decision.jsonl |   1 +
+ .../punchout-tests/S8-fresh-decision-honored.jsonl |   1 +
+ runs/punchout-tests/assessment-human-required.json |  12 +
+ runs/reject-decision-evidence.md                   |  17 +-
+ src/coordinator.js                                 | 149 ++++++++-
+ src/human-review.js                                | 115 ++++++-
+ src/substance-gate.js                              |   8 +-
+ src/test-punchout.js                               | 338 +++++++++++++++++++++
+ 53 files changed, 1347 insertions(+), 33 deletions(-)
+commit daef6bb5e7e8c3d24265428c5e64f6dd5210f511
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-22T11:52:54-06:00
+
+    add refinement of js files and evidence files
+    
+
+ CERTIFICATION-EVIDENCE.md                          |  20 +-
+ NEXT-STEPS.md                                      |  41 ++--
+ README.md                                          |  14 +-
+ audit/README.md                                    |  16 +-
+ audit/audit-log.jsonl                              |  16 ++
+ audit/correlation-id-strategy.md                   |   2 +-
+ docs/model-integration-plan.md                     |  15 +-
+ env.example                                        |   2 +-
+ evals/adversarial-reviewer-eval.md                 |   1 +
+ evals/final-review-writer-eval.md                  |   1 +
+ evals/requirement-interpreter-eval.md              |   1 +
+ evidence/run1/ticket1-run.json                     | 156 +++++++++------
+ evidence/run1/ticket2-run.json                     | 155 +++++++++------
+ evidence/run1/ticket3-run.json                     | 212 ++++++++++++---------
+ evidence/run1/ticket4-run.json                     | 175 +++++++++++++++++
+ evidence/ticket1-run.json                          | Bin 17914 -> 8760 bytes
+ evidence/ticket2-run.json                          | Bin 19700 -> 10207 bytes
+ evidence/ticket3-run.json                          | Bin 27194 -> 13673 bytes
+ evidence/ticket4-run.json                          | 175 +++++++++++++++++
+ ...CKET-1792016512336-adversarial-reviewer-raw.txt |  17 ++
+ ...ICKET-1792016512336-final-review-writer-raw.txt |   3 +
+ ...T-1792016512336-requirement-interpreter-raw.txt |  27 +++
+ .../adversarial-reviewer-pass1.json                |  25 +++
+ .../adversarial-reviewer.json                      |  17 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  29 +++
+ .../requirement-interpreter.json                   |  27 +++
+ ...CKET-1792016526650-adversarial-reviewer-raw.txt |  17 ++
+ ...ICKET-1792016526650-final-review-writer-raw.txt |   3 +
+ ...T-1792016526650-requirement-interpreter-raw.txt |  29 +++
+ .../adversarial-reviewer-pass1.json                |  17 ++
+ .../adversarial-reviewer.json                      |  17 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter-pass1.json             |  32 ++++
+ .../requirement-interpreter.json                   |  29 +++
+ ...CKET-1792016543957-adversarial-reviewer-raw.txt |  21 ++
+ ...ICKET-1792016543957-final-review-writer-raw.txt |   3 +
+ ...T-1792016543957-requirement-interpreter-raw.txt |  52 +++++
+ .../adversarial-reviewer.json                      |  21 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  52 +++++
+ ...CKET-1792016553892-adversarial-reviewer-raw.txt |   4 +
+ ...ICKET-1792016553892-final-review-writer-raw.txt |   3 +
+ ...T-1792016553892-requirement-interpreter-raw.txt |  42 ++++
+ .../adversarial-reviewer.json                      |   4 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  42 ++++
+ runs/redispatch-evidence.md                        |  11 +-
+ runs/run-evidence.md                               |   6 +-
+ schemas/challenges.schema.json                     |   1 +
+ schemas/examiner.schema.json                       |   1 +
+ schemas/final-review.schema.json                   |   1 +
+ src/agent-runner.js                                |  23 ++-
+ src/artifact-writer.js                             |  10 +
+ src/coordinator.js                                 |  98 ++++++++--
+ src/models/fireworks-client.js                     |   2 +-
+ src/prompt-builder.js                              |  22 +++
+ src/run-workflow.js                                |  13 +-
+ src/substance-gate.js                              |  24 ++-
+ stage5-certification-examination-report.md         | 105 ++++++++++
+ sub-agents-results.json                            |   3 +-
+ 61 files changed, 1564 insertions(+), 303 deletions(-)
+commit 40e7ab04e238074926897c02a989ee87bca43775
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-14T15:59:49-06:00
+
+    stage 5 completed, adding a ticket 4 to test
+    
+
+ CERTIFICATION-EVIDENCE.md                          | 109 +++++++++++++++++----
+ NEXT-STEPS.md                                      |   6 +-
+ README.md                                          |  28 +++++-
+ audit/README.md                                    |  58 ++++++-----
+ audit/audit-log.jsonl                              |  19 ++++
+ ...tegration-plan.md => model-integration-plan.md} |   4 +-
+ evidence/ticket1-run.json                          | Bin 0 -> 17914 bytes
+ evidence/ticket2-run.json                          | Bin 0 -> 19700 bytes
+ evidence/ticket3-run.json                          | Bin 0 -> 27194 bytes
+ fixtures/hvac-ticket-4.md                          |  25 +++++
+ ...CKET-1792013483182-adversarial-reviewer-raw.txt |   9 ++
+ ...ICKET-1792013483182-final-review-writer-raw.txt |   3 +
+ ...T-1792013483182-requirement-interpreter-raw.txt |  30 ++++++
+ .../adversarial-reviewer.json                      |   9 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  30 ++++++
+ ...CKET-1792014735759-adversarial-reviewer-raw.txt |  21 ++++
+ ...ICKET-1792014735759-final-review-writer-raw.txt |   3 +
+ ...T-1792014735759-requirement-interpreter-raw.txt |  30 ++++++
+ .../adversarial-reviewer.json                      |  21 ++++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  30 ++++++
+ ...CKET-1792014760717-adversarial-reviewer-raw.txt |   9 ++
+ ...ICKET-1792014760717-final-review-writer-raw.txt |   3 +
+ ...T-1792014760717-requirement-interpreter-raw.txt |  34 +++++++
+ .../adversarial-reviewer.json                      |   9 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  34 +++++++
+ ...CKET-1792014779904-adversarial-reviewer-raw.txt |  21 ++++
+ ...ICKET-1792014779904-final-review-writer-raw.txt |   1 +
+ ...T-1792014779904-requirement-interpreter-raw.txt |  53 ++++++++++
+ .../adversarial-reviewer.json                      |  21 ++++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  53 ++++++++++
+ ...CKET-1792015048876-adversarial-reviewer-raw.txt |  25 +++++
+ ...ICKET-1792015048876-final-review-writer-raw.txt |   3 +
+ ...T-1792015048876-requirement-interpreter-raw.txt |  30 ++++++
+ .../adversarial-reviewer.json                      |  25 +++++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  30 ++++++
+ src/agent-runner.js                                |  29 +++---
+ src/config.js                                      |   4 +
+ src/cost-estimator.js                              |  11 +--
+ src/models/model-client.js                         |   2 +-
+ stage5-summary.md                                  |  55 +++++++++++
+ 45 files changed, 826 insertions(+), 76 deletions(-)
+commit 4fcbf4787948a5014e5df3e20639990142475fbd
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-14T15:28:30-06:00
+
+    stage 5 progressing workflow with the 3 agents running
+    
+
+ README.md                                          |   7 +
+ agents/adversarial-reviewer.md                     |  42 ++++-
+ agents/final-review-writer.md                      |  19 +-
+ audit/README.md                                    |  22 ++-
+ audit/audit-log.jsonl                              |  17 ++
+ evidence/run1/ticket1-run.json                     | 141 ++++++++++++++
+ evidence/run1/ticket2-run.json                     | 147 +++++++++++++++
+ evidence/run1/ticket3-run.json                     | 207 +++++++++++++++++++++
+ ...CKET-1792007311762-adversarial-reviewer-raw.txt |  21 +++
+ ...ICKET-1792007311762-final-review-writer-raw.txt |   3 +
+ ...T-1792007311762-requirement-interpreter-raw.txt |  31 +++
+ .../adversarial-reviewer.json                      |  21 +++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  31 +++
+ ...CKET-1792007386416-adversarial-reviewer-raw.txt |  13 ++
+ ...ICKET-1792007386416-final-review-writer-raw.txt |   3 +
+ ...T-1792007386416-requirement-interpreter-raw.txt |  30 +++
+ .../adversarial-reviewer.json                      |  13 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  30 +++
+ ...CKET-1792007656189-adversarial-reviewer-raw.txt |   9 +
+ ...ICKET-1792007656189-final-review-writer-raw.txt |   3 +
+ ...T-1792007656189-requirement-interpreter-raw.txt |  34 ++++
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  34 ++++
+ ...CKET-1792007695413-adversarial-reviewer-raw.txt |  17 ++
+ ...ICKET-1792007695413-final-review-writer-raw.txt |   3 +
+ ...T-1792007695413-requirement-interpreter-raw.txt |  56 ++++++
+ .../adversarial-reviewer.json                      |  17 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  56 ++++++
+ ...CKET-1792007765808-adversarial-reviewer-raw.txt |   9 +
+ ...ICKET-1792007765808-final-review-writer-raw.txt |   3 +
+ ...T-1792007765808-requirement-interpreter-raw.txt |  31 +++
+ .../adversarial-reviewer.json                      |   9 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  31 +++
+ runs/redispatch-evidence.md                        |  14 +-
+ runs/sample-interpreter-output.json                |  15 ++
+ runs/sample-reviewer-output.json                   |  25 +++
+ runs/sample-writer-output.json                     |   3 +
+ src/agent-runner.js                                |   4 +-
+ src/coordinator.js                                 |   7 +-
+ src/cost-estimator.js                              |  17 ++
+ src/models/fireworks-client.js                     |  15 +-
+ src/test-reviewer-schema.js                        |  15 ++
+ src/test-reviewer.js                               |  80 ++++++++
+ src/test-writer-schema.js                          |  15 ++
+ src/test-writer.js                                 |  50 +++++
+ 50 files changed, 1373 insertions(+), 21 deletions(-)
+commit 1e2237a66abda93212e5fabf053762454768d5e2
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-14T11:53:41-06:00
+
+    Enable real call to fireworks, return and parse json response
+    
+
+ agents/adversarial-reviewer.md                     |   2 +-
+ agents/final-review-writer.md                      |   4 +-
+ agents/requirement-interpreter.md                  |  37 ++++++
+ audit/audit-log.jsonl                              |  11 ++
+ env.example                                        |   1 -
+ package-lock.json                                  |  56 ++++++++-
+ package.json                                       |   4 +-
+ .../adversarial-reviewer.json                      |   9 ++
+ .../requirement-interpreter.json                   |  15 +++
+ .../adversarial-reviewer.json                      |   9 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  15 +++
+ ...CKET-1791999987142-adversarial-reviewer-raw.txt |  14 +++
+ ...T-1791999987142-requirement-interpreter-raw.txt |  32 +++++
+ .../requirement-interpreter.json                   |  32 +++++
+ runs/fireworks-connectivity-test.md                |  23 ++++
+ src/agent-registry.js                              |   6 +-
+ src/agent-runner.js                                | 139 +++++++++++++++++----
+ src/config.js                                      |   5 +-
+ src/coordinator.js                                 |   4 +-
+ src/models/fireworks-client.js                     |  43 +++++++
+ src/models/model-config.js                         |   2 +-
+ src/models/swe-client.js                           |  12 --
+ src/prompt-builder.js                              |  26 ++++
+ src/run-workflow.js                                |   2 +
+ src/test-api.js                                    |   8 ++
+ src/test-fireworks-1.js                            |  33 +++++
+ src/test-fireworks.js                              |  21 ++++
+ src/test-interpreter.js                            |  43 +++++++
+ substance-assessment.json                          |   2 +-
+ 30 files changed, 559 insertions(+), 54 deletions(-)
+commit 02a975818eb76ed2b04f967a9b2bead122206c0e
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-13T11:30:24-06:00
+
+    Initial work to start using AI model. Still do not have API key, it was requested
+    
+
+ CERTIFICATION-EVIDENCE.md         | 47 +++++++++++++++++++++++++++++++++++++++
+ NEXT-STEPS.md                     | 31 ++++++++++++++++++++++++++
+ README.md                         |  5 +++++
+ agents/adversarial-reviewer.md    | 43 +++++++++++++----------------------
+ agents/final-review-writer.md     | 39 +++++++++++++++++---------------
+ agents/requirement-interpreter.md | 39 +++++++++++---------------------
+ docs/swe-integration-plan.md      | 34 ++++++++++++++++++++++++++++
+ env.example                       |  3 +++
+ prompts/prompt-design.md          | 35 +++++++++++++++++++++++++++++
+ prompts/prompt-evolution.md       | 29 ++++++++++++++++++++++++
+ src/config.js                     |  5 ++++-
+ src/models/model-client.js        | 20 ++++++++++++-----
+ src/models/model-config.js        |  5 +++++
+ src/models/swe-client.js          | 12 ++++++++++
+ 14 files changed, 268 insertions(+), 79 deletions(-)
+commit c41558a73094d11007e709db4916f249d541bf03
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-13T10:57:37-06:00
+
+    Prepared for workflow execution and schema validation
+    
+
+ audit/audit-log.jsonl                              |  34 +++++-
+ human-decisions.jsonl                              |   2 +-
+ package-lock.json                                  |  65 +++++++++++
+ package.json                                       |   5 +
+ .../adversarial-reviewer.json                      |   4 +
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  15 +++
+ .../adversarial-reviewer.json                      |   9 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  15 +++
+ .../adversarial-reviewer.json                      |   9 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  15 +++
+ .../adversarial-reviewer.json                      |   9 ++
+ .../requirement-interpreter.json                   |  15 +++
+ .../adversarial-reviewer.json                      |   9 ++
+ .../final-review-writer.json                       |   3 +
+ .../requirement-interpreter.json                   |  15 +++
+ .../adversarial-reviewer.json                      |   9 ++
+ .../requirement-interpreter.json                   |  15 +++
+ runs/continue-decision-evidence.md                 | 110 ++++++++++++++++++
+ runs/punchout-evidence.md                          |  21 ++++
+ runs/redispatch-evidence.md                        |  34 ++++++
+ runs/reject-decision-evidence.md                   |   5 +
+ runs/run-evidence.md                               |  29 +++++
+ runs/sample-artifacts.md                           |  23 ++++
+ runs/sample-run-result.json                        |  58 ++++++++++
+ src/agent-contract.md                              |  61 ++++++++++
+ src/agent-registry.js                              |  19 ++++
+ src/agent-runner.js                                |  84 ++++++++++++++
+ src/artifact-writer.js                             |  33 ++++++
+ src/audit-logger.js                                |  12 ++
+ src/config.js                                      |   5 +
+ src/constants.js                                   |   7 ++
+ src/coordinator.js                                 | 123 +++++++++++++++++++++
+ src/correlation-id.js                              |   7 ++
+ src/human-review.js                                |  37 +++++++
+ src/mock-agent-responses.js                        |  47 ++++++++
+ src/models/model-client.js                         |  15 +++
+ src/models/model-contract.md                       |  29 +++++
+ src/prompt-loader.js                               |  12 ++
+ src/run-workflow.js                                |  18 +++
+ src/schema-validator.js                            |  23 ++++
+ src/substance-gate.js                              |  20 ++++
+ substance-assessment.json                          |   2 +-
+ 45 files changed, 1088 insertions(+), 3 deletions(-)
+commit f55c8078a59894096cd11ff1f503ba5ae865df05
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: 2026-10-12T17:00:07-06:00
+
+    stage 5 initial commit
+    
+
+ .gitignore                               |  31 ++++
+ README.md                                | 280 +++++++++++++++++++++++++++++++
+ agents/adversarial-reviewer.md           |  40 +++++
+ agents/final-review-writer.md            |  31 ++++
+ agents/requirement-interpreter.md        |  37 ++++
+ audit/README.md                          |  26 +++
+ audit/audit-log.jsonl                    |   3 +
+ audit/correlation-id-strategy.md         |  23 +++
+ coordinator/coordinator-decision-flow.md | 138 +++++++++++++++
+ coordinator/coordinator-design.md        | 132 +++++++++++++++
+ coordinator/coordinator-tools.json       |   7 +
+ coordinator/disposition-matrix.md        |  11 ++
+ coordinator/redispatch-example.md        |  63 +++++++
+ coordinator/runtime-sequence.md          | 125 ++++++++++++++
+ coordinator/sequence-diagram.md          |  37 ++++
+ evals/adversarial-reviewer-eval.md       |  50 ++++++
+ evals/final-review-writer-eval.md        |  60 +++++++
+ evals/requirement-interpreter-eval.md    |  50 ++++++
+ examples/examiner-output.json            |  19 +++
+ examples/final-review-output.md          |  17 ++
+ examples/reviewer-output.json            |  13 ++
+ fixtures/hvac-ticket-1.md                |  16 ++
+ fixtures/hvac-ticket-2.md                |  72 ++++++++
+ fixtures/hvac-ticket-3.md                |  56 +++++++
+ human-decisions.jsonl                    |   1 +
+ schemas/challenges.schema.json           |  37 ++++
+ schemas/examiner.schema.json             |  45 +++++
+ schemas/final-review.schema.json         |  13 ++
+ stage5-requirements.png                  | Bin 0 -> 297773 bytes
+ stage5-system-design.md                  | 146 ++++++++++++++++
+ sub-agents-results.json                  |  29 ++++
+ sub-agents.config.yaml                   |  29 ++++
+ substance-assessment.json                |  27 +++
+ substance-assessment.md                  |  47 ++++++
+ workflow-definition.yaml                 |  18 ++
+ 35 files changed, 1729 insertions(+)

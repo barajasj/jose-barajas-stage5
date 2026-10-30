@@ -1,5 +1,22 @@
 # Adversarial Reviewer Evaluation
 
+## Current Live Evidence - Deliverable 5
+
+`evidence/d5-20261030T1940Z/` contains every response from one authorized batch,
+not selected successes. Of 16 direct reviewer cases, 11 passed runtime contracts;
+none passed the exact-label full-step scorer. Frozen wording/reference/rationale
+differences must not be described as proven semantic false positives or misses.
+Actual runtime failures: missing `ambiguityRefs` (`assumption`), invalid source
+quotations (`hvac`, `validation`, `bad-resolution`), and a non-pointer interpreter
+reference (`resolved`).
+
+Ticket 2 also omitted `ambiguityRefs`; ticket 3 supplied an invalid quotation.
+Ticket 1 completed with FAIL; its new reviewer input has independently authored
+post-collection source labels, including an unsupported read-only restriction.
+All 15 mandatory metric types have direct observations. Full before/after output
+and per-failure causes: `before.json`, `after-labeled.json`, `diagnostics.json`.
+No prompt changed, no extra attempts were run, and no prompt-improvement delta is claimed.
+
 ## Current scorer - Deliverable 4
 
 `src/eval-scorer.js` now evaluates reviews against frozen **ticket + actual interpreter output + prior review** inputs in `evals/step-cases.js`. Assumptions, explicit omissions, HVAC errors, missing validation, missed/already-listed ambiguities, boundary/configuration questions, and unsupported resolutions have separate applicable metrics. Corrected counterparts reject stale accusations; `isActive` sample data is not relabeled as a mandatory filter.
@@ -66,7 +83,7 @@ R16 was added after a live real-mode run (`HVAC-TICKET-1793313465729-3ff8ae74-b9
 
 The suite validates criterion sensitivity, not the model's detection rate. Schema-valid missing-finding controls change status consistently, so detection cannot pass merely by noticing an invalid JSON contract. Grounding labels require supported full descriptions/actions and exact sources; quotation existence alone is insufficient. Clean controls explicitly penalize invented accusations.
 
-**Current status:** scorer/runner repairs are implemented in Deliverable 4 above. The historical 0.727 measurement, baseline evidence regeneration, live re-runs, and genuine measured prompt-evolution iterations remain unrefreshed. The D3 audit does not relabel them as resolved.
+**Current status:** scorer/runner repairs were implemented in Deliverable 4; current live evidence and immutable baseline exports are described above. The historical 0.727 is not a current score. Genuine measured prompt-evolution iterations remain unproven. The D3 audit does not relabel them as resolved.
 
 ## Historical evaluation record — not refreshed by Deliverable 3
 

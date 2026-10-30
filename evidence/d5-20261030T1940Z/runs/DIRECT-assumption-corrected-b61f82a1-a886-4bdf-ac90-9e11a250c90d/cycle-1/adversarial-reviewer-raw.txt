@@ -1,0 +1,67 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output leaves several critical ambiguities unresolved and omits required guidance on filtering Unit Type by Condenser Type, which are essential for implementing the ticket's behavior. These open ambiguities and missing requirement constitute high‑severity findings that block a PASS.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The mapping for Condenser Type is unclear because the provided example parent data only contains refrigerants, leaving it unspecified how to filter Unit Type by Condenser Type.",
+      "action": "Obtain clarification from the ticket owner on how Condenser Type should be used to filter Unit Type entries.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The Condenser Type mapping is unclear because the example parent data contains refrigerants."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/0"]
+    },
+    {
+      "id": "F2",
+      "severity": "HIGH",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Behavior when a filter yields no results (empty dropdown) is unspecified.",
+      "action": "Clarify with the ticket owner what should be displayed or how the UI should behave when filtering returns an empty set.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "Empty filter-result behavior is unspecified."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/1"]
+    },
+    {
+      "id": "F3",
+      "severity": "HIGH",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Case sensitivity of the filter values and downstream selection reset behavior are unspecified.",
+      "action": "Ask the ticket owner to define case‑sensitivity rules and whether selections should be cleared when a parent dropdown changes.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Case sensitivity and downstream selection reset behavior are unspecified."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/2"]
+    },
+    {
+      "id": "F4",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter does not specify how to filter the Unit Type dropdown by the selected Condenser Type, which is a core requirement of the ticket.",
+      "action": "Add guidance to retrieve and apply Condenser Type mapping when filtering Unit Type entries, consistent with the ticket's acceptance criteria.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When a user selects the Condenser Type and the Refrigerant from their dropdowns, we should populate the Unit Type dropdown filtered by the condenser type and the refrigerant that was selected."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

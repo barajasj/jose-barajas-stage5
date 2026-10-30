@@ -1,0 +1,15 @@
+{
+  "ticket": "Display the calculated height using the exact label \"DX Coil Height\". The calculation is already correct.",
+  "interpreterResult": {
+    "requirementSummary": "Display the calculated height.",
+    "hvacTerminology": [
+      "DX Coil Height"
+    ],
+    "businessRules": [
+      "Display the calculated height using the label \"DX height\"."
+    ],
+    "developerConsiderations": [],
+    "ambiguities": [],
+    "confidence": "HIGH"
+  }
+}

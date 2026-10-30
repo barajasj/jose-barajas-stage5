@@ -1,5 +1,20 @@
 # Final Review Writer Evaluation
 
+## Current Live Evidence - Deliverable 5
+
+One authorized batch is retained at `evidence/d5-20261030T1940Z/`.
+Both direct writer cases passed runtime and strict scoring. Ticket 1's workflow
+writer also passed. Two other attempted workflow writers failed the exact content
+contract: ticket 4 removed existing escape characters from source strings; the
+positive control changed "or precision" to "and precision" in a finding and ambiguity.
+These are genuine contract deviations, not evidence of missing workflow status fields.
+
+Thus 3/5 attempted writer steps passed runtime; pooled preservation/completeness/
+quality of 1.0 covers only two direct cases and one completed workflow. Failed
+workflows remain failures and are not included as successful preservation.
+See `diagnostics.json.writerFailures` for exact differing substrings.
+No writer prompt changed; no prompt-evolution delta or repeat-run reliability is claimed.
+
 ## Current scorer - Deliverable 4
 
 `src/eval-scorer.js` now parses bounded reports through the independent section/row parser in `src/load-bearing-criteria.js`. It measures exact per-finding ID, severity, kind, description, and action; duplicates, missing concerns, invented concerns, altered summaries/ambiguities, contradictory heading/body dispositions, and unsupported conclusions fail. The runtime report template is an additional non-compensable contract/drift check, not the sole semantic scorer.
@@ -48,7 +63,7 @@ The checks are field-specific: correct section labels cannot compensate for an e
 
 Repeated JSON-format prose and duplicate example text were consolidated into W07. Interpreter input, no-new-conclusion restrictions, and substantive concern/disposition requirements were retained rather than removed.
 
-These are authored criterion-sensitivity measurements, not live writer executions or a prompt-evolution delta. The legacy results/log below are preserved and have not been revalidated. Deliverable 4 repairs the scorer/aggregation; fresh model evidence remains deferred.
+These are authored criterion-sensitivity measurements, not live writer executions or a prompt-evolution delta. The legacy results/log below are preserved and have not been revalidated. Deliverable 4 repaired scoring/aggregation; current live evidence is reported separately above.
 
 ## Historical evaluation record — not refreshed by Deliverable 3
 

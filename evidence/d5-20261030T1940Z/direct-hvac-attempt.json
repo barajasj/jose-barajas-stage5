@@ -1,0 +1,8 @@
+{
+  "caseId": "hvac",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-hvac-c5304883-a5d9-4919-ab2c-33e626941d72",
+  "hasRawResponse": true,
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Source quote is not present in the referenced artifact."
+}

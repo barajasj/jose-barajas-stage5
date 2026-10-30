@@ -1,0 +1,202 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains multiple critical errors and omissions. It incorrectly maps the meanings of AC and EC, reversing their definitions, which is a high‑severity HVAC_ERROR. Additionally, it fails to capture all core business requirements from the ticket, including the conditional display of input fields, detailed AC and EC input specifications, default values, unit definitions, and all acceptance criteria related to recording parameters, output generation, Condenser Passes options, and Roof Type options. These missing requirements are essential for implementing the described functionality, resulting in a high‑severity MISSING_REQUIREMENT for each. Consequently, the review contains several findings and the overall status is FAIL.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "HVAC_ERROR",
+      "description": "Interpreter incorrectly maps AC and EC meanings, reversing their definitions.",
+      "action": "Correct the mapping: AC = Air Cooled, EC = Evaporative Cooled.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Inputs — Air Cooled (AC)"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Inputs — Evaporative Cooled (EC)"
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F2",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The system must display the appropriate AC input fields when the user selects Condenser Type \"AC\".",
+      "action": "Add requirement to render all Air Cooled (AC) input rows upon AC selection.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Inputs — Air Cooled (AC) | Design Ambient | Numeric Input | User / Default | °F / °C | 95°F"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F3",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The system must display the appropriate EC input fields when the user selects Condenser Type \"EC\".",
+      "action": "Add requirement to render all Evaporative Cooled (EC) input rows upon EC selection.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Inputs — Evaporative Cooled (EC) | Wet Bulb Temperature | Numeric Input | User | °F / °C | —"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F4",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "Default values for AC condenser fields (Design Ambient, Tube Material, Fin Material, Tube Size, Fin Type) are not captured.",
+      "action": "Include default specifications: Design Ambient = 95°F, Tube Material = Copper, Fin Material = Aluminum, Tube Size = 3/8 (or 3/8 w/ 1\" spacing), Fin Type = Corrugated.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Design Ambient | Numeric Input | User / Default | °F / °C | 95°F"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Tube Material | Dropdown | User / Default | — | Copper"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Fin Material | Dropdown | User / Default | — | Aluminum"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Tube Size | Dropdown | User / Default | mm | 3/8, 3/8 w/ 1\" spacing"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Fin Type | Dropdown | User / Default | — | Corrugated"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F5",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "Units for temperature and tube size fields are not captured.",
+      "action": "Specify units: temperatures in °F / °C, tube size in mm.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Design Ambient | Numeric Input | User / Default | °F / °C"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Tube Size | Dropdown | User / Default | mm"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F6",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The system must output condenser and circuit‑level configuration ready for ECS calculation.",
+      "action": "Add requirement to produce a consolidated configuration object after processing AC/EC parameters and per‑circuit cooling configurations.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Given the AC/EC condenser parameters and per-circuit cooling configurations, When processed, Then the system outputs condenser and circuit-level configuration ready for ECS calculation."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F7",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "When configuring an AC condenser, the system must record the entered ambient design conditions and coil geometry.",
+      "action": "Add requirement to persist AC condenser parameters as entered by the user.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Given the user is configuring an AC condenser, When they enter ambient design conditions and coil geometry, Then the system records the condenser parameters."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F8",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "When configuring an EC condenser, the system must record the EC model and wet bulb temperature.",
+      "action": "Add requirement to persist EC condenser parameters as entered by the user.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Given the user is configuring an EC condenser, When they enter the EC model and wet bulb temperature, Then the system records the EC condenser parameters."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F9",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "When an AC condenser is configured and the user selects Condenser Passes, the system shall display AutoOdd, AutoEven, and values 2 through 41 in increments of 1 as options.",
+      "action": "Add requirement to generate and present the specified pass options list.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Given the user configures an AC condenser, When they select Condenser Passes, Then the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F10",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "When an AC condenser is configured and the user selects Roof Type, the system shall display the specified dark and light roof type options with and without parapet/shrouding.",
+      "action": "Add requirement to present the full set of roof type options as described.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Given the user configures an AC condenser, When they select Roof Type, Then the system shall display the specified dark and light roof type options with and without parapet/shrouding."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

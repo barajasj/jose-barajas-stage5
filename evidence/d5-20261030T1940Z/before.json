@@ -1,0 +1,585 @@
+{
+  "generatedBy": "node src/run-evals.js",
+  "generatedAt": "2026-10-30T19:38:58.239Z",
+  "scorerVersion": "content-v2",
+  "mode": "persisted-model-evidence",
+  "modelPerformanceMeasured": false,
+  "methodology": "Frozen full-proposition labels, contextual review findings, bounded parsed reports; explicit NA, non-compensable gates, unrounded decisions.",
+  "pass": false,
+  "errors": [
+    "dx: Missing required direct response: dx",
+    "coil: Missing required direct response: coil",
+    "filters: Missing required direct response: filters",
+    "clean: Missing required direct response: clean",
+    "sparse: Missing required direct response: sparse",
+    "conflict: Missing required direct response: conflict",
+    "redispatch: Missing required direct response: redispatch",
+    "assumption: Missing required direct response: assumption",
+    "missing: Missing required direct response: missing",
+    "hvac: Missing required direct response: hvac",
+    "validation: Missing required direct response: validation",
+    "missed-ambiguity: Missing required direct response: missed-ambiguity",
+    "open: Missing required direct response: open",
+    "boundary: Missing required direct response: boundary",
+    "clean-review: Missing required direct response: clean-review",
+    "minor-label: Missing required direct response: minor-label",
+    "retained: Missing required direct response: retained",
+    "resolved: Missing required direct response: resolved",
+    "bad-resolution: Missing required direct response: bad-resolution",
+    "writer-fail: Missing required direct response: writer-fail",
+    "writer-pass: Missing required direct response: writer-pass",
+    "condenser: Missing required direct response: condenser",
+    "missing-corrected: Missing required direct response: missing-corrected",
+    "assumption-corrected: Missing required direct response: assumption-corrected",
+    "hvac-corrected: Missing required direct response: hvac-corrected",
+    "validation-corrected: Missing required direct response: validation-corrected",
+    "fixtures/hvac-ticket-1.md: Workflow must have an explicit completed status.",
+    "Baseline fixtures/hvac-ticket-1.md: Workflow must have an explicit completed status.",
+    "fixtures/hvac-ticket-2.md: Workflow must have an explicit completed status.",
+    "Baseline fixtures/hvac-ticket-2.md: Workflow must have an explicit completed status.",
+    "fixtures/hvac-ticket-3.md: Workflow must have an explicit completed status.",
+    "Baseline fixtures/hvac-ticket-3.md: Workflow must have an explicit completed status.",
+    "fixtures/hvac-ticket-4.md: Workflow must have an explicit completed status.",
+    "Mandatory criteria have no measured cases: requirementExtractionAccuracy, hvacTerminologyRecognition, ambiguityDetection, unsupportedAssumptionDetection, missingRequirementDetection, challengeQuality, findingPreservation, reportCompleteness, outputQuality, summaryAccuracy, developerConsiderationGrounding, confidencePolicyConsistency, hvacInterpretationErrorDetection, missingValidationDetection, boundaryChallengeCoverage"
+  ],
+  "failures": [],
+  "thresholds": {
+    "requirementExtractionAccuracy": 0.9,
+    "hvacTerminologyRecognition": 0.9,
+    "ambiguityDetection": 0.8,
+    "unsupportedAssumptionDetection": 0.85,
+    "missingRequirementDetection": 0.85,
+    "challengeQuality": 0.9,
+    "findingPreservation": 1,
+    "reportCompleteness": 1,
+    "outputQuality": 0.95,
+    "summaryAccuracy": 1,
+    "developerConsiderationGrounding": 1,
+    "confidencePolicyConsistency": 1,
+    "hvacInterpretationErrorDetection": 1,
+    "missingValidationDetection": 1,
+    "boundaryChallengeCoverage": 1
+  },
+  "aggregate": {},
+  "direct": [],
+  "workflows": [
+    {
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "rows": [],
+      "failure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "rows": [],
+      "failure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "rows": [],
+      "failure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-4.md",
+      "rows": [],
+      "failure": "Workflow must have an explicit completed status."
+    }
+  ],
+  "baseline": [
+    {
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "rows": [],
+      "failure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "rows": [],
+      "failure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "rows": [],
+      "failure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-4.md",
+      "rows": [],
+      "applicable": false,
+      "reason": "Ticket 4 was added after commit 4fcbf47."
+    }
+  ],
+  "comparisons": {
+    "pairs": [],
+    "unpaired": [],
+    "baselineOnly": []
+  },
+  "coverage": {
+    "pass": true,
+    "modelPerformanceMeasured": false,
+    "hashes": {
+      "evals/load-bearing-map.json": "8a8a1e180e8fd73a0d8e341a8acb5463675f5a207dc274fdfcc4fd488e89c2aa",
+      "evals/load-bearing-cases.js": "9abfb3a1a15cab18921d410c524cec77f330eced9b8a2655901b669edf317c6e",
+      "src/load-bearing-criteria.js": "d815ae50443416db40ff2267f7ee5e55d3a45e0218c6a70889818838c4b3440c",
+      "src/run-load-bearing-audit.js": "5a7110e2cd1b621fdec84c996418f3b35ef64dae568aac7f1a115fa6a5b3586b",
+      "src/schema-validator.js": "a30e5dee99e334d66bbe0dbe1ad7283dbc59a776b9b8ee27b2812760b14d621c",
+      "src/governance-policy.js": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "src/prompt-builder.js": "439edb02396d1b9b2876e7b623f3bbad117fa916de7f40123b42a69bf5fbfc63",
+      "schemas/examiner.schema.json": "2e76026b9352e4eb0c5c2f4b8344925e197cf6bd14863ac61acf2642925c0057",
+      "schemas/challenges.schema.json": "2c3430aa72ce1f696776a80552931d85497cacb927dbc6fd83ed742369ebc8ff",
+      "schemas/final-review.schema.json": "56af547d2feb6cf2a6ca246263222693d3756b8bdebd09354c4b9497dc10cdba",
+      "agents/requirement-interpreter.md": "c96023d7906f54b504e0df73fbc77d366876abfaf503c6b44e3a1a403b46f275",
+      "agents/adversarial-reviewer.md": "53f57078237383f4e4ef97e6a70a334e723936adbd360604a26c1ebb3765cc70",
+      "agents/final-review-writer.md": "57db0596394403c8727ad53ba294a6ed083eb3e0b82c007ca56533d434f812d6",
+      "fixtures/hvac-ticket-1.md": "9213fde66d55e591c419db6faace48e2af2e1f86b0970dd51a69b816126423f4",
+      "fixtures/hvac-ticket-2.md": "7a678f38e9e7c34cb101208b668995b83692ca8a31cf398a6697855fd913cb54",
+      "fixtures/hvac-ticket-3.md": "4f5ab672a0ec2ae8601d0eb4680e7db31eed771139b5ee30afb05ffd36ff75d1",
+      "fixtures/hvac-ticket-4.md": "03b8e109c3c5254e095c36fc5a9775784d0d4b4a88b6ee632bb349d9ea123915"
+    },
+    "checks": 61,
+    "negativeControls": 152,
+    "agents": {
+      "requirement-interpreter": {
+        "examinerBaseline": {
+          "mapped": 8,
+          "total": 12
+        },
+        "mapped": 16,
+        "total": 16,
+        "coverage": 1,
+        "unmapped": [],
+        "units": [
+          {
+            "id": "I01",
+            "text": "- [I01] requirementSummary: summarize the ticket's requested behavior, affected HVAC objects, and conditions without changing quantities, units, or intent.",
+            "criteria": [
+              "summaryAccuracy"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I02",
+            "text": "- [I02] hvacTerminology: list HVAC terms explicitly present in the ticket; do not add terminology or change its meaning.",
+            "criteria": [
+              "hvacTerminologyAccuracy",
+              "sourceGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I03",
+            "text": "- [I03] businessRules: capture every explicitly stated business requirement as a complete proposition.",
+            "criteria": [
+              "businessRuleAccuracy"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I04",
+            "text": "- [I04] Include explicit validation constraints in businessRules, preserving both range limits, units, rounding behavior, and every coil-specific increment/configuration mapping, including specific overrides. Unspecified validation policy belongs in ambiguities, not invented rules.",
+            "criteria": [
+              "validationRuleAccuracy",
+              "sourceGrounding",
+              "ambiguityAccuracy"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I05",
+            "text": "- [I05] Preserve functional behavior in businessRules as the stated trigger, dependent action, and resulting field or output.",
+            "criteria": [
+              "functionalBehaviorAccuracy"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I06",
+            "text": "- [I06] ambiguities: identify source gaps, contradictions, unclear behavior, and unanswered implementation questions. Do not label explicitly answered details as missing.",
+            "criteria": [
+              "ambiguityAccuracy"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I07",
+            "text": "- [I07] developerConsiderations: report only technical constraints supported by the ticket, not preferred architectures or invented validation, defaults, reset, persistence, or conversion policies.",
+            "criteria": [
+              "developerConsiderationGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I08",
+            "text": "- [I08] confidence describes ticket readiness, not confidence in your extraction: HIGH only when the source defines the requested behavior and no ambiguity remains; MEDIUM when core behavior is clear but localized details remain unspecified; LOW when core behavior is missing or contradictory.",
+            "criteria": [
+              "confidencePolicyConsistency"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I09",
+            "text": "- [I09] Ground every summary, term, rule, and technical constraint in the supplied ticket. A plausible domain convention or sample-data attribute is not an explicit business policy.",
+            "criteria": [
+              "sourceGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I10",
+            "text": "- [I10] Use empty arrays for terms, rules, or developer considerations without source support; missing or unclear behavior must still appear as questions in ambiguities.",
+            "criteria": [
+              "emptyArrayDiscipline"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I11",
+            "text": "- [I11] On re-dispatch, correct supported reviewer challenges without inventing facts. Preserve previous ambiguities verbatim unless the original ticket answers them; each removed question requires ambiguityResolutions containing its exact ambiguity text, a rationale, and an exact nonempty ticket sourceQuote.",
+            "criteria": [
+              "redispatchSafety"
+            ],
+            "covered": true
+          },
+          {
+            "id": "I12",
+            "text": "- [I12] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/examiner.schema.json: requirementSummary is a nonblank string; hvacTerminology, businessRules, developerConsiderations, and ambiguities are string arrays; confidence is LOW, MEDIUM, or HIGH; ambiguityResolutions is optional as defined above. No other fields.",
+            "criteria": [
+              "rawResponseFormat",
+              "schemaConformance"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:ticket",
+            "text": "{{ticket}}",
+            "criteria": [
+              "summaryAccuracy",
+              "sourceGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "runtime:previousInterpretation",
+            "text": "Previous Interpretation:",
+            "criteria": [
+              "redispatchSafety"
+            ],
+            "covered": true
+          },
+          {
+            "id": "runtime:reviewerFeedback",
+            "text": "Adversarial Reviewer Findings (address actionable HIGH interpretation defects without inventing unsupported requirements; preserve missing ticket facts as ambiguities):",
+            "criteria": [
+              "redispatchSafety",
+              "sourceGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "runtime:ambiguityPreservation",
+            "text": "Preserve each previous ambiguity verbatim unless the original ticket explicitly answers it.",
+            "criteria": [
+              "redispatchSafety"
+            ],
+            "covered": true
+          }
+        ]
+      },
+      "adversarial-reviewer": {
+        "examinerBaseline": {
+          "mapped": 8,
+          "total": 12
+        },
+        "mapped": 19,
+        "total": 19,
+        "coverage": 1,
+        "unmapped": [],
+        "units": [
+          {
+            "id": "R01",
+            "text": "- [R01] Detect interpreter assumptions unsupported by the ticket, distinguishing requested behavior from an invented implementation policy.",
+            "criteria": [
+              "unsupportedAssumptionDetection",
+              "ticketGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R02",
+            "text": "- [R02] Detect explicit business requirements omitted or contradicted by the actual interpreter output; do not accuse it of omitting content it already includes.",
+            "criteria": [
+              "missingRequirementDetection",
+              "interpreterGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R03",
+            "text": "- [R03] Detect incorrect HVAC meanings, units, and coil/configuration interpretations.",
+            "criteria": [
+              "hvacInterpretationErrorDetection"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R04",
+            "text": "- [R04] Detect missing or incorrect explicit validation constraints. Ask for clarification of absent policy rather than supplying it.",
+            "criteria": [
+              "missingValidationDetection"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R05",
+            "text": "- [R05] Detect ambiguities the interpreter missed; distinguish these from questions it already identified.",
+            "criteria": [
+              "reviewerAmbiguityCoverage"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R06",
+            "text": "- [R06] Every unresolved interpreter ambiguity blocks PASS. Create an OPEN_AMBIGUITY finding with exact /ambiguities/N references and the complete ambiguity as an interpreter source quote; do not claim the interpreter missed an already-listed question.",
+            "criteria": [
+              "reviewerAmbiguityCoverage",
+              "statusConsistency"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R07",
+            "text": "- [R07] For relevant validation tickets, challenge boundary values, configuration overrides/detection, rounding ties, unknown configurations, and range/increment interaction. A gap is a clarification question, not an invented rule.",
+            "criteria": [
+              "boundaryChallengeCoverage",
+              "ticketGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R08",
+            "text": "- [R08] Ground findings in both the original ticket and actual interpreter output. Exact source quotations must support the accusation, not merely occur somewhere. Do not invent requirements, false omissions, or concerns on a complete correct interpretation.",
+            "criteria": [
+              "ticketGrounding",
+              "interpreterGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R09",
+            "text": "- [R09] Each finding contains a stable id, kind, LOW/MEDIUM/HIGH severity, specific description, concrete correction or clarification action, sourceRefs, and ambiguityRefs. Kinds are UNSUPPORTED_ASSUMPTION, MISSING_REQUIREMENT, HVAC_ERROR, MISSING_VALIDATION, or OPEN_AMBIGUITY. Each sourceRef contains artifact (ticket or interpreter), pointer (empty for ticket, JSON pointer for interpreter), and an exact nonempty quote. Only OPEN_AMBIGUITY uses nonempty ambiguityRefs.",
+            "criteria": [
+              "schemaConformance",
+              "findingActionability",
+              "reviewerAmbiguityCoverage"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R10",
+            "text": "- [R10] Assign severity by impact: HIGH for incorrect or missing core behavior preventing reliable implementation; MEDIUM for unresolved behavior/validation needing clarification; LOW for a minor supported concern. Every severity blocks PASS.",
+            "criteria": [
+              "severityAppropriateness",
+              "statusConsistency"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R11",
+            "text": "- [R11] Set PASS if and only if findings is empty and no interpreter ambiguity remains; set FAIL for any nonempty findings. An inconsistent status is invalid.",
+            "criteria": [
+              "statusConsistency"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R12",
+            "text": "- [R12] Supply a substantive rationale explaining the supported review result; a clean PASS must explain why the stated behavior is captured without unsupported claims or open questions.",
+            "criteria": [
+              "reviewRationaleQuality"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R13",
+            "text": "- [R13] Preserve prior finding IDs for concerns that remain. Each disappearing prior finding needs a resolutions entry containing findingId, rationale, and sourceRefs showing the correction in current artifacts.",
+            "criteria": [
+              "concernContinuity"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R14",
+            "text": "- [R14] Independently verify interpreter ambiguityResolutions against the ticket. A quotation that does not answer the removed question is not a resolution; flag unsupported removal as UNSUPPORTED_ASSUMPTION.",
+            "criteria": [
+              "ambiguityResolutionVerification"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R15",
+            "text": "- [R15] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/challenges.schema.json. Root fields are status, rationale, findings, and resolutions; no extra fields. Use the finding and resolution structures above.",
+            "criteria": [
+              "rawResponseFormat",
+              "schemaConformance"
+            ],
+            "covered": true
+          },
+          {
+            "id": "R16",
+            "text": "- [R16] Every finding must include all of its fields; a missing action or sourceRefs entry is invalid. Example of one complete finding: {\"id\":\"F1\",\"severity\":\"MEDIUM\",\"kind\":\"OPEN_AMBIGUITY\",\"description\":\"The ticket does not define the rounding tie-break policy.\",\"action\":\"Obtain clarification from the ticket owner on the tie-break policy.\",\"sourceRefs\":[{\"artifact\":\"interpreter\",\"pointer\":\"/ambiguities/0\",\"quote\":\"The ticket does not define the rounding tie-break policy.\"}],\"ambiguityRefs\":[\"/ambiguities/0\"]}",
+            "criteria": [
+              "schemaConformance",
+              "findingActionability"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:ticket",
+            "text": "{{ticket}}",
+            "criteria": [
+              "ticketGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:interpreterResult",
+            "text": "{{interpreterResult}}",
+            "criteria": [
+              "interpreterGrounding",
+              "reviewerAmbiguityCoverage"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:previousReview",
+            "text": "{{previousReview}}",
+            "criteria": [
+              "concernContinuity"
+            ],
+            "covered": true
+          }
+        ]
+      },
+      "final-review-writer": {
+        "examinerBaseline": {
+          "mapped": 6,
+          "total": 8
+        },
+        "mapped": 12,
+        "total": 12,
+        "coverage": 1,
+        "unmapped": [],
+        "units": [
+          {
+            "id": "W01",
+            "text": "- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.",
+            "criteria": [
+              "writerInterpreterGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "W02",
+            "text": "- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.",
+            "criteria": [
+              "findingPreservation",
+              "reportCompleteness"
+            ],
+            "covered": true
+          },
+          {
+            "id": "W03",
+            "text": "- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.",
+            "criteria": [
+              "writerInterpreterGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "W04",
+            "text": "- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.",
+            "criteria": [
+              "dispositionFidelity"
+            ],
+            "covered": true
+          },
+          {
+            "id": "W05",
+            "text": "- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.",
+            "criteria": [
+              "findingPreservation",
+              "conclusionGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "W06",
+            "text": "- [W06] Return the exact bounded Markdown supplied below, including substantive summary, findings, ambiguities, disposition, and reasons sections. Preserve JSON-escaped source strings. Only outer whitespace and CRLF line endings may differ; do not add or remove prose or sections.",
+            "criteria": [
+              "boundedMarkdownFidelity",
+              "conclusionGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "W07",
+            "text": "- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.",
+            "criteria": [
+              "rawResponseFormat",
+              "schemaConformance"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:interpreterResult",
+            "text": "{{interpreterResult}}",
+            "criteria": [
+              "writerInterpreterGrounding"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:reviewResult",
+            "text": "{{reviewResult}}",
+            "criteria": [
+              "findingPreservation",
+              "reportCompleteness"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:disposition",
+            "text": "{{disposition}}",
+            "criteria": [
+              "dispositionFidelity"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:reasonCodes",
+            "text": "{{reasonCodes}}",
+            "criteria": [
+              "dispositionFidelity"
+            ],
+            "covered": true
+          },
+          {
+            "id": "input:reportTemplate",
+            "text": "{{reportTemplate}}",
+            "criteria": [
+              "boundedMarkdownFidelity"
+            ],
+            "covered": true
+          }
+        ]
+      }
+    },
+    "errors": []
+  },
+  "hashes": {
+    "scorer": "4ebd1486bb5244694b623fab79eee512b274b49482b0d9239b809d704ceb460a",
+    "definitions": "8b03c14117e496cfc387f08a69aa73fd9a678d7ef2fd08b988f118368f5dcac0",
+    "cases": "dccc572d526da827c7665ac595b1c06b55591dcd9877f4fc44f2aaf9cefdb82e",
+    "loadBearingCases": "9abfb3a1a15cab18921d410c524cec77f330eced9b8a2655901b669edf317c6e",
+    "responses": null,
+    "baselineResponses": null
+  }
+}

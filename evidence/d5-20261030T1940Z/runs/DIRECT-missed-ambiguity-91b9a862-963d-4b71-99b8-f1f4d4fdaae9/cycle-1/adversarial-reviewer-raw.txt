@@ -1,0 +1,22 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter correctly captured the majority of the ticket requirements, but the ticket does not specify how to handle the case where an input is exactly halfway between two valid increments. This missing validation detail is essential for implementing deterministic rounding behavior. The reviewer therefore raises a MISSING_VALIDATION finding requesting clarification on the rounding tie‑break policy.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "MISSING_VALIDATION",
+      "description": "The ticket does not define the rounding tie‑break rule for inputs that are exactly halfway between two valid increments.",
+      "action": "Obtain clarification from the ticket owner on the tie‑break policy (e.g., round up, round down, or round to even) for values equidistant from two valid increments.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "If the entered value is not an exact multiple, round it to the nearest valid increment."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

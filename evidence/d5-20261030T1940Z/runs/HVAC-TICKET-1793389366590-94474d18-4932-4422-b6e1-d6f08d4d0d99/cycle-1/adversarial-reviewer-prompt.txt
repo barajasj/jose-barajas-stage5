@@ -1,0 +1,133 @@
+# Adversarial Reviewer
+
+- [R01] Detect interpreter assumptions unsupported by the ticket, distinguishing requested behavior from an invented implementation policy.
+- [R02] Detect explicit business requirements omitted or contradicted by the actual interpreter output; do not accuse it of omitting content it already includes.
+- [R03] Detect incorrect HVAC meanings, units, and coil/configuration interpretations.
+- [R04] Detect missing or incorrect explicit validation constraints. Ask for clarification of absent policy rather than supplying it.
+- [R05] Detect ambiguities the interpreter missed; distinguish these from questions it already identified.
+- [R06] Every unresolved interpreter ambiguity blocks PASS. Create an OPEN_AMBIGUITY finding with exact /ambiguities/N references and the complete ambiguity as an interpreter source quote; do not claim the interpreter missed an already-listed question.
+- [R07] For relevant validation tickets, challenge boundary values, configuration overrides/detection, rounding ties, unknown configurations, and range/increment interaction. A gap is a clarification question, not an invented rule.
+- [R08] Ground findings in both the original ticket and actual interpreter output. Exact source quotations must support the accusation, not merely occur somewhere. Do not invent requirements, false omissions, or concerns on a complete correct interpretation.
+- [R09] Each finding contains a stable id, kind, LOW/MEDIUM/HIGH severity, specific description, concrete correction or clarification action, sourceRefs, and ambiguityRefs. Kinds are UNSUPPORTED_ASSUMPTION, MISSING_REQUIREMENT, HVAC_ERROR, MISSING_VALIDATION, or OPEN_AMBIGUITY. Each sourceRef contains artifact (ticket or interpreter), pointer (empty for ticket, JSON pointer for interpreter), and an exact nonempty quote. Only OPEN_AMBIGUITY uses nonempty ambiguityRefs.
+- [R10] Assign severity by impact: HIGH for incorrect or missing core behavior preventing reliable implementation; MEDIUM for unresolved behavior/validation needing clarification; LOW for a minor supported concern. Every severity blocks PASS.
+- [R11] Set PASS if and only if findings is empty and no interpreter ambiguity remains; set FAIL for any nonempty findings. An inconsistent status is invalid.
+- [R12] Supply a substantive rationale explaining the supported review result; a clean PASS must explain why the stated behavior is captured without unsupported claims or open questions.
+- [R13] Preserve prior finding IDs for concerns that remain. Each disappearing prior finding needs a resolutions entry containing findingId, rationale, and sourceRefs showing the correction in current artifacts.
+- [R14] Independently verify interpreter ambiguityResolutions against the ticket. A quotation that does not answer the removed question is not a resolution; flag unsupported removal as UNSUPPORTED_ASSUMPTION.
+- [R15] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/challenges.schema.json. Root fields are status, rationale, findings, and resolutions; no extra fields. Use the finding and resolution structures above.
+- [R16] Every finding must include all of its fields; a missing action or sourceRefs entry is invalid. Example of one complete finding: {"id":"F1","severity":"MEDIUM","kind":"OPEN_AMBIGUITY","description":"The ticket does not define the rounding tie-break policy.","action":"Obtain clarification from the ticket owner on the tie-break policy.","sourceRefs":[{"artifact":"interpreter","pointer":"/ambiguities/0","quote":"The ticket does not define the rounding tie-break policy."}],"ambiguityRefs":["/ambiguities/0"]}
+
+## Ticket
+
+# Ticket 02
+
+## Title
+
+Autopopulate Unit Type and Unit Size
+
+## Description
+
+In the "CONDENSER TYPE" section:
+- When a user selects the Condenser Type and the Refrigerant from their dropdowns, we should populate the Unit Type dropdown filtered by the condenser type and the refrigerant that was selected.
+- After a user selects a Unit Type, we should populate the Unit Size dropdown filtered by the Refrigerant + Unit Type that was selected
+
+## Acceptance Criteria
+
+When we select the Condenser Type and the Refrigerant we should see the Unit Type dropdown filtered by Condenser Type + Refrigerant selected.
+When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.
+
+## Relevant Discussion
+The Refrigerants comes from an unitdesign api GET /dropdowns
+the attribute to get Unit Type is SDCommonUnitTypeRefrigerant
+for example, we sould filter by the "parent" that contains the refrigerant selected.
+  "SDCommonUnitTypeRefrigerant": [
+    {
+      "id": 0,
+      "display": "CU",
+      "value": "CU",
+      "parent": [
+        "R-410A",
+        "R-454B"
+      ],
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "display": "CUE",
+      "value": "CUE",
+      "parent": [
+        "R-410A",
+        "R-454B",
+        "R-513A"
+      ],
+      "isActive": true
+    },..
+]
+
+The attribute for Unit Size is SDCommonUnitModelSizes
+for example, we sould filter by the "parent" that contains both the refrigerant and the Unit Type selected.
+	
+"SDCommonUnitModelSizes": [
+    {
+      "id": 0,
+      "display": "101",
+      "value": "101",
+      "parent": [
+        "R-410A",
+        "R-454B",
+        "CU"
+      ],
+      "isActive": true
+    },
+    {
+      "id": 1,
+      "display": "103",
+      "value": "103",
+      "parent": [
+        "R-410A",
+        "R-454B",
+        "CU"
+      ],
+      "isActive": true
+    },...
+]
+
+## Interpreter Output
+
+{
+  "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown should be populated with options filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown should be populated with options filtered by the selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant whose parent array contains the selected Refrigerant (and, as stated, the selected Condenser Type).",
+    "If a user selects a Unit Type, the system must populate the Unit Size dropdown with entries from SDCommonUnitModelSizes whose parent array contains both the selected Refrigerant and the selected Unit Type.",
+    "The dropdown data is retrieved via a GET request to /dropdowns on the unitdesign API.",
+    "Only entries where isActive is true should be considered for filtering."
+  ],
+  "developerConsiderations": [
+    "Call the unitdesign API GET /dropdowns to obtain SDCommonUnitTypeRefrigerant and SDCommonUnitModelSizes data.",
+    "Filter Unit Type options by checking each entry's parent array for inclusion of the selected Refrigerant (and Condenser Type if applicable).",
+    "Filter Unit Size options by checking each entry's parent array for inclusion of both the selected Refrigerant and the selected Unit Type.",
+    "Exclude any entries where isActive is false from the filtered results.",
+    "Update the Unit Type and Unit Size dropdowns dynamically in the UI when the relevant selections change."
+  ],
+  "ambiguities": [
+    "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+    "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+    "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+    "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+    "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+    "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Previous Review (null on the initial cycle)
+
+null

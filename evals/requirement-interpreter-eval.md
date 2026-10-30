@@ -1,5 +1,31 @@
 # HVAC Requirement Interpreter Evaluation
 
+## Current Live Evidence - Deliverable 5
+
+Authoritative package: `evidence/d5-20261030T1940Z/`, collected 2026-10-30.
+All 26 direct cases have untouched real responses; all 15 mandatory metric types
+have applicable direct observations. Only 2/26 direct cases pass the unchanged
+strict scorer (both writer cases). This is exact-label compliance, not general
+semantic accuracy: paraphrases do not receive credit.
+
+Current `after-labeled.json`: FAIL, seven evidence errors and 26 failed scored steps.
+Ticket 1 completed with FAIL and contributes three measured workflow steps.
+Ticket 2 lacks `ambiguityRefs`; ticket 3 has an invalid source quotation; ticket 4
+and the positive control changed bounded report content. Three original baseline
+exports lack completed status/cycle/provenance. No statuses or responses were repaired.
+`diagnostics.json` traces every error, failed gate, and failed metric.
+
+The current definitions load `responseFile` automatically; `--responses FILE`
+overrides it. `workflowLabelsFile` supplies hash-bound, non-overriding contexts for
+new workflow inputs. Ticket-1 review labels were authored after collection from
+its frozen upstream input and original ticket, not from its candidate review;
+they are not blinded measurements. Fixed direct-case gold remains unchanged.
+
+Use `node src/run-evals.js` for offline replay (exit 1 is expected), and
+`node src/evidence-package.js evidence/d5-20261030T1940Z` for package integrity.
+`before.json`, `after.json`, and `after-labeled.json` retain each evaluation stage.
+Historical files below remain historical; no new prompt-iteration delta is claimed.
+
 ## Current scorer - Deliverable 4
 
 `src/eval-scorer.js` now uses `content-v2`, replacing substring and two-word-overlap credit. Existing thresholds remain unchanged. `evals/test-cases.json` identifies workflow artifacts; `evals/step-cases.js` supplies 26 fixed direct-step cases with authored labels, including all four HVAC fixtures, sparse/conflicting tickets, corrected reviewer counterparts, and clean PASS/concern-bearing FAIL reports.
@@ -14,7 +40,7 @@ node src/run-evals.js
 
 `--self-test` checks authored full-step controls plus the Deliverable 3 coverage/sensitivity audit. It reports `mode: authored-controls` and `modelPerformanceMeasured: false`; its PASS is not a model score. The test suite also exercises all 152 D3 mutations against the integrated scorer and the original false-credit counterexamples.
 
-Without `--self-test`, missing direct responses, incomplete workflows, incompatible old artifacts, missing required baselines, and unmeasured mandatory criteria fail with exit code 1. Current historical evidence does not meet the new contracts; a failing default command is expected until compatible evidence and fixed-input labels are supplied. No legacy artifact is upgraded, repaired, or given a fabricated default.
+Without `--self-test`, missing direct responses, incomplete workflows, incompatible old artifacts, missing required baselines, and unmeasured mandatory criteria fail with exit code 1. Current definitions select the live batch above; remaining failures are recorded rather than repaired. No legacy artifact is upgraded or given a fabricated default.
 
 Content rules:
 
@@ -35,11 +61,11 @@ provenance: {
 }
 ```
 
-`input` must equal the frozen case input. `rawResponse` is the untouched response string, including malformed JSON if returned; do not strip fences. Hashes are SHA-256: `inputHash` uses `JSON.stringify(input)`, `rawHash` uses the response bytes. Parsed-only, mock, duplicate, unknown, or missing observations fail. Provenance records are consistency checks, not independent proof that a provider was contacted. Collection/live calls and prompt-evolution measurements remain deferred.
+`input` must equal the frozen case input. `rawResponse` is the untouched response string, including malformed JSON if returned; do not strip fences. Hashes are SHA-256: `inputHash` uses `JSON.stringify(input)`, `rawHash` uses the response bytes. Parsed-only, mock, duplicate, unknown, or missing observations fail. Provenance records are consistency checks, not independent proof that a provider was contacted. Live collection now exists above; prompt-evolution measurements remain unproven.
 
 Workflow evidence additionally requires completed status, explicit real mode, contiguous cycles, matching initial/final artifacts, and persisted per-step input, prompt, raw, validated output, and SUCCESS manifests. Hashes and cross-artifact governance are verified before scoring. Unknown interpreter/reviewer input contexts require frozen labels; expectations are never inferred from the candidate output or ticket ID alone.
 
-`--definitions FILE` can select compatible workflow/baseline artifacts using the version-2 definition format. `baseline.state` is `required` (file, optionally immutable Git ref) or `not-in-baseline` with a reason. Tickets 1-3 still reference the original `4fcbf47` baseline; ticket 4 explicitly did not exist there. Missing/corrupt required baselines fail, rather than silently becoming null.
+`--definitions FILE` can select workflow/baseline artifacts using the version-2 format. Optional `responseFile` and `workflowLabelsFile` paths are repository-relative. Workflow labels contain `cases`, each with `id`, `agent`, `input` (or `inputFile`), `inputHash`, `gold`, and `provenance`; changed hashes, duplicate contexts, and overrides of fixed cases fail configuration. `baseline.state` is `required` (file, optionally immutable Git ref) or `not-in-baseline` with a reason. Tickets 1-3 now use byte-exact exports of `4fcbf47`, with Git origin metadata, so offline replay does not need `.git`. Ticket 4 and the new positive control have no historical baseline. Missing, corrupt, or contract-incompatible required baselines still fail.
 
 `--baseline-responses FILE` optionally compares the same direct cases. Deltas require identical case/fixture identity, exact step input, model/settings, and current scorer hash. Expanded/unmatched cases are reported separately with no delta. Old keyword scores are never compared to content-v2 scores.
 
@@ -68,7 +94,7 @@ These are different inventories, not like-for-like performance deltas. The local
 
 Each applicable assertion is Boolean: valid counterpart accepted AND every targeted violation rejected. No empty-denominator recall credit is used. Content mutations must remain schema-valid; explicit JSON/schema/status violations are separately identified. A case without applicable labels is an evaluation-configuration error, not a pass.
 
-Observed on this revision: all **61 valid counterparts accepted** and all **152 negative controls rejected** across the three agents. These are authored criterion-sensitivity measurements, not model executions. Gold proposition wording is deliberately conservative, with case/whitespace normalization only; broader paraphrase grading and integration with the legacy scoring pipeline remain Deliverable 4 work.
+Observed on this revision: all **61 valid counterparts accepted** and all **152 negative controls rejected** across the three agents. These are authored criterion-sensitivity measurements, not model executions. Gold proposition wording is deliberately conservative, with case/whitespace normalization only; scorer integration was completed in Deliverable 4. Broader paraphrase grading is not implemented.
 
 ### Interpreter instruction map
 

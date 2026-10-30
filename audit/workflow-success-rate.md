@@ -1,5 +1,28 @@
 # Workflow Success Rate
 
+## Current Scoped Batch - 2026-10-30
+
+Source: `evidence/d5-20261030T1940Z/collection-summary.json`, `audit.jsonl`, and
+`receipts/` inside that package. Window: 19:38:58.782Z through 19:44:17.225Z.
+Only this authorized batch is counted; historical and synthetic/mock tests are
+excluded. Source hashes and commit/dirty state are in the package manifests.
+
+- 26 direct cases plus five workflow attempts; 39 model invocations total.
+- Workflows completed: 1/5 (20%), ticket 1 with governed FAIL. No workflow PASS.
+- Direct runtime contracts: 20/26; direct exact-label full-step score: 2/26.
+- Interpreter runtime steps: 12/13 SUCCESS; reviewer: 14/21; writer: 3/5.
+- All 39 provider-returned responses are retained, including runtime rejections.
+
+Runtime SUCCESS is not substantive correctness. The positive control failed;
+writer pooled metrics exclude two failed workflow writers. One batch establishes
+neither repeat-run reliability nor improvement over incompatible historical runs.
+See package `diagnostics.json` for every remaining evaluator failure.
+
+## Historical Rate Calculation - Not Current Proof
+
+The mixed historical audit calculation below is retained, not refreshed or
+combined with the new batch. It must not be presented as current live reliability.
+
 Computed from `audit/audit-log.jsonl` by grouping
 entries per `correlationId` (one workflow execution
 per ID).

@@ -48,8 +48,8 @@ Outputs:
 - Questions
 - Confidence Assessment
 
-Tools:
-- read_ticket
+Input transport:
+- Ticket injected into a stateless request; no runtime tools.
 
 ---
 
@@ -72,9 +72,8 @@ Outputs:
 - Ambiguities Missed
 - Severity Assessment
 
-Tools:
-- read_ticket
-- read_interpreter_output
+Input transport:
+- Ticket and interpreter output injected into a stateless request; no runtime tools.
 
 Isolation:
 - Separate context
@@ -98,8 +97,8 @@ Inputs:
 Outputs:
 - Final Review Report
 
-Tools:
-- read_review_artifacts
+Input transport:
+- Validated upstream artifacts and bounded report injected; no runtime tools.
 
 Restriction:
 - Must not create new findings
@@ -116,12 +115,15 @@ Restriction:
 
 4. Coordinator evaluates review
 
-5. If critical issues exist:
-   - Re-dispatch Requirement Interpreter
-   - Re-run Adversarial Review
+5. If actionable HIGH interpretation defects exist and cycles remain:
+   - Re-dispatch Requirement Interpreter with source-preserving feedback
+   - Re-run Adversarial Review under identical contracts
+   - Never erase missing ticket facts or silently drop prior concerns
 
-6. If review passes:
-   - Launch Final Review Writer
+6. After bounded reviews and any required human gate:
+   - Derive FAIL for any finding or open ambiguity, otherwise PASS
+   - Launch Final Review Writer for either derived disposition
+   - Validate exact supplied content before persistence or SUCCESS
 
 7. Produce final report
 
@@ -143,4 +145,6 @@ Audit trail is persisted to disk.
 
 Human punch-outs are honored.
 
-Stage 3 evaluation guarantees remain in place.
+Local instruction coverage is measured separately from model performance.
+Current live evaluation remains FAIL; see `evidence/d5-20261030T1940Z/diagnostics.json`.
+No certification or measured prompt-evolution guarantee is made.

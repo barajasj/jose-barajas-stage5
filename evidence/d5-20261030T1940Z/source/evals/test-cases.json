@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "description": "Frozen full-proposition labels and ticket/interpreter pairs. Authored controls are separate from persisted real-model observations; unsupported paraphrases receive no semantic credit.",
+  "directCases": "evals/step-cases.js",
+  "loadBearingAudit": {
+    "map": "evals/load-bearing-map.json",
+    "cases": "evals/load-bearing-cases.js",
+    "criteria": "src/load-bearing-criteria.js",
+    "command": "node src/run-load-bearing-audit.js",
+    "jsonCommand": "node src/run-load-bearing-audit.js --json",
+    "scope": "Deliverable 3 instruction coverage and criterion sensitivity; required by the Deliverable 4 runner but not model-performance evidence."
+  },
+  "fixtures": [
+    {
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "evidenceFile": "evidence/ticket1-run.json",
+      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket1-run.json" }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "evidenceFile": "evidence/ticket2-run.json",
+      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket2-run.json" }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "evidenceFile": "evidence/ticket3-run.json",
+      "baseline": { "state": "required", "ref": "4fcbf47", "file": "evidence/run1/ticket3-run.json" }
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-4.md",
+      "evidenceFile": "evidence/ticket4-run.json",
+      "baseline": { "state": "not-in-baseline", "reason": "Ticket 4 was added after commit 4fcbf47." }
+    }
+  ]
+}

@@ -1,0 +1,1640 @@
+{
+  "generatedAt": "2026-10-30T19:51:12.002Z",
+  "status": "BLOCKED",
+  "scope": "One authorized batch; all attempts included, no prompt changes or live reruns.",
+  "before": {
+    "pass": false,
+    "directCases": 0,
+    "errors": 34,
+    "failures": 0,
+    "aggregate": {}
+  },
+  "after": {
+    "pass": false,
+    "directCases": 26,
+    "directPasses": 2,
+    "directRuntimeSuccesses": 20,
+    "workflowCompletions": 1,
+    "workflowAttempts": 5,
+    "errors": 7,
+    "failures": 26
+  },
+  "mandatoryMetricTypes": {
+    "measured": 15,
+    "required": 15,
+    "names": [
+      "requirementExtractionAccuracy",
+      "hvacTerminologyRecognition",
+      "ambiguityDetection",
+      "unsupportedAssumptionDetection",
+      "missingRequirementDetection",
+      "challengeQuality",
+      "findingPreservation",
+      "reportCompleteness",
+      "outputQuality",
+      "summaryAccuracy",
+      "developerConsiderationGrounding",
+      "confidencePolicyConsistency",
+      "hvacInterpretationErrorDetection",
+      "missingValidationDetection",
+      "boundaryChallengeCoverage"
+    ]
+  },
+  "directOnlyMetrics": {
+    "requirement-interpreter": {
+      "requirementExtractionAccuracy": {
+        "matched": 3,
+        "total": 33,
+        "applicableCases": 7,
+        "naCases": 1,
+        "applicable": true,
+        "score": 0.09090909090909091,
+        "threshold": 0.9,
+        "pass": false
+      },
+      "hvacTerminologyRecognition": {
+        "matched": 30,
+        "total": 40,
+        "applicableCases": 7,
+        "naCases": 1,
+        "applicable": true,
+        "score": 0.75,
+        "threshold": 0.9,
+        "pass": false
+      },
+      "ambiguityDetection": {
+        "matched": 3,
+        "total": 22,
+        "applicableCases": 7,
+        "naCases": 1,
+        "applicable": true,
+        "score": 0.13636363636363635,
+        "threshold": 0.8,
+        "pass": false
+      },
+      "summaryAccuracy": {
+        "matched": 0,
+        "total": 8,
+        "applicableCases": 8,
+        "naCases": 0,
+        "applicable": true,
+        "score": 0,
+        "threshold": 1,
+        "pass": false
+      },
+      "developerConsiderationGrounding": {
+        "matched": 2,
+        "total": 8,
+        "applicableCases": 8,
+        "naCases": 0,
+        "applicable": true,
+        "score": 0.25,
+        "threshold": 1,
+        "pass": false
+      },
+      "confidencePolicyConsistency": {
+        "matched": 7,
+        "total": 8,
+        "applicableCases": 8,
+        "naCases": 0,
+        "applicable": true,
+        "score": 0.875,
+        "threshold": 1,
+        "pass": false
+      }
+    },
+    "adversarial-reviewer": {
+      "unsupportedAssumptionDetection": {
+        "matched": 0,
+        "total": 2,
+        "applicableCases": 2,
+        "naCases": 14,
+        "applicable": true,
+        "score": 0,
+        "threshold": 0.85,
+        "pass": false
+      },
+      "missingRequirementDetection": {
+        "matched": 0,
+        "total": 3,
+        "applicableCases": 3,
+        "naCases": 13,
+        "applicable": true,
+        "score": 0,
+        "threshold": 0.85,
+        "pass": false
+      },
+      "hvacInterpretationErrorDetection": {
+        "matched": 0,
+        "total": 1,
+        "applicableCases": 1,
+        "naCases": 15,
+        "applicable": true,
+        "score": 0,
+        "threshold": 1,
+        "pass": false
+      },
+      "missingValidationDetection": {
+        "matched": 0,
+        "total": 1,
+        "applicableCases": 1,
+        "naCases": 15,
+        "applicable": true,
+        "score": 0,
+        "threshold": 1,
+        "pass": false
+      },
+      "ambiguityDetection": {
+        "matched": 0,
+        "total": 28,
+        "applicableCases": 8,
+        "naCases": 8,
+        "applicable": true,
+        "score": 0,
+        "threshold": 0.8,
+        "pass": false
+      },
+      "boundaryChallengeCoverage": {
+        "matched": 0,
+        "total": 5,
+        "applicableCases": 1,
+        "naCases": 15,
+        "applicable": true,
+        "score": 0,
+        "threshold": 1,
+        "pass": false
+      },
+      "challengeQuality": {
+        "matched": 1,
+        "total": 57,
+        "applicableCases": 16,
+        "naCases": 0,
+        "applicable": true,
+        "score": 0.017543859649122806,
+        "threshold": 0.9,
+        "pass": false
+      }
+    },
+    "final-review-writer": {
+      "findingPreservation": {
+        "matched": 2,
+        "total": 2,
+        "applicableCases": 2,
+        "naCases": 0,
+        "applicable": true,
+        "score": 1,
+        "threshold": 1,
+        "pass": true
+      },
+      "reportCompleteness": {
+        "matched": 5,
+        "total": 5,
+        "applicableCases": 2,
+        "naCases": 0,
+        "applicable": true,
+        "score": 1,
+        "threshold": 1,
+        "pass": true
+      },
+      "outputQuality": {
+        "matched": 8,
+        "total": 8,
+        "applicableCases": 2,
+        "naCases": 0,
+        "applicable": true,
+        "score": 1,
+        "threshold": 0.95,
+        "pass": true
+      }
+    }
+  },
+  "errors": [
+    {
+      "error": "Baseline fixtures/hvac-ticket-1.md: Workflow must have an explicit completed status.",
+      "cause": "Historical 4fcbf47 export lacks completed status, cycle manifests, and current contracts. Original bytes preserved; cannot invent missing provenance.",
+      "details": null
+    },
+    {
+      "error": "fixtures/hvac-ticket-2.md: Workflow must have an explicit completed status.",
+      "cause": "SCHEMA_FAILURE: Schema validation failed for adversarial-reviewer",
+      "details": [
+        {
+          "instancePath": "/findings/0",
+          "schemaPath": "#/properties/findings/items/required",
+          "keyword": "required",
+          "params": {
+            "missingProperty": "ambiguityRefs"
+          },
+          "message": "must have required property 'ambiguityRefs'"
+        }
+      ]
+    },
+    {
+      "error": "Baseline fixtures/hvac-ticket-2.md: Workflow must have an explicit completed status.",
+      "cause": "Historical 4fcbf47 export lacks completed status, cycle manifests, and current contracts. Original bytes preserved; cannot invent missing provenance.",
+      "details": null
+    },
+    {
+      "error": "fixtures/hvac-ticket-3.md: Workflow must have an explicit completed status.",
+      "cause": "GOVERNANCE_FAILURE: Source quote is not present in the referenced artifact.",
+      "details": null
+    },
+    {
+      "error": "Baseline fixtures/hvac-ticket-3.md: Workflow must have an explicit completed status.",
+      "cause": "Historical 4fcbf47 export lacks completed status, cycle manifests, and current contracts. Original bytes preserved; cannot invent missing provenance.",
+      "details": null
+    },
+    {
+      "error": "fixtures/hvac-ticket-4.md: Workflow must have an explicit completed status.",
+      "cause": "GOVERNANCE_FAILURE: Final report violates the supplied artifact content contract.",
+      "details": null
+    },
+    {
+      "error": "evidence/d5-20261030T1940Z/fixtures/positive-control.md: Workflow must have an explicit completed status.",
+      "cause": "GOVERNANCE_FAILURE: Final report violates the supplied artifact content contract.",
+      "details": null
+    }
+  ],
+  "rowFailures": [
+    {
+      "caseId": "dx",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "requirementExtractionAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 3,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 4,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "developerConsiderationGrounding": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-dx-07f4dd01-d4af-42e6-a43e-92d63fa5bf3c/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "coil",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "hvacTerminologyRecognition",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "requirementExtractionAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 8,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "hvacTerminologyRecognition": {
+          "applicable": true,
+          "matched": 3,
+          "total": 5,
+          "score": 0.6,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 4,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "developerConsiderationGrounding": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-coil-b9bccf85-7ab1-4428-a477-ab7a4d050f00/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "filters",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "requirementExtractionAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 3,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "developerConsiderationGrounding": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-filters-3e8ce9f7-0c54-4707-a5d4-31789b35f55c/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "clean",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "hvacTerminologyRecognition",
+        "summaryAccuracy",
+        "developerConsiderationGrounding",
+        "confidencePolicyConsistency"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "requirementExtractionAccuracy": {
+          "applicable": true,
+          "matched": 1,
+          "total": 4,
+          "score": 0.25,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "hvacTerminologyRecognition": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "developerConsiderationGrounding": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "confidencePolicyConsistency": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-clean-9508df93-fbfe-43de-94b9-1d7a15536b2f/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "sparse",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "summaryAccuracy"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-sparse-bbff826f-dc5e-4882-821f-a26a06e06eb7/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "conflict",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "summaryAccuracy"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-conflict-47030dc0-55a5-4914-a13a-df3eb561d171/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "redispatch",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding",
+        "redispatchSafety"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ],
+      "runtimeOutcome": "GOVERNANCE_FAILURE",
+      "runtimeProblem": {
+        "code": "GOVERNANCE_FAILURE",
+        "reason": "Redispatch removed an ambiguity without a sourced resolution."
+      },
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "redispatchSafety",
+          "reason": "Redispatch removed an ambiguity without a sourced resolution."
+        }
+      ],
+      "metricFailures": {
+        "requirementExtractionAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 3,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 3,
+          "total": 4,
+          "score": 0.75,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "developerConsiderationGrounding": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-redispatch-3367ff4f-28a5-42af-8d0b-49c833de12bc/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "assumption",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "schemaConformance",
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "unsupportedAssumptionDetection",
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SCHEMA_FAILURE",
+      "runtimeProblem": {
+        "code": "GOVERNANCE_FAILURE",
+        "reason": "Source quote is not present in the referenced artifact."
+      },
+      "schemaDetails": [
+        {
+          "instancePath": "/findings/0",
+          "schemaPath": "#/properties/findings/items/required",
+          "keyword": "required",
+          "params": {
+            "missingProperty": "ambiguityRefs"
+          },
+          "message": "must have required property 'ambiguityRefs'"
+        }
+      ],
+      "causes": [
+        {
+          "gate": "schemaConformance",
+          "reason": "Raw candidate fails required schema; semantic scoring uses invalid output, not repaired JSON."
+        },
+        {
+          "gate": "runtimeContract",
+          "reason": "Source quote is not present in the referenced artifact."
+        },
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "concernContinuity",
+          "reason": "Source quote is not present in the referenced artifact."
+        }
+      ],
+      "metricFailures": {
+        "unsupportedAssumptionDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.85,
+          "reason": "Schema-invalid response receives no semantic credit."
+        },
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 3,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Schema-invalid response receives no semantic credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Schema-invalid response receives no semantic credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-assumption-392b2c95-a043-4667-a5ee-6d9ed78ab488/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "missing",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "missingRequirementDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "missingRequirementDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.85,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-missing-b96172fb-9b05-44af-b350-629e6feb985d/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "hvac",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "hvacInterpretationErrorDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "GOVERNANCE_FAILURE",
+      "runtimeProblem": {
+        "code": "GOVERNANCE_FAILURE",
+        "reason": "Source quote is not present in the referenced artifact."
+      },
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "runtimeContract",
+          "reason": "Source quote is not present in the referenced artifact."
+        },
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "concernContinuity",
+          "reason": "Source quote is not present in the referenced artifact."
+        }
+      ],
+      "metricFailures": {
+        "hvacInterpretationErrorDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-hvac-c5304883-a5d9-4919-ab2c-33e626941d72/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "validation",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "missingValidationDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "GOVERNANCE_FAILURE",
+      "runtimeProblem": {
+        "code": "GOVERNANCE_FAILURE",
+        "reason": "Source quote is not present in the referenced artifact."
+      },
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "runtimeContract",
+          "reason": "Source quote is not present in the referenced artifact."
+        },
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "concernContinuity",
+          "reason": "Source quote is not present in the referenced artifact."
+        }
+      ],
+      "metricFailures": {
+        "missingValidationDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-validation-aae7a0e5-28d9-480a-a946-ca69e44757ca/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "missed-ambiguity",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-missed-ambiguity-91b9a862-963d-4b71-99b8-f1f4d4fdaae9/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "open",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 4,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-open-dd55b9c8-4995-421d-a3f1-6b04f422a4eb/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "boundary",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "boundaryChallengeCoverage",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "boundaryChallengeCoverage": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 6,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-open-dd55b9c8-4995-421d-a3f1-6b04f422a4eb/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "clean-review",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 1,
+          "total": 2,
+          "score": 0.5,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-clean-review-5168de23-bd34-406c-87fa-c542671ae57c/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "minor-label",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "missingRequirementDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "missingRequirementDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.85,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-minor-label-27dcbad0-3ca5-4449-9dac-c4ba585dac11/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "retained",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "missingRequirementDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "concernContinuity",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "missingRequirementDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.85,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-retained-89a7a995-958d-4e9e-93ab-1f60e970ef89/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "resolved",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "GOVERNANCE_FAILURE",
+      "runtimeProblem": {
+        "code": "GOVERNANCE_FAILURE",
+        "reason": "Interpreter source requires a JSON pointer."
+      },
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "runtimeContract",
+          "reason": "Interpreter source requires a JSON pointer."
+        },
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "concernContinuity",
+          "reason": "Interpreter source requires a JSON pointer."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 4,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-resolved-c7149ad2-257c-4585-903a-31f31ebbfe20/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "bad-resolution",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "unsupportedAssumptionDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "GOVERNANCE_FAILURE",
+      "runtimeProblem": {
+        "code": "GOVERNANCE_FAILURE",
+        "reason": "Source quote is not present in the referenced artifact."
+      },
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "runtimeContract",
+          "reason": "Source quote is not present in the referenced artifact."
+        },
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "concernContinuity",
+          "reason": "Source quote is not present in the referenced artifact."
+        }
+      ],
+      "metricFailures": {
+        "unsupportedAssumptionDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.85,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 2,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-bad-resolution-66644ec1-82b0-4f1a-8cbc-7a41eed3086e/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "condenser",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "hvacTerminologyRecognition",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "requirementExtractionAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 11,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "hvacTerminologyRecognition": {
+          "applicable": true,
+          "matched": 10,
+          "total": 16,
+          "score": 0.625,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "developerConsiderationGrounding": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-condenser-bf81015d-d68a-4f45-8194-95f137b1d36b/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "missing-corrected",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 4,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-missing-corrected-528878d5-c231-45f4-a80d-a4ad854e2383/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "assumption-corrected",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 3,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 4,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-assumption-corrected-b61f82a1-a886-4bdf-ac90-9e11a250c90d/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "hvac-corrected",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 6,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-hvac-corrected-19cd0e62-08c4-4796-b4ff-88af922cdbe4/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "validation-corrected",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 4,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-open-dd55b9c8-4995-421d-a3f1-6b04f422a4eb/cycle-1/adversarial-reviewer-raw.txt"
+    },
+    {
+      "caseId": "fixtures/hvac-ticket-1.md:1:requirement-interpreter",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "sourceGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "requirementExtractionAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 3,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 4,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "summaryAccuracy": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "developerConsiderationGrounding": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 1,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence/d5-20261030T1940Z/runs/DIRECT-dx-07f4dd01-d4af-42e6-a43e-92d63fa5bf3c/cycle-1/requirement-interpreter-raw.txt"
+    },
+    {
+      "caseId": "fixtures/hvac-ticket-1.md:1:adversarial-reviewer",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "unsupportedAssumptionDetection",
+        "ambiguityDetection",
+        "challengeQuality"
+      ],
+      "runtimeOutcome": "SUCCESS",
+      "runtimeProblem": null,
+      "schemaDetails": null,
+      "causes": [
+        {
+          "gate": "falsePositiveControl",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        },
+        {
+          "gate": "rationaleGrounding",
+          "reason": "Frozen content/reference/continuity assertion failed. Exact-gold mismatch alone does not prove a semantic defect."
+        }
+      ],
+      "metricFailures": {
+        "unsupportedAssumptionDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 1,
+          "score": 0,
+          "threshold": 0.85,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "ambiguityDetection": {
+          "applicable": true,
+          "matched": 0,
+          "total": 5,
+          "score": 0,
+          "threshold": 0.8,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        },
+        "challengeQuality": {
+          "applicable": true,
+          "matched": 0,
+          "total": 7,
+          "score": 0,
+          "threshold": 0.9,
+          "reason": "Applicable fixed-label assertion not satisfied; no keyword or paraphrase credit."
+        }
+      },
+      "rawArtifact": "evidence\\d5-20261030T1940Z\\runs\\HVAC-TICKET-1793389343718-8301b45d-4210-43aa-a851-bfae6584d0ed\\cycle-1\\adversarial-reviewer-raw.txt"
+    }
+  ],
+  "writerFailures": [
+    {
+      "fixture": "fixtures/hvac-ticket-4.md",
+      "cause": "Final report violates the supplied artifact content contract.",
+      "difference": {
+        "offset": 1324,
+        "actual": "UITY | \"The method for indicating \\\"3/8\\\" tube with 1\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not descri",
+        "expected": "UITY | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not de"
+      }
+    },
+    {
+      "fixture": "evidence/d5-20261030T1940Z/fixtures/positive-control.md",
+      "cause": "Final report violates the supplied artifact content contract.",
+      "difference": {
+        "offset": 609,
+        "actual": " MEDIUM | OPEN_AMBIGUITY | \"No rounding and precision rules are specified for the sum of heights.\" | \"Obtain clarification from the ticket o",
+        "expected": " MEDIUM | OPEN_AMBIGUITY | \"No rounding or precision rules are specified for the sum of heights.\" | \"Obtain clarification from the ticket ow"
+      }
+    }
+  ],
+  "usage": {
+    "modelInvocations": 39,
+    "tokens": {
+      "prompt": 50863,
+      "completion": 60481,
+      "total": 111344
+    },
+    "pricing": {
+      "inputPerMillion": 0.5,
+      "outputPerMillion": 2.5
+    },
+    "estimatedUSD": 0.176634
+  },
+  "qualifications": [
+    "Pooled writer metrics include only two direct cases and the completed ticket-1 workflow. Two failed workflow writers are not evidence of preservation success.",
+    "Positive-control interpreter invented out-of-scope questions; that workflow did not demonstrate clean PASS.",
+    "Ticket-1 interpreter asserted a read-only restriction not required by the source ticket.",
+    "Post-collection ticket-1 reviewer labels use frozen upstream input and source review, not candidate review wording.",
+    "No valid historical/current paired comparison or two measured prompt-change cycles per agent.",
+    "modelPerformanceMeasured=false on the overall evaluator reflects remaining evidence errors, not absence of these 26 real direct responses."
+  ]
+}

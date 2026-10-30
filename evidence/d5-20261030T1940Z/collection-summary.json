@@ -1,0 +1,599 @@
+{
+  "startedAt": "2026-10-30T19:38:58.782Z",
+  "finishedAt": "2026-10-30T19:44:17.225Z",
+  "source": {
+    "commit": "8a09d443f28e0328e8065cb43ac65043acd11039",
+    "dirty": true,
+    "status": "?? additional-discussion-comments-related-to-the-review.md\n?? evidence/d5-20261030T1940Z/\n?? src/collect-eval-evidence.js\n?? src/evidence-package.js\n?? stage5-certification-examination-report.md\n?? tests/evidence-package.test.js",
+    "log": "8a09d443f28e0328e8065cb43ac65043acd11039 2026-10-30T13:27:23-06:00 fix(evals): replace keyword scoring with provenance-bound content checks\n374ed511c84b086695c9cf0842071ec2b75ddf0d 2026-10-29T16:59:14-06:00 Add complete-finding example and missing-field controls\nbae61b6062151e65285d14f174775b70cd93063e 2026-10-29T13:06:44-06:00 test(evals): audit prompt instruction coverage\n60c5af25aa0df775a3700b3c33b362fc3d698d55 2026-10-29T12:40:57-06:00 fix(runtime): prevent unsafe PASS dispositions\n3a6784262093c384f7daeb4e21d0dacef18811d0 2026-10-27T18:17:57-06:00 Refresh exported git history\n705b48d7ac842db12c19b0a34b58f18839609f9f 2026-10-27T14:50:51-06:00 Update README with instruction to restore node_modules\n64c601a8a84d0fe8ea55b25de1ad97b2fbe370c2 2026-10-22T12:59:17-06:00 Rename and move documentation to docs\n5d397dfc2cb05b300905e255f5ec7dfde7c02e46 2026-10-22T12:45:46-06:00 Refresh exported git history\n37fa3101ee3ad636184a15744cbcc690a08450c3 2026-10-22T12:43:25-06:00 Document workflow success rate and export repository history\n485959156eb17bb1ad2e1385983b26c722481882 2026-10-22T12:42:23-06:00 Add deterministic eval scorer, test cases, and iteration evidence\n27369cf313bfef31f5f57cb4b7b806aa0d404305 2026-10-22T12:37:42-06:00 Make human escalation gate explicit and test all decision paths\ndaef6bb5e7e8c3d24265428c5e64f6dd5210f511 2026-10-22T11:52:54-06:00 add refinement of js files and evidence files",
+    "scope": "Explicit source/config allowlist only; no dotenv files, node_modules, or hidden Git dependency."
+  },
+  "modelInvocations": 39,
+  "authorizedLimit": 51,
+  "observations": 26,
+  "requiredDirectCases": 26,
+  "directRuntimeSuccesses": 20,
+  "directScorerPasses": 2,
+  "workflowCompletions": 1,
+  "workflows": [
+    {
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "correlationId": "HVAC-TICKET-1793389343718-8301b45d-4210-43aa-a851-bfae6584d0ed",
+      "status": "COMPLETED",
+      "disposition": "FAIL",
+      "completed": true,
+      "reason": null,
+      "details": null
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "correlationId": "HVAC-TICKET-1793389366590-94474d18-4932-4422-b6e1-d6f08d4d0d99",
+      "status": "SCHEMA_FAILURE",
+      "disposition": "FAIL",
+      "completed": false,
+      "reason": "Schema validation failed for adversarial-reviewer",
+      "details": [
+        {
+          "instancePath": "/findings/0",
+          "schemaPath": "#/properties/findings/items/required",
+          "keyword": "required",
+          "params": {
+            "missingProperty": "ambiguityRefs"
+          },
+          "message": "must have required property 'ambiguityRefs'"
+        }
+      ]
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "correlationId": "HVAC-TICKET-1793389382486-b16566b4-71b2-4391-ad90-772b300360e5",
+      "status": "GOVERNANCE_FAILURE",
+      "disposition": "FAIL",
+      "completed": false,
+      "reason": "Source quote is not present in the referenced artifact.",
+      "details": null
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-4.md",
+      "correlationId": "HVAC-TICKET-1793389411784-ea7916f3-eab4-4fca-8575-cd93591b3394",
+      "status": "GOVERNANCE_FAILURE",
+      "disposition": "FAIL",
+      "completed": false,
+      "reason": "Final report violates the supplied artifact content contract.",
+      "details": null
+    },
+    {
+      "fixture": "evidence/d5-20261030T1940Z/fixtures/positive-control.md",
+      "correlationId": "HVAC-TICKET-1793389437694-c1182fdb-bd8d-4092-932c-d8c4dcd57d84",
+      "status": "GOVERNANCE_FAILURE",
+      "disposition": "FAIL",
+      "completed": false,
+      "reason": "Final report violates the supplied artifact content contract.",
+      "details": null
+    }
+  ],
+  "attempts": [
+    {
+      "caseId": "dx",
+      "agent": "requirement-interpreter",
+      "correlationId": "DIRECT-dx-07f4dd01-d4af-42e6-a43e-92d63fa5bf3c",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "coil",
+      "agent": "requirement-interpreter",
+      "correlationId": "DIRECT-coil-b9bccf85-7ab1-4428-a477-ab7a4d050f00",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "filters",
+      "agent": "requirement-interpreter",
+      "correlationId": "DIRECT-filters-3e8ce9f7-0c54-4707-a5d4-31789b35f55c",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "clean",
+      "agent": "requirement-interpreter",
+      "correlationId": "DIRECT-clean-9508df93-fbfe-43de-94b9-1d7a15536b2f",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "sparse",
+      "agent": "requirement-interpreter",
+      "correlationId": "DIRECT-sparse-bbff826f-dc5e-4882-821f-a26a06e06eb7",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "conflict",
+      "agent": "requirement-interpreter",
+      "correlationId": "DIRECT-conflict-47030dc0-55a5-4914-a13a-df3eb561d171",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "redispatch",
+      "agent": "requirement-interpreter",
+      "correlationId": "DIRECT-redispatch-3367ff4f-28a5-42af-8d0b-49c833de12bc",
+      "hasRawResponse": true,
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Redispatch removed an ambiguity without a sourced resolution."
+    },
+    {
+      "caseId": "assumption",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-assumption-392b2c95-a043-4667-a5ee-6d9ed78ab488",
+      "hasRawResponse": true,
+      "status": "SCHEMA_FAILURE",
+      "reason": "Schema validation failed for adversarial-reviewer",
+      "details": [
+        {
+          "instancePath": "/findings/0",
+          "schemaPath": "#/properties/findings/items/required",
+          "keyword": "required",
+          "params": {
+            "missingProperty": "ambiguityRefs"
+          },
+          "message": "must have required property 'ambiguityRefs'"
+        }
+      ]
+    },
+    {
+      "caseId": "missing",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-missing-b96172fb-9b05-44af-b350-629e6feb985d",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "hvac",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-hvac-c5304883-a5d9-4919-ab2c-33e626941d72",
+      "hasRawResponse": true,
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Source quote is not present in the referenced artifact."
+    },
+    {
+      "caseId": "validation",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-validation-aae7a0e5-28d9-480a-a946-ca69e44757ca",
+      "hasRawResponse": true,
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Source quote is not present in the referenced artifact."
+    },
+    {
+      "caseId": "missed-ambiguity",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-missed-ambiguity-91b9a862-963d-4b71-99b8-f1f4d4fdaae9",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "open",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-open-dd55b9c8-4995-421d-a3f1-6b04f422a4eb",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "boundary",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-boundary-ae9cec1a-ccd7-49a8-be76-d23c547c5ab4",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "clean-review",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-clean-review-5168de23-bd34-406c-87fa-c542671ae57c",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "minor-label",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-minor-label-27dcbad0-3ca5-4449-9dac-c4ba585dac11",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "retained",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-retained-89a7a995-958d-4e9e-93ab-1f60e970ef89",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "resolved",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-resolved-c7149ad2-257c-4585-903a-31f31ebbfe20",
+      "hasRawResponse": true,
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Interpreter source requires a JSON pointer."
+    },
+    {
+      "caseId": "bad-resolution",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-bad-resolution-66644ec1-82b0-4f1a-8cbc-7a41eed3086e",
+      "hasRawResponse": true,
+      "status": "GOVERNANCE_FAILURE",
+      "reason": "Source quote is not present in the referenced artifact."
+    },
+    {
+      "caseId": "writer-fail",
+      "agent": "final-review-writer",
+      "correlationId": "DIRECT-writer-fail-8ca9deed-1cda-432d-9195-bcc989d5a017",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "writer-pass",
+      "agent": "final-review-writer",
+      "correlationId": "DIRECT-writer-pass-439d0519-2560-4ff2-a830-0b9adb6a1b66",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "condenser",
+      "agent": "requirement-interpreter",
+      "correlationId": "DIRECT-condenser-bf81015d-d68a-4f45-8194-95f137b1d36b",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "missing-corrected",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-missing-corrected-528878d5-c231-45f4-a80d-a4ad854e2383",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "assumption-corrected",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-assumption-corrected-b61f82a1-a886-4bdf-ac90-9e11a250c90d",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "hvac-corrected",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-hvac-corrected-19cd0e62-08c4-4796-b4ff-88af922cdbe4",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    },
+    {
+      "caseId": "validation-corrected",
+      "agent": "adversarial-reviewer",
+      "correlationId": "DIRECT-validation-corrected-4bd5bd23-0679-4a4b-bd3e-322834e304ce",
+      "hasRawResponse": true,
+      "status": "SUCCESS"
+    }
+  ],
+  "evaluationPass": false,
+  "errors": [
+    "fixtures/hvac-ticket-1.md: No frozen labels for adversarial-reviewer input 68e81027a8b5a46e8eb07a424e8d3a0e8660be63e5959857a0738fb8341ecf03; label this input before scoring.",
+    "Baseline fixtures/hvac-ticket-1.md: Workflow must have an explicit completed status.",
+    "fixtures/hvac-ticket-2.md: Workflow must have an explicit completed status.",
+    "Baseline fixtures/hvac-ticket-2.md: Workflow must have an explicit completed status.",
+    "fixtures/hvac-ticket-3.md: Workflow must have an explicit completed status.",
+    "Baseline fixtures/hvac-ticket-3.md: Workflow must have an explicit completed status.",
+    "fixtures/hvac-ticket-4.md: Workflow must have an explicit completed status.",
+    "evidence/d5-20261030T1940Z/fixtures/positive-control.md: Workflow must have an explicit completed status."
+  ],
+  "failures": [
+    {
+      "caseId": "dx",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ]
+    },
+    {
+      "caseId": "coil",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "hvacTerminologyRecognition",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ]
+    },
+    {
+      "caseId": "filters",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ]
+    },
+    {
+      "caseId": "clean",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "hvacTerminologyRecognition",
+        "summaryAccuracy",
+        "developerConsiderationGrounding",
+        "confidencePolicyConsistency"
+      ]
+    },
+    {
+      "caseId": "sparse",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "summaryAccuracy"
+      ]
+    },
+    {
+      "caseId": "conflict",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "summaryAccuracy"
+      ]
+    },
+    {
+      "caseId": "redispatch",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding",
+        "redispatchSafety"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ]
+    },
+    {
+      "caseId": "assumption",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "schemaConformance",
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "unsupportedAssumptionDetection",
+        "ambiguityDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "missing",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "missingRequirementDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "hvac",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "hvacInterpretationErrorDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "validation",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "missingValidationDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "missed-ambiguity",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "open",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "boundary",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "boundaryChallengeCoverage",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "clean-review",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "minor-label",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "missingRequirementDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "retained",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "missingRequirementDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "resolved",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "bad-resolution",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "runtimeContract",
+        "falsePositiveControl",
+        "rationaleGrounding",
+        "concernContinuity"
+      ],
+      "criteria": [
+        "unsupportedAssumptionDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "condenser",
+      "agent": "requirement-interpreter",
+      "gates": [
+        "sourceGrounding"
+      ],
+      "criteria": [
+        "requirementExtractionAccuracy",
+        "hvacTerminologyRecognition",
+        "ambiguityDetection",
+        "summaryAccuracy",
+        "developerConsiderationGrounding"
+      ]
+    },
+    {
+      "caseId": "missing-corrected",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "assumption-corrected",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "hvac-corrected",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ]
+    },
+    {
+      "caseId": "validation-corrected",
+      "agent": "adversarial-reviewer",
+      "gates": [
+        "falsePositiveControl",
+        "rationaleGrounding"
+      ],
+      "criteria": [
+        "ambiguityDetection",
+        "challengeQuality"
+      ]
+    }
+  ],
+  "limitations": [
+    "One prospective batch, not repeated-run reliability or two measured prompt-change cycles per agent.",
+    "Historical baseline exports remain original and may be unscorable under current contracts.",
+    "Strict proposition labels are unchanged; paraphrase failures are not proof of semantic errors."
+  ]
+}

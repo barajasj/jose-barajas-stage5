@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-10-30T19:55:42.924Z",
+  "tests": {
+    "exitCode": 0,
+    "total": 67,
+    "pass": 67,
+    "fail": 0,
+    "output": "tests.txt"
+  },
+  "authoredControls": {
+    "exitCode": 0,
+    "pass": true,
+    "modelPerformanceMeasured": false
+  },
+  "coverage": {
+    "pass": true,
+    "positive": 61,
+    "negative": 152,
+    "agents": {
+      "requirement-interpreter": "16/16",
+      "adversarial-reviewer": "19/19",
+      "final-review-writer": "12/12"
+    }
+  },
+  "offlineReplay": {
+    "pass": false,
+    "expectedExitCode": 1,
+    "matchesSavedOutputIgnoringTimestamp": true,
+    "subprocessAndGitAccessBlocked": true,
+    "evidenceErrors": 7,
+    "scoredFailures": 26
+  },
+  "originalCollectionFilesUnchanged": true,
+  "unchangedScorerAndDirectCaseHashes": true,
+  "loadBearingMapUnchanged": true,
+  "matchedRequestsAndReceipts": 39,
+  "rejectedWithoutValidatedArtifact": 10,
+  "baselineExportShaAndGitBlobVerified": true,
+  "configuredApiKeyPresent": false,
+  "forbiddenPackageFiles": [],
+  "note": "No additional live calls made during verification. Integrity checks are not independent provider attestations."
+}

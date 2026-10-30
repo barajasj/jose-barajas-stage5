@@ -63,11 +63,11 @@ function evaluateDirect(responses, versionHash) {
   return { rows, errors };
 }
 
-function evaluateWorkflow(run, ticket, fixtureId, versionHash) {
+function evaluateWorkflow(run, ticket, fixtureId, versionHash, workflowCases = []) {
   const observations = workflowObservations(run, ticket);
   return observations.map(observation => {
     // Reviewer labels are bound to interpreter input, never just a ticket ID.
-    const testCase = cases.find(value => value.agent === observation.agent
+    const testCase = [...cases, ...workflowCases].find(value => value.agent === observation.agent
       && inputHash(value.input) === inputHash(observation.input));
     const context = observation.agent === 'final-review-writer'
       ? { id: `${fixtureId}:writer`, agent: observation.agent, input: observation.input, gold: {} }
@@ -86,6 +86,7 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
   let directBaseline = [];
   const workflows = [];
   const baseline = [];
+  let workflowCases = [];
   configured(definitions.version === 2 && definitions.directCases === 'evals/step-cases.js', 'Unsupported eval definitions.');
   configured(Array.isArray(definitions.fixtures) && definitions.fixtures.length > 0, 'Required workflow fixtures are missing.');
   configured(new Set(definitions.fixtures.map(f => f.fixture)).size === definitions.fixtures.length, 'Duplicate fixture identities.');
@@ -95,6 +96,36 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
       rawResponse: JSON.stringify(testCase.output)
     }, testCase, versionHash, 'authored-controls'));
   } else {
+    if (definitions.workflowLabelsFile) {
+      const labels = readJson(path.resolve(root, definitions.workflowLabelsFile));
+      configured(Array.isArray(labels.cases), 'Workflow label file must contain frozen cases.');
+      workflowCases = labels.cases.map(value => {
+        configured(value && !(value.inputFile && Object.hasOwn(value, 'input')),
+          'Workflow labels must select one fixed input source.');
+        return value.inputFile
+          ? { ...value, input: readJson(path.resolve(root, value.inputFile)) }
+          : value;
+      });
+      const identities = new Set(cases.map(value => JSON.stringify([value.agent, inputHash(value.input)])));
+      for (const value of workflowCases) {
+        configured(value && value.input && typeof value.input === 'object' && !Array.isArray(value.input)
+          && value.gold && typeof value.gold === 'object'
+          && cases.some(testCase => testCase.agent === value.agent), 'Invalid workflow label context.');
+        const identity = JSON.stringify([value.agent, inputHash(value.input)]);
+        configured(typeof value.id === 'string' && value.id.trim()
+          && typeof value.provenance === 'string' && value.provenance.trim()
+          && value.inputHash === inputHash(value.input) && !identities.has(identity),
+        'Workflow labels require provenance, fixed input hashes, and unique non-overriding contexts.');
+        identities.add(identity);
+      }
+    }
+    if (responses === undefined && definitions.responseFile) {
+      try {
+        responses = readJson(path.resolve(root, definitions.responseFile));
+      } catch (error) {
+        errors.push(`Direct response file: ${error.message}`);
+      }
+    }
     const evaluated = evaluateDirect(responses || { observations: [] }, versionHash);
     direct = evaluated.rows;
     errors.push(...evaluated.errors);
@@ -107,7 +138,7 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
       const ticket = fs.readFileSync(path.resolve(root, fixture.fixture), 'utf8');
       try {
         const run = readJson(path.resolve(root, fixture.evidenceFile));
-        const rows = evaluateWorkflow(run, ticket, fixture.fixture, versionHash);
+        const rows = evaluateWorkflow(run, ticket, fixture.fixture, versionHash, workflowCases);
         workflows.push({ fixture: fixture.fixture, rows });
       } catch (error) {
         errors.push(`${fixture.fixture}: ${error.message}`);
@@ -115,7 +146,7 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
       }
       try {
         const run = readBaseline(fixture.baseline);
-        baseline.push(run ? { fixture: fixture.fixture, rows: evaluateWorkflow(run, ticket, fixture.fixture, versionHash) }
+        baseline.push(run ? { fixture: fixture.fixture, rows: evaluateWorkflow(run, ticket, fixture.fixture, versionHash, workflowCases) }
           : { fixture: fixture.fixture, rows: [], applicable: false, reason: fixture.baseline.reason });
       } catch (error) {
         errors.push(`Baseline ${fixture.fixture}: ${error.message}`);
@@ -150,7 +181,8 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
       cases: hash(fs.readFileSync(path.join(root, 'evals/step-cases.js'))),
       loadBearingCases: hash(fs.readFileSync(path.join(root, 'evals/load-bearing-cases.js'))),
       responses: responses ? hash(JSON.stringify(responses)) : null,
-      baselineResponses: baselineResponses ? hash(JSON.stringify(baselineResponses)) : null
+      baselineResponses: baselineResponses ? hash(JSON.stringify(baselineResponses)) : null,
+      workflowLabels: workflowCases.length ? hash(JSON.stringify(workflowCases)) : null
     }
   };
 }

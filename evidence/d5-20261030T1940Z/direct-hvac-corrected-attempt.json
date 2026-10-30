@@ -1,0 +1,7 @@
+{
+  "caseId": "hvac-corrected",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-hvac-corrected-19cd0e62-08c4-4796-b4ff-88af922cdbe4",
+  "hasRawResponse": true,
+  "status": "SUCCESS"
+}

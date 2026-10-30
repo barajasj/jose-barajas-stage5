@@ -1,0 +1,43 @@
+{
+  "modified": [
+    "CERTIFICATION-EVIDENCE.md",
+    "GIT-HISTORY.md",
+    "NEXT-STEPS.md",
+    "README.md",
+    "audit/workflow-success-rate.md",
+    "coordinator/disposition-matrix.md",
+    "evals/adversarial-reviewer-eval.md",
+    "evals/final-review-writer-eval.md",
+    "evals/requirement-interpreter-eval.md",
+    "evals/test-cases.json",
+    "prompts/prompt-evolution.md",
+    "src/eval-runner.js",
+    "stage5-summary.md",
+    "stage5-system-design.md",
+    "tests/eval-runner.test.js"
+  ],
+  "added": [
+    "src/collect-eval-evidence.js",
+    "src/diagnose-eval-evidence.js",
+    "src/evidence-package.js",
+    "tests/evidence-package.test.js"
+  ],
+  "generatedEvidenceDirectory": "evidence/d5-20261030T1940Z",
+  "completeEvidenceInventory": "manifest-final.json",
+  "unchanged": [
+    "evals/load-bearing-map.json",
+    "evals/step-cases.js",
+    "evals/load-bearing-cases.js",
+    "src/eval-scorer.js",
+    "agents/",
+    "schemas/",
+    "src/coordinator.js",
+    "src/agent-runner.js",
+    "audit/audit-log.jsonl",
+    "historical evidence/ticket*-run.json and evidence/run1/"
+  ],
+  "preExistingUntrackedLeftUntouched": [
+    "additional-discussion-comments-related-to-the-review.md",
+    "stage5-certification-examination-report.md"
+  ]
+}

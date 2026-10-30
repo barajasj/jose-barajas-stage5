@@ -1,0 +1,7 @@
+{
+  "correlationId": "HVAC-TICKET-1793389411784-ea7916f3-eab4-4fca-8575-cd93591b3394",
+  "status": "GOVERNANCE_FAILURE",
+  "disposition": "FAIL",
+  "runtimeMode": "real",
+  "reason": "Final report violates the supplied artifact content contract."
+}

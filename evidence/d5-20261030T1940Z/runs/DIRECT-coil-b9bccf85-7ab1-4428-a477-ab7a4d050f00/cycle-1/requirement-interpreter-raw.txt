@@ -1,0 +1,34 @@
+{
+  "requirementSummary": "The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\" to 100\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration.",
+  "hvacTerminology": [
+    "Coil Height",
+    "Water/Steam coils",
+    "tube",
+    "Lamiflo coil",
+    "spacing",
+    "increment"
+  ],
+  "businessRules": [
+    "Valid coil height range is 1.25\" to 100\" inclusive.",
+    "The entered coil height must be a multiple of a coil‑specific increment.",
+    "If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.",
+    "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+    "For 5/8\" tube, the increment is 1.50\".",
+    "For 1\" tube, the increment is 2.25\".",
+    "For Lamiflo coil, the increment is 9.00\".",
+    "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+  ],
+  "developerConsiderations": [
+    "The UI must determine the applicable increment based on the selected tube size and any spacing configuration before performing validation.",
+    "Rounding logic must compute the nearest multiple of the applicable increment and replace the user‑entered value with that rounded value.",
+    "Input values outside the 1.25\"–100\" range must be flagged as invalid; the exact handling (error message, clamping, etc.) is not defined in the ticket.",
+    "The system should display the rounded value to the user after validation."
+  ],
+  "ambiguities": [
+    "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+    "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+    "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+    "No guidance is provided for coil types or configurations not listed in the increment table."
+  ],
+  "confidence": "MEDIUM"
+}

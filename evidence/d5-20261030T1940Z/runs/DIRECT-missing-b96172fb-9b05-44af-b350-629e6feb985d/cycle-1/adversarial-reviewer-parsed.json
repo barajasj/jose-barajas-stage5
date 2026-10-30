@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "rationale": "The interpreter output accurately captures all explicit requirements from the ticket: it identifies the need to populate cooling circuits, sum their heights to compute the DX Coil Height, and update this total when any circuit height is edited. It correctly lists relevant HVAC terminology and does not introduce unsupported assumptions, incorrect HVAC meanings, or omitted business rules. No validation constraints are specified in the ticket, and the interpreter correctly reports no ambiguities. Consequently, there are no findings or required resolutions.",
+  "findings": [],
+  "resolutions": []
+}

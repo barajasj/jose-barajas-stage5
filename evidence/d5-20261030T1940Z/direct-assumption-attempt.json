@@ -1,0 +1,19 @@
+{
+  "caseId": "assumption",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-assumption-392b2c95-a043-4667-a5ee-6d9ed78ab488",
+  "hasRawResponse": true,
+  "status": "SCHEMA_FAILURE",
+  "reason": "Schema validation failed for adversarial-reviewer",
+  "details": [
+    {
+      "instancePath": "/findings/0",
+      "schemaPath": "#/properties/findings/items/required",
+      "keyword": "required",
+      "params": {
+        "missingProperty": "ambiguityRefs"
+      },
+      "message": "must have required property 'ambiguityRefs'"
+    }
+  ]
+}

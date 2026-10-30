@@ -1,0 +1,280 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output omits several required input fields and validation details present in the ticket, and it leaves multiple ambiguities unresolved. Each missing requirement, missing validation constraint, and each listed ambiguity is captured as a finding, preventing a PASS status.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The ticket includes an \"ASHRAE Summer Design\" numeric input, but the interpreter output does not capture this field.",
+      "action": "Clarify whether the ASHRAE Summer Design value should be recorded and, if so, include it in the captured condenser parameters.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "ASHRAE Summer Design"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The ticket defines a \"Default Condenser\" checkbox, but the interpreter output does not mention capturing its value.",
+      "action": "Specify the purpose of the Default Condenser checkbox and ensure its state is recorded in the system.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Default Condenser"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The ticket defines a \"High Amb. / Altit. Cond.\" checkbox, but the interpreter output does not mention capturing its value.",
+      "action": "Specify the purpose of the High Amb. / Altit. Cond. checkbox and ensure its state is recorded in the system.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "High Amb. / Altit. Cond."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The acceptance criteria reference \"per‑circuit cooling configurations\", but the interpreter output does not capture any per‑circuit data.",
+      "action": "Clarify the required per‑circuit cooling configuration inputs and include them in the captured data model.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "per‑circuit cooling configurations"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "One acceptance criterion mentions recording \"coil geometry\" for AC condensers, yet no coil‑geometry fields appear in the ticket tables and the interpreter does not address this.",
+      "action": "Provide the definition and input fields for coil geometry, or clarify that it is not required.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "coil geometry"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "MISSING_VALIDATION",
+      "description": "The ticket allows temperature inputs in both °F and °C, but does not define conversion or display rules.",
+      "action": "Define unit‑conversion behavior and display formatting for temperature fields that accept both units.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Unit handling for fields that accept both °F and °C is not defined"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F7",
+      "severity": "MEDIUM",
+      "kind": "MISSING_VALIDATION",
+      "description": "The purpose and validation constraints for the \"Copies of this Bank\" numeric input are not described in the ticket.",
+      "action": "Clarify the allowed range, required validation, and business meaning of the Copies of this Bank field.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Copies of this Bank"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F8",
+      "severity": "MEDIUM",
+      "kind": "MISSING_VALIDATION",
+      "description": "The ticket does not specify validation rules for the \"Default Condenser\" and \"High Amb. / Altit. Cond.\" checkboxes.",
+      "action": "Provide validation requirements (e.g., mutual exclusivity, required selection) for these checkboxes.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "\"Default Condenser\" and \"High Amb. / Altit. Cond.\" checkboxes"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F9",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The exact list of Roof Type options (beyond \"dark\" and \"light\") and how parapet/shrouding is represented is not specified.",
+      "action": "Obtain clarification on the full set of Roof Type options and the representation format for parapet/shrouding.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The exact list of Roof Type options (beyond \"dark\" and \"light\") and how parapet/shrouding is represented (separate flags or combined options) is not specified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F10",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The catalog of valid EC Model values is referenced but not enumerated in the ticket.",
+      "action": "Provide the complete list of permissible EC Model values or a reference to the catalog.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The catalog of valid EC Model values is referenced but not enumerated in the ticket."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F11",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Unit handling for fields that accept both °F and °C is not defined (e.g., conversion rules, display format).",
+      "action": "Specify how the system should handle dual‑unit temperature inputs, including conversion and display conventions.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Unit handling for fields that accept both °F and °C is not defined (e.g., conversion rules, display format)."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F12",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The purpose and validation rules for the \"Copies of this Bank\" numeric input are not described.",
+      "action": "Clarify the business purpose of the Copies of this Bank field and define any validation constraints (range, required, etc.).",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The purpose and validation rules for the \"Copies of this Bank\" numeric input are not described."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F13",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The functional effect of the \"Default Condenser\" and \"High Amb. / Altit. Cond.\" checkboxes is not explained.",
+      "action": "Provide a description of what each checkbox controls and how its state influences system behavior.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "The functional effect of the \"Default Condenser\" and \"High Amb. / Altit. Cond.\" checkboxes is not explained."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    },
+    {
+      "id": "F14",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The trigger for the \"When processed\" step (e.g., a submit button, auto‑save, or other event) is not defined.",
+      "action": "Specify the user action or system event that initiates processing of the entered condenser data.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/5",
+          "quote": "The trigger for the \"When processed\" step (e.g., a submit button, auto‑save, or other event) is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/5"
+      ]
+    },
+    {
+      "id": "F15",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Details of the \"per‑circuit cooling configurations\" referenced in the acceptance criteria are missing.",
+      "action": "Provide the required per‑circuit cooling configuration inputs and their validation rules.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/6",
+          "quote": "Details of the \"per‑circuit cooling configurations\" referenced in the acceptance criteria are missing."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/6"
+      ]
+    },
+    {
+      "id": "F16",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The meaning of \"coil geometry\" mentioned in an acceptance criterion is not linked to any input field in the tables.",
+      "action": "Clarify what \"coil geometry\" refers to, define the associated input fields, and describe how they should be captured.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/7",
+          "quote": "The meaning of \"coil geometry\" mentioned in an acceptance criterion is not linked to any input field in the tables."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/7"
+      ]
+    },
+    {
+      "id": "F17",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Reference to \"output 3.7\" for echoing Design Ambient lacks context about where or how this output is presented.",
+      "action": "Explain the purpose and location of output 3.7 and how the Design Ambient value should be displayed there.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/8",
+          "quote": "Reference to \"output 3.7\" for echoing Design Ambient lacks context about where or how this output is presented."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/8"
+      ]
+    }
+  ],
+  "resolutions": []
+}

@@ -1,0 +1,8 @@
+{
+  "caseId": "redispatch",
+  "agent": "requirement-interpreter",
+  "correlationId": "DIRECT-redispatch-3367ff4f-28a5-42af-8d0b-49c833de12bc",
+  "hasRawResponse": true,
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Redispatch removed an ambiguity without a sourced resolution."
+}

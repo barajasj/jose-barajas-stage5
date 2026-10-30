@@ -153,19 +153,96 @@ test('complete persisted workflow can be scored; missing/mutated provenance neve
   assert.throws(() => workflowObservations(run, clean.input.ticket), /mismatch/);
 });
 
-test('CLI exits zero for authored controls and nonzero for missing model evidence without rewriting history', () => {
+test('CLI exits zero for authored controls and nonzero for missing model evidence without rewriting history', t => {
   const historicPath = path.join(root, 'sub-agents-results.json');
   const before = hash(fs.readFileSync(historicPath));
   const controls = cli(['--self-test']);
   assert.equal(controls.status, 0, controls.stderr);
   assert.equal(JSON.parse(controls.stdout).modelPerformanceMeasured, false);
-  const evidence = cli([]);
+  const directory = workspace(t);
+  const missing = path.join(directory, 'missing-definitions.json');
+  fs.writeFileSync(missing, JSON.stringify({
+    ...definitions, responseFile: undefined,
+    fixtures: [{
+      fixture: 'fixtures/hvac-ticket-1.md', evidenceFile: 'evidence/ticket1-run.json',
+      baseline: { state: 'required', ref: '4fcbf47', file: 'evidence/run1/ticket1-run.json' }
+    }]
+  }));
+  const evidence = cli(['--definitions', missing]);
   assert.equal(evidence.status, 1, evidence.stderr);
   const result = JSON.parse(evidence.stdout);
   assert.equal(result.pass, false);
   assert.ok(result.errors.some(error => error.includes('Missing required direct response')));
   assert.ok(result.workflows.every(value => value.failure));
   assert.equal(hash(fs.readFileSync(historicPath)), before);
+});
+
+test('definition response files are loaded without changing scoring; explicit responses take precedence', t => {
+  const directory = workspace(t);
+  const file = path.join(directory, 'responses.json');
+  const observations = cases.map(observation);
+  fs.writeFileSync(file, JSON.stringify({ observations }));
+  const selected = {
+    ...definitions, responseFile: file,
+    fixtures: [{
+      fixture: 'fixtures/hvac-ticket-1.md', evidenceFile: 'evidence/ticket1-run.json',
+      baseline: { state: 'required', ref: '4fcbf47', file: 'evidence/run1/ticket1-run.json' }
+    }]
+  };
+  const report = runEvaluation({ definitions: selected, coverage });
+  assert.equal(report.direct.length, cases.length);
+  assert.ok(report.direct.every(row => row.score.pass));
+  assert.ok(!report.errors.some(error => error.includes('Missing required direct response')));
+  const overridden = runEvaluation({ definitions: selected, responses: { observations: [] }, coverage });
+  assert.equal(overridden.direct.length, 0);
+  assert.ok(overridden.errors.some(error => error.includes('Missing required direct response')));
+  const absent = runEvaluation({ definitions: { ...selected, responseFile: path.join(directory, 'absent.json') }, coverage });
+  assert.ok(absent.errors.some(error => error.startsWith('Direct response file:')));
+  assert.equal(absent.pass, false);
+});
+
+test('workflow labels are hash-bound, cannot override fixed cases, and measure unknown contexts without changing gold', async t => {
+  const directory = workspace(t);
+  const clean = context('clean');
+  const review = context('clean-review');
+  const interpreter = { ...clone(clean.output), developerConsiderations: ['Inputs are already validated.'] };
+  const input = { ticket: clean.input.ticket, interpreterResult: interpreter };
+  const outputs = [interpreter, review.output, context('writer-pass').output];
+  const runner = createAgentRunner({ invokeModel: async () => ({ content: JSON.stringify(outputs.shift()) }) });
+  const assessmentFile = path.join(directory, 'assessment.json');
+  fs.writeFileSync(assessmentFile, JSON.stringify({ overallAssessment: { humanReviewRequired: false } }));
+  const run = await executeWorkflow(clean.input.ticket, {
+    agentRunner: runner, runtimeMode: 'real', runsDir: path.join(directory, 'runs'),
+    auditFile: path.join(directory, 'audit.jsonl'), assessmentFile
+  });
+  assert.equal(run.status, 'COMPLETED');
+  const ticketFile = path.join(directory, 'ticket.md');
+  const runFile = path.join(directory, 'run.json');
+  const inputFile = path.join(directory, 'review-input.json');
+  const labelFile = path.join(directory, 'labels.json');
+  fs.writeFileSync(ticketFile, clean.input.ticket);
+  fs.writeFileSync(runFile, JSON.stringify(run));
+  fs.writeFileSync(inputFile, JSON.stringify(input));
+  const label = { id: 'new-upstream', agent: review.agent, inputFile, inputHash: inputHash(input),
+    gold: review.gold, provenance: 'Test-only source label, not a response-derived oracle.' };
+  fs.writeFileSync(labelFile, JSON.stringify({ cases: [label] }));
+  const selected = {
+    ...definitions, workflowLabelsFile: labelFile,
+    fixtures: [{ fixture: ticketFile, evidenceFile: runFile,
+      baseline: { state: 'not-in-baseline', reason: 'New synthetic input.' } }]
+  };
+  const options = { definitions: selected, coverage, responses: { observations: cases.map(observation) } };
+  const report = runEvaluation(options);
+  assert.equal(report.errors.length, 0);
+  assert.equal(report.workflows[0].rows.length, 3);
+  assert.equal(report.pass, false); // Extra interpreter content must still fail the original gold.
+  for (const changed of [
+    { ...label, inputHash: hash('wrong input') },
+    { ...label, inputFile: undefined, input: review.input, inputHash: inputHash(review.input) }
+  ]) {
+    fs.writeFileSync(labelFile, JSON.stringify({ cases: [changed] }));
+    assert.throws(() => runEvaluation(options), /unique non-overriding contexts/);
+  }
 });
 
 test('CLI rejects corrupt inputs, mixed control/model mode, bad flags, and output overwrites', t => {

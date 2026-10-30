@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "rationale": "The interpreter output accurately captures all explicit requirements from the ticket: it states that DX Coil Height equals the sum of Cooling Circuit Heights in inches, that the value is recalculated immediately after a height edit, that an empty circuit list yields 0 inches, and that inputs are already validated with no additional behavior in scope. No unsupported assumptions, missing requirements, HVAC terminology errors, validation gaps, or ambiguities are present. Consequently, there are no findings or resolutions needed.",
+  "findings": [],
+  "resolutions": []
+}

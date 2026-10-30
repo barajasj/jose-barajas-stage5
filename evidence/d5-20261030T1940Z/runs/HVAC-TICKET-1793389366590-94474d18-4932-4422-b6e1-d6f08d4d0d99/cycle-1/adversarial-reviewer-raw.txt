@@ -1,0 +1,111 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter makes an unsupported assumption about how the selected Condenser Type should be used to filter Unit Type entries, which is not defined in the ticket. Additionally, several ambiguities identified by the interpreter remain unresolved, each of which blocks a PASS per the review guidelines.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "UNSUPPORTED_ASSUMPTION",
+      "description": "The interpreter assumes that the Condenser Type must be used to filter Unit Type entries, but the ticket provides no mapping or data indicating how Condenser Type participates in the filter.",
+      "action": "Clarify from the ticket owner how the selected Condenser Type should influence the Unit Type filtering (e.g., whether it appears in the parent array, requires a separate lookup, or is ignored).",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "If a user selects a Condenser Type and a Refrigerant, the system must populate the Unit Type dropdown with entries from SDCommonUnitTypeRefrigerant whose parent array contains the selected Refrigerant (and, as stated, the selected Condenser Type)."
+        }
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Unclear how the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants.",
+      "action": "Obtain clarification from the ticket owner on the role of Condenser Type in Unit Type filtering.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "How the selected Condenser Type should be used to filter Unit Type entries, given the example parent arrays only contain refrigerants."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/0"]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping.",
+      "action": "Clarify from the ticket owner whether Condenser Type is represented in the parent array or needs a different mapping mechanism.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "Whether the Condenser Type appears in the parent array of SDCommonUnitTypeRefrigerant entries or requires a separate mapping."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/1"]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "What should be displayed or how the UI should behave when no entries match the filter criteria.",
+      "action": "Obtain clarification on the expected UI behavior (e.g., empty state message, disabled dropdown) when filters yield no results.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "What should be displayed or how the UI should behave when no entries match the filter criteria."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/2"]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Whether the isActive flag must always be enforced or if inactive items can ever be shown.",
+      "action": "Clarify from the ticket owner if inactive items should ever be presented to the user or are always excluded.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Whether the isActive flag must always be enforced or if inactive items can ever be shown."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/3"]
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.",
+      "action": "Clarify whether Condenser Type should be part of the Unit Size filter criteria.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "If the Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/4"]
+    },
+    {
+      "id": "F7",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined.",
+      "action": "Obtain detailed API contract information for /dropdowns, including response schema, pagination, and error handling expectations.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/5",
+          "quote": "The exact structure, pagination, and error handling of the /dropdowns API response is not defined."
+        }
+      ],
+      "ambiguityRefs": ["/ambiguities/5"]
+    }
+  ],
+  "resolutions": []
+}
