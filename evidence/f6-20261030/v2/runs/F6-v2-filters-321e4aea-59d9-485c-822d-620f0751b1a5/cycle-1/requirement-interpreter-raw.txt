@@ -1,0 +1,26 @@
+{
+  "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown must be populated with entries filtered by the selected Condenser Type and Refrigerant. After a Unit Type is selected, the Unit Size dropdown must be populated with entries filtered by the selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size"
+  ],
+  "businessRules": [
+    "If a Condenser Type and a Refrigerant are selected, the Unit Type dropdown is filtered to include only entries whose parent list contains the selected Refrigerant and that are associated with the selected Condenser Type.",
+    "If a Unit Type is selected (after Refrigerant is already selected), the Unit Size dropdown is filtered to include only entries whose parent list contains both the selected Refrigerant and the selected Unit Type."
+  ],
+  "developerConsiderations": [
+    "Retrieve dropdown data from the unitdesign API endpoint GET /dropdowns, using the attribute SDCommonUnitTypeRefrigerant for Unit Type and SDCommonUnitModelSizes for Unit Size.",
+    "Apply filtering based on the parent arrays of each entry according to the selected values.",
+    "Update the UI dropdown options dynamically when the relevant selections change."
+  ],
+  "ambiguities": [
+    "How should the Condenser Type be matched to entries in the SDCommonUnitTypeRefrigerant data, which in the example only includes a parent list of refrigerants?",
+    "Should entries with isActive set to false be excluded from the filtered dropdown options?",
+    "What should the UI display if no entries match the filter criteria (e.g., empty dropdown, message, disabled state)?",
+    "Is there any required ordering or sorting of the filtered dropdown entries?",
+    "Should the filtered dropdown retain any previously selected value if it remains valid after a new filter is applied?"
+  ],
+  "confidence": "MEDIUM"
+}

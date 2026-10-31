@@ -1,0 +1,54 @@
+{
+  "requirementSummary": "When a user selects Condenser Type \"AC\" or \"EC\", the system displays the corresponding input fields. For AC condensers, the user can enter Design Ambient, ASHRAE Summer Design, select Default Condenser or High Amb./Altit. Cond., choose tube and fin materials, tube size, and fin type (with specified defaults and options). For EC condensers, the system shows Bank ID#, Copies of this Bank, EC Model, and Wet Bulb Temperature fields. The entered parameters are recorded. Upon processing, the system outputs condenser and circuit‑level configuration ready for ECS calculation. When configuring an AC condenser, selecting Condenser Passes displays AutoOdd, AutoEven, and numeric options 2 through 41 in increments of 1. Selecting Roof Type displays the specified dark and light roof type options with and without parapet/shrouding.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Air Cooled",
+    "Evaporative Cooled",
+    "Design Ambient",
+    "ASHRAE Summer Design",
+    "Default Condenser",
+    "High Amb. / Altit. Cond.",
+    "Condenser Tube Material",
+    "Condenser Fin Material",
+    "Condenser Tube Size",
+    "Condenser Fin Type",
+    "Bank ID#",
+    "EC Model",
+    "Wet Bulb Temperature",
+    "Condenser Passes",
+    "AutoOdd",
+    "AutoEven",
+    "Roof Type",
+    "ECS calculation",
+    "circuit‑level configuration"
+  ],
+  "businessRules": [
+    "When the user selects Condenser Type \"AC\" or \"EC\", the corresponding input fields shall be displayed.",
+    "When the user configures an AC condenser and enters ambient design conditions and coil geometry, the system shall record the AC condenser parameters.",
+    "When the user configures an EC condenser and enters the EC model and wet bulb temperature, the system shall record the EC condenser parameters.",
+    "When the system processes AC/EC condenser parameters together with per‑circuit cooling configurations, it shall output condenser and circuit‑level configuration ready for ECS calculation.",
+    "When the user configures an AC condenser and selects Condenser Passes, the system shall display the options AutoOdd, AutoEven, and the numeric values 2 through 41 in increments of 1.",
+    "When the user configures an AC condenser and selects Roof Type, the system shall display the specified dark and light roof type options with and without parapet/shrouding.",
+    "The Design Ambient field shall default to 95°F.",
+    "The Condenser Tube Material dropdown shall default to \"Copper\".",
+    "The Condenser Fin Material dropdown shall default to \"Aluminum\".",
+    "The Condenser Tube Size dropdown shall offer the options \"3/8\" and \"3/8 w/ 1\" spacing\".",
+    "The Condenser Fin Type dropdown shall default to \"Corrugated\"."
+  ],
+  "developerConsiderations": [
+    "Implement conditional UI logic to show AC input fields when Condenser Type = AC and EC input fields when Condenser Type = EC.",
+    "Populate dropdowns with the specified default values and option lists.",
+    "Record user‑entered values for all input fields and persist them for later processing.",
+    "Provide a processing routine that combines condenser parameters with per‑circuit cooling configurations to produce output for ECS calculation.",
+    "Render Condenser Passes selection control with options AutoOdd, AutoEven, and numeric values 2‑41 inclusive, incrementing by 1.",
+    "Render Roof Type selection control with dark and light roof options, each available with and without parapet/shrouding.",
+    "Support both °F and °C units for temperature inputs, preserving the default value of 95°F for Design Ambient."
+  ],
+  "ambiguities": [
+    "The ticket does not specify how to handle unit conversion or validation ranges for temperature inputs (Design Ambient, ASHRAE Summer Design, Wet Bulb Temperature) when the user selects °C versus °F.",
+    "It is unclear whether the AutoOdd and AutoEven options for Condenser Passes are mutually exclusive with the numeric 2‑41 options or can be selected together.",
+    "The exact list of dark and light roof type options, and how parapet/shrouding is represented in the UI, are not enumerated.",
+    "No validation constraints (e.g., minimum/maximum values) are provided for numeric fields such as ASHRAE Summer Design, Copies of this Bank, or Wet Bulb Temperature."
+  ],
+  "confidence": "MEDIUM"
+}

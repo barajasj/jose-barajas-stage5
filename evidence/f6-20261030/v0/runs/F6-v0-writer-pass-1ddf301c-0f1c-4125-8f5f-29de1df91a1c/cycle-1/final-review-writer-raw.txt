@@ -1,0 +1,1 @@
+{"reportMarkdown":"# PASS\n\n## Requirement Summary\n\n\"Sum Cooling Circuit Heights in inches into DX Coil Height, recalculate on edit, and use 0 inches for an empty list.\"\n\n## Reviewer Findings\n\nNone.\n\n## Open Ambiguities\n\nNone.\n\n## Final Disposition\n\nPASS\n\n## Governance Reasons\n\n- NO_OPEN_CONCERNS"}

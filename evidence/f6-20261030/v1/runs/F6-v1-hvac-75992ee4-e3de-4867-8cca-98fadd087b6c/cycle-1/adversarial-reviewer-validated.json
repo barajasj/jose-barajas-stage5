@@ -1,0 +1,152 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains several critical defects: it reverses the meaning of AC and EC, and it omits all substantive business requirements described in the ticket, including conditional field display, detailed input specifications, and acceptance criteria. These gaps prevent reliable implementation of the condenser configuration feature.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "HVAC_ERROR",
+      "description": "The interpreter incorrectly defines AC as Evaporative Cooled and EC as Air Cooled, which contradicts the ticket where AC is Air Cooled and EC is Evaporative Cooled.",
+      "action": "Correct the HVAC terminology mapping to match the ticket: AC = Air Cooled, EC = Evaporative Cooled.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Inputs — Air Cooled (AC)"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Condenser Inputs — Evaporative Cooled (EC)"
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F2",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The ticket requires that when the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields are displayed, but the interpreter does not capture this behavior.",
+      "action": "Add a business rule describing the conditional display of input fields based on the selected condenser type.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/requirementSummary",
+          "quote": "Configure AC and EC condensers."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F3",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The ticket lists detailed Air Cooled (AC) condenser input fields (e.g., Design Ambient, ASHRAE Summer Design, etc.), which are absent from the interpreter output.",
+      "action": "Include the AC condenser input specifications as business rules or requirement details.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "| 1 | Design Ambient | Numeric Input | User / Default | °F / °C | 95°F | Echoed in output 3.7 |"
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/requirementSummary",
+          "quote": "Configure AC and EC condensers."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F4",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The ticket lists Evaporative Cooled (EC) condenser input fields (e.g., Bank ID#, Copies of this Bank, etc.), which are not represented in the interpreter output.",
+      "action": "Add the EC condenser input specifications to the interpreter result.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "| 1 | Bank ID# | ID | System | — | — |"
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/requirementSummary",
+          "quote": "Configure AC and EC condensers."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F5",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The acceptance criteria state that when a user configures an AC condenser and enters ambient design conditions and coil geometry, the system must record the condenser parameters, but this is missing from the interpreter output.",
+      "action": "Add a business rule capturing the recording of AC condenser parameters upon entry of design conditions and coil geometry.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Then the system records the condenser parameters."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/requirementSummary",
+          "quote": "Configure AC and EC condensers."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F6",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The ticket requires that when a user selects Condenser Passes, the system shall display AutoOdd, AutoEven, and numbers 2 through 41 in increments of 1, but this rule is absent.",
+      "action": "Include a business rule describing the AutoOdd/AutoEven and numeric options display when Condenser Passes are selected.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Then the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/requirementSummary",
+          "quote": "Configure AC and EC condensers."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F7",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The ticket specifies that when a user selects Roof Type, the system shall display dark and light roof type options with and without parapet/shrouding, which is not captured.",
+      "action": "Add a business rule detailing the roof type option display requirements.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Then the system shall display the specified dark and light roof type options with and without parapet/shrouding."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/requirementSummary",
+          "quote": "Configure AC and EC condensers."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

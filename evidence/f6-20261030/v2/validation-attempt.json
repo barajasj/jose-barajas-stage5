@@ -1,0 +1,14 @@
+{
+  "version": "v2",
+  "caseId": "validation",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v2-validation-697076a1-6f53-4b81-baef-8ef84e0aef54",
+  "inputHash": "1ff086ebb84512bba05e4659db8101ace42dfd58f408bf3bddc81b9c0a723317",
+  "startedAt": "2026-10-30T23:18:33.721Z",
+  "finishedAt": "2026-10-30T23:18:40.696Z",
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Source quote is not present in the referenced artifact.",
+  "details": null,
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-validation-697076a1-6f53-4b81-baef-8ef84e0aef54/cycle-1"
+}

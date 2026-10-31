@@ -1,0 +1,31 @@
+{
+  "requirementSummary": "When a user selects a Condenser Type and a Refrigerant, the Unit Type dropdown must be populated with only those unit types associated with the selected condenser type and refrigerant. After a Unit Type is selected, the Unit Size dropdown must be populated with only those sizes associated with the selected refrigerant and unit type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size"
+  ],
+  "businessRules": [
+    "If a user selects a Condenser Type and a Refrigerant, then the Unit Type dropdown must be filtered to include only entries whose parent list contains the selected Refrigerant and that correspond to the selected Condenser Type.",
+    "If a user selects a Unit Type (after having selected a Refrigerant), then the Unit Size dropdown must be filtered to include only entries whose parent list contains both the selected Refrigerant and the selected Unit Type.",
+    "Unit Type options are obtained from the SDCommonUnitTypeRefrigerant attribute returned by the GET /dropdowns call to the unitdesign API.",
+    "Unit Size options are obtained from the SDCommonUnitModelSizes attribute returned by the GET /dropdowns call to the unitdesign API."
+  ],
+  "developerConsiderations": [
+    "Fetch dropdown data via the unitdesign API endpoint GET /dropdowns.",
+    "Extract Unit Type options from the SDCommonUnitTypeRefrigerant attribute in the response.",
+    "Extract Unit Size options from the SDCommonUnitModelSizes attribute in the response.",
+    "Filter each option list by checking that the option's \"parent\" array contains the required selected values.",
+    "Update the Unit Type dropdown immediately after Condenser Type and Refrigerant selections.",
+    "Update the Unit Size dropdown immediately after a Unit Type selection.",
+    "Ensure the UI reflects the filtered option sets for each dropdown."
+  ],
+  "ambiguities": [
+    "How should the Condenser Type be used to filter Unit Type entries when the provided example data only shows refrigerant in the parent list?",
+    "Should inactive entries (isActive: false) be excluded from the filtered dropdowns?",
+    "What should be displayed if no entries match the filter criteria for a dropdown?",
+    "Is the filtering of parent values case-sensitive?"
+  ],
+  "confidence": "MEDIUM"
+}

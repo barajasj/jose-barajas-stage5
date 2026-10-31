@@ -1,0 +1,14 @@
+{
+  "version": "v0",
+  "caseId": "retained",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v0-retained-4c93c0ed-3707-4379-a877-a0dcb14137c6",
+  "inputHash": "641cedcbc499ea2b75d1f511a4be954fb29191a1cb9e188ffd21fcb764f6da44",
+  "startedAt": "2026-10-30T23:12:04.398Z",
+  "finishedAt": "2026-10-30T23:12:07.131Z",
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Prior findings disappeared without sourced resolutions.",
+  "details": null,
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v0/runs/F6-v0-retained-4c93c0ed-3707-4379-a877-a0dcb14137c6/cycle-1"
+}

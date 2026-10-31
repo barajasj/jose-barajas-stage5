@@ -1,0 +1,9 @@
+{
+  "sequence": 2,
+  "startedAt": "2026-10-30T23:17:39.563Z",
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "temperature": 0,
+  "promptHash": "c9a675402c9daa833fe596393762d2a279e968d57c0d7300f4ff82e1a772b0e0",
+  "providerRetries": 0,
+  "status": "REQUEST_STARTED"
+}

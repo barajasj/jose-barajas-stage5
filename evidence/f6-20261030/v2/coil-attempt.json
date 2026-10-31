@@ -1,0 +1,12 @@
+{
+  "version": "v2",
+  "caseId": "coil",
+  "agent": "requirement-interpreter",
+  "correlationId": "F6-v2-coil-13426395-c408-4f87-8b0c-ea673a95a14c",
+  "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+  "startedAt": "2026-10-30T23:17:39.557Z",
+  "finishedAt": "2026-10-30T23:17:46.137Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-coil-13426395-c408-4f87-8b0c-ea673a95a14c/cycle-1"
+}

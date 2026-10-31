@@ -1,6 +1,33 @@
 # Final Review Writer Evaluation
 
-## Current Live Evidence - Deliverable 5
+## F6 Measured Prompt Changes
+
+Protocol: `docs/F6-MEASUREMENT.md`; versions/hypotheses:
+`evals/f6-iterations.js`; ledger: `prompts/prompt-evolution.md`.
+Four fixed writer inputs were measured unchanged across v0->v1->v2:
+the two direct controls plus the preserved ticket-4 and positive-control inputs.
+The exact fidelity contract is unchanged; 12 real responses are preserved.
+
+| Measurement | v0 | v1 | v2 | Cycle 1 Delta | Cycle 2 Delta |
+|---|---:|---:|---:|---:|---:|
+| Strict passes / runtime accepted | 3/4 | 3/4 | 4/4 | 0 pp | +25 pp |
+| Finding preservation | 3/4 | 3/4 | 4/4 | 0 pp | +25 pp |
+| Report completeness | 13/14 | 13/14 | 14/14 | 0 pp | +7.14 pp |
+| Output quality | 14/16 | 14/16 | 16/16 | 0 pp | +12.5 pp |
+
+v1's opaque-template/JSON-encoding instructions did not fix the ticket-4 nested
+escaping failure. v2's added decoded-character audit returned an exact report
+for that same input. Both earlier rejected raw responses remain in the
+denominator and are discoverable; v2 is not evidence of repeat-run reliability.
+This is fidelity improvement on fixed direct inputs, not a new workflow PASS,
+F4 closure, or an automatically deployed prompt.
+
+Exact escaping deviations and all raw/input/prompt/validated artifacts:
+[runtime rejections](../evidence/f6-20261030/runtime-rejections.json),
+[measured summary](../evidence/f6-20261030/MEASURED-SUMMARY.md),
+[machine results](../evidence/f6-20261030/measured-results.json).
+
+## Preserved Live Evidence - Deliverable 5
 
 One authorized batch is retained at `evidence/d5-20261030T1940Z/`.
 Both direct writer cases passed runtime and strict scoring. Ticket 1's workflow

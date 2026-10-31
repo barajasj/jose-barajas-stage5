@@ -1,0 +1,12 @@
+{
+  "version": "v2",
+  "caseId": "writer-pass",
+  "agent": "final-review-writer",
+  "correlationId": "F6-v2-writer-pass-32291c83-0c32-4775-8560-4a41a9c5434d",
+  "inputHash": "e229fd36483eaace25e85131bc4ff54e305b0437e71942a6b64b4185ee37b423",
+  "startedAt": "2026-10-30T23:19:31.197Z",
+  "finishedAt": "2026-10-30T23:19:34.243Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-writer-pass-32291c83-0c32-4775-8560-4a41a9c5434d/cycle-1"
+}

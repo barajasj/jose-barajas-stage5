@@ -1,0 +1,3124 @@
+{
+  "scope": "F6 measured prompt changes only; measurement integrity is separate from model acceptance.",
+  "scorerVersion": "content-v3-reviewed-equivalents",
+  "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+  "measurementPass": false,
+  "modelAcceptancePass": false,
+  "positiveCyclesPerAgent": {
+    "requirement-interpreter": 0,
+    "adversarial-reviewer": 0,
+    "final-review-writer": 0
+  },
+  "errors": [
+    "v1: incomplete or uncollected version; inspect retained started files/receipts.",
+    "v2: incomplete or uncollected version; inspect retained started files/receipts.",
+    "v0->v1: incomplete strict pairing.",
+    "v1->v2: incomplete strict pairing."
+  ],
+  "archival": [
+    {
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "file": "evidence/d5-20261030T1940Z/baselines/ticket1-run.json",
+      "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+      "sha256": "8237e7b2e025d93cd0f364461abbf35cb5f9cfa804af6e40dc77c3e898b3152e",
+      "compatibility": "excluded-incompatible",
+      "observedFailure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "file": "evidence/d5-20261030T1940Z/baselines/ticket2-run.json",
+      "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+      "sha256": "3c978cefac8052c880036b1d8e92956be515110033e533e8922169c0dd0be8ad",
+      "compatibility": "excluded-incompatible",
+      "observedFailure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "file": "evidence/d5-20261030T1940Z/baselines/ticket3-run.json",
+      "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+      "sha256": "982629ac9c0c29c6a91f4406a7ce84ea4745a35b69f5214c416fa785c72db3f5",
+      "compatibility": "excluded-incompatible",
+      "observedFailure": "Workflow must have an explicit completed status."
+    }
+  ],
+  "versions": [
+    {
+      "version": "v0",
+      "collected": true,
+      "rows": [
+        {
+          "caseId": "dx",
+          "agent": "requirement-interpreter",
+          "inputHash": "077a9f54373c5f65dfab00a9472bf9e72800e9694802462179b331701d15f125",
+          "goldHash": "bb336d53b60cc9e40027f0e258be226d4663279349d87f2332b9214d09e8369b",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "522890e393a63e3dbee06ef3e6f780916f5349cc9c0721754c971331cd3d21ee",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-dx-0100d727-29cb-4ac0-8598-eee7c44ca565/cycle-1/requirement-interpreter-raw.txt",
+          "score": {
+            "agent": "requirement-interpreter",
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 3,
+                "score": 0
+              },
+              "hvacTerminologyRecognition": {
+                "applicable": true,
+                "matched": 6,
+                "total": 6,
+                "score": 1
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 4,
+                "score": 0
+              },
+              "summaryAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "developerConsiderationGrounding": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "confidencePolicyConsistency": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "sourceGrounding": false,
+              "redispatchSafety": true
+            },
+            "thresholds": {
+              "requirementExtractionAccuracy": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "threshold": 0.9,
+                "pass": true
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "threshold": 1,
+                "pass": true
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "coil",
+          "agent": "requirement-interpreter",
+          "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+          "goldHash": "3af64b75ec9830072ef780bce36aca265d825e9822ea173eb232f062b78ffbc1",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "87739587aa5984b7a987ae00618d342f635f60e6588d2645cc8f9613edbaff97",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-coil-8df58dfe-7c6c-4f93-b5de-d525c5b18654/cycle-1/requirement-interpreter-raw.txt",
+          "score": {
+            "agent": "requirement-interpreter",
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "applicable": true,
+                "matched": 1,
+                "total": 8,
+                "score": 0.125
+              },
+              "hvacTerminologyRecognition": {
+                "applicable": true,
+                "matched": 3,
+                "total": 6,
+                "score": 0.5
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 4,
+                "score": 0
+              },
+              "summaryAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "developerConsiderationGrounding": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "confidencePolicyConsistency": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "sourceGrounding": false,
+              "redispatchSafety": true
+            },
+            "thresholds": {
+              "requirementExtractionAccuracy": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "threshold": 1,
+                "pass": true
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "filters",
+          "agent": "requirement-interpreter",
+          "inputHash": "3b03a93c0ab616680c1a2b1a7812d09ce6aa31516d45612e4864d4217eb5debb",
+          "goldHash": "c75c638c0ed698f174ad4bdf322702010be444a9d071bd8f337a52c529e79e2b",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "a435b2c25f60e322009199941bd186e85a54e6b4f5a689d76fb34f9a90e8965b",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-filters-a4753715-68ef-423e-9d9d-0a1be92518f1/cycle-1/requirement-interpreter-raw.txt",
+          "score": {
+            "agent": "requirement-interpreter",
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              },
+              "hvacTerminologyRecognition": {
+                "applicable": true,
+                "matched": 4,
+                "total": 4,
+                "score": 1
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 3,
+                "score": 0
+              },
+              "summaryAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "developerConsiderationGrounding": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "confidencePolicyConsistency": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "sourceGrounding": false,
+              "redispatchSafety": true
+            },
+            "thresholds": {
+              "requirementExtractionAccuracy": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "threshold": 0.9,
+                "pass": true
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "threshold": 1,
+                "pass": true
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "clean",
+          "agent": "requirement-interpreter",
+          "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+          "goldHash": "a460292958ae8e8396deeaec341ea590ea040f6da0fa767063928560f641f003",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "597f81108cbe8c1e4fd45035dfb20de0ff0305488a1828fa5e251cfcd1c15309",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-clean-7b7425cb-cf09-4d6d-af1a-63594d7ce85b/cycle-1/requirement-interpreter-raw.txt",
+          "score": {
+            "agent": "requirement-interpreter",
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "applicable": true,
+                "matched": 2,
+                "total": 4,
+                "score": 0.5
+              },
+              "hvacTerminologyRecognition": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "summaryAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "developerConsiderationGrounding": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "confidencePolicyConsistency": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "sourceGrounding": false,
+              "redispatchSafety": true
+            },
+            "thresholds": {
+              "requirementExtractionAccuracy": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "summaryAccuracy": {
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "threshold": 1,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "sparse",
+          "agent": "requirement-interpreter",
+          "inputHash": "b166d8c83b46f2de7b52d6b296b686116d14e2e7af01230bcc943c5d427c7dcb",
+          "goldHash": "cc43f79a3451ba16d0c39d4c25acff38ff55100c7dc606c957a9b00baede294b",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "e2164c8f10d8a5e0771fb3f47fdcdef96900b293aa6c4b4de1850b7484fa22fc",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-sparse-d0a338a0-9079-4b02-82fc-5031498fe4fe/cycle-1/requirement-interpreter-raw.txt",
+          "score": {
+            "agent": "requirement-interpreter",
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacTerminologyRecognition": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "summaryAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "developerConsiderationGrounding": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              },
+              "confidencePolicyConsistency": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "sourceGrounding": false,
+              "redispatchSafety": true
+            },
+            "thresholds": {
+              "requirementExtractionAccuracy": {
+                "threshold": 0.9,
+                "pass": null
+              },
+              "hvacTerminologyRecognition": {
+                "threshold": 0.9,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "threshold": 1,
+                "pass": true
+              },
+              "confidencePolicyConsistency": {
+                "threshold": 1,
+                "pass": true
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "conflict",
+          "agent": "requirement-interpreter",
+          "inputHash": "e0f26f168a99b9a85132bfc0cd8610160a73bd71bcba82cf37ae10cd39fee4ec",
+          "goldHash": "1b743a6a006dff4b2da39e375960e2330f48d82ecf7fb6ae179a5885e23190d0",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "430a0f8c6b6706d476491f74bcf0665ffb994bb259b1fc402cb28d89b6469b8e",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-conflict-902c2244-94ff-41a3-98a4-59c224d80271/cycle-1/requirement-interpreter-raw.txt",
+          "score": {
+            "agent": "requirement-interpreter",
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "applicable": true,
+                "matched": 2,
+                "total": 2,
+                "score": 1
+              },
+              "hvacTerminologyRecognition": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "summaryAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "developerConsiderationGrounding": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              },
+              "confidencePolicyConsistency": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "sourceGrounding": false,
+              "redispatchSafety": true
+            },
+            "thresholds": {
+              "requirementExtractionAccuracy": {
+                "threshold": 0.9,
+                "pass": true
+              },
+              "hvacTerminologyRecognition": {
+                "threshold": 0.9,
+                "pass": true
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "threshold": 1,
+                "pass": true
+              },
+              "confidencePolicyConsistency": {
+                "threshold": 1,
+                "pass": true
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "redispatch",
+          "agent": "requirement-interpreter",
+          "inputHash": "44ef1b3a5d866384cef22c2a81b0ecb9064cf7450c66d0dd146a0e76c2213e65",
+          "goldHash": "3dfa092525272614c6e6a527b4d82cef18bd28692f3b1e9a1bcb761f014f1b2d",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "c0b80bd45447a9156644c4698a88a931d539129cfb4859f99cbc16a43ae4bdfc",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-redispatch-ed29094c-32e9-4b58-8f61-9baefcea9148/cycle-1/requirement-interpreter-raw.txt",
+          "score": {
+            "agent": "requirement-interpreter",
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "applicable": true,
+                "matched": 1,
+                "total": 3,
+                "score": 0.3333333333333333
+              },
+              "hvacTerminologyRecognition": {
+                "applicable": true,
+                "matched": 6,
+                "total": 6,
+                "score": 1
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 4,
+                "total": 4,
+                "score": 1
+              },
+              "summaryAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "developerConsiderationGrounding": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "confidencePolicyConsistency": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "sourceGrounding": false,
+              "redispatchSafety": false
+            },
+            "thresholds": {
+              "requirementExtractionAccuracy": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "threshold": 0.9,
+                "pass": true
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": true
+              },
+              "summaryAccuracy": {
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "threshold": 1,
+                "pass": true
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "assumption",
+          "agent": "adversarial-reviewer",
+          "inputHash": "844148820d9bede976294c7581d927e3f1ab95034315764df55e2e6147fb7b85",
+          "goldHash": "032ee22c64a13a252345028cc2f9470c75ceab1bca03849472c68e0874c64449",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "b1f05b2587cb32ffa348325f7c4391bf5fc080c6495c7001d97f2dad447ca561",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-assumption-f1b0f507-26ba-4bc9-a108-1f8c690868d6/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 3,
+                "score": 0
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": false
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "missing",
+          "agent": "adversarial-reviewer",
+          "inputHash": "a2329678935c63e16fc35269959a10e8d684d5efa68304bda3bdbea045ac82af",
+          "goldHash": "1ef84d4b4a9b86acfe5df8c3638a369b19c9bab27ad4c4c910ed1349b00766b9",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "b258fe8d37331dd3ffaa1d4d3e9ba504ba6d785ff752acf4e3aeeb9dde0e1198",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-missing-f5741f9f-4bdc-4ebb-8d4f-517a40060e8f/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": true,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "hvac",
+          "agent": "adversarial-reviewer",
+          "inputHash": "af6bf4551382f0ecf3637787a691c16a24ba2357e7cbae2cd174d168172c1e0d",
+          "goldHash": "cb78ffb94709175bda56a94894f3d3e126125b36a01b06be02be2bfdd462e2ca",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "3b22fb4affaceb95d33b07397938d6732f7f06c308aae4f1c6ab1a77595c1038",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-hvac-39d6fc43-f3c1-4845-b6c2-c278d827ad32/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 9,
+                "score": 0
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": false
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "validation",
+          "agent": "adversarial-reviewer",
+          "inputHash": "1ff086ebb84512bba05e4659db8101ace42dfd58f408bf3bddc81b9c0a723317",
+          "goldHash": "1ce4f7d8814912267900a53aca7972958a7b0b85b215fe8cc61fb0cb8d88ee01",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "87abca9e3169393fcc825d41a75424f2e3c40212a3f8337733ed130bd6317d2f",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-validation-83ca006d-9e58-4eba-be4c-763dac9477a3/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "missed-ambiguity",
+          "agent": "adversarial-reviewer",
+          "inputHash": "5a2973cce48c468811c105631e165b902f44e6b41800093472621aba64188111",
+          "goldHash": "0b7d098b272c55facdf9ca11f01c7242749ac7db50ad3ceb543a5b574f5cd8ce",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "ca7ba99a87adefd64b669f194ed38ccd570372de300035fbaa9671643526c049",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-missed-ambiguity-0148426b-cf8c-4bc8-9342-77bf22bc0e66/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "open",
+          "agent": "adversarial-reviewer",
+          "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c",
+          "goldHash": "2f5c7d74390ba42ecdad892b300b3cffe631459fe149eb281266dd2235ef72f9",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "309d18b7d64ea90aad04f47d6a613b41810ffb829f5ab97100772258025ad37f",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-open-d9d8a514-3290-4e46-844e-599d4fd034a0/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 4,
+                "score": 0
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "boundary",
+          "agent": "adversarial-reviewer",
+          "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c",
+          "goldHash": "ff54ca98440de9920ba6c50802f06a512a4006f1590c690618f5fbcb162b587e",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "309d18b7d64ea90aad04f47d6a613b41810ffb829f5ab97100772258025ad37f",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-boundary-b707fa3e-556b-4b4a-a71e-5272f1713f40/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": true,
+                "matched": 0,
+                "total": 5,
+                "score": 0
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": false
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "clean-review",
+          "agent": "adversarial-reviewer",
+          "inputHash": "3e61e4407f94acf12336ae3b46b6136a1eff942c26036b5ebdf0341ef5717dce",
+          "goldHash": "585fe12ee6d17ecb009522bcf15308bf0bb1e51ac51352bc43d275e0b6d88fc8",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "17d072937616811f56279caccd8a4ec9961a2a59119954657ddf1e46c605e865",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-clean-review-86974f6e-0910-400b-80ff-db90720ad087/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 1,
+                "total": 2,
+                "score": 0.5
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": true,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "minor-label",
+          "agent": "adversarial-reviewer",
+          "inputHash": "d35397a24582e25f60b239684367975805f5de516fc24566ca23a11f7f1b7b81",
+          "goldHash": "01b79c49e39bdc37ef049ae5bde900894b22e87cda841fca22a185c6056a2357",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "7e4796966defaee08d6371d50f3d161dc985e957d58e6e3f065f15d374226781",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-minor-label-f20cc97a-c06c-4d0e-a526-162e3f30b00d/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "retained",
+          "agent": "adversarial-reviewer",
+          "inputHash": "641cedcbc499ea2b75d1f511a4be954fb29191a1cb9e188ffd21fcb764f6da44",
+          "goldHash": "e17338df2525c172f213cf1328981e2597b6995dd142dcc50b6b808139a627f3",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "e14900d6e4c90419e0531d9cef9d1b6ff1e3d65f425383574122c4af89265354",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "GOVERNANCE_FAILURE",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-retained-4c93c0ed-3707-4379-a877-a0dcb14137c6/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": false,
+              "falsePositiveControl": true,
+              "rationaleGrounding": false,
+              "concernContinuity": false
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "resolved",
+          "agent": "adversarial-reviewer",
+          "inputHash": "7f2297424c86e1f2f7b74bde88da8b7dcc7839fa4500f8c3e36c7384bad4ac3a",
+          "goldHash": "d5c18bf48e0586131d1925e101065834bb9de603a2da12e93f14c9203c9be932",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "6adaa9b8c1d9d2838f90e47e93015c1f00563018a1b98fa1214972c49b3fa937",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-resolved-d6d32720-b26a-473d-b129-5c063a659e1e/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 4,
+                "score": 0
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": false
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "bad-resolution",
+          "agent": "adversarial-reviewer",
+          "inputHash": "6dd8cea7f8b266b241b628dd9239f2a2bd19e61ea9f593d0acaed3bbe9d2b1b2",
+          "goldHash": "3616aa7c6f687f996d52931afa1f593306ca33e6483cf6efd1cdd66b1809c058",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "dd72bbfe1260a1242bff6698b895dcb15acd57d3d5d75a6f8f1ebe7e47a6dd42",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-bad-resolution-42149c47-1af0-42f2-98af-0880db84fc59/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": false
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": null
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "writer-fail",
+          "agent": "final-review-writer",
+          "inputHash": "6a80fa71623115be4fcd9eec4ad56db358288408120a01f08ae445abb2c6f9cc",
+          "goldHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "fde9a51b2122ff6519fa95ffe537395f4cdc5c5d875b39ce4edd18ea7a78fb8f",
+          "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-writer-fail-fe61a1d2-2859-43be-b9e1-8bf83aca0d3b/cycle-1/final-review-writer-raw.txt",
+          "score": {
+            "agent": "final-review-writer",
+            "metrics": {
+              "findingPreservation": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              },
+              "reportCompleteness": {
+                "applicable": true,
+                "matched": 4,
+                "total": 4,
+                "score": 1
+              },
+              "outputQuality": {
+                "applicable": true,
+                "matched": 4,
+                "total": 4,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "upstreamContract": true,
+              "reportStructure": true,
+              "conclusionGrounding": true,
+              "boundedReport": true
+            },
+            "thresholds": {
+              "findingPreservation": {
+                "threshold": 1,
+                "pass": true
+              },
+              "reportCompleteness": {
+                "threshold": 1,
+                "pass": true
+              },
+              "outputQuality": {
+                "threshold": 0.95,
+                "pass": true
+              }
+            },
+            "pass": true
+          }
+        },
+        {
+          "caseId": "writer-pass",
+          "agent": "final-review-writer",
+          "inputHash": "e229fd36483eaace25e85131bc4ff54e305b0437e71942a6b64b4185ee37b423",
+          "goldHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "0abde4ff67d5523f7379551d8a8e7aa15e078f7fec0af7693383a64bde6838f6",
+          "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-writer-pass-1ddf301c-0f1c-4125-8f5f-29de1df91a1c/cycle-1/final-review-writer-raw.txt",
+          "score": {
+            "agent": "final-review-writer",
+            "metrics": {
+              "findingPreservation": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              },
+              "reportCompleteness": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              },
+              "outputQuality": {
+                "applicable": true,
+                "matched": 4,
+                "total": 4,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "upstreamContract": true,
+              "reportStructure": true,
+              "conclusionGrounding": true,
+              "boundedReport": true
+            },
+            "thresholds": {
+              "findingPreservation": {
+                "threshold": 1,
+                "pass": true
+              },
+              "reportCompleteness": {
+                "threshold": 1,
+                "pass": true
+              },
+              "outputQuality": {
+                "threshold": 0.95,
+                "pass": true
+              }
+            },
+            "pass": true
+          }
+        },
+        {
+          "caseId": "condenser",
+          "agent": "requirement-interpreter",
+          "inputHash": "48364f3e10a454ed63786474dca9a7bdeaa140317a0e51b303f8d65527783c87",
+          "goldHash": "ff17be2b7a3ada527a451e26b95f90cc804cd32eb99bbdfe3b2b2d6a7c2a87cd",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "6e24ac9a1f749d730839b2ab9b380c9e05079a0b1976a60f54c266fdb2b77a94",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-condenser-882cd36e-e90f-4299-9b62-43b811bd821d/cycle-1/requirement-interpreter-raw.txt",
+          "score": {
+            "agent": "requirement-interpreter",
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 17,
+                "score": 0
+              },
+              "hvacTerminologyRecognition": {
+                "applicable": true,
+                "matched": 18,
+                "total": 24,
+                "score": 0.75
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 5,
+                "score": 0
+              },
+              "summaryAccuracy": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "developerConsiderationGrounding": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "confidencePolicyConsistency": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "sourceGrounding": false,
+              "redispatchSafety": true
+            },
+            "thresholds": {
+              "requirementExtractionAccuracy": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "threshold": 0.9,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "threshold": 1,
+                "pass": true
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "missing-corrected",
+          "agent": "adversarial-reviewer",
+          "inputHash": "074205509514bdfc1c18d1a38795dfd58ab8890431ddbcd67462a7b634286d3c",
+          "goldHash": "2fe4750473e4be9a095763b0965d3f2809cefb4d83feb2dfb0fc1e02d4af20ea",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "06366f4d4d18df79d546078d453e1c3c93419f11d6b330bb81f054744fef24ed",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-missing-corrected-6c772efc-5900-4ebb-b9e0-c7bdce13d75a/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 4,
+                "score": 0
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "assumption-corrected",
+          "agent": "adversarial-reviewer",
+          "inputHash": "0c07130ff7de88a48b8d7f2ded3c6431aa42c321b2dfff1c691501f23e573895",
+          "goldHash": "ed2182c73045f492669783212d32f31e9cc829c31465136c923feee1f875440b",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "8f0762f77cca0cdda70f1528ebc118374bf9735b56813630cd351bdc2f1b1bd2",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-assumption-corrected-0474397c-574b-4fd8-87db-03f204d7f90a/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 3,
+                "score": 0
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "hvac-corrected",
+          "agent": "adversarial-reviewer",
+          "inputHash": "2fd792c9b0da33a7168a81ecc54c18f14c2d581c640caaa6fc51b6f74a427d2e",
+          "goldHash": "84b55803b40747c6865700d8c1212325acf60c1f4ab230336693594bc663a793",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "afd47fb301587e73ffff2d8292dbf03cb4be72eaef2258045d57d797baba08fa",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-hvac-corrected-69c0de0e-d17d-47e0-9a76-c419889b1ff8/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 5,
+                "score": 0
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "validation-corrected",
+          "agent": "adversarial-reviewer",
+          "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c",
+          "goldHash": "fd4f68b47e61b2dc6f4350af796181df38c628fb4b037ea7211da8c27fce9745",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "309d18b7d64ea90aad04f47d6a613b41810ffb829f5ab97100772258025ad37f",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-validation-corrected-8a9e4d8c-46d8-4f28-8f26-a3054022daf1/cycle-1/adversarial-reviewer-raw.txt",
+          "score": {
+            "agent": "adversarial-reviewer",
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingRequirementDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "hvacInterpretationErrorDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "missingValidationDetection": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "ambiguityDetection": {
+                "applicable": true,
+                "matched": 0,
+                "total": 4,
+                "score": 0
+              },
+              "boundaryChallengeCoverage": {
+                "applicable": false,
+                "matched": 0,
+                "total": 0,
+                "score": null,
+                "reason": "No applicable source expectations in this fixed case."
+              },
+              "challengeQuality": {
+                "applicable": true,
+                "matched": 0,
+                "total": 2,
+                "score": 0
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "runtimeContract": true,
+              "falsePositiveControl": false,
+              "rationaleGrounding": false,
+              "concernContinuity": true
+            },
+            "thresholds": {
+              "unsupportedAssumptionDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "missingRequirementDetection": {
+                "threshold": 0.85,
+                "pass": null
+              },
+              "hvacInterpretationErrorDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "missingValidationDetection": {
+                "threshold": 1,
+                "pass": null
+              },
+              "ambiguityDetection": {
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "threshold": 1,
+                "pass": null
+              },
+              "challengeQuality": {
+                "threshold": 0.9,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "ticket4-final-review-writer",
+          "agent": "final-review-writer",
+          "inputHash": "7ee5cb71512b76bd60b9b8ec2214f7c4abdf2b1167667aca467dddd5c8f570e1",
+          "goldHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "8f9f7c14af51e68c0756f1e2c5e2f4d910210caa64c439a4eaa97f7470ba5d6e",
+          "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+          "runtimeStatus": "GOVERNANCE_FAILURE",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-ticket4-final-review-writer-a6c02488-210d-4ebc-b80e-6c19a31a9083/cycle-1/final-review-writer-raw.txt",
+          "score": {
+            "agent": "final-review-writer",
+            "metrics": {
+              "findingPreservation": {
+                "applicable": true,
+                "matched": 0,
+                "total": 1,
+                "score": 0
+              },
+              "reportCompleteness": {
+                "applicable": true,
+                "matched": 4,
+                "total": 5,
+                "score": 0.8
+              },
+              "outputQuality": {
+                "applicable": true,
+                "matched": 2,
+                "total": 4,
+                "score": 0.5
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "upstreamContract": true,
+              "reportStructure": true,
+              "conclusionGrounding": false,
+              "boundedReport": false
+            },
+            "thresholds": {
+              "findingPreservation": {
+                "threshold": 1,
+                "pass": false
+              },
+              "reportCompleteness": {
+                "threshold": 1,
+                "pass": false
+              },
+              "outputQuality": {
+                "threshold": 0.95,
+                "pass": false
+              }
+            },
+            "pass": false
+          }
+        },
+        {
+          "caseId": "ticket5-final-review-writer",
+          "agent": "final-review-writer",
+          "inputHash": "d0ab982cee09f23ca3e1398db39c7ef807e5072937a15bfb99945835f9be7db2",
+          "goldHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+          "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptHash": "105162117f1a12adece7341fd950b0f64438a0e3f968eadfaf79c9ac8599ee9f",
+          "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+          "runtimeStatus": "SUCCESS",
+          "rawAvailable": true,
+          "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-ticket5-final-review-writer-1a833807-4c18-47af-89f9-8a697e80bbb1/cycle-1/final-review-writer-raw.txt",
+          "score": {
+            "agent": "final-review-writer",
+            "metrics": {
+              "findingPreservation": {
+                "applicable": true,
+                "matched": 1,
+                "total": 1,
+                "score": 1
+              },
+              "reportCompleteness": {
+                "applicable": true,
+                "matched": 4,
+                "total": 4,
+                "score": 1
+              },
+              "outputQuality": {
+                "applicable": true,
+                "matched": 4,
+                "total": 4,
+                "score": 1
+              }
+            },
+            "gates": {
+              "rawResponseFormat": true,
+              "schemaConformance": true,
+              "upstreamContract": true,
+              "reportStructure": true,
+              "conclusionGrounding": true,
+              "boundedReport": true
+            },
+            "thresholds": {
+              "findingPreservation": {
+                "threshold": 1,
+                "pass": true
+              },
+              "reportCompleteness": {
+                "threshold": 1,
+                "pass": true
+              },
+              "outputQuality": {
+                "threshold": 0.95,
+                "pass": true
+              }
+            },
+            "pass": true
+          }
+        }
+      ],
+      "agents": {
+        "requirement-interpreter": {
+          "attempts": 8,
+          "rawResponses": 8,
+          "strictPasses": 0,
+          "runtimeAccepted": 8,
+          "strictPassRate": 0,
+          "runtimeAcceptanceRate": 1,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "sourceGrounding": 0,
+            "redispatchSafety": 0.875
+          },
+          "metrics": {
+            "requirementExtractionAccuracy": {
+              "matched": 6,
+              "total": 39,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.15384615384615385,
+              "threshold": 0.9,
+              "pass": false
+            },
+            "hvacTerminologyRecognition": {
+              "matched": 38,
+              "total": 49,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.7755102040816326,
+              "threshold": 0.9,
+              "pass": false
+            },
+            "ambiguityDetection": {
+              "matched": 4,
+              "total": 22,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.18181818181818182,
+              "threshold": 0.8,
+              "pass": false
+            },
+            "summaryAccuracy": {
+              "matched": 0,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "developerConsiderationGrounding": {
+              "matched": 2,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.25,
+              "threshold": 1,
+              "pass": false
+            },
+            "confidencePolicyConsistency": {
+              "matched": 7,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.875,
+              "threshold": 1,
+              "pass": false
+            }
+          }
+        },
+        "adversarial-reviewer": {
+          "attempts": 16,
+          "rawResponses": 16,
+          "strictPasses": 0,
+          "runtimeAccepted": 15,
+          "strictPassRate": 0,
+          "runtimeAcceptanceRate": 0.9375,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "runtimeContract": 0.9375,
+            "falsePositiveControl": 0.1875,
+            "rationaleGrounding": 0,
+            "concernContinuity": 0.875
+          },
+          "metrics": {
+            "unsupportedAssumptionDetection": {
+              "matched": 0,
+              "total": 2,
+              "applicableCases": 2,
+              "naCases": 14,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.85,
+              "pass": false
+            },
+            "missingRequirementDetection": {
+              "matched": 0,
+              "total": 13,
+              "applicableCases": 5,
+              "naCases": 11,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.85,
+              "pass": false
+            },
+            "hvacInterpretationErrorDetection": {
+              "matched": 0,
+              "total": 1,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "missingValidationDetection": {
+              "matched": 0,
+              "total": 1,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "ambiguityDetection": {
+              "matched": 0,
+              "total": 28,
+              "applicableCases": 8,
+              "naCases": 8,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.8,
+              "pass": false
+            },
+            "boundaryChallengeCoverage": {
+              "matched": 0,
+              "total": 5,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "challengeQuality": {
+              "matched": 1,
+              "total": 32,
+              "applicableCases": 16,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.03125,
+              "threshold": 0.9,
+              "pass": false
+            }
+          }
+        },
+        "final-review-writer": {
+          "attempts": 4,
+          "rawResponses": 4,
+          "strictPasses": 3,
+          "runtimeAccepted": 3,
+          "strictPassRate": 0.75,
+          "runtimeAcceptanceRate": 0.75,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "upstreamContract": 1,
+            "reportStructure": 1,
+            "conclusionGrounding": 0.75,
+            "boundedReport": 0.75
+          },
+          "metrics": {
+            "findingPreservation": {
+              "matched": 3,
+              "total": 4,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.75,
+              "threshold": 1,
+              "pass": false
+            },
+            "reportCompleteness": {
+              "matched": 13,
+              "total": 14,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.9285714285714286,
+              "threshold": 1,
+              "pass": false
+            },
+            "outputQuality": {
+              "matched": 14,
+              "total": 16,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.875,
+              "threshold": 0.95,
+              "pass": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "version": "v1",
+      "rows": [],
+      "agents": {},
+      "collected": false
+    },
+    {
+      "version": "v2",
+      "rows": [],
+      "agents": {},
+      "collected": false
+    }
+  ],
+  "cycles": [
+    {
+      "before": "v0",
+      "after": "v1",
+      "comparison": {
+        "pairs": [],
+        "unpaired": [],
+        "baselineOnly": [
+          "dx",
+          "coil",
+          "filters",
+          "clean",
+          "sparse",
+          "conflict",
+          "redispatch",
+          "assumption",
+          "missing",
+          "hvac",
+          "validation",
+          "missed-ambiguity",
+          "open",
+          "boundary",
+          "clean-review",
+          "minor-label",
+          "retained",
+          "resolved",
+          "bad-resolution",
+          "writer-fail",
+          "writer-pass",
+          "condenser",
+          "missing-corrected",
+          "assumption-corrected",
+          "hvac-corrected",
+          "validation-corrected",
+          "ticket4-final-review-writer",
+          "ticket5-final-review-writer"
+        ]
+      },
+      "unmatched": [],
+      "agents": {
+        "requirement-interpreter": {
+          "measured": false
+        },
+        "adversarial-reviewer": {
+          "measured": false
+        },
+        "final-review-writer": {
+          "measured": false
+        }
+      }
+    },
+    {
+      "before": "v1",
+      "after": "v2",
+      "comparison": {
+        "pairs": [],
+        "unpaired": [],
+        "baselineOnly": []
+      },
+      "unmatched": [],
+      "agents": {
+        "requirement-interpreter": {
+          "measured": false
+        },
+        "adversarial-reviewer": {
+          "measured": false
+        },
+        "final-review-writer": {
+          "measured": false
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Small development suite, not held-out evaluation; single observation per case/version.",
+    "Temperature zero is not a reproducibility guarantee; no causal or statistical-significance claim.",
+    "Corrected bounded scorer stays frozen; unsupported formulations may lack credit. No post-response label expansion.",
+    "No workflow, F4, or overall certification PASS claim."
+  ],
+  "allAttemptsRetained": true,
+  "productionPromptsAutomaticallyPromoted": false
+}

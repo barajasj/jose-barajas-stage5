@@ -1,0 +1,32 @@
+{
+  "requirementSummary": "The UI must validate Coil Height input for Water/Steam coils, ensuring the entered height in inches falls within 1.25\" to 100\" and is a multiple of a coil‑specific increment; if not, the value is rounded to the nearest valid increment based on the selected tube size or coil type.",
+  "hvacTerminology": [
+    "Coil Height",
+    "Water/Steam coils",
+    "3/8\" tube",
+    "1/2\" tube",
+    "5/8\" tube",
+    "1\" tube",
+    "Lamiflo coil",
+    "3/8\" tube with 1\" spacing"
+  ],
+  "businessRules": [
+    "Valid Coil Height range is 1.25\" to 100\" inclusive.",
+    "The entered Coil Height must be a multiple of a coil‑specific increment.",
+    "If the entered Coil Height is not an exact multiple of the applicable increment, it must be rounded to the nearest valid increment.",
+    "Increment mapping by coil type/configuration: 3/8\" tube or 1/2\" tube → 1.25\"; 5/8\" tube → 1.50\"; 1\" tube → 2.25\"; Lamiflo coil → 9.00\"; 3/8\" tube with 1\" spacing → 1.00\"."
+  ],
+  "developerConsiderations": [
+    "UI input field should accept numeric values expressed in inches.",
+    "Validation logic must enforce the 1.25\"‑100\" range before applying increment rules.",
+    "The system must determine the applicable increment based on the selected tube size or coil type as defined.",
+    "Rounding algorithm must select the nearest increment to the entered value."
+  ],
+  "ambiguities": [
+    "Tie‑breaking rule when the entered value is exactly halfway between two valid increments is not specified.",
+    "Behavior when the entered value is below the minimum range (1.25\") is not specified.",
+    "Behavior when the entered value exceeds the maximum range (100\") is not specified.",
+    "Handling of non‑numeric or malformed input is not specified."
+  ],
+  "confidence": "MEDIUM"
+}

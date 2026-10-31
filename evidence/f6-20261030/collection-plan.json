@@ -1,0 +1,551 @@
+{
+  "version": 1,
+  "preparedAt": "2026-10-30T23:06:47.852Z",
+  "scope": "F6a/F6b only",
+  "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+  "casesHash": "06f7f59272e70264965813fcd48174e96f5a7a89a7db934c57b22decbeb21212",
+  "sourceHashes": [
+    {
+      "file": "CERTIFICATION-EVIDENCE.md",
+      "sha256": "2fe571aee9174b4dac7d7e27f1c9096c0cbd6723524678fa4c9071b7d2116c62"
+    },
+    {
+      "file": "GIT-HISTORY.md",
+      "sha256": "71ac15a76ba364775a5ce7848999517446052a5896ce6d815c69ec96e4ee2232"
+    },
+    {
+      "file": "NEXT-STEPS.md",
+      "sha256": "22fbde17b55b9404f494dd801e21410e4b260fae0c0636c2d72d994eb54315df"
+    },
+    {
+      "file": "README.md",
+      "sha256": "cba5443cc326ef7818b75f9cc150dc4b9301be944490298f58573418afc6f232"
+    },
+    {
+      "file": "agents/adversarial-reviewer.md",
+      "sha256": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713"
+    },
+    {
+      "file": "agents/final-review-writer.md",
+      "sha256": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e"
+    },
+    {
+      "file": "agents/requirement-interpreter.md",
+      "sha256": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2"
+    },
+    {
+      "file": "coordinator/coordinator-decision-flow.md",
+      "sha256": "0d7f4fb097296e2138f547a7234841adc16dd0150556009bfdef44b10bab3ece"
+    },
+    {
+      "file": "coordinator/coordinator-design.md",
+      "sha256": "bbc1100423b4fb58594df2c0e55bc38e5cddf47b8cdf5e89b897f05c8dedfd6f"
+    },
+    {
+      "file": "coordinator/coordinator-tools.json",
+      "sha256": "651220e92b4d562abbc687138d1276f4defe84a34362967aebe07ef0208312de"
+    },
+    {
+      "file": "coordinator/disposition-matrix.md",
+      "sha256": "26d3db43bdc9cb82f901e701437e7baa80a4e21d6ed34e83523da0e0fcaf7094"
+    },
+    {
+      "file": "coordinator/redispatch-example.md",
+      "sha256": "737170a798bb4c54a97cd80d867205aa7f544d1d4d897e4c472f74124646938e"
+    },
+    {
+      "file": "coordinator/runtime-sequence.md",
+      "sha256": "ff3cbac25375144e332be7bf15fec6d2de48cf8001534c38ad9774b8d6a68eab"
+    },
+    {
+      "file": "coordinator/sequence-diagram.md",
+      "sha256": "0d7dac0e5953612387d5c1173058bee2cf06a88f8d1db2cd853dce2ae0534391"
+    },
+    {
+      "file": "evals/adversarial-reviewer-eval.md",
+      "sha256": "3cc0ac386c4723cb5b1b0dba4695b2708ddfec83a2ff309c5b2c91d687f398e8"
+    },
+    {
+      "file": "evals/f6-iterations.js",
+      "sha256": "a84dbf3c4834c3c32d6e663ee27178b8f85a31fadf70ee4694a24596a59462e8"
+    },
+    {
+      "file": "evals/final-review-writer-eval.md",
+      "sha256": "a73085fea3fa22bf4eac947290b39765e34c15ce13b3935b11aaa9f1d0814ea4"
+    },
+    {
+      "file": "evals/load-bearing-cases.js",
+      "sha256": "0ef025da8c54ba71154c37b9ed13a71c5b6ea168397c6bdad89f8fa51d7d3364"
+    },
+    {
+      "file": "evals/load-bearing-map.json",
+      "sha256": "9e3c4f0797d196b8a4917091e835f310a92068fc18f9127060939f472e9bdd7d"
+    },
+    {
+      "file": "evals/requirement-interpreter-eval.md",
+      "sha256": "e0cd480de58bc95dcf5b5c740ddc2bba8366ad3fb4a67749f42278f537916038"
+    },
+    {
+      "file": "evals/step-cases.js",
+      "sha256": "59fa6ec390db8900021b16923c4687443e5631ef7a0236e48558321306d26e99"
+    },
+    {
+      "file": "evals/test-cases.json",
+      "sha256": "5315ff6675765ebd2f5211ac03e24c20fda5aba0a8e8bef76cd6f26ab836e18c"
+    },
+    {
+      "file": "evals/workflow-label-equivalents.js",
+      "sha256": "9d6e4e2396582394f199c92ef51c4eb5a0dbb82124727fe2e1a04ee06be15bd0"
+    },
+    {
+      "file": "fixtures/hvac-ticket-1.md",
+      "sha256": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282"
+    },
+    {
+      "file": "fixtures/hvac-ticket-2.md",
+      "sha256": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085"
+    },
+    {
+      "file": "fixtures/hvac-ticket-3.md",
+      "sha256": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce"
+    },
+    {
+      "file": "fixtures/hvac-ticket-4.md",
+      "sha256": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215"
+    },
+    {
+      "file": "package-lock.json",
+      "sha256": "cc72f7bc39a776b73965cee8f4472a905234ed976957a1770a813cafd71f71a7"
+    },
+    {
+      "file": "package.json",
+      "sha256": "177f4a89bacc3e37425cce73d2b47de2f12d59c91b59dffeed291019ac119d57"
+    },
+    {
+      "file": "prompts/prompt-evolution.md",
+      "sha256": "8b669591a50fa223a6b670a8f6d4545ad9928aaedfe5dfa425c10360caf81f17"
+    },
+    {
+      "file": "schemas/challenges.schema.json",
+      "sha256": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3"
+    },
+    {
+      "file": "schemas/examiner.schema.json",
+      "sha256": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9"
+    },
+    {
+      "file": "schemas/final-review.schema.json",
+      "sha256": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c"
+    },
+    {
+      "file": "src/agent-contract.md",
+      "sha256": "6a48dcd46d8ee4e8b9b2f65fcf72cb05caf965b81546d0a9b7e7f5c71e428750"
+    },
+    {
+      "file": "src/agent-registry.js",
+      "sha256": "b179c227896d5c26dbaaeb5384a34a03fc81d703798fdcb22d44a88e8e6e24c6"
+    },
+    {
+      "file": "src/agent-runner.js",
+      "sha256": "da392bd118669df319616d3addd0cd92c37cd78e0b70b39f570c5504c19b12f6"
+    },
+    {
+      "file": "src/artifact-writer.js",
+      "sha256": "174583dd849cfec45fbf89412b5396f1a47ca59418d39722c612500d981e215b"
+    },
+    {
+      "file": "src/audit-logger.js",
+      "sha256": "840b337162c716d3bb24fb24b6d13da0fa64c4b59423e8b558598a10620933ca"
+    },
+    {
+      "file": "src/collect-eval-evidence.js",
+      "sha256": "e7cf0698a7905402a139f7139393e55fa75d45760c3bb30a5be9f7b4176c8165"
+    },
+    {
+      "file": "src/collect-f3-evidence.js",
+      "sha256": "e21c4717d6d6681f7bd33a44907451f2ecbd01997056e0eaad848e309d1de35f"
+    },
+    {
+      "file": "src/collect-f6-evidence.js",
+      "sha256": "4120f4c1483168cbd64d08866854a9b65e2bddfba51a6c9cfdcad6e6892355b1"
+    },
+    {
+      "file": "src/config.js",
+      "sha256": "79a363588617da8cfece40e4e82aed037c35f07c0ef90742bcde40e9add8f81c"
+    },
+    {
+      "file": "src/constants.js",
+      "sha256": "573fe771466ebbc1beefdb186268566da2e72d5c25421b133aec86be82f31f99"
+    },
+    {
+      "file": "src/coordinator.js",
+      "sha256": "c8b22ff0d57660a0aadc2cf205e07adfe1adfb6eafc5436a5cc7728ed440f996"
+    },
+    {
+      "file": "src/correlation-id.js",
+      "sha256": "1102957cfeb4c38f6344ce8e0d0b9ff569db3ce4f3dae4c628f70ab85701ca85"
+    },
+    {
+      "file": "src/cost-estimator.js",
+      "sha256": "f0c64cca835ee3e219b25fb59b65d5b26a1dadae8b0913d5d469768b832545bb"
+    },
+    {
+      "file": "src/diagnose-eval-evidence.js",
+      "sha256": "85b7c51da1873a275ff849758662bab27d730dcf163dab75fc6d18091e713022"
+    },
+    {
+      "file": "src/eval-evidence.js",
+      "sha256": "456630463f1bf4b495e76da98d88c4edd0a26dff5891a62a540af13afd73c497"
+    },
+    {
+      "file": "src/eval-runner.js",
+      "sha256": "fa179f5f3373ed8daca07949abbabc377f91b8550de7cc15fedebf75add97aa4"
+    },
+    {
+      "file": "src/eval-scorer.js",
+      "sha256": "14c057ea260e18ded76ca07be00534facd58391a19ae7c33a4af7799c42dc11a"
+    },
+    {
+      "file": "src/evidence-package.js",
+      "sha256": "4243ef3877c26b1f7797d5914aed1a2949c04b264b8e7ad01d332d97ff317685"
+    },
+    {
+      "file": "src/f6-analysis.js",
+      "sha256": "bf6be5c24e9588bd95a3ac82c6a52afd2092c1ba974cb5f4a946061261753d4a"
+    },
+    {
+      "file": "src/f6-plan.js",
+      "sha256": "725757c230ba0a3b4ead77862f64dc494938c9eda0131eb6cb9f210e72221548"
+    },
+    {
+      "file": "src/governance-policy.js",
+      "sha256": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88"
+    },
+    {
+      "file": "src/human-review.js",
+      "sha256": "d780f3a6532c30f6c58e5a18995ae9273763eefc885e626f5b6ed41edef84a23"
+    },
+    {
+      "file": "src/load-bearing-criteria.js",
+      "sha256": "e36fdda458a216463c080915a3169dba881c401a731ac781894f38a0bd936b0b"
+    },
+    {
+      "file": "src/mock-agent-responses.js",
+      "sha256": "6bc9319e7b014c2766319804f3690d89ccbe0145a78b4feb534e9c3490c14d06"
+    },
+    {
+      "file": "src/models/fireworks-client.js",
+      "sha256": "60fdd5942251d0051024931d5e9c2e74bad3d9358344643b7ec5bf43c1b6a64a"
+    },
+    {
+      "file": "src/models/model-client.js",
+      "sha256": "039b84d9b6ffd778acd6bace2afa081eb7cceb803f74fcfaaf65a4e123fcea7c"
+    },
+    {
+      "file": "src/models/model-config.js",
+      "sha256": "d64da4149b19b6635f56ab6be73a1843f6522d23e1b52a4eb5a25af0afbeab38"
+    },
+    {
+      "file": "src/models/model-contract.md",
+      "sha256": "22acd1ff076806c5cbe4332ca3ef637aaf6b764a92d3d497a86c6c743d444936"
+    },
+    {
+      "file": "src/prompt-builder.js",
+      "sha256": "ad1d214fb80432904a5137e9103e6168cb336fd206b9ddad380176ced5ad9adf"
+    },
+    {
+      "file": "src/prompt-loader.js",
+      "sha256": "2283873eda35403b7e555b51c357f1e8a7d149e27d04b816d42bb2627783fc1e"
+    },
+    {
+      "file": "src/report-contract.js",
+      "sha256": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5"
+    },
+    {
+      "file": "src/run-evals.js",
+      "sha256": "f7d078ead4048e2302f28fdfcec6fd863a848e61e4cc787a8363bff1b4ad2159"
+    },
+    {
+      "file": "src/run-f6.js",
+      "sha256": "ea9807c82e211b7b930ca4ece4536d607747b4fce82a116a5b083a04b8f99939"
+    },
+    {
+      "file": "src/run-load-bearing-audit.js",
+      "sha256": "5a7110e2cd1b621fdec84c996418f3b35ef64dae568aac7f1a115fa6a5b3586b"
+    },
+    {
+      "file": "src/run-workflow.js",
+      "sha256": "1db3fca90a16911d971076a7023c8de494c14b21d412e47ea93b4898ddced14b"
+    },
+    {
+      "file": "src/schema-validator.js",
+      "sha256": "b2d54c2f237a6b4fcf918db46570a6a29c51dc2cfd7ced0fd897d96d0e001064"
+    },
+    {
+      "file": "src/substance-gate.js",
+      "sha256": "10c1a22914b301562e464a758b6a4843c224f9162ad6733fde8cc819946bec3c"
+    },
+    {
+      "file": "src/test-fireworks-1.js",
+      "sha256": "0f4250705f0f4d12e9bbbd568cd864bfc6ca2d2a6e4ab2ec4f4ef6d312de9b66"
+    },
+    {
+      "file": "src/test-fireworks.js",
+      "sha256": "746db74a3f92940360ae1beb406efa0a98d4058c0f6918d77009ae003fd821f2"
+    },
+    {
+      "file": "src/test-interpreter.js",
+      "sha256": "1e59895965f2b87192031d2a537074174fa4c47b3b5ecbd67bc57a1c698dd75f"
+    },
+    {
+      "file": "src/test-punchout.js",
+      "sha256": "1459f8d10aaec2d77ca976ad22072c566da42cfa43f79dd5c5fe8749ae7fe277"
+    },
+    {
+      "file": "src/test-reviewer-schema.js",
+      "sha256": "b35655f379cec1120d486d5717c7c3be9843d5adfb5593febf13e6a10970dfa8"
+    },
+    {
+      "file": "src/test-reviewer.js",
+      "sha256": "9f179b9b487b4ea35dd4c2b28deab5e027bd74715d82da20d66add344d7f234a"
+    },
+    {
+      "file": "src/test-writer-schema.js",
+      "sha256": "ddb7956f6c7812c72fb63a2258589e9a85fb6c741b8fdc4676f2936fa57ce4b7"
+    },
+    {
+      "file": "src/test-writer.js",
+      "sha256": "5aee0afdaadf37f9b17f6ef299bb09f0ede99a9d33ea2573a66b0651dcf48576"
+    },
+    {
+      "file": "stage5-summary.md",
+      "sha256": "e9d102e6c5e595eb76e5be0bc7bfed1dcc89667b6c2af6618362c55ad6cfeffa"
+    },
+    {
+      "file": "sub-agents.config.yaml",
+      "sha256": "eac5cec53f739a2acbdc735ae439f7a75481aedaeaf8b904790ca15d545e4a5d"
+    },
+    {
+      "file": "substance-assessment.json",
+      "sha256": "ebdc7d06a432f1501843712113f54e416e2e46b44f39d5da2ab21323fcef4d13"
+    },
+    {
+      "file": "tests/eval-runner.test.js",
+      "sha256": "1ca48a68bc10521e633a056b83d76735d83ede25a65e1c6d868149c34328c667"
+    },
+    {
+      "file": "tests/eval-scorer.test.js",
+      "sha256": "512ac7300f3e3a8ec55453897b14d6ba7c2d5f3fc9fd2abc8b072430f2a46ff6"
+    },
+    {
+      "file": "tests/evidence-package.test.js",
+      "sha256": "e105b8ddf05723fa6c22374de354e727ec2d5a47211c696af72007f064f4d705"
+    },
+    {
+      "file": "tests/f3-evidence.test.js",
+      "sha256": "aa2f9e7f5c7aea8fc292ffbdab6c51ac80a10f559ba080de865bfca7d3072812"
+    },
+    {
+      "file": "tests/f3-regression.test.js",
+      "sha256": "82196ad7975b4b7386f3a24b47019c7406375859566827d3316fb3741b1d272f"
+    },
+    {
+      "file": "tests/f6-measurement.test.js",
+      "sha256": "e67f6551ff161a8131abf5b466dbe7c4a11f14826507cf1c4ad3aaf2988b3457"
+    },
+    {
+      "file": "tests/load-bearing.test.js",
+      "sha256": "bc36aea6077834f53129117a5dbd0c2ae17e65263dc9d1196d6088ac9a82d89e"
+    },
+    {
+      "file": "tests/reviewer-smoke.test.js",
+      "sha256": "8edb91aa448d3df16a0c16b3c07ba005f6e73b752f6c0d09383924f5d8bd115a"
+    },
+    {
+      "file": "tests/runtime-governance.test.js",
+      "sha256": "5d54090ac664b05d8779ddb56f796f221558817b73fb2cde7fa39c726c0f1ae5"
+    }
+  ],
+  "versions": [
+    {
+      "version": "v0",
+      "reason": "Prospective baseline: unchanged post-F3 production prompts, not reconstructed historical performance.",
+      "changes": {},
+      "prompts": {
+        "requirement-interpreter": {
+          "file": "evidence/f6-20261030/prompts/v0/requirement-interpreter.md",
+          "sha256": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2"
+        },
+        "adversarial-reviewer": {
+          "file": "evidence/f6-20261030/prompts/v0/adversarial-reviewer.md",
+          "sha256": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713"
+        },
+        "final-review-writer": {
+          "file": "evidence/f6-20261030/prompts/v0/final-review-writer.md",
+          "sha256": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e"
+        }
+      }
+    },
+    {
+      "version": "v1",
+      "reason": "Separate extraction, review comparison, and literal transcription from speculative completion.",
+      "changes": {
+        "requirement-interpreter": [
+          "Before answering, privately separate explicit ticket propositions from unanswered questions. Extract each requested behavior and numeric constraint once, with all its conditions. Sample data does not establish policy.",
+          "Keep developerConsiderations limited to implementation consequences explicitly required by the ticket. Do not add generic engineering advice. Choose confidence from the scope of unanswered behavior, not from confidence in your prose."
+        ],
+        "adversarial-reviewer": [
+          "Before drafting findings, compare each ticket proposition against the entire actual interpretation, not businessRules alone. A proposition already captured in the summary or developerConsiderations is not absent everywhere.",
+          "For each proposed finding, privately identify the specific defective scalar or the missing proposition. Then copy the shortest sufficient ticket quote and the complete relevant interpreter scalar, with its zero-based pointer. Reject your own finding if the input already corrects the alleged defect."
+        ],
+        "final-review-writer": [
+          "Treat reportTemplate as an opaque character sequence, not a draft to edit. Produce exactly one JSON string encoding of that sequence as reportMarkdown. Do not regenerate the report from the other input sections.",
+          "Use these JSON encoding rules on template characters: an existing backslash becomes \\\\, an existing double quote becomes \\\", and a line break becomes \\n. Leave words, punctuation, and Markdown delimiters unchanged."
+        ]
+      },
+      "prompts": {
+        "requirement-interpreter": {
+          "file": "evidence/f6-20261030/prompts/v1/requirement-interpreter.md",
+          "sha256": "577e46823ebe1af85601839360dd79f4b0944f5bd17d787f9843875acb324acd"
+        },
+        "adversarial-reviewer": {
+          "file": "evidence/f6-20261030/prompts/v1/adversarial-reviewer.md",
+          "sha256": "1f3c3b63078929789918a7b722eb53b04d46d7a9a83ff0885e50f6b6bb48ebb3"
+        },
+        "final-review-writer": {
+          "file": "evidence/f6-20261030/prompts/v1/final-review-writer.md",
+          "sha256": "1ebd0c8aec89f800e7c5b2cbf196c8e479d6148f86d2f4a9510e22086c5f6f30"
+        }
+      }
+    },
+    {
+      "version": "v2",
+      "reason": "Add a final omission/identity/character audit after the v1 task decomposition; no new facts or output repair.",
+      "changes": {
+        "requirement-interpreter": [
+          "Privately audit the draft against the ticket once more: no dropped dependency, no swapped HVAC abbreviation, no lost increment or special configuration override, no invented limit, default, rounding tie rule, or error policy.",
+          "Ask separate, concise questions for genuinely unspecified behavior; do not ask a question the ticket answers. On redispatch, perform this audit without rewording unanswered previous ambiguities or changing their resolution identities."
+        ],
+        "adversarial-reviewer": [
+          "Privately audit every finding before emitting JSON: its claim must still be true for the current input, its action must address exactly that defect, and its severity must reflect impact rather than the number of findings.",
+          "Run a final pointer/identity checklist: every current ambiguity index is covered, every interpreter quote equals the complete scalar at that pointer, every non-ambiguity finding has ambiguityRefs: [], and every disappearing prior ID has a supported resolution. Do not turn this checklist into additional findings."
+        ],
+        "final-review-writer": [
+          "Before returning, privately compare the value obtained by decoding your proposed outer JSON once with reportTemplate from beginning to end. Check the first differing character rather than accepting equivalent meaning.",
+          "Specifically check repeated backslashes, quotes inside already quoted Markdown rows, and short conjunctions such as or/and. Preserve them literally. This check is internal only: return no commentary, checksum, or extra fields."
+        ]
+      },
+      "prompts": {
+        "requirement-interpreter": {
+          "file": "evidence/f6-20261030/prompts/v2/requirement-interpreter.md",
+          "sha256": "8906f88e1915f1f4399b79b2816779f8b6633ad50e62a9b00edd55cd7eabfaf4"
+        },
+        "adversarial-reviewer": {
+          "file": "evidence/f6-20261030/prompts/v2/adversarial-reviewer.md",
+          "sha256": "d60e7b732f1f8049550871b3304a9340ae78c525a43b741c8cc672741741697f"
+        },
+        "final-review-writer": {
+          "file": "evidence/f6-20261030/prompts/v2/final-review-writer.md",
+          "sha256": "607f2844a1678f58f9e80ea3dac77552a23a679f60585128dd7dbf2fcaf4ffec"
+        }
+      }
+    }
+  ],
+  "casesPerVersion": 28,
+  "maxModelInvocations": 84,
+  "modelSettings": {
+    "temperature": 0
+  },
+  "providerRetries": 0,
+  "agents": [
+    "requirement-interpreter",
+    "adversarial-reviewer",
+    "final-review-writer"
+  ],
+  "definitions": {
+    "version": 2,
+    "description": "Frozen reviewed proposition labels and ticket/interpreter pairs. Authored controls, current comparisons, and incompatible archival exports are reported separately.",
+    "directCases": "evals/step-cases.js",
+    "responseFile": "evidence/d5-20261030T1940Z/direct-responses.json",
+    "workflowLabelsFile": "evidence/d5-20261030T1940Z/workflow-labels.json",
+    "promptComparison": {
+      "state": "required",
+      "directory": "evidence/f6-20261030",
+      "command": "node src/run-f6.js evidence/f6-20261030",
+      "scope": "Prospective v0->v1->v2 prompt measurements for all three agents; missing or incompatible observations fail current acceptance."
+    },
+    "loadBearingAudit": {
+      "map": "evals/load-bearing-map.json",
+      "cases": "evals/load-bearing-cases.js",
+      "criteria": "src/load-bearing-criteria.js",
+      "command": "node src/run-load-bearing-audit.js",
+      "jsonCommand": "node src/run-load-bearing-audit.js --json",
+      "scope": "Deliverable 3 instruction coverage and criterion sensitivity; required by the Deliverable 4 runner but not model-performance evidence."
+    },
+    "fixtures": [
+      {
+        "fixture": "fixtures/hvac-ticket-1.md",
+        "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket1-run.json",
+        "baseline": {
+          "state": "archival-incompatible",
+          "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+          "file": "evidence/d5-20261030T1940Z/baselines/ticket1-run.json",
+          "origin": {
+            "ref": "4fcbf47",
+            "file": "evidence/run1/ticket1-run.json"
+          }
+        }
+      },
+      {
+        "fixture": "fixtures/hvac-ticket-2.md",
+        "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket2-run.json",
+        "baseline": {
+          "state": "archival-incompatible",
+          "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+          "file": "evidence/d5-20261030T1940Z/baselines/ticket2-run.json",
+          "origin": {
+            "ref": "4fcbf47",
+            "file": "evidence/run1/ticket2-run.json"
+          }
+        }
+      },
+      {
+        "fixture": "fixtures/hvac-ticket-3.md",
+        "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket3-run.json",
+        "baseline": {
+          "state": "archival-incompatible",
+          "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+          "file": "evidence/d5-20261030T1940Z/baselines/ticket3-run.json",
+          "origin": {
+            "ref": "4fcbf47",
+            "file": "evidence/run1/ticket3-run.json"
+          }
+        }
+      },
+      {
+        "fixture": "fixtures/hvac-ticket-4.md",
+        "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket4-run.json",
+        "baseline": {
+          "state": "not-in-baseline",
+          "reason": "Ticket 4 was added after commit 4fcbf47."
+        }
+      },
+      {
+        "fixture": "evidence/d5-20261030T1940Z/fixtures/positive-control.md",
+        "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket5-run.json",
+        "baseline": {
+          "state": "not-in-baseline",
+          "reason": "New fully specified positive-control ticket; no historical run."
+        }
+      }
+    ]
+  },
+  "design": "Prospective v0 -> v1 -> v2 on identical fixed inputs; one observation per case/version, no repair, retry, or survivor selection.",
+  "decision": "Report strict full-step, runtime-contract, gate, and criterion deltas, including zero/negative changes. A measured cycle is not necessarily an improvement. No automatic deployment.",
+  "limitations": [
+    "Small development suite, not held-out evaluation; single observation per case/version.",
+    "Temperature zero is not a reproducibility guarantee; no causal or statistical-significance claim.",
+    "Corrected bounded scorer stays frozen; unsupported formulations may lack credit. No post-response label expansion.",
+    "No workflow, F4, or overall certification PASS claim."
+  ]
+}

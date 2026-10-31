@@ -1,0 +1,12 @@
+{
+  "version": "v2",
+  "caseId": "ticket5-final-review-writer",
+  "agent": "final-review-writer",
+  "correlationId": "F6-v2-ticket5-final-review-writer-0a745bec-1608-4845-9ebd-d253352aeacf",
+  "inputHash": "d0ab982cee09f23ca3e1398db39c7ef807e5072937a15bfb99945835f9be7db2",
+  "startedAt": "2026-10-30T23:20:45.931Z",
+  "finishedAt": "2026-10-30T23:20:52.206Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-ticket5-final-review-writer-0a745bec-1608-4845-9ebd-d253352aeacf/cycle-1"
+}

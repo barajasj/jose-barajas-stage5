@@ -1,0 +1,12 @@
+{
+  "version": "v2",
+  "caseId": "boundary",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v2-boundary-e4f1a173-0294-4c15-82de-b6a0119b25dd",
+  "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c",
+  "startedAt": "2026-10-30T23:18:50.561Z",
+  "finishedAt": "2026-10-30T23:18:56.838Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-boundary-e4f1a173-0294-4c15-82de-b6a0119b25dd/cycle-1"
+}

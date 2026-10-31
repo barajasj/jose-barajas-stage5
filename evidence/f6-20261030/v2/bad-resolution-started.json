@@ -1,0 +1,8 @@
+{
+  "version": "v2",
+  "caseId": "bad-resolution",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v2-bad-resolution-a3f3aefa-b03c-4274-9d83-d53b067ff5e5",
+  "inputHash": "6dd8cea7f8b266b241b628dd9239f2a2bd19e61ea9f593d0acaed3bbe9d2b1b2",
+  "startedAt": "2026-10-30T23:19:17.861Z"
+}

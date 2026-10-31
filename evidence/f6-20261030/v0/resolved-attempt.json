@@ -1,0 +1,12 @@
+{
+  "version": "v0",
+  "caseId": "resolved",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v0-resolved-d6d32720-b26a-473d-b129-5c063a659e1e",
+  "inputHash": "7f2297424c86e1f2f7b74bde88da8b7dcc7839fa4500f8c3e36c7384bad4ac3a",
+  "startedAt": "2026-10-30T23:12:07.132Z",
+  "finishedAt": "2026-10-30T23:12:14.286Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v0/runs/F6-v0-resolved-d6d32720-b26a-473d-b129-5c063a659e1e/cycle-1"
+}

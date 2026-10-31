@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "caseId": "ticket4-final-review-writer",
+  "agent": "final-review-writer",
+  "correlationId": "F6-v1-ticket4-final-review-writer-d9246e7d-0cdc-4c39-9b06-efc861c8c3d0",
+  "inputHash": "7ee5cb71512b76bd60b9b8ec2214f7c4abdf2b1167667aca467dddd5c8f570e1",
+  "startedAt": "2026-10-30T23:16:28.148Z",
+  "finishedAt": "2026-10-30T23:16:46.447Z",
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Final report violates the supplied artifact content contract.",
+  "details": null,
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v1/runs/F6-v1-ticket4-final-review-writer-d9246e7d-0cdc-4c39-9b06-efc861c8c3d0/cycle-1"
+}

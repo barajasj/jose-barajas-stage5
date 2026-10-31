@@ -1,0 +1,2038 @@
+{
+  "auditType": "local-instruction-coverage-and-criterion-sensitivity",
+  "modelPerformanceMeasured": false,
+  "examinerParserEquivalent": false,
+  "scope": "Deliverable 3 only; legacy scorer and historical metrics are unchanged.",
+  "threshold": 0.9,
+  "hashNormalization": "UTF-8 text, initial BOM removed, CRLF normalized to LF.",
+  "hashes": {
+    "evals/load-bearing-map.json": "9e3c4f0797d196b8a4917091e835f310a92068fc18f9127060939f472e9bdd7d",
+    "evals/load-bearing-cases.js": "0ef025da8c54ba71154c37b9ed13a71c5b6ea168397c6bdad89f8fa51d7d3364",
+    "src/load-bearing-criteria.js": "e36fdda458a216463c080915a3169dba881c401a731ac781894f38a0bd936b0b",
+    "src/run-load-bearing-audit.js": "5a7110e2cd1b621fdec84c996418f3b35ef64dae568aac7f1a115fa6a5b3586b",
+    "src/schema-validator.js": "a30e5dee99e334d66bbe0dbe1ad7283dbc59a776b9b8ee27b2812760b14d621c",
+    "src/governance-policy.js": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+    "src/prompt-builder.js": "439edb02396d1b9b2876e7b623f3bbad117fa916de7f40123b42a69bf5fbfc63",
+    "schemas/examiner.schema.json": "2e76026b9352e4eb0c5c2f4b8344925e197cf6bd14863ac61acf2642925c0057",
+    "schemas/challenges.schema.json": "2c3430aa72ce1f696776a80552931d85497cacb927dbc6fd83ed742369ebc8ff",
+    "schemas/final-review.schema.json": "56af547d2feb6cf2a6ca246263222693d3756b8bdebd09354c4b9497dc10cdba",
+    "agents/requirement-interpreter.md": "4cd0f26739baced24d9ea591f8104058faf4dfdb38a9619f4097bc52e3a9bad6",
+    "agents/adversarial-reviewer.md": "1ea4f5333d45b7f2c730adac9f04f93cbe6e1af2b3fe8ecc71b9390188a5e937",
+    "agents/final-review-writer.md": "979a88343c61822abb879bf8c2d65a07fda917075d8d051cae6247e2447f5e14",
+    "fixtures/hvac-ticket-1.md": "9213fde66d55e591c419db6faace48e2af2e1f86b0970dd51a69b816126423f4",
+    "fixtures/hvac-ticket-2.md": "7a678f38e9e7c34cb101208b668995b83692ca8a31cf398a6697855fd913cb54",
+    "fixtures/hvac-ticket-3.md": "4f5ab672a0ec2ae8601d0eb4680e7db31eed771139b5ee30afb05ffd36ff75d1",
+    "fixtures/hvac-ticket-4.md": "03b8e109c3c5254e095c36fc5a9775784d0d4b4a88b6ee632bb349d9ea123915"
+  },
+  "contexts": 21,
+  "checks": 61,
+  "negativeControls": 152,
+  "pass": true,
+  "errors": [],
+  "agents": {
+    "requirement-interpreter": {
+      "examinerBaseline": {
+        "mapped": 8,
+        "total": 12
+      },
+      "mapped": 17,
+      "total": 17,
+      "coverage": 1,
+      "unmapped": [],
+      "units": [
+        {
+          "id": "I01",
+          "text": "- [I01] requirementSummary: summarize the ticket's requested behavior, affected HVAC objects, and conditions without changing quantities, units, or intent.",
+          "criteria": [
+            "summaryAccuracy"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I02",
+          "text": "- [I02] hvacTerminology: list HVAC terms explicitly present in the ticket; do not add terminology or change its meaning.",
+          "criteria": [
+            "hvacTerminologyAccuracy",
+            "sourceGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I03",
+          "text": "- [I03] businessRules: capture every explicitly stated business requirement as a complete proposition.",
+          "criteria": [
+            "businessRuleAccuracy"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I04",
+          "text": "- [I04] Include explicit validation constraints in businessRules, preserving both range limits, units, rounding behavior, and every coil-specific increment/configuration mapping, including specific overrides. Unspecified validation policy belongs in ambiguities, not invented rules.",
+          "criteria": [
+            "validationRuleAccuracy",
+            "sourceGrounding",
+            "ambiguityAccuracy"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I05",
+          "text": "- [I05] Preserve functional behavior in businessRules as the stated trigger, dependent action, and resulting field or output.",
+          "criteria": [
+            "functionalBehaviorAccuracy"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I06",
+          "text": "- [I06] ambiguities: identify source gaps, contradictions, unclear behavior, and unanswered implementation questions. Do not label explicitly answered details as missing.",
+          "criteria": [
+            "ambiguityAccuracy"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I07",
+          "text": "- [I07] developerConsiderations: report only technical constraints supported by the ticket, not preferred architectures or invented validation, defaults, reset, persistence, or conversion policies.",
+          "criteria": [
+            "developerConsiderationGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I08",
+          "text": "- [I08] confidence describes ticket readiness, not confidence in your extraction: HIGH only when the source defines the requested behavior and no ambiguity remains; MEDIUM when core behavior is clear but localized details remain unspecified; LOW when core behavior is missing or contradictory.",
+          "criteria": [
+            "confidencePolicyConsistency"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I09",
+          "text": "- [I09] Ground every summary, term, rule, and technical constraint in the supplied ticket. A plausible domain convention or sample-data attribute is not an explicit business policy.",
+          "criteria": [
+            "sourceGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I10",
+          "text": "- [I10] Use empty arrays for terms, rules, or developer considerations without source support; missing or unclear behavior must still appear as questions in ambiguities.",
+          "criteria": [
+            "emptyArrayDiscipline"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I11",
+          "text": "- [I11] On re-dispatch, correct supported reviewer challenges without inventing facts. Match previous and current ambiguities by exact string. Preserve every unanswered previous ambiguity verbatim. For each previous ambiguity removed because the ticket explicitly answers it, add exactly one ambiguityResolutions entry; copy ambiguity byte-for-byte from previousInterpretation.ambiguities, never from a reviewer description. Never resolve one previous ambiguity more than once or use one resolution to cover multiple questions. Removing an unsupported business rule does not resolve an ambiguity about the missing policy: retain that question verbatim unless the ticket answers it.",
+          "criteria": [
+            "redispatchSafety"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I12",
+          "text": "- [I12] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/examiner.schema.json: requirementSummary is a nonblank string; hvacTerminology, businessRules, developerConsiderations, and ambiguities are string arrays; confidence is LOW, MEDIUM, or HIGH; ambiguityResolutions is optional as defined above. No other fields.",
+          "criteria": [
+            "rawResponseFormat",
+            "schemaConformance"
+          ],
+          "covered": true
+        },
+        {
+          "id": "I13",
+          "text": "- [I13] Worked re-dispatch example (illustrative; never substitute these values for the supplied ticket or interpretation). Ticket: `When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.` Previous ambiguities: `[\"If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.\",\"How should entries with isActive:false be handled?\"]`. Reviewer paraphrase: `Unclear if Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.` Correct result: `{\"ambiguities\":[\"How should entries with isActive:false be handled?\"],\"ambiguityResolutions\":[{\"ambiguity\":\"If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.\",\"rationale\":\"The ticket specifies the Unit Size filter as Refrigerant + Unit Type.\",\"sourceQuote\":\"When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.\"}]}`. Copy resolution identity from the previous ambiguity, not the reviewer paraphrase. Keep the unanswered isActive question; removing an invented isActive filtering rule does not answer it.",
+          "criteria": [
+            "redispatchSafety"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:ticket",
+          "text": "{{ticket}}",
+          "criteria": [
+            "summaryAccuracy",
+            "sourceGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "runtime:previousInterpretation",
+          "text": "Previous Interpretation:",
+          "criteria": [
+            "redispatchSafety"
+          ],
+          "covered": true
+        },
+        {
+          "id": "runtime:reviewerFeedback",
+          "text": "Adversarial Reviewer Findings (address actionable HIGH interpretation defects without inventing unsupported requirements; preserve missing ticket facts as ambiguities):",
+          "criteria": [
+            "redispatchSafety",
+            "sourceGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "runtime:ambiguityPreservation",
+          "text": "Preserve each previous ambiguity verbatim unless the original ticket explicitly answers it.",
+          "criteria": [
+            "redispatchSafety"
+          ],
+          "covered": true
+        }
+      ]
+    },
+    "adversarial-reviewer": {
+      "examinerBaseline": {
+        "mapped": 8,
+        "total": 12
+      },
+      "mapped": 21,
+      "total": 21,
+      "coverage": 1,
+      "unmapped": [],
+      "units": [
+        {
+          "id": "R01",
+          "text": "- [R01] Detect interpreter assumptions unsupported by the ticket, distinguishing requested behavior from an invented implementation policy.",
+          "criteria": [
+            "unsupportedAssumptionDetection",
+            "ticketGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R02",
+          "text": "- [R02] Detect explicit business requirements omitted or contradicted by the actual interpreter output; do not accuse it of omitting content it already includes.",
+          "criteria": [
+            "missingRequirementDetection",
+            "interpreterGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R03",
+          "text": "- [R03] Detect incorrect HVAC meanings, units, and coil/configuration interpretations.",
+          "criteria": [
+            "hvacInterpretationErrorDetection"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R04",
+          "text": "- [R04] Detect missing or incorrect explicit validation constraints. Ask for clarification of absent policy rather than supplying it.",
+          "criteria": [
+            "missingValidationDetection"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R05",
+          "text": "- [R05] Detect ambiguities the interpreter missed; distinguish these from questions it already identified.",
+          "criteria": [
+            "reviewerAmbiguityCoverage"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R06",
+          "text": "- [R06] Every unresolved interpreter ambiguity blocks PASS. Enumerate the current ambiguities array from index 0 and create an OPEN_AMBIGUITY finding for EVERY entry with its exact /ambiguities/N reference and complete interpreter source quote. Do not skip an entry because it overlaps another concern or appears unnecessary; the reviewer cannot remove current interpreter ambiguities. Do not claim the interpreter missed an already-listed question. Only current /ambiguities/N pointers belong in ambiguityRefs; an unsupported ambiguityResolutions entry is an UNSUPPORTED_ASSUMPTION with ambiguityRefs: [].",
+          "criteria": [
+            "reviewerAmbiguityCoverage",
+            "statusConsistency"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R07",
+          "text": "- [R07] For relevant validation tickets, challenge boundary values, configuration overrides/detection, rounding ties, unknown configurations, and range/increment interaction. A gap is a clarification question, not an invented rule.",
+          "criteria": [
+            "boundaryChallengeCoverage",
+            "ticketGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R08",
+          "text": "- [R08] Ground findings in both the original ticket and actual interpreter output. Copy each source quote verbatim from one artifact; do not normalize characters, units, punctuation, wording, or whitespace. A ticket quote is a contiguous substring with pointer \"\"; prefer a short quote within a single line rather than joining separate lines and losing CRLF characters or spaces. An interpreter quote is the exact complete string at its JSON pointer after decoding the input JSON. Count array indices from 0 and verify the quote is at that index, not a neighboring index. Point to a string such as /businessRules/0, never an array such as /businessRules or an empty interpreter pointer. Text from interpreter ambiguities is not ticket text: do not label it artifact \"ticket\". These citation rules also apply to resolutions. Every quote must support the specific claim, not merely occur somewhere. Do not invent requirements, false omissions, or concerns on a complete correct interpretation.",
+          "criteria": [
+            "ticketGrounding",
+            "interpreterGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R09",
+          "text": "- [R09] Each finding contains a stable id, kind, LOW/MEDIUM/HIGH severity, specific description, concrete correction or clarification action, sourceRefs, and ambiguityRefs. Kinds are UNSUPPORTED_ASSUMPTION, MISSING_REQUIREMENT, HVAC_ERROR, MISSING_VALIDATION, or OPEN_AMBIGUITY. Each sourceRef contains artifact (ticket or interpreter), pointer (empty for ticket, JSON pointer for interpreter), and an exact nonempty quote. ALWAYS include ambiguityRefs: [] for every non-OPEN_AMBIGUITY finding. Only OPEN_AMBIGUITY uses nonempty ambiguityRefs.",
+          "criteria": [
+            "schemaConformance",
+            "findingActionability",
+            "reviewerAmbiguityCoverage"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R10",
+          "text": "- [R10] Assign severity by impact: HIGH for incorrect or missing core behavior preventing reliable implementation; MEDIUM for unresolved behavior/validation needing clarification; LOW for a minor supported concern. Every severity blocks PASS.",
+          "criteria": [
+            "severityAppropriateness",
+            "statusConsistency"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R11",
+          "text": "- [R11] Set PASS if and only if findings is empty and no interpreter ambiguity remains; set FAIL for any nonempty findings. An inconsistent status is invalid.",
+          "criteria": [
+            "statusConsistency"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R12",
+          "text": "- [R12] Supply a substantive rationale explaining the supported review result; a clean PASS must explain why the stated behavior is captured without unsupported claims or open questions.",
+          "criteria": [
+            "reviewRationaleQuality"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R13",
+          "text": "- [R13] Preserve prior finding IDs for concerns that remain. Each disappearing prior finding needs a resolutions entry containing findingId, rationale, and sourceRefs showing the correction in current artifacts.",
+          "criteria": [
+            "concernContinuity"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R14",
+          "text": "- [R14] Independently verify interpreter ambiguityResolutions against the ticket. A quotation that does not answer the removed question is not a resolution; flag unsupported removal as UNSUPPORTED_ASSUMPTION.",
+          "criteria": [
+            "ambiguityResolutionVerification"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R15",
+          "text": "- [R15] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/challenges.schema.json. Root fields are status, rationale, findings, and resolutions; no extra fields. Use the finding and resolution structures above.",
+          "criteria": [
+            "rawResponseFormat",
+            "schemaConformance"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R16",
+          "text": "- [R16] Before returning, check every finding individually against the schema: include all required fields, including ambiguityRefs even when its value is []. A missing action, sourceRefs, or ambiguityRefs makes the whole response invalid. For OPEN_AMBIGUITY, quote the exact complete ambiguity string from the referenced interpreter pointer and use that exact pointer in ambiguityRefs. For every other kind, use ambiguityRefs: []. Copy source quotes exactly; never paraphrase or repair text inside a quote. Complete OPEN_AMBIGUITY example: {\"id\":\"F1\",\"severity\":\"MEDIUM\",\"kind\":\"OPEN_AMBIGUITY\",\"description\":\"The ticket does not define the rounding tie-break policy.\",\"action\":\"Obtain clarification from the ticket owner on the tie-break policy.\",\"sourceRefs\":[{\"artifact\":\"interpreter\",\"pointer\":\"/ambiguities/0\",\"quote\":\"The ticket does not define the rounding tie-break policy.\"}],\"ambiguityRefs\":[\"/ambiguities/0\"]}",
+          "criteria": [
+            "schemaConformance",
+            "findingActionability",
+            "ticketGrounding",
+            "interpreterGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "R17",
+          "text": "- [R17] Worked non-ambiguity example, illustrative only; do not copy this finding into an unrelated review. Example input: `{\"ticket\":\"Calculate DX Coil Height as the sum of circuit heights.\",\"interpreterResult\":{\"requirementSummary\":\"Calculate DX Coil Height as the sum of circuit heights.\",\"hvacTerminology\":[\"DX Coil\"],\"businessRules\":[\"Calculate DX Coil Height as the sum of circuit heights.\",\"Round the sum to the nearest inch.\"],\"developerConsiderations\":[],\"ambiguities\":[],\"confidence\":\"HIGH\"}}`. Complete finding: `{\"id\":\"F1\",\"severity\":\"HIGH\",\"kind\":\"UNSUPPORTED_ASSUMPTION\",\"description\":\"The interpreter adds a nearest-inch rounding policy not specified by the ticket.\",\"action\":\"Remove the unsupported rounding policy.\",\"sourceRefs\":[{\"artifact\":\"ticket\",\"pointer\":\"\",\"quote\":\"Calculate DX Coil Height as the sum of circuit heights.\"},{\"artifact\":\"interpreter\",\"pointer\":\"/businessRules/1\",\"quote\":\"Round the sum to the nearest inch.\"}],\"ambiguityRefs\":[]}`. The interpreter pointer identifies one scalar string, both quotes are copied exactly, and ambiguityRefs is present even though empty.",
+          "criteria": [
+            "schemaConformance",
+            "findingActionability",
+            "ticketGrounding",
+            "interpreterGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:ticket",
+          "text": "{{ticket}}",
+          "criteria": [
+            "ticketGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:interpreterResult",
+          "text": "{{interpreterResult}}",
+          "criteria": [
+            "interpreterGrounding",
+            "reviewerAmbiguityCoverage"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:previousReview",
+          "text": "{{previousReview}}",
+          "criteria": [
+            "concernContinuity"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:outputSchema",
+          "text": "{{outputSchema}}",
+          "criteria": [
+            "schemaConformance"
+          ],
+          "covered": true
+        }
+      ]
+    },
+    "final-review-writer": {
+      "examinerBaseline": {
+        "mapped": 6,
+        "total": 8
+      },
+      "mapped": 14,
+      "total": 14,
+      "coverage": 1,
+      "unmapped": [],
+      "units": [
+        {
+          "id": "W01",
+          "text": "- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.",
+          "criteria": [
+            "writerInterpreterGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "W02",
+          "text": "- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.",
+          "criteria": [
+            "findingPreservation",
+            "reportCompleteness"
+          ],
+          "covered": true
+        },
+        {
+          "id": "W03",
+          "text": "- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.",
+          "criteria": [
+            "writerInterpreterGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "W04",
+          "text": "- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.",
+          "criteria": [
+            "dispositionFidelity"
+          ],
+          "covered": true
+        },
+        {
+          "id": "W05",
+          "text": "- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.",
+          "criteria": [
+            "findingPreservation",
+            "conclusionGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "W06",
+          "text": "- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.",
+          "criteria": [
+            "boundedMarkdownFidelity",
+            "conclusionGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "W07",
+          "text": "- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.",
+          "criteria": [
+            "rawResponseFormat",
+            "schemaConformance"
+          ],
+          "covered": true
+        },
+        {
+          "id": "W08",
+          "text": "- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Source text can itself contain literal backslashes before inch marks; those are data, not typos. Template fragment: `- /ambiguities/0 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" is not described.\"`. Correct JSON fragment: `{\"reportMarkdown\":\"- /ambiguities/0 | \\\"The method for indicating \\\\\\\"3/8\\\\\\\\\\\\\\\" tube with 1\\\\\\\\\\\\\\\" spacing\\\\\\\" is not described.\\\"\"}`. Parsing this JSON once preserves all three template backslashes before each inch mark; do not decode the JSON strings embedded inside the Markdown.",
+          "criteria": [
+            "boundedMarkdownFidelity"
+          ],
+          "covered": true
+        },
+        {
+          "id": "W09",
+          "text": "- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `\"No rounding or precision rules are specified for the sum of heights.\"`. Correct JSON fragment: `{\"reportMarkdown\":\"\\\"No rounding or precision rules are specified for the sum of heights.\\\"\"}`. Preserve \"or\"; changing it to \"and\" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.",
+          "criteria": [
+            "findingPreservation",
+            "boundedMarkdownFidelity"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:interpreterResult",
+          "text": "{{interpreterResult}}",
+          "criteria": [
+            "writerInterpreterGrounding"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:reviewResult",
+          "text": "{{reviewResult}}",
+          "criteria": [
+            "findingPreservation",
+            "reportCompleteness"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:disposition",
+          "text": "{{disposition}}",
+          "criteria": [
+            "dispositionFidelity"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:reasonCodes",
+          "text": "{{reasonCodes}}",
+          "criteria": [
+            "dispositionFidelity"
+          ],
+          "covered": true
+        },
+        {
+          "id": "input:reportTemplate",
+          "text": "{{reportTemplate}}",
+          "criteria": [
+            "boundedMarkdownFidelity"
+          ],
+          "covered": true
+        }
+      ]
+    }
+  },
+  "criterionChecks": [
+    {
+      "id": "requirement-interpreter-raw",
+      "agent": "requirement-interpreter",
+      "criterion": "rawResponseFormat",
+      "context": "dx",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "fenced-json",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "surrounding-prose",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "array-root",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "requirement-interpreter-schema",
+      "agent": "requirement-interpreter",
+      "criterion": "schemaConformance",
+      "context": "dx",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "extra-field",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-requirementSummary",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-hvacTerminology",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-businessRules",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-developerConsiderations",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-ambiguities",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-confidence",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-requirementSummary",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-hvacTerminology",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-businessRules",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-developerConsiderations",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-ambiguities",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-confidence",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "adversarial-reviewer-raw",
+      "agent": "adversarial-reviewer",
+      "criterion": "rawResponseFormat",
+      "context": "open",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "fenced-json",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "surrounding-prose",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "array-root",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "adversarial-reviewer-schema",
+      "agent": "adversarial-reviewer",
+      "criterion": "schemaConformance",
+      "context": "open",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "extra-field",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-status",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-rationale",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-findings",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-resolutions",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-status",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-rationale",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-findings",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-resolutions",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-action",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-source-refs",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "final-review-writer-raw",
+      "agent": "final-review-writer",
+      "criterion": "rawResponseFormat",
+      "context": "writer-fail",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "fenced-json",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "surrounding-prose",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "array-root",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "final-review-writer-schema",
+      "agent": "final-review-writer",
+      "criterion": "schemaConformance",
+      "context": "writer-fail",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "extra-field",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "wrong-type-reportMarkdown",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "missing-required-reportMarkdown",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "summary",
+      "agent": "requirement-interpreter",
+      "criterion": "summaryAccuracy",
+      "context": "coil",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-range",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "generic-summary",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "terminology",
+      "agent": "requirement-interpreter",
+      "criterion": "hvacTerminologyAccuracy",
+      "context": "coil",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "invented-term",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "omitted-term",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "business-rules",
+      "agent": "requirement-interpreter",
+      "criterion": "businessRuleAccuracy",
+      "context": "dx",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-aggregation",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "omitted-edit-rule",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "validation",
+      "agent": "requirement-interpreter",
+      "criterion": "validationRuleAccuracy",
+      "context": "coil",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-validation-proposition-1",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-validation-proposition-2",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-validation-proposition-3",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-validation-proposition-4",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-validation-proposition-5",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-validation-proposition-6",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-validation-proposition-7",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-validation-proposition-8",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-upper-limit",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-units",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-spacing-override",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "dx-functional",
+      "agent": "requirement-interpreter",
+      "criterion": "functionalBehaviorAccuracy",
+      "context": "dx",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-trigger",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-dependent-output",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "filters-functional",
+      "agent": "requirement-interpreter",
+      "criterion": "functionalBehaviorAccuracy",
+      "context": "filters",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-trigger",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "wrong-dependent-output",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "ambiguities",
+      "agent": "requirement-interpreter",
+      "criterion": "ambiguityAccuracy",
+      "context": "coil",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "erased-question",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "false-ambiguity",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "dx-developer",
+      "agent": "requirement-interpreter",
+      "criterion": "developerConsiderationGrounding",
+      "context": "dx",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "invented-implementation-policy",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "missing-supported-constraint",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "filters-developer",
+      "agent": "requirement-interpreter",
+      "criterion": "developerConsiderationGrounding",
+      "context": "filters",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "invented-implementation-policy",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "missing-supported-constraint",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "clean-confidence",
+      "agent": "requirement-interpreter",
+      "criterion": "confidencePolicyConsistency",
+      "context": "clean",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-readiness-class",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "dx-confidence",
+      "agent": "requirement-interpreter",
+      "criterion": "confidencePolicyConsistency",
+      "context": "dx",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-readiness-class",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "sparse-confidence",
+      "agent": "requirement-interpreter",
+      "criterion": "confidencePolicyConsistency",
+      "context": "sparse",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-readiness-class",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "conflict-confidence",
+      "agent": "requirement-interpreter",
+      "criterion": "confidencePolicyConsistency",
+      "context": "conflict",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-readiness-class",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "coil-grounding",
+      "agent": "requirement-interpreter",
+      "criterion": "sourceGrounding",
+      "context": "coil",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "invented-rule",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-ticket-summary",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "filters-grounding",
+      "agent": "requirement-interpreter",
+      "criterion": "sourceGrounding",
+      "context": "filters",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "invented-rule",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-ticket-summary",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "empty-arrays",
+      "agent": "requirement-interpreter",
+      "criterion": "emptyArrayDiscipline",
+      "context": "sparse",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "invented-term",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "invented-rule",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "invented-technical-policy",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "empty-questions",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "redispatch",
+      "agent": "requirement-interpreter",
+      "criterion": "redispatchSafety",
+      "context": "redispatch",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "erased-unanswered-question",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "invented-fix",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "irrelevant-resolution-quote",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "assumption-detection",
+      "agent": "adversarial-reviewer",
+      "criterion": "unsupportedAssumptionDetection",
+      "context": "assumption",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missed-all-challenges",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-description",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "missing-detection",
+      "agent": "adversarial-reviewer",
+      "criterion": "missingRequirementDetection",
+      "context": "missing",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missed-all-challenges",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-description",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "hvac-detection",
+      "agent": "adversarial-reviewer",
+      "criterion": "hvacInterpretationErrorDetection",
+      "context": "hvac",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missed-all-challenges",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-description",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "validation-detection",
+      "agent": "adversarial-reviewer",
+      "criterion": "missingValidationDetection",
+      "context": "validation",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missed-all-challenges",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-description",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "missed-ambiguity-detection",
+      "agent": "adversarial-reviewer",
+      "criterion": "reviewerAmbiguityCoverage",
+      "context": "missed-ambiguity",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missed-all-challenges",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-description",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "open-detection",
+      "agent": "adversarial-reviewer",
+      "criterion": "reviewerAmbiguityCoverage",
+      "context": "open",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missed-all-challenges",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-description",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "bad-resolution-detection",
+      "agent": "adversarial-reviewer",
+      "criterion": "ambiguityResolutionVerification",
+      "context": "bad-resolution",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missed-all-challenges",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-description",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "boundary-detection",
+      "agent": "adversarial-reviewer",
+      "criterion": "boundaryChallengeCoverage",
+      "context": "boundary",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missed-boundary-class-1",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "missed-boundary-class-2",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "missed-boundary-class-3",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "missed-boundary-class-4",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "missed-boundary-class-5",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "ticketGrounding-supported",
+      "agent": "adversarial-reviewer",
+      "criterion": "ticketGrounding",
+      "context": "assumption",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "false-accusation-with-real-quote",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "fabricated-interpreter-citation",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "fabricated-ticket-citation",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "ticketGrounding-clean-control",
+      "agent": "adversarial-reviewer",
+      "criterion": "ticketGrounding",
+      "context": "clean-review",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "false-positive-on-clean-input",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "interpreterGrounding-supported",
+      "agent": "adversarial-reviewer",
+      "criterion": "interpreterGrounding",
+      "context": "assumption",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "false-accusation-with-real-quote",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "fabricated-interpreter-citation",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "fabricated-ticket-citation",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "interpreterGrounding-clean-control",
+      "agent": "adversarial-reviewer",
+      "criterion": "interpreterGrounding",
+      "context": "clean-review",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "false-positive-on-clean-input",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "boundary-grounding",
+      "agent": "adversarial-reviewer",
+      "criterion": "ticketGrounding",
+      "context": "boundary",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "invented-clamp-policy",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "actionability",
+      "agent": "adversarial-reviewer",
+      "criterion": "findingActionability",
+      "context": "validation",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "generic-action",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "invented-action",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "hvac-severity",
+      "agent": "adversarial-reviewer",
+      "criterion": "severityAppropriateness",
+      "context": "hvac",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "misclassified-impact",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "validation-severity",
+      "agent": "adversarial-reviewer",
+      "criterion": "severityAppropriateness",
+      "context": "validation",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "misclassified-impact",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "minor-label-severity",
+      "agent": "adversarial-reviewer",
+      "criterion": "severityAppropriateness",
+      "context": "minor-label",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "misclassified-impact",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "clean-review-status",
+      "agent": "adversarial-reviewer",
+      "criterion": "statusConsistency",
+      "context": "clean-review",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "opposite-status",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "clean-review-rationale",
+      "agent": "adversarial-reviewer",
+      "criterion": "reviewRationaleQuality",
+      "context": "clean-review",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "meaningless-rationale",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unsupported-clearance",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "open-status",
+      "agent": "adversarial-reviewer",
+      "criterion": "statusConsistency",
+      "context": "open",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "opposite-status",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        },
+        {
+          "id": "zero-finding-clearance-with-open-ambiguities",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "open-rationale",
+      "agent": "adversarial-reviewer",
+      "criterion": "reviewRationaleQuality",
+      "context": "open",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "meaningless-rationale",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unsupported-clearance",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "hvac-status",
+      "agent": "adversarial-reviewer",
+      "criterion": "statusConsistency",
+      "context": "hvac",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "opposite-status",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "hvac-rationale",
+      "agent": "adversarial-reviewer",
+      "criterion": "reviewRationaleQuality",
+      "context": "hvac",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "meaningless-rationale",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unsupported-clearance",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "validation-status",
+      "agent": "adversarial-reviewer",
+      "criterion": "statusConsistency",
+      "context": "validation",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "opposite-status",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "validation-rationale",
+      "agent": "adversarial-reviewer",
+      "criterion": "reviewRationaleQuality",
+      "context": "validation",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "meaningless-rationale",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unsupported-clearance",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "minor-label-status",
+      "agent": "adversarial-reviewer",
+      "criterion": "statusConsistency",
+      "context": "minor-label",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "opposite-status",
+          "rejected": true,
+          "expectedSchemaValid": false,
+          "actualSchemaValid": false
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "minor-label-rationale",
+      "agent": "adversarial-reviewer",
+      "criterion": "reviewRationaleQuality",
+      "context": "minor-label",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "meaningless-rationale",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unsupported-clearance",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "retained-continuity",
+      "agent": "adversarial-reviewer",
+      "criterion": "concernContinuity",
+      "context": "retained",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "renamed-unresolved-finding",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "dropped-unresolved-finding",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "resolved-continuity",
+      "agent": "adversarial-reviewer",
+      "criterion": "concernContinuity",
+      "context": "resolved",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "missing-resolution",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "unrelated-resolution",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-interpreter",
+      "agent": "final-review-writer",
+      "criterion": "writerInterpreterGrounding",
+      "context": "writer-fail",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "wrong-summary",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "dropped-ambiguity",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-preservation",
+      "agent": "final-review-writer",
+      "criterion": "findingPreservation",
+      "context": "writer-fail",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "changed-severity",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "changed-action",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "new-finding",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-completeness",
+      "agent": "final-review-writer",
+      "criterion": "reportCompleteness",
+      "context": "writer-fail",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "dropped-concern",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "duplicate-concern",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-fail-disposition",
+      "agent": "final-review-writer",
+      "criterion": "dispositionFidelity",
+      "context": "writer-fail",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "opposing-heading",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "opposing-body",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "invented-reason",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-fail-conclusions",
+      "agent": "final-review-writer",
+      "criterion": "conclusionGrounding",
+      "context": "writer-fail",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "unsupported-conclusion",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "empty-summary-section",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-fail-bounded-markdown",
+      "agent": "final-review-writer",
+      "criterion": "boundedMarkdownFidelity",
+      "context": "writer-fail",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "extra-section",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "empty-section-labels",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-pass-disposition",
+      "agent": "final-review-writer",
+      "criterion": "dispositionFidelity",
+      "context": "writer-pass",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "opposing-heading",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "opposing-body",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "invented-reason",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-pass-conclusions",
+      "agent": "final-review-writer",
+      "criterion": "conclusionGrounding",
+      "context": "writer-pass",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "unsupported-conclusion",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "empty-summary-section",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "writer-pass-bounded-markdown",
+      "agent": "final-review-writer",
+      "criterion": "boundedMarkdownFidelity",
+      "context": "writer-pass",
+      "positiveAccepted": true,
+      "negatives": [
+        {
+          "id": "extra-section",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        },
+        {
+          "id": "empty-section-labels",
+          "rejected": true,
+          "expectedSchemaValid": true,
+          "actualSchemaValid": true
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": "v2",
+  "caseId": "hvac-corrected",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v2-hvac-corrected-8c239b73-4ab2-4953-a2c7-fe8a7e058e2d",
+  "inputHash": "2fd792c9b0da33a7168a81ecc54c18f14c2d581c640caaa6fc51b6f74a427d2e",
+  "startedAt": "2026-10-30T23:19:57.916Z",
+  "finishedAt": "2026-10-30T23:20:07.933Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-hvac-corrected-8c239b73-4ab2-4953-a2c7-fe8a7e058e2d/cycle-1"
+}

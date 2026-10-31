@@ -1,0 +1,117 @@
+{
+  "scope": "F6 measured prompt changes only; measurement integrity is separate from model acceptance.",
+  "scorerVersion": "content-v3-reviewed-equivalents",
+  "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+  "measurementPass": false,
+  "modelAcceptancePass": false,
+  "positiveCyclesPerAgent": {
+    "requirement-interpreter": 0,
+    "adversarial-reviewer": 0,
+    "final-review-writer": 0
+  },
+  "errors": [
+    "v0: incomplete or uncollected version; inspect retained started files/receipts.",
+    "v1: incomplete or uncollected version; inspect retained started files/receipts.",
+    "v2: incomplete or uncollected version; inspect retained started files/receipts.",
+    "v0->v1: incomplete strict pairing.",
+    "v1->v2: incomplete strict pairing."
+  ],
+  "archival": [
+    {
+      "fixture": "fixtures/hvac-ticket-1.md",
+      "file": "evidence/d5-20261030T1940Z/baselines/ticket1-run.json",
+      "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+      "sha256": "8237e7b2e025d93cd0f364461abbf35cb5f9cfa804af6e40dc77c3e898b3152e",
+      "compatibility": "excluded-incompatible",
+      "observedFailure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-2.md",
+      "file": "evidence/d5-20261030T1940Z/baselines/ticket2-run.json",
+      "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+      "sha256": "3c978cefac8052c880036b1d8e92956be515110033e533e8922169c0dd0be8ad",
+      "compatibility": "excluded-incompatible",
+      "observedFailure": "Workflow must have an explicit completed status."
+    },
+    {
+      "fixture": "fixtures/hvac-ticket-3.md",
+      "file": "evidence/d5-20261030T1940Z/baselines/ticket3-run.json",
+      "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
+      "sha256": "982629ac9c0c29c6a91f4406a7ce84ea4745a35b69f5214c416fa785c72db3f5",
+      "compatibility": "excluded-incompatible",
+      "observedFailure": "Workflow must have an explicit completed status."
+    }
+  ],
+  "versions": [
+    {
+      "version": "v0",
+      "rows": [],
+      "agents": {},
+      "collected": false
+    },
+    {
+      "version": "v1",
+      "rows": [],
+      "agents": {},
+      "collected": false
+    },
+    {
+      "version": "v2",
+      "rows": [],
+      "agents": {},
+      "collected": false
+    }
+  ],
+  "cycles": [
+    {
+      "before": "v0",
+      "after": "v1",
+      "comparison": {
+        "pairs": [],
+        "unpaired": [],
+        "baselineOnly": []
+      },
+      "unmatched": [],
+      "agents": {
+        "requirement-interpreter": {
+          "measured": false
+        },
+        "adversarial-reviewer": {
+          "measured": false
+        },
+        "final-review-writer": {
+          "measured": false
+        }
+      }
+    },
+    {
+      "before": "v1",
+      "after": "v2",
+      "comparison": {
+        "pairs": [],
+        "unpaired": [],
+        "baselineOnly": []
+      },
+      "unmatched": [],
+      "agents": {
+        "requirement-interpreter": {
+          "measured": false
+        },
+        "adversarial-reviewer": {
+          "measured": false
+        },
+        "final-review-writer": {
+          "measured": false
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Small development suite, not held-out evaluation; single observation per case/version.",
+    "Temperature zero is not a reproducibility guarantee; no causal or statistical-significance claim.",
+    "Corrected bounded scorer stays frozen; unsupported formulations may lack credit. No post-response label expansion.",
+    "No workflow, F4, or overall certification PASS claim."
+  ],
+  "allAttemptsRetained": true,
+  "productionPromptsAutomaticallyPromoted": false
+}

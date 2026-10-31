@@ -1,0 +1,8 @@
+{
+  "version": "v2",
+  "caseId": "clean-review",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v2-clean-review-815b0231-0ce9-4416-8b30-eed1e45abe0d",
+  "inputHash": "3e61e4407f94acf12336ae3b46b6136a1eff942c26036b5ebdf0341ef5717dce",
+  "startedAt": "2026-10-30T23:18:56.839Z"
+}

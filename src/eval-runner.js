@@ -17,7 +17,12 @@ const scorerFiles = ['src/eval-scorer.js', 'src/load-bearing-criteria.js', 'src/
 const scorerHash = () => hash(JSON.stringify(scorerFiles.map(file => [file, hash(fs.readFileSync(path.join(root, file)))])));
 
 function readBaseline(definition) {
-  configured(definition && ['required', 'not-in-baseline'].includes(definition.state), 'Explicit baseline applicability required.');
+  configured(definition && ['required', 'not-in-baseline', 'archival-incompatible'].includes(definition.state),
+    'Explicit baseline applicability required.');
+  if (definition.state === 'archival-incompatible') {
+    configured(typeof definition.reason === 'string' && definition.reason.trim(),
+      'Archival exclusion requires a reason.');
+  }
   if (definition.state === 'not-in-baseline') {
     configured(typeof definition.reason === 'string' && definition.reason.trim(), 'Absent baseline requires a reason.');
     return null;
@@ -120,6 +125,7 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
   let directBaseline = [];
   const workflows = [];
   const baseline = [];
+  let promptComparison = null;
   let workflowCases = [];
   configured(definitions.version === 2 && definitions.directCases === 'evals/step-cases.js', 'Unsupported eval definitions.');
   configured(Array.isArray(definitions.fixtures) && definitions.fixtures.length > 0, 'Required workflow fixtures are missing.');
@@ -181,8 +187,23 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
       }
       try {
         const run = readBaseline(fixture.baseline);
-        baseline.push(run ? { fixture: fixture.fixture, rows: evaluateWorkflow(run, ticket, fixture.fixture, versionHash, workflowCases) }
-          : { fixture: fixture.fixture, rows: [], applicable: false, reason: fixture.baseline.reason });
+        if (fixture.baseline.state === 'archival-incompatible') {
+          let incompatibility;
+          try {
+            workflowObservations(run, ticket);
+          } catch (error) {
+            incompatibility = error.message;
+          }
+          configured(incompatibility, 'An archival-incompatible baseline must actually fail the current evidence contract.');
+          baseline.push({
+            fixture: fixture.fixture, rows: [], applicable: false, state: 'archival-incompatible',
+            file: fixture.baseline.file, reason: fixture.baseline.reason,
+            compatibilityFailure: incompatibility, artifactHash: hash(JSON.stringify(run))
+          });
+        } else {
+          baseline.push(run ? { fixture: fixture.fixture, rows: evaluateWorkflow(run, ticket, fixture.fixture, versionHash, workflowCases) }
+            : { fixture: fixture.fixture, rows: [], applicable: false, reason: fixture.baseline.reason });
+        }
       } catch (error) {
         errors.push(`Baseline ${fixture.fixture}: ${error.message}`);
         baseline.push({ fixture: fixture.fixture, rows: [], failure: error.message });
@@ -190,6 +211,25 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
     }
   }
   const rows = [...direct, ...workflows.flatMap(value => value.rows)];
+  if (!selfTest && definitions.promptComparison) {
+    try {
+      configured(definitions.promptComparison.state === 'required'
+        && typeof definitions.promptComparison.directory === 'string', 'Invalid required prompt comparison.');
+      const measured = require('./f6-analysis').analyzePackage(path.resolve(root, definitions.promptComparison.directory));
+      promptComparison = {
+        directory: definitions.promptComparison.directory,
+        measurementPass: measured.measurementPass,
+        positiveCyclesPerAgent: measured.positiveCyclesPerAgent,
+        pairsPerCycle: measured.cycles.map(cycle => ({
+          before: cycle.before, after: cycle.after, pairs: cycle.comparison.pairs.length
+        })),
+        errors: measured.errors
+      };
+      if (!measured.measurementPass) errors.push('Required F6 prompt comparison is incomplete or incompatible.');
+    } catch (error) {
+      errors.push(`Required F6 prompt comparison: ${error.message}`);
+    }
+  }
   const totals = aggregate(rows.map(row => row.score));
   const failures = rows.filter(row => !row.score.pass).map(row => ({ caseId: row.caseId, agent: row.agent,
     gates: Object.keys(row.score.gates).filter(name => !row.score.gates[name]),
@@ -205,7 +245,7 @@ function runEvaluation({ selfTest = false, responses, baselineResponses, definit
     modelPerformanceMeasured: !selfTest && direct.length === cases.length && errors.length === 0,
     methodology: 'Frozen full-proposition labels, contextual review findings, bounded parsed reports; explicit NA, non-compensable gates, unrounded decisions.',
     pass, errors, failures, thresholds: THRESHOLDS, aggregate: totals,
-    direct, workflows, baseline,
+    direct, workflows, baseline, promptComparison,
     comparisons: comparePaired([...directBaseline, ...baseline.flatMap(value => value.rows)], rows),
     coverage: { pass: coverage.pass, modelPerformanceMeasured: false, hashes: coverage.hashes,
       checks: coverage.checks, negativeControls: coverage.negativeControls,
@@ -255,5 +295,5 @@ function main(argv = process.argv.slice(2)) {
 
 module.exports = {
   runEvaluation, evaluateDirect, evaluateWorkflow, readBaseline, main,
-  applyWorkflowLabelEquivalents
+  applyWorkflowLabelEquivalents, scorerHash
 };

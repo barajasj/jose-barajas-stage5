@@ -2,6 +2,18 @@
 
 # HVAC Ticket Governance System
 
+## F6 Measurement Status
+
+F6 collection is complete: 84 real calls, two measured prompt changes per agent,
+28 eligible pairs per cycle, no unmatched cases, and all failures retained.
+Measurement integrity passes; latest-candidate model acceptance fails. Writer
+strict fidelity improves 3/4 -> 3/4 -> 4/4, but reviewer runtime acceptance
+regresses 15/16 -> 16/16 -> 14/16. No production prompts were promoted.
+Protocol and offline replay: `docs/F6-MEASUREMENT.md`; results:
+`evidence/f6-20261030/MEASURED-SUMMARY.md`; version ledger:
+`prompts/prompt-evolution.md`. Historical claims remain withdrawn. This is not
+overall certification PASS or proof of two successful improvements per agent.
+
 ## Overview
 
 This project demonstrates a Stage 5 delegation-based AI system for HVAC software requirement analysis.

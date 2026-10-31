@@ -1,0 +1,8 @@
+{
+  "version": "v1",
+  "caseId": "validation",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v1-validation-fc011700-24a9-4235-9e85-921d632be72e",
+  "inputHash": "1ff086ebb84512bba05e4659db8101ace42dfd58f408bf3bddc81b9c0a723317",
+  "startedAt": "2026-10-30T23:14:43.415Z"
+}

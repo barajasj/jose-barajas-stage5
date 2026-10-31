@@ -1,0 +1,43 @@
+# HVAC Requirement Interpreter
+
+- [I01] requirementSummary: summarize the ticket's requested behavior, affected HVAC objects, and conditions without changing quantities, units, or intent.
+- [I02] hvacTerminology: list HVAC terms explicitly present in the ticket; do not add terminology or change its meaning.
+- [I03] businessRules: capture every explicitly stated business requirement as a complete proposition.
+- [I04] Include explicit validation constraints in businessRules, preserving both range limits, units, rounding behavior, and every coil-specific increment/configuration mapping, including specific overrides. Unspecified validation policy belongs in ambiguities, not invented rules.
+- [I05] Preserve functional behavior in businessRules as the stated trigger, dependent action, and resulting field or output.
+- [I06] ambiguities: identify source gaps, contradictions, unclear behavior, and unanswered implementation questions. Do not label explicitly answered details as missing.
+- [I07] developerConsiderations: report only technical constraints supported by the ticket, not preferred architectures or invented validation, defaults, reset, persistence, or conversion policies.
+- [I08] confidence describes ticket readiness, not confidence in your extraction: HIGH only when the source defines the requested behavior and no ambiguity remains; MEDIUM when core behavior is clear but localized details remain unspecified; LOW when core behavior is missing or contradictory.
+- [I09] Ground every summary, term, rule, and technical constraint in the supplied ticket. A plausible domain convention or sample-data attribute is not an explicit business policy.
+- [I10] Use empty arrays for terms, rules, or developer considerations without source support; missing or unclear behavior must still appear as questions in ambiguities.
+- [I11] On re-dispatch, correct supported reviewer challenges without inventing facts. Match previous and current ambiguities by exact string. Preserve every unanswered previous ambiguity verbatim. For each previous ambiguity removed because the ticket explicitly answers it, add exactly one ambiguityResolutions entry; copy ambiguity byte-for-byte from previousInterpretation.ambiguities, never from a reviewer description. Never resolve one previous ambiguity more than once or use one resolution to cover multiple questions. Removing an unsupported business rule does not resolve an ambiguity about the missing policy: retain that question verbatim unless the ticket answers it.
+- [I12] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/examiner.schema.json: requirementSummary is a nonblank string; hvacTerminology, businessRules, developerConsiderations, and ambiguities are string arrays; confidence is LOW, MEDIUM, or HIGH; ambiguityResolutions is optional as defined above. No other fields.
+- [I13] Worked re-dispatch example (illustrative; never substitute these values for the supplied ticket or interpretation). Ticket: `When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.` Previous ambiguities: `["If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.","How should entries with isActive:false be handled?"]`. Reviewer paraphrase: `Unclear if Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.` Correct result: `{"ambiguities":["How should entries with isActive:false be handled?"],"ambiguityResolutions":[{"ambiguity":"If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.","rationale":"The ticket specifies the Unit Size filter as Refrigerant + Unit Type.","sourceQuote":"When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected."}]}`. Copy resolution identity from the previous ambiguity, not the reviewer paraphrase. Keep the unanswered isActive question; removing an invented isActive filtering rule does not answer it.
+
+## Ticket
+
+# Ticket 04
+
+## Title
+
+FW Series: UI Input validation and ranges for Coil Height
+
+## Description
+Coil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8" & 1/2" tube → multiple of 1.25"; 5/8" tube → multiple of 1.50"; 1" tube → multiple of 2.25"; Lamiflo coil → multiple of 9"; 3/8" tube w/ 1" spacing → multiple of 1"
+
+## Acceptance Criteria
+
+- Valid range: 1.25" to 100"
+- The entered value must be a multiple of a coil-specific increment.
+- If the entered value is not an exact multiple, round it to the nearest valid increment.
+- Height increments by coil type/configuration:
+  - 3/8" tube or 1/2" tube: Increment = 1.25"
+  - 5/8" tube: Increment = 1.50"
+  - 1" tube: Increment = 2.25"
+  - Lamiflo coil: Increment = 9.00"
+  - 3/8" tube with 1" spacing: Increment = 1.00"
+- Examples:
+  - Tube Size = 3/8" User enters 14.1" Nearest valid value = 13.75" (11 × 1.25)
+  - Tube Size = 5/8" User enters 14.0" Nearest valid value = 13.5" (9 × 1.5)
+  - Tube Size = 1" User enters 16.0" Nearest valid value = 15.75" (7 × 2.25)
+  - Lamiflo coil User enters 20" Nearest valid value = 18"

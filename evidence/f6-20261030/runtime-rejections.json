@@ -1,0 +1,237 @@
+[
+  {
+    "version": "v0",
+    "caseId": "retained",
+    "agent": "adversarial-reviewer",
+    "correlationId": "F6-v0-retained-4c93c0ed-3707-4379-a877-a0dcb14137c6",
+    "inputHash": "641cedcbc499ea2b75d1f511a4be954fb29191a1cb9e188ffd21fcb764f6da44",
+    "startedAt": "2026-10-30T23:12:04.398Z",
+    "finishedAt": "2026-10-30T23:12:07.131Z",
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Prior findings disappeared without sourced resolutions.",
+    "details": null,
+    "hasRawResponse": true,
+    "runsDirectory": "evidence/f6-20261030/v0/runs/F6-v0-retained-4c93c0ed-3707-4379-a877-a0dcb14137c6/cycle-1",
+    "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-retained-4c93c0ed-3707-4379-a877-a0dcb14137c6/cycle-1/adversarial-reviewer-raw.txt",
+    "generatedOutput": {
+      "status": "PASS",
+      "rationale": "The interpreter output captures every requirement described in the ticket, including populating cooling circuits, summing their heights for DX Coil Height, and updating the total when a Circuit Height is edited. No unsupported assumptions, HVAC errors, missing validations, or ambiguities are present.",
+      "findings": [],
+      "resolutions": []
+    }
+  },
+  {
+    "version": "v0",
+    "caseId": "ticket4-final-review-writer",
+    "agent": "final-review-writer",
+    "correlationId": "F6-v0-ticket4-final-review-writer-a6c02488-210d-4ebc-b80e-6c19a31a9083",
+    "inputHash": "7ee5cb71512b76bd60b9b8ec2214f7c4abdf2b1167667aca467dddd5c8f570e1",
+    "startedAt": "2026-10-30T23:13:08.536Z",
+    "finishedAt": "2026-10-30T23:13:28.511Z",
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Final report violates the supplied artifact content contract.",
+    "details": null,
+    "hasRawResponse": true,
+    "runsDirectory": "evidence/f6-20261030/v0/runs/F6-v0-ticket4-final-review-writer-a6c02488-210d-4ebc-b80e-6c19a31a9083/cycle-1",
+    "rawArtifact": "evidence/f6-20261030/v0/runs/F6-v0-ticket4-final-review-writer-a6c02488-210d-4ebc-b80e-6c19a31a9083/cycle-1/final-review-writer-raw.txt",
+    "firstDifference": {
+      "offset": 1324,
+      "actual": "UITY | \"The method for indicating \\\"3/8\\\" tube with 1\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not descri",
+      "expected": "UITY | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not de"
+    }
+  },
+  {
+    "version": "v1",
+    "caseId": "ticket4-final-review-writer",
+    "agent": "final-review-writer",
+    "correlationId": "F6-v1-ticket4-final-review-writer-d9246e7d-0cdc-4c39-9b06-efc861c8c3d0",
+    "inputHash": "7ee5cb71512b76bd60b9b8ec2214f7c4abdf2b1167667aca467dddd5c8f570e1",
+    "startedAt": "2026-10-30T23:16:28.148Z",
+    "finishedAt": "2026-10-30T23:16:46.447Z",
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Final report violates the supplied artifact content contract.",
+    "details": null,
+    "hasRawResponse": true,
+    "runsDirectory": "evidence/f6-20261030/v1/runs/F6-v1-ticket4-final-review-writer-d9246e7d-0cdc-4c39-9b06-efc861c8c3d0/cycle-1",
+    "rawArtifact": "evidence/f6-20261030/v1/runs/F6-v1-ticket4-final-review-writer-d9246e7d-0cdc-4c39-9b06-efc861c8c3d0/cycle-1/final-review-writer-raw.txt",
+    "firstDifference": {
+      "offset": 1324,
+      "actual": "UITY | \"The method for indicating \\\"3/8\\\" tube with 1\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not descri",
+      "expected": "UITY | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" in the UI (separate spacing field, combined selection, etc.) is not de"
+    }
+  },
+  {
+    "version": "v2",
+    "caseId": "hvac",
+    "agent": "adversarial-reviewer",
+    "correlationId": "F6-v2-hvac-e397f873-0617-43c2-a7bb-bb8fe820fd7e",
+    "inputHash": "af6bf4551382f0ecf3637787a691c16a24ba2357e7cbae2cd174d168172c1e0d",
+    "startedAt": "2026-10-30T23:18:21.623Z",
+    "finishedAt": "2026-10-30T23:18:33.720Z",
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Source quote is not present in the referenced artifact.",
+    "details": null,
+    "hasRawResponse": true,
+    "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-hvac-e397f873-0617-43c2-a7bb-bb8fe820fd7e/cycle-1",
+    "rawArtifact": "evidence/f6-20261030/v2/runs/F6-v2-hvac-e397f873-0617-43c2-a7bb-bb8fe820fd7e/cycle-1/adversarial-reviewer-raw.txt",
+    "generatedOutput": {
+      "status": "FAIL",
+      "rationale": "The interpreter output contains several critical defects: it reverses the definitions of AC and EC, and it omits all explicit business requirements from the ticket, including UI display rules and detailed input specifications. These gaps prevent reliable implementation of the condenser configuration feature.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "HIGH",
+          "kind": "UNSUPPORTED_ASSUMPTION",
+          "description": "The interpreter incorrectly defines AC as Evaporative Cooled and EC as Air Cooled, reversing the definitions provided in the ticket.",
+          "action": "Correct the business rule so that AC means Air Cooled and EC means Evaporative Cooled, or remove the incorrect rule.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Air Cooled (AC)"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Evaporative Cooled (EC)"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/0",
+              "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+            }
+          ],
+          "ambiguityRefs": []
+        },
+        {
+          "id": "F2",
+          "severity": "HIGH",
+          "kind": "MISSING_REQUIREMENT",
+          "description": "The interpreter does not capture the requirement to display the appropriate condenser input fields when the user selects AC or EC.",
+          "action": "Add a business rule or requirement that specifies the UI must show the AC input fields for AC selection and the EC input fields for EC selection.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": []
+        },
+        {
+          "id": "F3",
+          "severity": "HIGH",
+          "kind": "MISSING_REQUIREMENT",
+          "description": "The interpreter omits the acceptance criterion that selecting Condenser Passes shall display AutoOdd, AutoEven, and numbers 2 through 41 in increments of 1.",
+          "action": "Include this acceptance criterion in the business rules or requirement summary.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "When they select Condenser Passes, Then the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options."
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": []
+        },
+        {
+          "id": "F4",
+          "severity": "HIGH",
+          "kind": "MISSING_REQUIREMENT",
+          "description": "The interpreter omits the acceptance criterion that selecting Roof Type shall display the specified dark and light roof type options with and without parapet/shrouding.",
+          "action": "Add this acceptance criterion to the interpreter output.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "When they select Roof Type, Then the system shall display the specified dark and light roof type options with and without parapet/shrouding."
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": []
+        },
+        {
+          "id": "F5",
+          "severity": "HIGH",
+          "kind": "MISSING_REQUIREMENT",
+          "description": "The interpreter fails to capture the detailed AC and EC condenser input fields listed in the ticket (e.g., Design Ambient, ASHRAE Summer Design, Condenser Tube Material, Bank ID#, Wet Bulb Temperature, etc.).",
+          "action": "Add business rules that enumerate all required input fields for both AC and EC condenser configurations.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Design Ambient"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Bank ID#"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": []
+        }
+      ],
+      "resolutions": []
+    }
+  },
+  {
+    "version": "v2",
+    "caseId": "validation",
+    "agent": "adversarial-reviewer",
+    "correlationId": "F6-v2-validation-697076a1-6f53-4b81-baef-8ef84e0aef54",
+    "inputHash": "1ff086ebb84512bba05e4659db8101ace42dfd58f408bf3bddc81b9c0a723317",
+    "startedAt": "2026-10-30T23:18:33.721Z",
+    "finishedAt": "2026-10-30T23:18:40.696Z",
+    "status": "GOVERNANCE_FAILURE",
+    "reason": "Source quote is not present in the referenced artifact.",
+    "details": null,
+    "hasRawResponse": true,
+    "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-validation-697076a1-6f53-4b81-baef-8ef84e0aef54/cycle-1",
+    "rawArtifact": "evidence/f6-20261030/v2/runs/F6-v2-validation-697076a1-6f53-4b81-baef-8ef84e0aef54/cycle-1/adversarial-reviewer-raw.txt",
+    "generatedOutput": {
+      "status": "FAIL",
+      "rationale": "The interpreter introduces an unsupported assumption by stating that the 3/8-inch tube with 1-inch spacing increment is \"instead of the generic increment\", which is not mentioned in the ticket. This adds information not required by the specification and could lead to incorrect implementation behavior.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "UNSUPPORTED_ASSUMPTION",
+          "description": "The interpreter adds a clause that the 3/8-inch tube with 1-inch spacing increment is \"instead of the generic increment\", which is not present in the ticket.",
+          "action": "Remove the unsupported \"instead of the generic increment\" clause from the business rule.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "- 3/8\" tube w/ 1\" spacing → multiple of 1\""
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/6",
+              "quote": "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+            }
+          ],
+          "ambiguityRefs": []
+        }
+      ],
+      "resolutions": []
+    }
+  }
+]

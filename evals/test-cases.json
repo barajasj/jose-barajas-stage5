@@ -1,9 +1,15 @@
 {
   "version": 2,
-  "description": "Frozen full-proposition labels and ticket/interpreter pairs. Authored controls are separate from persisted real-model observations; unsupported paraphrases receive no semantic credit.",
+  "description": "Frozen reviewed proposition labels and ticket/interpreter pairs. Authored controls, current comparisons, and incompatible archival exports are reported separately.",
   "directCases": "evals/step-cases.js",
   "responseFile": "evidence/d5-20261030T1940Z/direct-responses.json",
   "workflowLabelsFile": "evidence/d5-20261030T1940Z/workflow-labels.json",
+  "promptComparison": {
+    "state": "required",
+    "directory": "evidence/f6-20261030",
+    "command": "node src/run-f6.js evidence/f6-20261030",
+    "scope": "Prospective v0->v1->v2 prompt measurements for all three agents; missing or incompatible observations fail current acceptance."
+  },
   "loadBearingAudit": {
     "map": "evals/load-bearing-map.json",
     "cases": "evals/load-bearing-cases.js",
@@ -17,7 +23,8 @@
       "fixture": "fixtures/hvac-ticket-1.md",
       "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket1-run.json",
       "baseline": {
-        "state": "required",
+        "state": "archival-incompatible",
+        "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
         "file": "evidence/d5-20261030T1940Z/baselines/ticket1-run.json",
         "origin": { "ref": "4fcbf47", "file": "evidence/run1/ticket1-run.json" }
       }
@@ -26,7 +33,8 @@
       "fixture": "fixtures/hvac-ticket-2.md",
       "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket2-run.json",
       "baseline": {
-        "state": "required",
+        "state": "archival-incompatible",
+        "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
         "file": "evidence/d5-20261030T1940Z/baselines/ticket2-run.json",
         "origin": { "ref": "4fcbf47", "file": "evidence/run1/ticket2-run.json" }
       }
@@ -35,7 +43,8 @@
       "fixture": "fixtures/hvac-ticket-3.md",
       "evidenceFile": "evidence/d5-20261030T1940Z/workflows/ticket3-run.json",
       "baseline": {
-        "state": "required",
+        "state": "archival-incompatible",
+        "reason": "Original 4fcbf47 export lacks current completed-status, review-cycle, and response provenance contracts; retained for compatibility reporting, not current acceptance.",
         "file": "evidence/d5-20261030T1940Z/baselines/ticket3-run.json",
         "origin": { "ref": "4fcbf47", "file": "evidence/run1/ticket3-run.json" }
       }

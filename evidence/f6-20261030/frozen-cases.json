@@ -1,0 +1,2594 @@
+[
+  {
+    "id": "dx",
+    "agent": "requirement-interpreter",
+    "input": {
+      "ticket": "# Ticket 01\r\n\r\n## Title\r\n\r\nCalculate the DX Coil Height\r\n\r\n## Description\r\n\r\nAs we enter in the Cooling Package (e.g. R-454B FW 43 ) - the system will run to Calculations and get the starting values.\r\nThe DX Coil Height is empty.\r\nWhat we want to happen is:\r\n- The Cooling Circuits are populated\r\n- Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information.\r\n- For exmaple We have 3 circuits, each with a height of 7.5\r\n- so 7.5 + 7.5 + 7.5 = 22.5\r\n- and should the user alter the Circuit Height - the form should react to this edit - resum all heights and update the Height field in DX Coil Information\r\n"
+    },
+    "gold": {
+      "interpreter": {
+        "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+        "hvacTerminology": [
+          "DX Coil",
+          "Cooling Package",
+          "Cooling Circuits",
+          "Circuit Height",
+          "DX Coil Information",
+          "R-454B"
+        ],
+        "businessRules": [
+          "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+          "DX Coil Height is the sum of all populated Cooling Circuit heights.",
+          "Editing any Circuit Height recalculates the sum and updates DX Coil Information."
+        ],
+        "developerConsiderations": [
+          "Update DX Coil Information when a Circuit Height is edited."
+        ],
+        "ambiguities": [
+          "Height units are unspecified.",
+          "Valid height ranges and precision are unspecified.",
+          "The source and format of starting circuit values are unspecified.",
+          "Behavior when circuits are added or removed is unspecified."
+        ],
+        "confidence": "MEDIUM"
+      },
+      "readiness": "LOCAL_GAPS",
+      "equivalents": {},
+      "functionalRules": [
+        "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+        "DX Coil Height is the sum of all populated Cooling Circuit heights.",
+        "Editing any Circuit Height recalculates the sum and updates DX Coil Information."
+      ]
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "077a9f54373c5f65dfab00a9472bf9e72800e9694802462179b331701d15f125",
+    "goldHash": "bb336d53b60cc9e40027f0e258be226d4663279349d87f2332b9214d09e8369b"
+  },
+  {
+    "id": "coil",
+    "agent": "requirement-interpreter",
+    "input": {
+      "ticket": "# Ticket 04\r\n\r\n## Title\r\n\r\nFW Series: UI Input validation and ranges for Coil Height\r\n\r\n## Description\r\nCoil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8\" & 1/2\" tube → multiple of 1.25\"; 5/8\" tube → multiple of 1.50\"; 1\" tube → multiple of 2.25\"; Lamiflo coil → multiple of 9\"; 3/8\" tube w/ 1\" spacing → multiple of 1\"\r\n\r\n## Acceptance Criteria\r\n\r\n- Valid range: 1.25\" to 100\"\r\n- The entered value must be a multiple of a coil-specific increment.\r\n- If the entered value is not an exact multiple, round it to the nearest valid increment.\r\n- Height increments by coil type/configuration:\r\n  - 3/8\" tube or 1/2\" tube: Increment = 1.25\"\r\n  - 5/8\" tube: Increment = 1.50\"\r\n  - 1\" tube: Increment = 2.25\"\r\n  - Lamiflo coil: Increment = 9.00\"\r\n  - 3/8\" tube with 1\" spacing: Increment = 1.00\"\r\n- Examples:\r\n  - Tube Size = 3/8\" User enters 14.1\" Nearest valid value = 13.75\" (11 × 1.25)\r\n  - Tube Size = 5/8\" User enters 14.0\" Nearest valid value = 13.5\" (9 × 1.5)\r\n  - Tube Size = 1\" User enters 16.0\" Nearest valid value = 15.75\" (7 × 2.25)\r\n  - Lamiflo coil User enters 20\" Nearest valid value = 18\""
+    },
+    "gold": {
+      "interpreter": {
+        "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam coils",
+          "tube",
+          "Lamiflo coil",
+          "spacing",
+          "increment"
+        ],
+        "businessRules": [
+          "Coil Height must be within 1.25 to 100 inches.",
+          "Coil Height must be a multiple of its coil-specific increment.",
+          "Non-multiple inputs are rounded to the nearest valid increment.",
+          "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+          "The 5/8-inch tube increment is 1.50 inches.",
+          "The 1-inch tube increment is 2.25 inches.",
+          "The Lamiflo coil increment is 9.00 inches.",
+          "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+        ],
+        "developerConsiderations": [
+          "Use the specified coil/configuration increments and preserve the special spacing override."
+        ],
+        "ambiguities": [
+          "Exact rounding tie-breaking is unspecified.",
+          "The ticket does not specify how the 3/8-inch tube with 1-inch spacing configuration is selected or represented.",
+          "The response to out-of-range input is unspecified.",
+          "Behavior for an unlisted coil configuration is unspecified."
+        ],
+        "confidence": "MEDIUM"
+      },
+      "readiness": "LOCAL_GAPS",
+      "equivalents": {
+        "requirementSummary": [
+          "The UI must validate Water/Steam Coil Height from 1.25 to 100 inches and round non-multiples to the nearest increment for the selected coil configuration."
+        ],
+        "hvacTerminology": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "businessRules": [
+          [
+            "Valid coil height range is 1.25\" to 100\" inclusive."
+          ],
+          [],
+          [
+            "If the entered value is not an exact multiple, it must be rounded to the nearest valid increment."
+          ],
+          [],
+          [],
+          [],
+          [],
+          [
+            "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+          ]
+        ],
+        "ambiguities": [
+          [
+            "The tie-breaking rule for a value exactly halfway between two valid increments is not specified."
+          ],
+          [
+            "The ticket does not specify how the 3/8-inch tube with 1-inch spacing configuration is selected or represented."
+          ],
+          [],
+          []
+        ]
+      },
+      "validationRules": [
+        "Coil Height must be within 1.25 to 100 inches.",
+        "Coil Height must be a multiple of its coil-specific increment.",
+        "Non-multiple inputs are rounded to the nearest valid increment.",
+        "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+        "The 5/8-inch tube increment is 1.50 inches.",
+        "The 1-inch tube increment is 2.25 inches.",
+        "The Lamiflo coil increment is 9.00 inches.",
+        "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+      ]
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+    "goldHash": "3af64b75ec9830072ef780bce36aca265d825e9822ea173eb232f062b78ffbc1"
+  },
+  {
+    "id": "filters",
+    "agent": "requirement-interpreter",
+    "input": {
+      "ticket": "# Ticket 02\r\n\r\n## Title\r\n\r\nAutopopulate Unit Type and Unit Size\r\n\r\n## Description\r\n\r\nIn the \"CONDENSER TYPE\" section:\r\n- When a user selects the Condenser Type and the Refrigerant from their dropdowns, we should populate the Unit Type dropdown filtered by the condenser type and the refrigerant that was selected.\r\n- After a user selects a Unit Type, we should populate the Unit Size dropdown filtered by the Refrigerant + Unit Type that was selected\r\n\r\n## Acceptance Criteria\r\n\r\nWhen we select the Condenser Type and the Refrigerant we should see the Unit Type dropdown filtered by Condenser Type + Refrigerant selected.\r\nWhen we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.\r\n\r\n## Relevant Discussion\r\nThe Refrigerants comes from an unitdesign api GET /dropdowns\r\nthe attribute to get Unit Type is SDCommonUnitTypeRefrigerant\r\nfor example, we sould filter by the \"parent\" that contains the refrigerant selected.\r\n  \"SDCommonUnitTypeRefrigerant\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"CU\",\r\n      \"value\": \"CU\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"display\": \"CUE\",\r\n      \"value\": \"CUE\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"R-513A\"\r\n      ],\r\n      \"isActive\": true\r\n    },..\r\n]\r\n\r\nThe attribute for Unit Size is SDCommonUnitModelSizes\r\nfor example, we sould filter by the \"parent\" that contains both the refrigerant and the Unit Type selected.\r\n\t\r\n\"SDCommonUnitModelSizes\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"101\",\r\n      \"value\": \"101\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 1,\r\n      \"display\": \"103\",\r\n      \"value\": \"103\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },...\r\n]"
+    },
+    "gold": {
+      "interpreter": {
+        "requirementSummary": "Populate Unit Type from Condenser Type and Refrigerant, then populate Unit Size from Refrigerant and Unit Type.",
+        "hvacTerminology": [
+          "Condenser Type",
+          "Refrigerant",
+          "Unit Type",
+          "Unit Size"
+        ],
+        "businessRules": [
+          "Selecting Condenser Type and Refrigerant filters Unit Type by both selections.",
+          "Selecting Unit Type filters Unit Size by Refrigerant and Unit Type."
+        ],
+        "developerConsiderations": [
+          "Retrieve dropdown data from unitdesign GET /dropdowns.",
+          "Use SDCommonUnitModelSizes parent entries containing the selected Refrigerant and Unit Type."
+        ],
+        "ambiguities": [
+          "The Condenser Type mapping is unclear because the example parent data contains refrigerants.",
+          "Empty filter-result behavior is unspecified.",
+          "Case sensitivity and downstream selection reset behavior are unspecified."
+        ],
+        "confidence": "MEDIUM"
+      },
+      "readiness": "LOCAL_GAPS",
+      "equivalents": {},
+      "functionalRules": [
+        "Selecting Condenser Type and Refrigerant filters Unit Type by both selections.",
+        "Selecting Unit Type filters Unit Size by Refrigerant and Unit Type."
+      ]
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "3b03a93c0ab616680c1a2b1a7812d09ce6aa31516d45612e4864d4217eb5debb",
+    "goldHash": "c75c638c0ed698f174ad4bdf322702010be444a9d071bd8f337a52c529e79e2b"
+  },
+  {
+    "id": "clean",
+    "agent": "requirement-interpreter",
+    "input": {
+      "ticket": "DX Coil Height equals the sum of Cooling Circuit Heights in inches. Recalculate immediately after a height edit. An empty circuit list produces 0 inches. Inputs are already validated; no other behavior is in scope."
+    },
+    "gold": {
+      "interpreter": {
+        "requirementSummary": "Sum Cooling Circuit Heights in inches into DX Coil Height, recalculate on edit, and use 0 inches for an empty list.",
+        "hvacTerminology": [
+          "DX Coil Height",
+          "Cooling Circuit Heights"
+        ],
+        "businessRules": [
+          "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+          "A height edit immediately recalculates DX Coil Height.",
+          "An empty circuit list produces 0 inches.",
+          "Inputs are already validated."
+        ],
+        "developerConsiderations": [],
+        "ambiguities": [],
+        "confidence": "HIGH"
+      },
+      "readiness": "COMPLETE",
+      "equivalents": {}
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+    "goldHash": "a460292958ae8e8396deeaec341ea590ea040f6da0fa767063928560f641f003"
+  },
+  {
+    "id": "sparse",
+    "agent": "requirement-interpreter",
+    "input": {
+      "ticket": "A UI request is planned; the required behavior and fields are not specified."
+    },
+    "gold": {
+      "interpreter": {
+        "requirementSummary": "The ticket does not yet define the requested UI behavior.",
+        "hvacTerminology": [],
+        "businessRules": [],
+        "developerConsiderations": [],
+        "ambiguities": [
+          "The requested behavior and affected fields are unspecified."
+        ],
+        "confidence": "LOW"
+      },
+      "readiness": "CORE_GAPS",
+      "equivalents": {}
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "b166d8c83b46f2de7b52d6b296b686116d14e2e7af01230bcc943c5d427c7dcb",
+    "goldHash": "cc43f79a3451ba16d0c39d4c25acff38ff55100c7dc606c957a9b00baede294b"
+  },
+  {
+    "id": "conflict",
+    "agent": "requirement-interpreter",
+    "input": {
+      "ticket": "DX Coil Height must update immediately after every edit. DX Coil Height must never update after an edit."
+    },
+    "gold": {
+      "interpreter": {
+        "requirementSummary": "The ticket gives conflicting update requirements for DX Coil Height.",
+        "hvacTerminology": [
+          "DX Coil Height"
+        ],
+        "businessRules": [
+          "DX Coil Height must update immediately after every edit.",
+          "DX Coil Height must never update after an edit."
+        ],
+        "developerConsiderations": [],
+        "ambiguities": [
+          "The ticket contradicts itself about updates after an edit."
+        ],
+        "confidence": "LOW"
+      },
+      "readiness": "CORE_GAPS",
+      "equivalents": {}
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "e0f26f168a99b9a85132bfc0cd8610160a73bd71bcba82cf37ae10cd39fee4ec",
+    "goldHash": "1b743a6a006dff4b2da39e375960e2330f48d82ecf7fb6ae179a5885e23190d0"
+  },
+  {
+    "id": "redispatch",
+    "agent": "requirement-interpreter",
+    "input": {
+      "ticket": "# Ticket 01\r\n\r\n## Title\r\n\r\nCalculate the DX Coil Height\r\n\r\n## Description\r\n\r\nAs we enter in the Cooling Package (e.g. R-454B FW 43 ) - the system will run to Calculations and get the starting values.\r\nThe DX Coil Height is empty.\r\nWhat we want to happen is:\r\n- The Cooling Circuits are populated\r\n- Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information.\r\n- For exmaple We have 3 circuits, each with a height of 7.5\r\n- so 7.5 + 7.5 + 7.5 = 22.5\r\n- and should the user alter the Circuit Height - the form should react to this edit - resum all heights and update the Height field in DX Coil Information\r\n",
+      "previousInterpretation": {
+        "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+        "hvacTerminology": [
+          "DX Coil",
+          "Cooling Package",
+          "Cooling Circuits",
+          "Circuit Height",
+          "DX Coil Information",
+          "R-454B"
+        ],
+        "businessRules": [
+          "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+          "DX Coil Height is the sum of all populated Cooling Circuit heights."
+        ],
+        "developerConsiderations": [
+          "Update DX Coil Information when a Circuit Height is edited."
+        ],
+        "ambiguities": [
+          "Height units are unspecified.",
+          "Valid height ranges and precision are unspecified.",
+          "The source and format of starting circuit values are unspecified.",
+          "Behavior when circuits are added or removed is unspecified.",
+          "How are circuit heights combined?"
+        ],
+        "confidence": "MEDIUM"
+      },
+      "reviewerFindings": [
+        {
+          "id": "DX-F1",
+          "severity": "HIGH",
+          "description": "Restore recalculation after Circuit Height edits."
+        }
+      ]
+    },
+    "gold": {
+      "interpreter": {
+        "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+        "hvacTerminology": [
+          "DX Coil",
+          "Cooling Package",
+          "Cooling Circuits",
+          "Circuit Height",
+          "DX Coil Information",
+          "R-454B"
+        ],
+        "businessRules": [
+          "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+          "DX Coil Height is the sum of all populated Cooling Circuit heights.",
+          "Editing any Circuit Height recalculates the sum and updates DX Coil Information."
+        ],
+        "developerConsiderations": [
+          "Update DX Coil Information when a Circuit Height is edited."
+        ],
+        "ambiguities": [
+          "Height units are unspecified.",
+          "Valid height ranges and precision are unspecified.",
+          "The source and format of starting circuit values are unspecified.",
+          "Behavior when circuits are added or removed is unspecified."
+        ],
+        "confidence": "MEDIUM",
+        "ambiguityResolutions": [
+          {
+            "ambiguity": "How are circuit heights combined?",
+            "rationale": "The original ticket explicitly states that the circuit heights are summed.",
+            "sourceQuote": "Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information."
+          }
+        ]
+      },
+      "readiness": "LOCAL_GAPS",
+      "equivalents": {}
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "44ef1b3a5d866384cef22c2a81b0ecb9064cf7450c66d0dd146a0e76c2213e65",
+    "goldHash": "3dfa092525272614c6e6a527b4d82cef18bd28692f3b1e9a1bcb761f014f1b2d"
+  },
+  {
+    "id": "assumption",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 02\r\n\r\n## Title\r\n\r\nAutopopulate Unit Type and Unit Size\r\n\r\n## Description\r\n\r\nIn the \"CONDENSER TYPE\" section:\r\n- When a user selects the Condenser Type and the Refrigerant from their dropdowns, we should populate the Unit Type dropdown filtered by the condenser type and the refrigerant that was selected.\r\n- After a user selects a Unit Type, we should populate the Unit Size dropdown filtered by the Refrigerant + Unit Type that was selected\r\n\r\n## Acceptance Criteria\r\n\r\nWhen we select the Condenser Type and the Refrigerant we should see the Unit Type dropdown filtered by Condenser Type + Refrigerant selected.\r\nWhen we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.\r\n\r\n## Relevant Discussion\r\nThe Refrigerants comes from an unitdesign api GET /dropdowns\r\nthe attribute to get Unit Type is SDCommonUnitTypeRefrigerant\r\nfor example, we sould filter by the \"parent\" that contains the refrigerant selected.\r\n  \"SDCommonUnitTypeRefrigerant\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"CU\",\r\n      \"value\": \"CU\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"display\": \"CUE\",\r\n      \"value\": \"CUE\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"R-513A\"\r\n      ],\r\n      \"isActive\": true\r\n    },..\r\n]\r\n\r\nThe attribute for Unit Size is SDCommonUnitModelSizes\r\nfor example, we sould filter by the \"parent\" that contains both the refrigerant and the Unit Type selected.\r\n\t\r\n\"SDCommonUnitModelSizes\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"101\",\r\n      \"value\": \"101\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 1,\r\n      \"display\": \"103\",\r\n      \"value\": \"103\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },...\r\n]",
+      "interpreterResult": {
+        "requirementSummary": "Populate Unit Type from Condenser Type and Refrigerant, then populate Unit Size from Refrigerant and Unit Type.",
+        "hvacTerminology": [
+          "Condenser Type",
+          "Refrigerant",
+          "Unit Type",
+          "Unit Size"
+        ],
+        "businessRules": [
+          "Selecting Condenser Type and Refrigerant filters Unit Type by both selections.",
+          "Selecting Unit Type filters Unit Size by Refrigerant and Unit Type.",
+          "Always exclude entries with isActive=false."
+        ],
+        "developerConsiderations": [
+          "Retrieve dropdown data from unitdesign GET /dropdowns.",
+          "Use SDCommonUnitModelSizes parent entries containing the selected Refrigerant and Unit Type."
+        ],
+        "ambiguities": [
+          "The Condenser Type mapping is unclear because the example parent data contains refrigerants.",
+          "Empty filter-result behavior is unspecified.",
+          "Case sensitivity and downstream selection reset behavior are unspecified."
+        ],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "A1",
+          "category": "UNSUPPORTED_ASSUMPTION",
+          "kind": "UNSUPPORTED_ASSUMPTION",
+          "severity": "MEDIUM",
+          "description": "The interpreter makes isActive filtering mandatory, but the ticket provides sample data rather than that policy.",
+          "action": "Ask whether inactive entries must be excluded; do not assume the policy.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/2",
+              "quote": "Always exclude entries with isActive=false."
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "\"isActive\": true"
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "OPEN-0",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The Condenser Type mapping is unclear because the example parent data contains refrigerants.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "The Condenser Type mapping is unclear because the example parent data contains refrigerants."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "OPEN-1",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Empty filter-result behavior is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Empty filter-result behavior is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "OPEN-2",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Case sensitivity and downstream selection reset behavior are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "Case sensitivity and downstream selection reset behavior are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        }
+      ],
+      "rationale": "An inactive-option policy was inferred from sample data and requires clarification.",
+      "rationaleEquivalents": [],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "844148820d9bede976294c7581d927e3f1ab95034315764df55e2e6147fb7b85",
+    "goldHash": "032ee22c64a13a252345028cc2f9470c75ceab1bca03849472c68e0874c64449"
+  },
+  {
+    "id": "missing",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 01\r\n\r\n## Title\r\n\r\nCalculate the DX Coil Height\r\n\r\n## Description\r\n\r\nAs we enter in the Cooling Package (e.g. R-454B FW 43 ) - the system will run to Calculations and get the starting values.\r\nThe DX Coil Height is empty.\r\nWhat we want to happen is:\r\n- The Cooling Circuits are populated\r\n- Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information.\r\n- For exmaple We have 3 circuits, each with a height of 7.5\r\n- so 7.5 + 7.5 + 7.5 = 22.5\r\n- and should the user alter the Circuit Height - the form should react to this edit - resum all heights and update the Height field in DX Coil Information\r\n",
+      "interpreterResult": {
+        "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+        "hvacTerminology": [
+          "DX Coil",
+          "Cooling Package",
+          "Cooling Circuits",
+          "Circuit Height",
+          "DX Coil Information",
+          "R-454B"
+        ],
+        "businessRules": [
+          "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+          "DX Coil Height is the sum of all populated Cooling Circuit heights."
+        ],
+        "developerConsiderations": [
+          "Update DX Coil Information when a Circuit Height is edited."
+        ],
+        "ambiguities": [],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "DX-F1",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "LOW",
+          "description": "The edit-triggered recalculation is recorded only as a developer consideration, not as an explicit business rule.",
+          "action": "Record the ticket-stated recalculation and DX Coil Information update as a business rule.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "should the user alter the Circuit Height"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/developerConsiderations/0",
+              "quote": "Update DX Coil Information when a Circuit Height is edited."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {
+            "description": [
+              "The rule to recalculate on a Circuit Height edit is absent from businessRules; it appears only in developerConsiderations."
+            ],
+            "action": [
+              "Move the supported edit-triggered recalculation behavior into businessRules; keep the developer note only if useful."
+            ]
+          }
+        }
+      ],
+      "rationale": "The ticket behavior is summarized and noted for developers, but is missing from the required businessRules field.",
+      "rationaleEquivalents": [
+        "The summary and developer note mention recalculation, but businessRules does not capture the edit-triggered rule."
+      ],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "a2329678935c63e16fc35269959a10e8d684d5efa68304bda3bdbea045ac82af",
+    "goldHash": "1ef84d4b4a9b86acfe5df8c3638a369b19c9bab27ad4c4c910ed1349b00766b9"
+  },
+  {
+    "id": "hvac",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 03\r\n\r\n## Title\r\n\r\nFW Series: Condenser Configuration Inputs\r\n\r\n## Description\r\n\r\nBusiness value: Captures the detailed physical and environmental parameters for Air Cooled (AC) and Evaporative Cooled (EC) condensers, as well as per-circuit refrigeration configurations, enabling accurate ECS calculations.\r\n\r\nWhen the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed.\r\n\r\n### Condenser Inputs — Air Cooled (AC)\r\n\r\n| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |\r\n|-----|--------|------------|--------|------|-------------------|-------|\r\n| 1 | Design Ambient | Numeric Input | User / Default | °F / °C | 95°F | Echoed in output 3.7 |\r\n| 2 | ASHRAE Summer Design | Numeric Input | User / Default | °F / °C | — | |\r\n| 3 | Default Condenser | Checkbox | User | — | — | Condenser selection mode |\r\n| 4 | High Amb. / Altit. Cond. | Checkbox | User | — | — | Condenser selection mode |\r\n| 5 | Condenser Tube Material | Dropdown | User / Default | — | Copper | |\r\n| 6 | Condenser Fin Material | Dropdown | User / Default | — | Aluminum | |\r\n| 7 | Condenser Tube Size | Dropdown | User / Default | mm | 3/8, 3/8 w/ 1\" spacing | |\r\n| 8 | Condenser Fin Type | Dropdown | User / Default | — | Corrugated | |\r\n\r\n### Condenser Inputs — Evaporative Cooled (EC)\r\n\r\n| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |\r\n|-----|--------|------------|--------|------|-------------------|-------|\r\n| 1 | Bank ID# | ID | System | — | — | |\r\n| 2 | Copies of this Bank | Numeric Input | User | — | — | |\r\n| 3 | EC Model | Dropdown | User | — | — | See Catalog |\r\n| 4 | Wet Bulb Temperature | Numeric Input | User | °F / °C | — | |\r\n\r\n\r\n## Acceptance Criteria\r\n\r\nGiven the AC/EC condenser parameters and per-circuit cooling configurations, \r\nWhen processed, \r\nThen the system outputs condenser and circuit-level configuration ready for ECS calculation.\r\n\r\nGiven the user is configuring an AC condenser, \r\nWhen they enter ambient design conditions and coil geometry, \r\nThen the system records the condenser parameters.\r\n\r\nGiven the user is configuring an EC condenser, \r\nWhen they enter the EC model and wet bulb temperature, \r\nThen the system records the EC condenser parameters.\r\n\r\nGiven the user configures an AC condenser, \r\nWhen they select Condenser Passes, \r\nThen the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options.\r\n\r\nGiven the user configures an AC condenser, \r\nWhen they select Roof Type, \r\nThen the system shall display the specified dark and light roof type options with and without parapet/shrouding.\r\n",
+      "interpreterResult": {
+        "requirementSummary": "Configure AC and EC condensers.",
+        "hvacTerminology": [
+          "AC",
+          "EC"
+        ],
+        "businessRules": [
+          "AC means Evaporative Cooled and EC means Air Cooled."
+        ],
+        "developerConsiderations": [],
+        "ambiguities": [],
+        "confidence": "HIGH"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "H1",
+          "category": "HVAC_ERROR",
+          "kind": "HVAC_ERROR",
+          "severity": "HIGH",
+          "description": "The interpreter swaps AC and EC meanings; the ticket defines Air Cooled as AC and Evaporative Cooled as EC.",
+          "action": "Restore Air Cooled (AC) and Evaporative Cooled (EC).",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Air Cooled (AC) and Evaporative Cooled (EC)"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/0",
+              "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H2",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "HIGH",
+          "description": "The conditional display of the AC/EC-specific input fields is absent from the interpretation.",
+          "action": "Capture that selecting AC or EC displays the corresponding input fields.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H3",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "HIGH",
+          "description": "The interpretation omits the stated AC defaults and tube-size options.",
+          "action": "Capture the 95°F Design Ambient default, Copper tube material, Aluminum fin material, Corrugated fin type, and both stated tube-size options.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "95°F"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Copper"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Aluminum"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Corrugated"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "3/8, 3/8 w/ 1\" spacing"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H4",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "MEDIUM",
+          "description": "The interpretation omits the listed temperature and tube-size units.",
+          "action": "Capture the stated °F/°C temperature units and mm tube-size unit without inventing conversion behavior.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Design Ambient | Numeric Input | User / Default | °F / °C"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Condenser Tube Size | Dropdown | User / Default | mm"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H5",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "HIGH",
+          "description": "The interpretation omits the EC Bank ID, Copies of this Bank, EC Model, and Wet Bulb Temperature inputs.",
+          "action": "Capture the listed EC fields and their stated sources/units.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Bank ID#"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Copies of this Bank"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "EC Model"
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Wet Bulb Temperature"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H6",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "HIGH",
+          "description": "The output requirement for condenser and per-circuit configuration ready for ECS calculation is absent.",
+          "action": "Capture the stated ECS-ready condenser and circuit-level output.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Then the system outputs condenser and circuit-level configuration ready for ECS calculation."
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H7",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "MEDIUM",
+          "description": "The interpretation omits the AC requirement to record ambient design conditions and coil geometry; the ticket does not enumerate the geometry fields.",
+          "action": "Capture the stated record behavior and ask the ticket owner to identify the required coil-geometry fields.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "When they enter ambient design conditions and coil geometry,"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H8",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "HIGH",
+          "description": "The interpretation omits the EC requirement to record the selected model and wet bulb temperature.",
+          "action": "Capture the stated EC parameter-recording behavior.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Then the system records the EC condenser parameters."
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H9",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "HIGH",
+          "description": "The interpretation omits the specified AutoOdd, AutoEven, and 2-through-41 Condenser Passes options.",
+          "action": "Capture the complete Condenser Passes option set and increment.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options."
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        },
+        {
+          "id": "H10",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "MEDIUM",
+          "description": "The ticket requires Roof Type choices but does not enumerate the exact dark/light and parapet/shrouding options.",
+          "action": "Record the stated option dimensions and obtain the missing exact Roof Type choices from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "specified dark and light roof type options with and without parapet/shrouding."
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Configure AC and EC condensers."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        }
+      ],
+      "rationale": "The interpretation reverses AC/EC meanings and omits multiple explicit input, recording, and output requirements.",
+      "rationaleEquivalents": [],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "af6bf4551382f0ecf3637787a691c16a24ba2357e7cbae2cd174d168172c1e0d",
+    "goldHash": "cb78ffb94709175bda56a94894f3d3e126125b36a01b06be02be2bfdd462e2ca"
+  },
+  {
+    "id": "validation",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 04\r\n\r\n## Title\r\n\r\nFW Series: UI Input validation and ranges for Coil Height\r\n\r\n## Description\r\nCoil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8\" & 1/2\" tube → multiple of 1.25\"; 5/8\" tube → multiple of 1.50\"; 1\" tube → multiple of 2.25\"; Lamiflo coil → multiple of 9\"; 3/8\" tube w/ 1\" spacing → multiple of 1\"\r\n\r\n## Acceptance Criteria\r\n\r\n- Valid range: 1.25\" to 100\"\r\n- The entered value must be a multiple of a coil-specific increment.\r\n- If the entered value is not an exact multiple, round it to the nearest valid increment.\r\n- Height increments by coil type/configuration:\r\n  - 3/8\" tube or 1/2\" tube: Increment = 1.25\"\r\n  - 5/8\" tube: Increment = 1.50\"\r\n  - 1\" tube: Increment = 2.25\"\r\n  - Lamiflo coil: Increment = 9.00\"\r\n  - 3/8\" tube with 1\" spacing: Increment = 1.00\"\r\n- Examples:\r\n  - Tube Size = 3/8\" User enters 14.1\" Nearest valid value = 13.75\" (11 × 1.25)\r\n  - Tube Size = 5/8\" User enters 14.0\" Nearest valid value = 13.5\" (9 × 1.5)\r\n  - Tube Size = 1\" User enters 16.0\" Nearest valid value = 15.75\" (7 × 2.25)\r\n  - Lamiflo coil User enters 20\" Nearest valid value = 18\"",
+      "interpreterResult": {
+        "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam",
+          "tube",
+          "Lamiflo",
+          "increment"
+        ],
+        "businessRules": [
+          "Coil Height must be a multiple of its coil-specific increment.",
+          "Non-multiple inputs are rounded to the nearest valid increment.",
+          "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+          "The 5/8-inch tube increment is 1.50 inches.",
+          "The 1-inch tube increment is 2.25 inches.",
+          "The Lamiflo coil increment is 9.00 inches.",
+          "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+        ],
+        "developerConsiderations": [
+          "Use the specified coil/configuration increments and preserve the special spacing override."
+        ],
+        "ambiguities": [],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "V1",
+          "category": "MISSING_VALIDATION",
+          "kind": "MISSING_VALIDATION",
+          "severity": "MEDIUM",
+          "description": "The 1.25-to-100-inch constraint appears in the summary but is missing from businessRules, where explicit validation constraints belong.",
+          "action": "Record both stated range limits and inches as an explicit business rule.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Valid range: 1.25\" to 100\""
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/requirementSummary",
+              "quote": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {
+            "description": [
+              "The ticket range is summarized, but the explicit 1.25-to-100-inch validation rule is absent from businessRules."
+            ],
+            "action": [
+              "Add the ticket-stated lower and upper limits, with inches, to businessRules."
+            ]
+          }
+        }
+      ],
+      "rationale": "The range is mentioned in the summary but is absent from the required businessRules field.",
+      "rationaleEquivalents": [
+        "The stated limits appear in the summary, but the structured business-rule list does not preserve them."
+      ],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "1ff086ebb84512bba05e4659db8101ace42dfd58f408bf3bddc81b9c0a723317",
+    "goldHash": "1ce4f7d8814912267900a53aca7972958a7b0b85b215fe8cc61fb0cb8d88ee01"
+  },
+  {
+    "id": "missed-ambiguity",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 04\r\n\r\n## Title\r\n\r\nFW Series: UI Input validation and ranges for Coil Height\r\n\r\n## Description\r\nCoil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8\" & 1/2\" tube → multiple of 1.25\"; 5/8\" tube → multiple of 1.50\"; 1\" tube → multiple of 2.25\"; Lamiflo coil → multiple of 9\"; 3/8\" tube w/ 1\" spacing → multiple of 1\"\r\n\r\n## Acceptance Criteria\r\n\r\n- Valid range: 1.25\" to 100\"\r\n- The entered value must be a multiple of a coil-specific increment.\r\n- If the entered value is not an exact multiple, round it to the nearest valid increment.\r\n- Height increments by coil type/configuration:\r\n  - 3/8\" tube or 1/2\" tube: Increment = 1.25\"\r\n  - 5/8\" tube: Increment = 1.50\"\r\n  - 1\" tube: Increment = 2.25\"\r\n  - Lamiflo coil: Increment = 9.00\"\r\n  - 3/8\" tube with 1\" spacing: Increment = 1.00\"\r\n- Examples:\r\n  - Tube Size = 3/8\" User enters 14.1\" Nearest valid value = 13.75\" (11 × 1.25)\r\n  - Tube Size = 5/8\" User enters 14.0\" Nearest valid value = 13.5\" (9 × 1.5)\r\n  - Tube Size = 1\" User enters 16.0\" Nearest valid value = 15.75\" (7 × 2.25)\r\n  - Lamiflo coil User enters 20\" Nearest valid value = 18\"",
+      "interpreterResult": {
+        "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam",
+          "tube",
+          "Lamiflo",
+          "increment"
+        ],
+        "businessRules": [
+          "Coil Height must be within 1.25 to 100 inches.",
+          "Coil Height must be a multiple of its coil-specific increment.",
+          "Non-multiple inputs are rounded to the nearest valid increment.",
+          "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+          "The 5/8-inch tube increment is 1.50 inches.",
+          "The 1-inch tube increment is 2.25 inches.",
+          "The Lamiflo coil increment is 9.00 inches.",
+          "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+        ],
+        "developerConsiderations": [
+          "Use the specified coil/configuration increments and preserve the special spacing override."
+        ],
+        "ambiguities": [],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "Q1",
+          "category": "MISSED_AMBIGUITY",
+          "kind": "MISSING_VALIDATION",
+          "severity": "MEDIUM",
+          "description": "The interpreter misses the unanswered rounding tie question; nearest rounding does not define ties.",
+          "action": "Ask the ticket owner how exact halfway values should be rounded.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "round it to the nearest valid increment."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        }
+      ],
+      "rationale": "A missing tie-breaking policy was not surfaced as a question.",
+      "rationaleEquivalents": [],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "5a2973cce48c468811c105631e165b902f44e6b41800093472621aba64188111",
+    "goldHash": "0b7d098b272c55facdf9ca11f01c7242749ac7db50ad3ceb543a5b574f5cd8ce"
+  },
+  {
+    "id": "open",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 04\r\n\r\n## Title\r\n\r\nFW Series: UI Input validation and ranges for Coil Height\r\n\r\n## Description\r\nCoil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8\" & 1/2\" tube → multiple of 1.25\"; 5/8\" tube → multiple of 1.50\"; 1\" tube → multiple of 2.25\"; Lamiflo coil → multiple of 9\"; 3/8\" tube w/ 1\" spacing → multiple of 1\"\r\n\r\n## Acceptance Criteria\r\n\r\n- Valid range: 1.25\" to 100\"\r\n- The entered value must be a multiple of a coil-specific increment.\r\n- If the entered value is not an exact multiple, round it to the nearest valid increment.\r\n- Height increments by coil type/configuration:\r\n  - 3/8\" tube or 1/2\" tube: Increment = 1.25\"\r\n  - 5/8\" tube: Increment = 1.50\"\r\n  - 1\" tube: Increment = 2.25\"\r\n  - Lamiflo coil: Increment = 9.00\"\r\n  - 3/8\" tube with 1\" spacing: Increment = 1.00\"\r\n- Examples:\r\n  - Tube Size = 3/8\" User enters 14.1\" Nearest valid value = 13.75\" (11 × 1.25)\r\n  - Tube Size = 5/8\" User enters 14.0\" Nearest valid value = 13.5\" (9 × 1.5)\r\n  - Tube Size = 1\" User enters 16.0\" Nearest valid value = 15.75\" (7 × 2.25)\r\n  - Lamiflo coil User enters 20\" Nearest valid value = 18\"",
+      "interpreterResult": {
+        "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam",
+          "tube",
+          "Lamiflo",
+          "increment"
+        ],
+        "businessRules": [
+          "Coil Height must be within 1.25 to 100 inches.",
+          "Coil Height must be a multiple of its coil-specific increment.",
+          "Non-multiple inputs are rounded to the nearest valid increment.",
+          "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+          "The 5/8-inch tube increment is 1.50 inches.",
+          "The 1-inch tube increment is 2.25 inches.",
+          "The Lamiflo coil increment is 9.00 inches.",
+          "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+        ],
+        "developerConsiderations": [
+          "Use the specified coil/configuration increments and preserve the special spacing override."
+        ],
+        "ambiguities": [
+          "Exact rounding tie-breaking is unspecified.",
+          "The source of the 1-inch spacing configuration is unspecified.",
+          "The response to out-of-range input is unspecified.",
+          "Behavior for an unlisted coil configuration is unspecified."
+        ],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "O1",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Exact rounding tie-breaking is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "Exact rounding tie-breaking is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "O2",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "LOW",
+          "description": "The source of the 1-inch spacing configuration is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "The source of the 1-inch spacing configuration is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "O3",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The response to out-of-range input is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The response to out-of-range input is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "O4",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "HIGH",
+          "description": "Behavior for an unlisted coil configuration is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Behavior for an unlisted coil configuration is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ],
+          "equivalents": {}
+        }
+      ],
+      "rationale": "All four listed questions remain unresolved and prevent readiness clearance.",
+      "rationaleEquivalents": [],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c",
+    "goldHash": "2f5c7d74390ba42ecdad892b300b3cffe631459fe149eb281266dd2235ef72f9"
+  },
+  {
+    "id": "boundary",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 04\r\n\r\n## Title\r\n\r\nFW Series: UI Input validation and ranges for Coil Height\r\n\r\n## Description\r\nCoil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8\" & 1/2\" tube → multiple of 1.25\"; 5/8\" tube → multiple of 1.50\"; 1\" tube → multiple of 2.25\"; Lamiflo coil → multiple of 9\"; 3/8\" tube w/ 1\" spacing → multiple of 1\"\r\n\r\n## Acceptance Criteria\r\n\r\n- Valid range: 1.25\" to 100\"\r\n- The entered value must be a multiple of a coil-specific increment.\r\n- If the entered value is not an exact multiple, round it to the nearest valid increment.\r\n- Height increments by coil type/configuration:\r\n  - 3/8\" tube or 1/2\" tube: Increment = 1.25\"\r\n  - 5/8\" tube: Increment = 1.50\"\r\n  - 1\" tube: Increment = 2.25\"\r\n  - Lamiflo coil: Increment = 9.00\"\r\n  - 3/8\" tube with 1\" spacing: Increment = 1.00\"\r\n- Examples:\r\n  - Tube Size = 3/8\" User enters 14.1\" Nearest valid value = 13.75\" (11 × 1.25)\r\n  - Tube Size = 5/8\" User enters 14.0\" Nearest valid value = 13.5\" (9 × 1.5)\r\n  - Tube Size = 1\" User enters 16.0\" Nearest valid value = 15.75\" (7 × 2.25)\r\n  - Lamiflo coil User enters 20\" Nearest valid value = 18\"",
+      "interpreterResult": {
+        "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam",
+          "tube",
+          "Lamiflo",
+          "increment"
+        ],
+        "businessRules": [
+          "Coil Height must be within 1.25 to 100 inches.",
+          "Coil Height must be a multiple of its coil-specific increment.",
+          "Non-multiple inputs are rounded to the nearest valid increment.",
+          "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+          "The 5/8-inch tube increment is 1.50 inches.",
+          "The 1-inch tube increment is 2.25 inches.",
+          "The Lamiflo coil increment is 9.00 inches.",
+          "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+        ],
+        "developerConsiderations": [
+          "Use the specified coil/configuration increments and preserve the special spacing override."
+        ],
+        "ambiguities": [
+          "Exact rounding tie-breaking is unspecified.",
+          "The source of the 1-inch spacing configuration is unspecified.",
+          "The response to out-of-range input is unspecified.",
+          "Behavior for an unlisted coil configuration is unspecified."
+        ],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "O1",
+          "category": "ROUNDING_TIE",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Exact rounding tie-breaking is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "Exact rounding tie-breaking is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "O2",
+          "category": "CONFIGURATION",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "LOW",
+          "description": "The source of the 1-inch spacing configuration is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "The source of the 1-inch spacing configuration is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "O3",
+          "category": "BOUNDARY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The response to out-of-range input is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The response to out-of-range input is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "O4",
+          "category": "UNKNOWN_CONFIGURATION",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "HIGH",
+          "description": "Behavior for an unlisted coil configuration is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Behavior for an unlisted coil configuration is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "B5",
+          "category": "RANGE_INCREMENT",
+          "kind": "MISSING_VALIDATION",
+          "severity": "MEDIUM",
+          "description": "The ticket does not explain range handling when rounding to an increment would produce an out-of-range result.",
+          "action": "Clarify that the chosen rounded value must satisfy both the range and increment constraints without inventing clamp policy.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Valid range: 1.25\" to 100\""
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "round it to the nearest valid increment."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        }
+      ],
+      "rationale": "Boundary, configuration, tie, unknown-option, and range/increment questions remain unresolved.",
+      "rationaleEquivalents": [],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c",
+    "goldHash": "ff54ca98440de9920ba6c50802f06a512a4006f1590c690618f5fbcb162b587e"
+  },
+  {
+    "id": "clean-review",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "DX Coil Height equals the sum of Cooling Circuit Heights in inches. Recalculate immediately after a height edit. An empty circuit list produces 0 inches. Inputs are already validated; no other behavior is in scope.",
+      "interpreterResult": {
+        "requirementSummary": "Sum Cooling Circuit Heights in inches into DX Coil Height, recalculate on edit, and use 0 inches for an empty list.",
+        "hvacTerminology": [
+          "DX Coil Height",
+          "Cooling Circuit Heights"
+        ],
+        "businessRules": [
+          "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+          "A height edit immediately recalculates DX Coil Height.",
+          "An empty circuit list produces 0 inches.",
+          "Inputs are already validated."
+        ],
+        "developerConsiderations": [],
+        "ambiguities": [],
+        "confidence": "HIGH"
+      }
+    },
+    "gold": {
+      "findings": [],
+      "rationale": "The sum, inches, immediate edit update, empty-list result, and validated-input scope are captured without open questions.",
+      "rationaleEquivalents": [
+        "The ticket's calculation, units, edit trigger, empty-list result, and prevalidated-input scope are all represented; no clarification remains."
+      ],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "3e61e4407f94acf12336ae3b46b6136a1eff942c26036b5ebdf0341ef5717dce",
+    "goldHash": "585fe12ee6d17ecb009522bcf15308bf0bb1e51ac51352bc43d275e0b6d88fc8"
+  },
+  {
+    "id": "minor-label",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "Display the calculated height using the exact label \"DX Coil Height\". The calculation is already correct.",
+      "interpreterResult": {
+        "requirementSummary": "Display the calculated height.",
+        "hvacTerminology": [
+          "DX Coil Height"
+        ],
+        "businessRules": [
+          "Display the calculated height using the label \"DX height\"."
+        ],
+        "developerConsiderations": [],
+        "ambiguities": [],
+        "confidence": "HIGH"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "L1",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "LOW",
+          "description": "The interpreter changes the explicitly requested display label from DX Coil Height to DX height.",
+          "action": "Keep the exact display label DX Coil Height without changing the already-correct calculation.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "the exact label \"DX Coil Height\""
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/0",
+              "quote": "Display the calculated height using the label \"DX height\"."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        }
+      ],
+      "rationale": "The requested display label needs a minor wording correction.",
+      "rationaleEquivalents": [],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "d35397a24582e25f60b239684367975805f5de516fc24566ca23a11f7f1b7b81",
+    "goldHash": "01b79c49e39bdc37ef049ae5bde900894b22e87cda841fca22a185c6056a2357"
+  },
+  {
+    "id": "retained",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 01\r\n\r\n## Title\r\n\r\nCalculate the DX Coil Height\r\n\r\n## Description\r\n\r\nAs we enter in the Cooling Package (e.g. R-454B FW 43 ) - the system will run to Calculations and get the starting values.\r\nThe DX Coil Height is empty.\r\nWhat we want to happen is:\r\n- The Cooling Circuits are populated\r\n- Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information.\r\n- For exmaple We have 3 circuits, each with a height of 7.5\r\n- so 7.5 + 7.5 + 7.5 = 22.5\r\n- and should the user alter the Circuit Height - the form should react to this edit - resum all heights and update the Height field in DX Coil Information\r\n",
+      "interpreterResult": {
+        "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+        "hvacTerminology": [
+          "DX Coil",
+          "Cooling Package",
+          "Cooling Circuits",
+          "Circuit Height",
+          "DX Coil Information",
+          "R-454B"
+        ],
+        "businessRules": [
+          "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+          "DX Coil Height is the sum of all populated Cooling Circuit heights."
+        ],
+        "developerConsiderations": [
+          "Update DX Coil Information when a Circuit Height is edited."
+        ],
+        "ambiguities": [],
+        "confidence": "MEDIUM"
+      },
+      "previousReview": {
+        "status": "FAIL",
+        "rationale": "The stated edit-triggered recalculation is missing.",
+        "findings": [
+          {
+            "id": "DX-F1",
+            "kind": "MISSING_REQUIREMENT",
+            "severity": "HIGH",
+            "description": "The interpreter omits recalculation and updating DX Coil Information after Circuit Height edits.",
+            "action": "Restore the ticket requirement to recompute the sum and update DX Coil Information on edit.",
+            "sourceRefs": [
+              {
+                "artifact": "ticket",
+                "pointer": "",
+                "quote": "should the user alter the Circuit Height"
+              }
+            ],
+            "ambiguityRefs": []
+          }
+        ],
+        "resolutions": []
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "DX-F1",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "LOW",
+          "description": "The edit-triggered recalculation is recorded only as a developer consideration, not as an explicit business rule.",
+          "action": "Record the ticket-stated recalculation and DX Coil Information update as a business rule.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "should the user alter the Circuit Height"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/developerConsiderations/0",
+              "quote": "Update DX Coil Information when a Circuit Height is edited."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {
+            "description": [
+              "The rule to recalculate on a Circuit Height edit is absent from businessRules; it appears only in developerConsiderations."
+            ],
+            "action": [
+              "Move the supported edit-triggered recalculation behavior into businessRules; keep the developer note only if useful."
+            ]
+          }
+        }
+      ],
+      "rationale": "The ticket behavior is summarized and noted for developers, but is missing from the required businessRules field.",
+      "rationaleEquivalents": [],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "641cedcbc499ea2b75d1f511a4be954fb29191a1cb9e188ffd21fcb764f6da44",
+    "goldHash": "e17338df2525c172f213cf1328981e2597b6995dd142dcc50b6b808139a627f3"
+  },
+  {
+    "id": "resolved",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 01\r\n\r\n## Title\r\n\r\nCalculate the DX Coil Height\r\n\r\n## Description\r\n\r\nAs we enter in the Cooling Package (e.g. R-454B FW 43 ) - the system will run to Calculations and get the starting values.\r\nThe DX Coil Height is empty.\r\nWhat we want to happen is:\r\n- The Cooling Circuits are populated\r\n- Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information.\r\n- For exmaple We have 3 circuits, each with a height of 7.5\r\n- so 7.5 + 7.5 + 7.5 = 22.5\r\n- and should the user alter the Circuit Height - the form should react to this edit - resum all heights and update the Height field in DX Coil Information\r\n",
+      "interpreterResult": {
+        "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+        "hvacTerminology": [
+          "DX Coil",
+          "Cooling Package",
+          "Cooling Circuits",
+          "Circuit Height",
+          "DX Coil Information",
+          "R-454B"
+        ],
+        "businessRules": [
+          "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+          "DX Coil Height is the sum of all populated Cooling Circuit heights.",
+          "Editing any Circuit Height recalculates the sum and updates DX Coil Information."
+        ],
+        "developerConsiderations": [
+          "Update DX Coil Information when a Circuit Height is edited."
+        ],
+        "ambiguities": [
+          "Height units are unspecified.",
+          "Valid height ranges and precision are unspecified.",
+          "The source and format of starting circuit values are unspecified.",
+          "Behavior when circuits are added or removed is unspecified."
+        ],
+        "confidence": "MEDIUM"
+      },
+      "previousReview": {
+        "status": "FAIL",
+        "rationale": "The stated edit-triggered recalculation is missing.",
+        "findings": [
+          {
+            "id": "DX-F1",
+            "kind": "MISSING_REQUIREMENT",
+            "severity": "HIGH",
+            "description": "The interpreter omits recalculation and updating DX Coil Information after Circuit Height edits.",
+            "action": "Restore the ticket requirement to recompute the sum and update DX Coil Information on edit.",
+            "sourceRefs": [
+              {
+                "artifact": "ticket",
+                "pointer": "",
+                "quote": "should the user alter the Circuit Height"
+              }
+            ],
+            "ambiguityRefs": []
+          }
+        ],
+        "resolutions": []
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "D1",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Height units are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "Height units are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "D2",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Valid height ranges and precision are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Valid height ranges and precision are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "D3",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The source and format of starting circuit values are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The source and format of starting circuit values are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ],
+          "equivalents": {}
+        },
+        {
+          "id": "D4",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Behavior when circuits are added or removed is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Behavior when circuits are added or removed is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ],
+          "equivalents": {}
+        }
+      ],
+      "rationale": "Edit-triggered recalculation is restored, but the remaining ticket questions still prevent clearance.",
+      "rationaleEquivalents": [],
+      "resolutions": [
+        {
+          "findingId": "DX-F1",
+          "rationale": "The current business rule explicitly restores recalculation and the DX Coil Information update.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/2",
+              "quote": "Editing any Circuit Height recalculates the sum and updates DX Coil Information."
+            }
+          ]
+        }
+      ]
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "7f2297424c86e1f2f7b74bde88da8b7dcc7839fa4500f8c3e36c7384bad4ac3a",
+    "goldHash": "d5c18bf48e0586131d1925e101065834bb9de603a2da12e93f14c9203c9be932"
+  },
+  {
+    "id": "bad-resolution",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 04\r\n\r\n## Title\r\n\r\nFW Series: UI Input validation and ranges for Coil Height\r\n\r\n## Description\r\nCoil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8\" & 1/2\" tube → multiple of 1.25\"; 5/8\" tube → multiple of 1.50\"; 1\" tube → multiple of 2.25\"; Lamiflo coil → multiple of 9\"; 3/8\" tube w/ 1\" spacing → multiple of 1\"\r\n\r\n## Acceptance Criteria\r\n\r\n- Valid range: 1.25\" to 100\"\r\n- The entered value must be a multiple of a coil-specific increment.\r\n- If the entered value is not an exact multiple, round it to the nearest valid increment.\r\n- Height increments by coil type/configuration:\r\n  - 3/8\" tube or 1/2\" tube: Increment = 1.25\"\r\n  - 5/8\" tube: Increment = 1.50\"\r\n  - 1\" tube: Increment = 2.25\"\r\n  - Lamiflo coil: Increment = 9.00\"\r\n  - 3/8\" tube with 1\" spacing: Increment = 1.00\"\r\n- Examples:\r\n  - Tube Size = 3/8\" User enters 14.1\" Nearest valid value = 13.75\" (11 × 1.25)\r\n  - Tube Size = 5/8\" User enters 14.0\" Nearest valid value = 13.5\" (9 × 1.5)\r\n  - Tube Size = 1\" User enters 16.0\" Nearest valid value = 15.75\" (7 × 2.25)\r\n  - Lamiflo coil User enters 20\" Nearest valid value = 18\"",
+      "interpreterResult": {
+        "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam",
+          "tube",
+          "Lamiflo",
+          "increment"
+        ],
+        "businessRules": [
+          "Coil Height must be within 1.25 to 100 inches.",
+          "Coil Height must be a multiple of its coil-specific increment.",
+          "Non-multiple inputs are rounded to the nearest valid increment.",
+          "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+          "The 5/8-inch tube increment is 1.50 inches.",
+          "The 1-inch tube increment is 2.25 inches.",
+          "The Lamiflo coil increment is 9.00 inches.",
+          "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+        ],
+        "developerConsiderations": [
+          "Use the specified coil/configuration increments and preserve the special spacing override."
+        ],
+        "ambiguities": [],
+        "confidence": "MEDIUM",
+        "ambiguityResolutions": [
+          {
+            "ambiguity": "Exact rounding tie-breaking is unspecified.",
+            "rationale": "Assume the tie is resolved.",
+            "sourceQuote": "Valid range: 1.25\" to 100\""
+          }
+        ]
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "U1",
+          "category": "UNSUPPORTED_RESOLUTION",
+          "kind": "UNSUPPORTED_ASSUMPTION",
+          "severity": "HIGH",
+          "description": "A range quotation does not answer the removed rounding tie question, so the claimed resolution is unsupported.",
+          "action": "Restore the tie-breaking question rather than inferring a resolution from range limits.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguityResolutions/0/sourceQuote",
+              "quote": "Valid range: 1.25\" to 100\""
+            },
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "round it to the nearest valid increment."
+            }
+          ],
+          "ambiguityRefs": [],
+          "equivalents": {}
+        }
+      ],
+      "rationale": "The interpreter removed a question using evidence that does not answer it.",
+      "rationaleEquivalents": [],
+      "resolutions": []
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "6dd8cea7f8b266b241b628dd9239f2a2bd19e61ea9f593d0acaed3bbe9d2b1b2",
+    "goldHash": "3616aa7c6f687f996d52931afa1f593306ca33e6483cf6efd1cdd66b1809c058"
+  },
+  {
+    "id": "writer-fail",
+    "agent": "final-review-writer",
+    "input": {
+      "interpreterResult": {
+        "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam",
+          "tube",
+          "Lamiflo",
+          "increment"
+        ],
+        "businessRules": [
+          "Coil Height must be within 1.25 to 100 inches.",
+          "Coil Height must be a multiple of its coil-specific increment.",
+          "Non-multiple inputs are rounded to the nearest valid increment.",
+          "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+          "The 5/8-inch tube increment is 1.50 inches.",
+          "The 1-inch tube increment is 2.25 inches.",
+          "The Lamiflo coil increment is 9.00 inches.",
+          "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+        ],
+        "developerConsiderations": [
+          "Use the specified coil/configuration increments and preserve the special spacing override."
+        ],
+        "ambiguities": [
+          "Exact rounding tie-breaking is unspecified.",
+          "The source of the 1-inch spacing configuration is unspecified.",
+          "The response to out-of-range input is unspecified.",
+          "Behavior for an unlisted coil configuration is unspecified."
+        ],
+        "confidence": "MEDIUM"
+      },
+      "reviewResult": {
+        "status": "FAIL",
+        "rationale": "All four listed questions remain unresolved and prevent readiness clearance.",
+        "findings": [
+          {
+            "id": "O1",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "MEDIUM",
+            "description": "Exact rounding tie-breaking is unspecified.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/0",
+                "quote": "Exact rounding tie-breaking is unspecified."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/0"
+            ]
+          },
+          {
+            "id": "O2",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "LOW",
+            "description": "The source of the 1-inch spacing configuration is unspecified.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/1",
+                "quote": "The source of the 1-inch spacing configuration is unspecified."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/1"
+            ]
+          },
+          {
+            "id": "O3",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "MEDIUM",
+            "description": "The response to out-of-range input is unspecified.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/2",
+                "quote": "The response to out-of-range input is unspecified."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/2"
+            ]
+          },
+          {
+            "id": "O4",
+            "kind": "OPEN_AMBIGUITY",
+            "severity": "HIGH",
+            "description": "Behavior for an unlisted coil configuration is unspecified.",
+            "action": "Obtain clarification from the ticket owner.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/3",
+                "quote": "Behavior for an unlisted coil configuration is unspecified."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/3"
+            ]
+          }
+        ],
+        "resolutions": []
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    },
+    "gold": {},
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "6a80fa71623115be4fcd9eec4ad56db358288408120a01f08ae445abb2c6f9cc",
+    "goldHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  {
+    "id": "writer-pass",
+    "agent": "final-review-writer",
+    "input": {
+      "interpreterResult": {
+        "requirementSummary": "Sum Cooling Circuit Heights in inches into DX Coil Height, recalculate on edit, and use 0 inches for an empty list.",
+        "hvacTerminology": [
+          "DX Coil Height",
+          "Cooling Circuit Heights"
+        ],
+        "businessRules": [
+          "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+          "A height edit immediately recalculates DX Coil Height.",
+          "An empty circuit list produces 0 inches.",
+          "Inputs are already validated."
+        ],
+        "developerConsiderations": [],
+        "ambiguities": [],
+        "confidence": "HIGH"
+      },
+      "reviewResult": {
+        "status": "PASS",
+        "rationale": "The sum, inches, immediate edit update, empty-list result, and validated-input scope are captured without open questions.",
+        "findings": [],
+        "resolutions": []
+      },
+      "disposition": "PASS",
+      "reasonCodes": [
+        "NO_OPEN_CONCERNS"
+      ]
+    },
+    "gold": {},
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "e229fd36483eaace25e85131bc4ff54e305b0437e71942a6b64b4185ee37b423",
+    "goldHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  {
+    "id": "condenser",
+    "agent": "requirement-interpreter",
+    "input": {
+      "ticket": "# Ticket 03\r\n\r\n## Title\r\n\r\nFW Series: Condenser Configuration Inputs\r\n\r\n## Description\r\n\r\nBusiness value: Captures the detailed physical and environmental parameters for Air Cooled (AC) and Evaporative Cooled (EC) condensers, as well as per-circuit refrigeration configurations, enabling accurate ECS calculations.\r\n\r\nWhen the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed.\r\n\r\n### Condenser Inputs — Air Cooled (AC)\r\n\r\n| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |\r\n|-----|--------|------------|--------|------|-------------------|-------|\r\n| 1 | Design Ambient | Numeric Input | User / Default | °F / °C | 95°F | Echoed in output 3.7 |\r\n| 2 | ASHRAE Summer Design | Numeric Input | User / Default | °F / °C | — | |\r\n| 3 | Default Condenser | Checkbox | User | — | — | Condenser selection mode |\r\n| 4 | High Amb. / Altit. Cond. | Checkbox | User | — | — | Condenser selection mode |\r\n| 5 | Condenser Tube Material | Dropdown | User / Default | — | Copper | |\r\n| 6 | Condenser Fin Material | Dropdown | User / Default | — | Aluminum | |\r\n| 7 | Condenser Tube Size | Dropdown | User / Default | mm | 3/8, 3/8 w/ 1\" spacing | |\r\n| 8 | Condenser Fin Type | Dropdown | User / Default | — | Corrugated | |\r\n\r\n### Condenser Inputs — Evaporative Cooled (EC)\r\n\r\n| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |\r\n|-----|--------|------------|--------|------|-------------------|-------|\r\n| 1 | Bank ID# | ID | System | — | — | |\r\n| 2 | Copies of this Bank | Numeric Input | User | — | — | |\r\n| 3 | EC Model | Dropdown | User | — | — | See Catalog |\r\n| 4 | Wet Bulb Temperature | Numeric Input | User | °F / °C | — | |\r\n\r\n\r\n## Acceptance Criteria\r\n\r\nGiven the AC/EC condenser parameters and per-circuit cooling configurations, \r\nWhen processed, \r\nThen the system outputs condenser and circuit-level configuration ready for ECS calculation.\r\n\r\nGiven the user is configuring an AC condenser, \r\nWhen they enter ambient design conditions and coil geometry, \r\nThen the system records the condenser parameters.\r\n\r\nGiven the user is configuring an EC condenser, \r\nWhen they enter the EC model and wet bulb temperature, \r\nThen the system records the EC condenser parameters.\r\n\r\nGiven the user configures an AC condenser, \r\nWhen they select Condenser Passes, \r\nThen the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options.\r\n\r\nGiven the user configures an AC condenser, \r\nWhen they select Roof Type, \r\nThen the system shall display the specified dark and light roof type options with and without parapet/shrouding.\r\n"
+    },
+    "gold": {
+      "interpreter": {
+        "requirementSummary": "Show the corresponding AC or EC condenser inputs, capture the stated condenser parameters and options, and output condenser and per-circuit configuration for ECS calculation.",
+        "hvacTerminology": [
+          "Air Cooled",
+          "Evaporative Cooled",
+          "AC",
+          "EC",
+          "Condenser Type",
+          "Design Ambient",
+          "ASHRAE Summer Design",
+          "Default Condenser",
+          "High Amb. / Altit. Cond.",
+          "Condenser Tube Material",
+          "Condenser Fin Material",
+          "Condenser Tube Size",
+          "Condenser Fin Type",
+          "Bank ID#",
+          "Copies of this Bank",
+          "EC Model",
+          "Wet Bulb Temperature",
+          "Condenser Passes",
+          "AutoOdd",
+          "AutoEven",
+          "Roof Type",
+          "coil geometry",
+          "per-circuit cooling configurations",
+          "ECS"
+        ],
+        "businessRules": [
+          "Selecting Condenser Type AC or EC displays the corresponding input fields.",
+          "AC Design Ambient accepts degrees F or C and defaults to 95 degrees F.",
+          "AC ASHRAE Summer Design accepts degrees F or C; the ticket states no default value.",
+          "AC includes Default Condenser and High Amb. / Altit. Cond. checkboxes.",
+          "AC Condenser Tube Material defaults to Copper.",
+          "AC Condenser Fin Material defaults to Aluminum.",
+          "AC Condenser Tube Size options are 3/8 and 3/8 with 1-inch spacing, with the ticket listing mm as the unit.",
+          "AC Condenser Fin Type defaults to Corrugated.",
+          "EC Bank ID# is supplied by the system.",
+          "EC Copies of this Bank is a user-entered numeric input.",
+          "EC Model is selected from the catalog.",
+          "EC Wet Bulb Temperature accepts degrees F or C.",
+          "Processing AC/EC condenser parameters and per-circuit cooling configurations outputs condenser and circuit-level configuration ready for ECS calculation.",
+          "For AC, entering ambient design conditions and coil geometry records the condenser parameters.",
+          "For EC, entering the EC model and wet bulb temperature records the EC condenser parameters.",
+          "AC Condenser Passes options are AutoOdd, AutoEven, and integers 2 through 41 in increments of 1.",
+          "AC Roof Type provides the specified dark and light options with and without parapet/shrouding."
+        ],
+        "developerConsiderations": [],
+        "ambiguities": [
+          "The ticket does not enumerate the exact Roof Type choices for the dark/light and parapet/shrouding combinations.",
+          "The EC Model catalog entries are unspecified.",
+          "Numeric validation ranges are unspecified.",
+          "Temperature conversion and unit selection behavior are unspecified.",
+          "The coil-geometry fields and detailed per-circuit configuration fields are unspecified."
+        ],
+        "confidence": "MEDIUM"
+      },
+      "readiness": "LOCAL_GAPS"
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "48364f3e10a454ed63786474dca9a7bdeaa140317a0e51b303f8d65527783c87",
+    "goldHash": "ff17be2b7a3ada527a451e26b95f90cc804cd32eb99bbdfe3b2b2d6a7c2a87cd"
+  },
+  {
+    "id": "missing-corrected",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 01\r\n\r\n## Title\r\n\r\nCalculate the DX Coil Height\r\n\r\n## Description\r\n\r\nAs we enter in the Cooling Package (e.g. R-454B FW 43 ) - the system will run to Calculations and get the starting values.\r\nThe DX Coil Height is empty.\r\nWhat we want to happen is:\r\n- The Cooling Circuits are populated\r\n- Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information.\r\n- For exmaple We have 3 circuits, each with a height of 7.5\r\n- so 7.5 + 7.5 + 7.5 = 22.5\r\n- and should the user alter the Circuit Height - the form should react to this edit - resum all heights and update the Height field in DX Coil Information\r\n",
+      "interpreterResult": {
+        "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+        "hvacTerminology": [
+          "DX Coil",
+          "Cooling Package",
+          "Cooling Circuits",
+          "Circuit Height",
+          "DX Coil Information",
+          "R-454B"
+        ],
+        "businessRules": [
+          "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+          "DX Coil Height is the sum of all populated Cooling Circuit heights.",
+          "Editing any Circuit Height recalculates the sum and updates DX Coil Information."
+        ],
+        "developerConsiderations": [
+          "Update DX Coil Information when a Circuit Height is edited."
+        ],
+        "ambiguities": [
+          "Height units are unspecified.",
+          "Valid height ranges and precision are unspecified.",
+          "The source and format of starting circuit values are unspecified.",
+          "Behavior when circuits are added or removed is unspecified."
+        ],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "OPEN-0",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Height units are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "Height units are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "OPEN-1",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Valid height ranges and precision are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Valid height ranges and precision are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "OPEN-2",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The source and format of starting circuit values are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The source and format of starting circuit values are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "OPEN-3",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Behavior when circuits are added or removed is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Behavior when circuits are added or removed is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        }
+      ],
+      "resolutions": [],
+      "rationale": "The explicit behavior is captured; only the listed source questions remain unresolved."
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "074205509514bdfc1c18d1a38795dfd58ab8890431ddbcd67462a7b634286d3c",
+    "goldHash": "2fe4750473e4be9a095763b0965d3f2809cefb4d83feb2dfb0fc1e02d4af20ea"
+  },
+  {
+    "id": "assumption-corrected",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 02\r\n\r\n## Title\r\n\r\nAutopopulate Unit Type and Unit Size\r\n\r\n## Description\r\n\r\nIn the \"CONDENSER TYPE\" section:\r\n- When a user selects the Condenser Type and the Refrigerant from their dropdowns, we should populate the Unit Type dropdown filtered by the condenser type and the refrigerant that was selected.\r\n- After a user selects a Unit Type, we should populate the Unit Size dropdown filtered by the Refrigerant + Unit Type that was selected\r\n\r\n## Acceptance Criteria\r\n\r\nWhen we select the Condenser Type and the Refrigerant we should see the Unit Type dropdown filtered by Condenser Type + Refrigerant selected.\r\nWhen we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.\r\n\r\n## Relevant Discussion\r\nThe Refrigerants comes from an unitdesign api GET /dropdowns\r\nthe attribute to get Unit Type is SDCommonUnitTypeRefrigerant\r\nfor example, we sould filter by the \"parent\" that contains the refrigerant selected.\r\n  \"SDCommonUnitTypeRefrigerant\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"CU\",\r\n      \"value\": \"CU\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"display\": \"CUE\",\r\n      \"value\": \"CUE\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"R-513A\"\r\n      ],\r\n      \"isActive\": true\r\n    },..\r\n]\r\n\r\nThe attribute for Unit Size is SDCommonUnitModelSizes\r\nfor example, we sould filter by the \"parent\" that contains both the refrigerant and the Unit Type selected.\r\n\t\r\n\"SDCommonUnitModelSizes\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"101\",\r\n      \"value\": \"101\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 1,\r\n      \"display\": \"103\",\r\n      \"value\": \"103\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },...\r\n]",
+      "interpreterResult": {
+        "requirementSummary": "Populate Unit Type from Condenser Type and Refrigerant, then populate Unit Size from Refrigerant and Unit Type.",
+        "hvacTerminology": [
+          "Condenser Type",
+          "Refrigerant",
+          "Unit Type",
+          "Unit Size"
+        ],
+        "businessRules": [
+          "Selecting Condenser Type and Refrigerant filters Unit Type by both selections.",
+          "Selecting Unit Type filters Unit Size by Refrigerant and Unit Type."
+        ],
+        "developerConsiderations": [
+          "Retrieve dropdown data from unitdesign GET /dropdowns.",
+          "Use SDCommonUnitModelSizes parent entries containing the selected Refrigerant and Unit Type."
+        ],
+        "ambiguities": [
+          "The Condenser Type mapping is unclear because the example parent data contains refrigerants.",
+          "Empty filter-result behavior is unspecified.",
+          "Case sensitivity and downstream selection reset behavior are unspecified."
+        ],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "OPEN-0",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The Condenser Type mapping is unclear because the example parent data contains refrigerants.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "The Condenser Type mapping is unclear because the example parent data contains refrigerants."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "OPEN-1",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Empty filter-result behavior is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Empty filter-result behavior is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "OPEN-2",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Case sensitivity and downstream selection reset behavior are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "Case sensitivity and downstream selection reset behavior are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        }
+      ],
+      "resolutions": [],
+      "rationale": "The explicit behavior is captured; only the listed source questions remain unresolved."
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "0c07130ff7de88a48b8d7f2ded3c6431aa42c321b2dfff1c691501f23e573895",
+    "goldHash": "ed2182c73045f492669783212d32f31e9cc829c31465136c923feee1f875440b"
+  },
+  {
+    "id": "hvac-corrected",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 03\r\n\r\n## Title\r\n\r\nFW Series: Condenser Configuration Inputs\r\n\r\n## Description\r\n\r\nBusiness value: Captures the detailed physical and environmental parameters for Air Cooled (AC) and Evaporative Cooled (EC) condensers, as well as per-circuit refrigeration configurations, enabling accurate ECS calculations.\r\n\r\nWhen the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed.\r\n\r\n### Condenser Inputs — Air Cooled (AC)\r\n\r\n| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |\r\n|-----|--------|------------|--------|------|-------------------|-------|\r\n| 1 | Design Ambient | Numeric Input | User / Default | °F / °C | 95°F | Echoed in output 3.7 |\r\n| 2 | ASHRAE Summer Design | Numeric Input | User / Default | °F / °C | — | |\r\n| 3 | Default Condenser | Checkbox | User | — | — | Condenser selection mode |\r\n| 4 | High Amb. / Altit. Cond. | Checkbox | User | — | — | Condenser selection mode |\r\n| 5 | Condenser Tube Material | Dropdown | User / Default | — | Copper | |\r\n| 6 | Condenser Fin Material | Dropdown | User / Default | — | Aluminum | |\r\n| 7 | Condenser Tube Size | Dropdown | User / Default | mm | 3/8, 3/8 w/ 1\" spacing | |\r\n| 8 | Condenser Fin Type | Dropdown | User / Default | — | Corrugated | |\r\n\r\n### Condenser Inputs — Evaporative Cooled (EC)\r\n\r\n| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |\r\n|-----|--------|------------|--------|------|-------------------|-------|\r\n| 1 | Bank ID# | ID | System | — | — | |\r\n| 2 | Copies of this Bank | Numeric Input | User | — | — | |\r\n| 3 | EC Model | Dropdown | User | — | — | See Catalog |\r\n| 4 | Wet Bulb Temperature | Numeric Input | User | °F / °C | — | |\r\n\r\n\r\n## Acceptance Criteria\r\n\r\nGiven the AC/EC condenser parameters and per-circuit cooling configurations, \r\nWhen processed, \r\nThen the system outputs condenser and circuit-level configuration ready for ECS calculation.\r\n\r\nGiven the user is configuring an AC condenser, \r\nWhen they enter ambient design conditions and coil geometry, \r\nThen the system records the condenser parameters.\r\n\r\nGiven the user is configuring an EC condenser, \r\nWhen they enter the EC model and wet bulb temperature, \r\nThen the system records the EC condenser parameters.\r\n\r\nGiven the user configures an AC condenser, \r\nWhen they select Condenser Passes, \r\nThen the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options.\r\n\r\nGiven the user configures an AC condenser, \r\nWhen they select Roof Type, \r\nThen the system shall display the specified dark and light roof type options with and without parapet/shrouding.\r\n",
+      "interpreterResult": {
+        "requirementSummary": "Show AC or EC condenser inputs by selection and record condenser and circuit configuration for ECS calculation.",
+        "hvacTerminology": [
+          "Air Cooled",
+          "Evaporative Cooled",
+          "Condenser Type",
+          "AC",
+          "EC",
+          "ASHRAE",
+          "Condenser Tube Material",
+          "Condenser Fin Material",
+          "Condenser Tube Size",
+          "Condenser Fin Type",
+          "Bank ID#",
+          "EC Model",
+          "Wet Bulb Temperature",
+          "Condenser Passes",
+          "Roof Type",
+          "ECS"
+        ],
+        "businessRules": [
+          "Selecting Condenser Type AC or EC displays the corresponding input fields.",
+          "AC records Design Ambient in degrees F or C with a default of 95 degrees F and ASHRAE Summer Design.",
+          "AC includes Default Condenser and High Amb. / Altit. Cond. checkboxes.",
+          "AC Condenser Tube Material defaults to Copper and Condenser Fin Material defaults to Aluminum.",
+          "AC Condenser Tube Size options are 3/8 and 3/8 with 1-inch spacing; Condenser Fin Type defaults to Corrugated.",
+          "EC includes system Bank ID#, user Copies of this Bank, EC Model from the catalog, and Wet Bulb Temperature in degrees F or C.",
+          "AC Condenser Passes options are AutoOdd, AutoEven, and integers 2 through 41 in increments of 1.",
+          "AC Roof Type offers dark and light options with and without parapet/shrouding.",
+          "Ambient design conditions and coil geometry are recorded for AC condensers.",
+          "EC model and wet bulb temperature are recorded for EC condensers.",
+          "Condenser and per-circuit cooling configuration are output ready for ECS calculation."
+        ],
+        "developerConsiderations": [
+          "Display the input fields corresponding to the selected AC or EC condenser type."
+        ],
+        "ambiguities": [
+          "The exact Roof Type option list is unspecified.",
+          "The EC Model catalog entries are unspecified.",
+          "Numeric validation ranges are unspecified.",
+          "Temperature conversion and unit selection behavior are unspecified.",
+          "The detailed per-circuit configuration fields are unspecified."
+        ],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "TUBE-UNIT",
+          "category": "MISSING_REQUIREMENT",
+          "kind": "MISSING_REQUIREMENT",
+          "severity": "MEDIUM",
+          "description": "The ticket specifies mm as the Condenser Tube Size unit, but the interpretation omits that unit from its tube-size rule.",
+          "action": "Preserve mm as the stated Condenser Tube Size unit in the business rule.",
+          "sourceRefs": [
+            {
+              "artifact": "ticket",
+              "pointer": "",
+              "quote": "Condenser Tube Size | Dropdown | User / Default | mm"
+            },
+            {
+              "artifact": "interpreter",
+              "pointer": "/businessRules/4",
+              "quote": "AC Condenser Tube Size options are 3/8 and 3/8 with 1-inch spacing; Condenser Fin Type defaults to Corrugated."
+            }
+          ],
+          "ambiguityRefs": []
+        },
+        {
+          "id": "OPEN-0",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The exact Roof Type option list is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "The exact Roof Type option list is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "OPEN-1",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The EC Model catalog entries are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "The EC Model catalog entries are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "OPEN-2",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Numeric validation ranges are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "Numeric validation ranges are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "OPEN-3",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Temperature conversion and unit selection behavior are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Temperature conversion and unit selection behavior are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "OPEN-4",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The detailed per-circuit configuration fields are unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "The detailed per-circuit configuration fields are unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        }
+      ],
+      "resolutions": [],
+      "rationale": "The AC/EC behavior is captured and the listed questions remain open, but the ticket-stated mm unit is missing from the tube-size rule."
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "2fd792c9b0da33a7168a81ecc54c18f14c2d581c640caaa6fc51b6f74a427d2e",
+    "goldHash": "84b55803b40747c6865700d8c1212325acf60c1f4ab230336693594bc663a793"
+  },
+  {
+    "id": "validation-corrected",
+    "agent": "adversarial-reviewer",
+    "input": {
+      "ticket": "# Ticket 04\r\n\r\n## Title\r\n\r\nFW Series: UI Input validation and ranges for Coil Height\r\n\r\n## Description\r\nCoil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8\" & 1/2\" tube → multiple of 1.25\"; 5/8\" tube → multiple of 1.50\"; 1\" tube → multiple of 2.25\"; Lamiflo coil → multiple of 9\"; 3/8\" tube w/ 1\" spacing → multiple of 1\"\r\n\r\n## Acceptance Criteria\r\n\r\n- Valid range: 1.25\" to 100\"\r\n- The entered value must be a multiple of a coil-specific increment.\r\n- If the entered value is not an exact multiple, round it to the nearest valid increment.\r\n- Height increments by coil type/configuration:\r\n  - 3/8\" tube or 1/2\" tube: Increment = 1.25\"\r\n  - 5/8\" tube: Increment = 1.50\"\r\n  - 1\" tube: Increment = 2.25\"\r\n  - Lamiflo coil: Increment = 9.00\"\r\n  - 3/8\" tube with 1\" spacing: Increment = 1.00\"\r\n- Examples:\r\n  - Tube Size = 3/8\" User enters 14.1\" Nearest valid value = 13.75\" (11 × 1.25)\r\n  - Tube Size = 5/8\" User enters 14.0\" Nearest valid value = 13.5\" (9 × 1.5)\r\n  - Tube Size = 1\" User enters 16.0\" Nearest valid value = 15.75\" (7 × 2.25)\r\n  - Lamiflo coil User enters 20\" Nearest valid value = 18\"",
+      "interpreterResult": {
+        "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam",
+          "tube",
+          "Lamiflo",
+          "increment"
+        ],
+        "businessRules": [
+          "Coil Height must be within 1.25 to 100 inches.",
+          "Coil Height must be a multiple of its coil-specific increment.",
+          "Non-multiple inputs are rounded to the nearest valid increment.",
+          "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+          "The 5/8-inch tube increment is 1.50 inches.",
+          "The 1-inch tube increment is 2.25 inches.",
+          "The Lamiflo coil increment is 9.00 inches.",
+          "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+        ],
+        "developerConsiderations": [
+          "Use the specified coil/configuration increments and preserve the special spacing override."
+        ],
+        "ambiguities": [
+          "Exact rounding tie-breaking is unspecified.",
+          "The source of the 1-inch spacing configuration is unspecified.",
+          "The response to out-of-range input is unspecified.",
+          "Behavior for an unlisted coil configuration is unspecified."
+        ],
+        "confidence": "MEDIUM"
+      }
+    },
+    "gold": {
+      "findings": [
+        {
+          "id": "OPEN-0",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Exact rounding tie-breaking is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "Exact rounding tie-breaking is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "OPEN-1",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The source of the 1-inch spacing configuration is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "The source of the 1-inch spacing configuration is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "OPEN-2",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "The response to out-of-range input is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The response to out-of-range input is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "OPEN-3",
+          "category": "OPEN_AMBIGUITY",
+          "kind": "OPEN_AMBIGUITY",
+          "severity": "MEDIUM",
+          "description": "Behavior for an unlisted coil configuration is unspecified.",
+          "action": "Obtain clarification from the ticket owner.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Behavior for an unlisted coil configuration is unspecified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        }
+      ],
+      "resolutions": [],
+      "rationale": "The explicit behavior is captured; only the listed source questions remain unresolved."
+    },
+    "origin": "evals/step-cases.js; pre-existing reviewed labels",
+    "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c",
+    "goldHash": "fd4f68b47e61b2dc6f4350af796181df38c628fb4b037ea7211da8c27fce9745"
+  },
+  {
+    "id": "ticket4-final-review-writer",
+    "agent": "final-review-writer",
+    "input": {
+      "interpreterResult": {
+        "requirementSummary": "The UI must validate Coil Height input for Water/Steam coils, enforcing a valid range of 1.25\" to 100\" and requiring the entered height to be a multiple of a coil‑specific increment; if the input is not an exact multiple, it must be rounded to the nearest valid increment based on the coil type or configuration.",
+        "hvacTerminology": [
+          "Coil Height",
+          "Water/Steam coils",
+          "tube",
+          "Lamiflo coil",
+          "spacing",
+          "increment"
+        ],
+        "businessRules": [
+          "Valid coil height range is 1.25\" to 100\" inclusive.",
+          "The entered coil height must be a multiple of a coil‑specific increment.",
+          "If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.",
+          "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+          "For 5/8\" tube, the increment is 1.50\".",
+          "For 1\" tube, the increment is 2.25\".",
+          "For Lamiflo coil, the increment is 9.00\".",
+          "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+        ],
+        "developerConsiderations": [
+          "The UI must determine the applicable increment based on the selected tube size and any spacing configuration before performing validation.",
+          "Rounding logic must compute the nearest multiple of the applicable increment and replace the user‑entered value with that rounded value.",
+          "Input values outside the 1.25\"–100\" range must be flagged as invalid; the exact handling (error message, clamping, etc.) is not defined in the ticket.",
+          "The system should display the rounded value to the user after validation."
+        ],
+        "ambiguities": [
+          "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+          "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+          "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+          "No guidance is provided for coil types or configurations not listed in the increment table."
+        ],
+        "confidence": "MEDIUM"
+      },
+      "reviewResult": {
+        "status": "FAIL",
+        "rationale": "The interpreter output contains an unsupported assumption about displaying the rounded value to the user, which is not specified in the ticket. Additionally, the interpreter lists four ambiguities that remain unresolved; each of these open questions must be clarified before the implementation can be considered complete. These issues constitute findings that block a PASS.",
+        "findings": [
+          {
+            "id": "F1",
+            "severity": "MEDIUM",
+            "kind": "UNSUPPORTED_ASSUMPTION",
+            "description": "The interpreter assumes the system should display the rounded value to the user after validation, but the ticket does not specify any UI display behavior.",
+            "action": "Remove the assumption or obtain clarification from the ticket owner whether the rounded value must be shown to the user.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/developerConsiderations/3",
+                "quote": "The system should display the rounded value to the user after validation."
+              }
+            ],
+            "ambiguityRefs": []
+          },
+          {
+            "id": "F2",
+            "severity": "MEDIUM",
+            "kind": "OPEN_AMBIGUITY",
+            "description": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down).",
+            "action": "Obtain clarification on the tie‑break policy for rounding (e.g., round up, round down, or round to even).",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/0",
+                "quote": "The ticket does not specify how to resolve ties when the entered value is exactly halfway between two valid increments (e.g., rounding up vs. down)."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/0"
+            ]
+          },
+          {
+            "id": "F3",
+            "severity": "MEDIUM",
+            "kind": "OPEN_AMBIGUITY",
+            "description": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling).",
+            "action": "Clarify the expected handling for out‑of‑range values (e.g., display an error message, clamp to limits, reject input).",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/1",
+                "quote": "The required behavior for inputs below 1.25\" or above 100\" is not defined (error, clamp, or other handling)."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/1"
+            ]
+          },
+          {
+            "id": "F4",
+            "severity": "MEDIUM",
+            "kind": "OPEN_AMBIGUITY",
+            "description": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described.",
+            "action": "Provide UI design details on how the spacing configuration is captured and associated with the tube size.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/2",
+                "quote": "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" in the UI (separate spacing field, combined selection, etc.) is not described."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/2"
+            ]
+          },
+          {
+            "id": "F5",
+            "severity": "MEDIUM",
+            "kind": "OPEN_AMBIGUITY",
+            "description": "No guidance is provided for coil types or configurations not listed in the increment table.",
+            "action": "Clarify how the system should handle coil types or configurations that are not explicitly listed (e.g., reject, default increment, or extend the table).",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/3",
+                "quote": "No guidance is provided for coil types or configurations not listed in the increment table."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/3"
+            ]
+          }
+        ],
+        "resolutions": []
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    },
+    "gold": {},
+    "origin": "evidence/f3-20261030T2225Z/frozen-cases.json#ticket4-final-review-writer; exact upstream input, no inferred gold",
+    "inputHash": "7ee5cb71512b76bd60b9b8ec2214f7c4abdf2b1167667aca467dddd5c8f570e1",
+    "goldHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  {
+    "id": "ticket5-final-review-writer",
+    "agent": "final-review-writer",
+    "input": {
+      "interpreterResult": {
+        "requirementSummary": "DX Coil Height must be set to the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are pre‑validated and no other behavior is required.",
+        "hvacTerminology": [
+          "DX Coil",
+          "Cooling Circuit",
+          "Height"
+        ],
+        "businessRules": [
+          "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+          "Recalculate DX Coil Height immediately after a height edit.",
+          "If the circuit list is empty, DX Coil Height is set to 0 inches.",
+          "All inputs are already validated; no additional validation is in scope."
+        ],
+        "developerConsiderations": [
+          "Implement calculation that sums all Cooling Circuit Height values (in inches) and assigns the total to DX Coil Height.",
+          "Trigger the calculation immediately after any edit to a Cooling Circuit Height.",
+          "When the list of Cooling Circuits is empty, set DX Coil Height to 0 inches.",
+          "Assume input values are pre‑validated; do not add extra validation logic."
+        ],
+        "ambiguities": [
+          "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+          "No rounding or precision rules are specified for the sum of heights.",
+          "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.",
+          "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+        ],
+        "confidence": "MEDIUM"
+      },
+      "reviewResult": {
+        "status": "FAIL",
+        "rationale": "The interpreter identified four ambiguities that are not addressed by the ticket. Each represents missing clarification required to implement the behavior unambiguously, and therefore each blocks a PASS result.",
+        "findings": [
+          {
+            "id": "F1",
+            "severity": "MEDIUM",
+            "kind": "OPEN_AMBIGUITY",
+            "description": "Unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both.",
+            "action": "Obtain clarification from the ticket owner on which edits should trigger the recalculation.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/0",
+                "quote": "It is unclear whether the recalculation should be triggered by edits to any Cooling Circuit Height, edits to DX Coil Height itself, or both."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/0"
+            ]
+          },
+          {
+            "id": "F2",
+            "severity": "MEDIUM",
+            "kind": "OPEN_AMBIGUITY",
+            "description": "No rounding or precision rules are specified for the sum of heights.",
+            "action": "Obtain clarification from the ticket owner on rounding and precision requirements for the summed height.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/1",
+                "quote": "No rounding or precision rules are specified for the sum of heights."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/1"
+            ]
+          },
+          {
+            "id": "F3",
+            "severity": "MEDIUM",
+            "kind": "OPEN_AMBIGUITY",
+            "description": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum.",
+            "action": "Obtain clarification from the ticket owner on whether inactive or disabled Cooling Circuits should be excluded from the sum.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/2",
+                "quote": "The ticket does not specify whether only active/enabled Cooling Circuits should be included in the sum."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/2"
+            ]
+          },
+          {
+            "id": "F4",
+            "severity": "MEDIUM",
+            "kind": "OPEN_AMBIGUITY",
+            "description": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined.",
+            "action": "Obtain clarification from the ticket owner on the required mechanism for triggering the immediate recalculation.",
+            "sourceRefs": [
+              {
+                "artifact": "interpreter",
+                "pointer": "/ambiguities/3",
+                "quote": "The mechanism for the immediate recalculation (e.g., UI event, backend process) is not defined."
+              }
+            ],
+            "ambiguityRefs": [
+              "/ambiguities/3"
+            ]
+          }
+        ],
+        "resolutions": []
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    },
+    "gold": {},
+    "origin": "evidence/f3-20261030T2225Z/frozen-cases.json#ticket5-final-review-writer; exact upstream input, no inferred gold",
+    "inputHash": "d0ab982cee09f23ca3e1398db39c7ef807e5072937a15bfb99945835f9be7db2",
+    "goldHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  }
+]

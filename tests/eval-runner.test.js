@@ -5,7 +5,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { cases } = require('../evals/step-cases');
-const definitions = require('../evals/test-cases.json');
+const definitions = { ...require('../evals/test-cases.json'), promptComparison: undefined };
 const workflowGoldEquivalents = require('../evals/workflow-label-equivalents');
 const {
   runEvaluation, evaluateDirect, readBaseline, evaluateWorkflow, applyWorkflowLabelEquivalents
@@ -114,6 +114,26 @@ test('required missing/corrupt baselines fail; intentional post-baseline fixture
   assert.throws(() => readBaseline({ state: 'not-in-baseline' }), /reason/);
   assert.equal(readBaseline({ state: 'not-in-baseline', reason: 'New fixture.' }), null);
   assert.equal(definitions.fixtures[3].baseline.state, 'not-in-baseline');
+  assert.throws(() => readBaseline({ state: 'archival-incompatible', file: corrupt }), /reason/);
+});
+
+test('incompatible archives are reported separately, never paired or mandatory acceptance failures', () => {
+  const result = runEvaluation({ definitions, responses: { observations: cases.map(observation) }, coverage });
+  const archives = result.baseline.filter(row => row.state === 'archival-incompatible');
+  assert.equal(archives.length, 3);
+  assert.ok(archives.every(row => row.rows.length === 0 && !row.applicable && row.compatibilityFailure));
+  assert.ok(!result.errors.some(error => error.startsWith('Baseline ')), result.errors.join('\n'));
+  assert.equal(result.comparisons.pairs.length, 0);
+  assert.ok(result.comparisons.unpaired.length > 0);
+});
+
+test('required prospective prompt comparison is fail-closed when measurements are absent', () => {
+  const result = runEvaluation({
+    definitions: { ...definitions, promptComparison: { state: 'required', directory: 'evidence/absent-f6-test' } },
+    responses: { observations: cases.map(observation) }, coverage
+  });
+  assert.equal(result.pass, false);
+  assert.ok(result.errors.some(error => error.startsWith('Required F6 prompt comparison:')));
 });
 
 test('paired deltas require identical case, input, model, settings, and scorer; expanded cases stay separate', () => {

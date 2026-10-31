@@ -1,0 +1,2001 @@
+[
+  {
+    "agent": "requirement-interpreter",
+    "versions": [
+      {
+        "version": "v0",
+        "reason": "Prospective baseline: unchanged post-F3 production prompts, not reconstructed historical performance.",
+        "addedInstructions": [],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v0/requirement-interpreter.md",
+          "sha256": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2"
+        },
+        "baseline": null,
+        "measuredOutcome": {
+          "attempts": 8,
+          "rawResponses": 8,
+          "strictPasses": 0,
+          "runtimeAccepted": 8,
+          "strictPassRate": 0,
+          "runtimeAcceptanceRate": 1,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "sourceGrounding": 0,
+            "redispatchSafety": 0.875
+          },
+          "metrics": {
+            "requirementExtractionAccuracy": {
+              "matched": 6,
+              "total": 39,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.15384615384615385,
+              "threshold": 0.9,
+              "pass": false
+            },
+            "hvacTerminologyRecognition": {
+              "matched": 38,
+              "total": 49,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.7755102040816326,
+              "threshold": 0.9,
+              "pass": false
+            },
+            "ambiguityDetection": {
+              "matched": 4,
+              "total": 22,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.18181818181818182,
+              "threshold": 0.8,
+              "pass": false
+            },
+            "summaryAccuracy": {
+              "matched": 0,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "developerConsiderationGrounding": {
+              "matched": 2,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.25,
+              "threshold": 1,
+              "pass": false
+            },
+            "confidencePolicyConsistency": {
+              "matched": 7,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.875,
+              "threshold": 1,
+              "pass": false
+            }
+          }
+        },
+        "measuredDelta": null,
+        "evidence": "evidence/f6-20261030/v0/attempts.json"
+      },
+      {
+        "version": "v1",
+        "reason": "Separate extraction, review comparison, and literal transcription from speculative completion.",
+        "addedInstructions": [
+          "Before answering, privately separate explicit ticket propositions from unanswered questions. Extract each requested behavior and numeric constraint once, with all its conditions. Sample data does not establish policy.",
+          "Keep developerConsiderations limited to implementation consequences explicitly required by the ticket. Do not add generic engineering advice. Choose confidence from the scope of unanswered behavior, not from confidence in your prose."
+        ],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v1/requirement-interpreter.md",
+          "sha256": "577e46823ebe1af85601839360dd79f4b0944f5bd17d787f9843875acb324acd"
+        },
+        "baseline": "v0",
+        "measuredOutcome": {
+          "attempts": 8,
+          "rawResponses": 8,
+          "strictPasses": 0,
+          "runtimeAccepted": 8,
+          "strictPassRate": 0,
+          "runtimeAcceptanceRate": 1,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "sourceGrounding": 0,
+            "redispatchSafety": 0.875
+          },
+          "metrics": {
+            "requirementExtractionAccuracy": {
+              "matched": 5,
+              "total": 39,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.1282051282051282,
+              "threshold": 0.9,
+              "pass": false
+            },
+            "hvacTerminologyRecognition": {
+              "matched": 40,
+              "total": 49,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.8163265306122449,
+              "threshold": 0.9,
+              "pass": false
+            },
+            "ambiguityDetection": {
+              "matched": 4,
+              "total": 22,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.18181818181818182,
+              "threshold": 0.8,
+              "pass": false
+            },
+            "summaryAccuracy": {
+              "matched": 0,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "developerConsiderationGrounding": {
+              "matched": 2,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.25,
+              "threshold": 1,
+              "pass": false
+            },
+            "confidencePolicyConsistency": {
+              "matched": 8,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 1,
+              "threshold": 1,
+              "pass": true
+            }
+          }
+        },
+        "measuredDelta": {
+          "measured": true,
+          "baseline": {
+            "attempts": 8,
+            "rawResponses": 8,
+            "strictPasses": 0,
+            "runtimeAccepted": 8,
+            "strictPassRate": 0,
+            "runtimeAcceptanceRate": 1,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "sourceGrounding": 0,
+              "redispatchSafety": 0.875
+            },
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "matched": 6,
+                "total": 39,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.15384615384615385,
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "matched": 38,
+                "total": 49,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.7755102040816326,
+                "threshold": 0.9,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "matched": 4,
+                "total": 22,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.18181818181818182,
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "matched": 0,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "matched": 2,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.25,
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "matched": 7,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.875,
+                "threshold": 1,
+                "pass": false
+              }
+            }
+          },
+          "current": {
+            "attempts": 8,
+            "rawResponses": 8,
+            "strictPasses": 0,
+            "runtimeAccepted": 8,
+            "strictPassRate": 0,
+            "runtimeAcceptanceRate": 1,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "sourceGrounding": 0,
+              "redispatchSafety": 0.875
+            },
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "matched": 5,
+                "total": 39,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.1282051282051282,
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "matched": 40,
+                "total": 49,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.8163265306122449,
+                "threshold": 0.9,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "matched": 4,
+                "total": 22,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.18181818181818182,
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "matched": 0,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "matched": 2,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.25,
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "matched": 8,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 1,
+                "threshold": 1,
+                "pass": true
+              }
+            }
+          },
+          "metrics": {
+            "requirementExtractionAccuracy": {
+              "baseline": 0.15384615384615385,
+              "current": 0.1282051282051282,
+              "delta": -0.02564102564102566
+            },
+            "hvacTerminologyRecognition": {
+              "baseline": 0.7755102040816326,
+              "current": 0.8163265306122449,
+              "delta": 0.04081632653061229
+            },
+            "ambiguityDetection": {
+              "baseline": 0.18181818181818182,
+              "current": 0.18181818181818182,
+              "delta": 0
+            },
+            "summaryAccuracy": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "developerConsiderationGrounding": {
+              "baseline": 0.25,
+              "current": 0.25,
+              "delta": 0
+            },
+            "confidencePolicyConsistency": {
+              "baseline": 0.875,
+              "current": 1,
+              "delta": 0.125
+            }
+          },
+          "gates": {
+            "rawResponseFormat": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "schemaConformance": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "sourceGrounding": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "redispatchSafety": {
+              "baseline": 0.875,
+              "current": 0.875,
+              "delta": 0
+            }
+          },
+          "strictPassDelta": 0,
+          "runtimeAcceptanceDelta": 0,
+          "anyPositiveDelta": true
+        },
+        "evidence": "evidence/f6-20261030/v1/attempts.json"
+      },
+      {
+        "version": "v2",
+        "reason": "Add a final omission/identity/character audit after the v1 task decomposition; no new facts or output repair.",
+        "addedInstructions": [
+          "Privately audit the draft against the ticket once more: no dropped dependency, no swapped HVAC abbreviation, no lost increment or special configuration override, no invented limit, default, rounding tie rule, or error policy.",
+          "Ask separate, concise questions for genuinely unspecified behavior; do not ask a question the ticket answers. On redispatch, perform this audit without rewording unanswered previous ambiguities or changing their resolution identities."
+        ],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v2/requirement-interpreter.md",
+          "sha256": "8906f88e1915f1f4399b79b2816779f8b6633ad50e62a9b00edd55cd7eabfaf4"
+        },
+        "baseline": "v1",
+        "measuredOutcome": {
+          "attempts": 8,
+          "rawResponses": 8,
+          "strictPasses": 0,
+          "runtimeAccepted": 8,
+          "strictPassRate": 0,
+          "runtimeAcceptanceRate": 1,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "sourceGrounding": 0,
+            "redispatchSafety": 0.875
+          },
+          "metrics": {
+            "requirementExtractionAccuracy": {
+              "matched": 3,
+              "total": 39,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.07692307692307693,
+              "threshold": 0.9,
+              "pass": false
+            },
+            "hvacTerminologyRecognition": {
+              "matched": 39,
+              "total": 49,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.7959183673469388,
+              "threshold": 0.9,
+              "pass": false
+            },
+            "ambiguityDetection": {
+              "matched": 4,
+              "total": 22,
+              "applicableCases": 7,
+              "naCases": 1,
+              "applicable": true,
+              "score": 0.18181818181818182,
+              "threshold": 0.8,
+              "pass": false
+            },
+            "summaryAccuracy": {
+              "matched": 0,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "developerConsiderationGrounding": {
+              "matched": 2,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.25,
+              "threshold": 1,
+              "pass": false
+            },
+            "confidencePolicyConsistency": {
+              "matched": 8,
+              "total": 8,
+              "applicableCases": 8,
+              "naCases": 0,
+              "applicable": true,
+              "score": 1,
+              "threshold": 1,
+              "pass": true
+            }
+          }
+        },
+        "measuredDelta": {
+          "measured": true,
+          "baseline": {
+            "attempts": 8,
+            "rawResponses": 8,
+            "strictPasses": 0,
+            "runtimeAccepted": 8,
+            "strictPassRate": 0,
+            "runtimeAcceptanceRate": 1,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "sourceGrounding": 0,
+              "redispatchSafety": 0.875
+            },
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "matched": 5,
+                "total": 39,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.1282051282051282,
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "matched": 40,
+                "total": 49,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.8163265306122449,
+                "threshold": 0.9,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "matched": 4,
+                "total": 22,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.18181818181818182,
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "matched": 0,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "matched": 2,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.25,
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "matched": 8,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 1,
+                "threshold": 1,
+                "pass": true
+              }
+            }
+          },
+          "current": {
+            "attempts": 8,
+            "rawResponses": 8,
+            "strictPasses": 0,
+            "runtimeAccepted": 8,
+            "strictPassRate": 0,
+            "runtimeAcceptanceRate": 1,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "sourceGrounding": 0,
+              "redispatchSafety": 0.875
+            },
+            "metrics": {
+              "requirementExtractionAccuracy": {
+                "matched": 3,
+                "total": 39,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.07692307692307693,
+                "threshold": 0.9,
+                "pass": false
+              },
+              "hvacTerminologyRecognition": {
+                "matched": 39,
+                "total": 49,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.7959183673469388,
+                "threshold": 0.9,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "matched": 4,
+                "total": 22,
+                "applicableCases": 7,
+                "naCases": 1,
+                "applicable": true,
+                "score": 0.18181818181818182,
+                "threshold": 0.8,
+                "pass": false
+              },
+              "summaryAccuracy": {
+                "matched": 0,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "developerConsiderationGrounding": {
+                "matched": 2,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.25,
+                "threshold": 1,
+                "pass": false
+              },
+              "confidencePolicyConsistency": {
+                "matched": 8,
+                "total": 8,
+                "applicableCases": 8,
+                "naCases": 0,
+                "applicable": true,
+                "score": 1,
+                "threshold": 1,
+                "pass": true
+              }
+            }
+          },
+          "metrics": {
+            "requirementExtractionAccuracy": {
+              "baseline": 0.1282051282051282,
+              "current": 0.07692307692307693,
+              "delta": -0.051282051282051266
+            },
+            "hvacTerminologyRecognition": {
+              "baseline": 0.8163265306122449,
+              "current": 0.7959183673469388,
+              "delta": -0.020408163265306145
+            },
+            "ambiguityDetection": {
+              "baseline": 0.18181818181818182,
+              "current": 0.18181818181818182,
+              "delta": 0
+            },
+            "summaryAccuracy": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "developerConsiderationGrounding": {
+              "baseline": 0.25,
+              "current": 0.25,
+              "delta": 0
+            },
+            "confidencePolicyConsistency": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            }
+          },
+          "gates": {
+            "rawResponseFormat": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "schemaConformance": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "sourceGrounding": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "redispatchSafety": {
+              "baseline": 0.875,
+              "current": 0.875,
+              "delta": 0
+            }
+          },
+          "strictPassDelta": 0,
+          "runtimeAcceptanceDelta": 0,
+          "anyPositiveDelta": false
+        },
+        "evidence": "evidence/f6-20261030/v2/attempts.json"
+      }
+    ]
+  },
+  {
+    "agent": "adversarial-reviewer",
+    "versions": [
+      {
+        "version": "v0",
+        "reason": "Prospective baseline: unchanged post-F3 production prompts, not reconstructed historical performance.",
+        "addedInstructions": [],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v0/adversarial-reviewer.md",
+          "sha256": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713"
+        },
+        "baseline": null,
+        "measuredOutcome": {
+          "attempts": 16,
+          "rawResponses": 16,
+          "strictPasses": 0,
+          "runtimeAccepted": 15,
+          "strictPassRate": 0,
+          "runtimeAcceptanceRate": 0.9375,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "runtimeContract": 0.9375,
+            "falsePositiveControl": 0.1875,
+            "rationaleGrounding": 0,
+            "concernContinuity": 0.875
+          },
+          "metrics": {
+            "unsupportedAssumptionDetection": {
+              "matched": 0,
+              "total": 2,
+              "applicableCases": 2,
+              "naCases": 14,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.85,
+              "pass": false
+            },
+            "missingRequirementDetection": {
+              "matched": 0,
+              "total": 13,
+              "applicableCases": 5,
+              "naCases": 11,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.85,
+              "pass": false
+            },
+            "hvacInterpretationErrorDetection": {
+              "matched": 0,
+              "total": 1,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "missingValidationDetection": {
+              "matched": 0,
+              "total": 1,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "ambiguityDetection": {
+              "matched": 0,
+              "total": 28,
+              "applicableCases": 8,
+              "naCases": 8,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.8,
+              "pass": false
+            },
+            "boundaryChallengeCoverage": {
+              "matched": 0,
+              "total": 5,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "challengeQuality": {
+              "matched": 1,
+              "total": 32,
+              "applicableCases": 16,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.03125,
+              "threshold": 0.9,
+              "pass": false
+            }
+          }
+        },
+        "measuredDelta": null,
+        "evidence": "evidence/f6-20261030/v0/attempts.json"
+      },
+      {
+        "version": "v1",
+        "reason": "Separate extraction, review comparison, and literal transcription from speculative completion.",
+        "addedInstructions": [
+          "Before drafting findings, compare each ticket proposition against the entire actual interpretation, not businessRules alone. A proposition already captured in the summary or developerConsiderations is not absent everywhere.",
+          "For each proposed finding, privately identify the specific defective scalar or the missing proposition. Then copy the shortest sufficient ticket quote and the complete relevant interpreter scalar, with its zero-based pointer. Reject your own finding if the input already corrects the alleged defect."
+        ],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v1/adversarial-reviewer.md",
+          "sha256": "1f3c3b63078929789918a7b722eb53b04d46d7a9a83ff0885e50f6b6bb48ebb3"
+        },
+        "baseline": "v0",
+        "measuredOutcome": {
+          "attempts": 16,
+          "rawResponses": 16,
+          "strictPasses": 0,
+          "runtimeAccepted": 16,
+          "strictPassRate": 0,
+          "runtimeAcceptanceRate": 1,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "runtimeContract": 1,
+            "falsePositiveControl": 0.3125,
+            "rationaleGrounding": 0,
+            "concernContinuity": 0.875
+          },
+          "metrics": {
+            "unsupportedAssumptionDetection": {
+              "matched": 0,
+              "total": 2,
+              "applicableCases": 2,
+              "naCases": 14,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.85,
+              "pass": false
+            },
+            "missingRequirementDetection": {
+              "matched": 0,
+              "total": 13,
+              "applicableCases": 5,
+              "naCases": 11,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.85,
+              "pass": false
+            },
+            "hvacInterpretationErrorDetection": {
+              "matched": 0,
+              "total": 1,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "missingValidationDetection": {
+              "matched": 0,
+              "total": 1,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "ambiguityDetection": {
+              "matched": 0,
+              "total": 28,
+              "applicableCases": 8,
+              "naCases": 8,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.8,
+              "pass": false
+            },
+            "boundaryChallengeCoverage": {
+              "matched": 0,
+              "total": 5,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "challengeQuality": {
+              "matched": 1,
+              "total": 32,
+              "applicableCases": 16,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.03125,
+              "threshold": 0.9,
+              "pass": false
+            }
+          }
+        },
+        "measuredDelta": {
+          "measured": true,
+          "baseline": {
+            "attempts": 16,
+            "rawResponses": 16,
+            "strictPasses": 0,
+            "runtimeAccepted": 15,
+            "strictPassRate": 0,
+            "runtimeAcceptanceRate": 0.9375,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "runtimeContract": 0.9375,
+              "falsePositiveControl": 0.1875,
+              "rationaleGrounding": 0,
+              "concernContinuity": 0.875
+            },
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "matched": 0,
+                "total": 2,
+                "applicableCases": 2,
+                "naCases": 14,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.85,
+                "pass": false
+              },
+              "missingRequirementDetection": {
+                "matched": 0,
+                "total": 13,
+                "applicableCases": 5,
+                "naCases": 11,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "matched": 0,
+                "total": 1,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "missingValidationDetection": {
+                "matched": 0,
+                "total": 1,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "matched": 0,
+                "total": 28,
+                "applicableCases": 8,
+                "naCases": 8,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "matched": 0,
+                "total": 5,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "challengeQuality": {
+                "matched": 1,
+                "total": 32,
+                "applicableCases": 16,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.03125,
+                "threshold": 0.9,
+                "pass": false
+              }
+            }
+          },
+          "current": {
+            "attempts": 16,
+            "rawResponses": 16,
+            "strictPasses": 0,
+            "runtimeAccepted": 16,
+            "strictPassRate": 0,
+            "runtimeAcceptanceRate": 1,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "runtimeContract": 1,
+              "falsePositiveControl": 0.3125,
+              "rationaleGrounding": 0,
+              "concernContinuity": 0.875
+            },
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "matched": 0,
+                "total": 2,
+                "applicableCases": 2,
+                "naCases": 14,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.85,
+                "pass": false
+              },
+              "missingRequirementDetection": {
+                "matched": 0,
+                "total": 13,
+                "applicableCases": 5,
+                "naCases": 11,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "matched": 0,
+                "total": 1,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "missingValidationDetection": {
+                "matched": 0,
+                "total": 1,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "matched": 0,
+                "total": 28,
+                "applicableCases": 8,
+                "naCases": 8,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "matched": 0,
+                "total": 5,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "challengeQuality": {
+                "matched": 1,
+                "total": 32,
+                "applicableCases": 16,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.03125,
+                "threshold": 0.9,
+                "pass": false
+              }
+            }
+          },
+          "metrics": {
+            "unsupportedAssumptionDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "missingRequirementDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "hvacInterpretationErrorDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "missingValidationDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "ambiguityDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "boundaryChallengeCoverage": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "challengeQuality": {
+              "baseline": 0.03125,
+              "current": 0.03125,
+              "delta": 0
+            }
+          },
+          "gates": {
+            "rawResponseFormat": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "schemaConformance": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "runtimeContract": {
+              "baseline": 0.9375,
+              "current": 1,
+              "delta": 0.0625
+            },
+            "falsePositiveControl": {
+              "baseline": 0.1875,
+              "current": 0.3125,
+              "delta": 0.125
+            },
+            "rationaleGrounding": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "concernContinuity": {
+              "baseline": 0.875,
+              "current": 0.875,
+              "delta": 0
+            }
+          },
+          "strictPassDelta": 0,
+          "runtimeAcceptanceDelta": 0.0625,
+          "anyPositiveDelta": true
+        },
+        "evidence": "evidence/f6-20261030/v1/attempts.json"
+      },
+      {
+        "version": "v2",
+        "reason": "Add a final omission/identity/character audit after the v1 task decomposition; no new facts or output repair.",
+        "addedInstructions": [
+          "Privately audit every finding before emitting JSON: its claim must still be true for the current input, its action must address exactly that defect, and its severity must reflect impact rather than the number of findings.",
+          "Run a final pointer/identity checklist: every current ambiguity index is covered, every interpreter quote equals the complete scalar at that pointer, every non-ambiguity finding has ambiguityRefs: [], and every disappearing prior ID has a supported resolution. Do not turn this checklist into additional findings."
+        ],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v2/adversarial-reviewer.md",
+          "sha256": "d60e7b732f1f8049550871b3304a9340ae78c525a43b741c8cc672741741697f"
+        },
+        "baseline": "v1",
+        "measuredOutcome": {
+          "attempts": 16,
+          "rawResponses": 16,
+          "strictPasses": 0,
+          "runtimeAccepted": 14,
+          "strictPassRate": 0,
+          "runtimeAcceptanceRate": 0.875,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "runtimeContract": 0.875,
+            "falsePositiveControl": 0.1875,
+            "rationaleGrounding": 0,
+            "concernContinuity": 0.75
+          },
+          "metrics": {
+            "unsupportedAssumptionDetection": {
+              "matched": 0,
+              "total": 2,
+              "applicableCases": 2,
+              "naCases": 14,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.85,
+              "pass": false
+            },
+            "missingRequirementDetection": {
+              "matched": 0,
+              "total": 13,
+              "applicableCases": 5,
+              "naCases": 11,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.85,
+              "pass": false
+            },
+            "hvacInterpretationErrorDetection": {
+              "matched": 0,
+              "total": 1,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "missingValidationDetection": {
+              "matched": 0,
+              "total": 1,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "ambiguityDetection": {
+              "matched": 0,
+              "total": 28,
+              "applicableCases": 8,
+              "naCases": 8,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.8,
+              "pass": false
+            },
+            "boundaryChallengeCoverage": {
+              "matched": 0,
+              "total": 5,
+              "applicableCases": 1,
+              "naCases": 15,
+              "applicable": true,
+              "score": 0,
+              "threshold": 1,
+              "pass": false
+            },
+            "challengeQuality": {
+              "matched": 0,
+              "total": 32,
+              "applicableCases": 16,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0,
+              "threshold": 0.9,
+              "pass": false
+            }
+          }
+        },
+        "measuredDelta": {
+          "measured": true,
+          "baseline": {
+            "attempts": 16,
+            "rawResponses": 16,
+            "strictPasses": 0,
+            "runtimeAccepted": 16,
+            "strictPassRate": 0,
+            "runtimeAcceptanceRate": 1,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "runtimeContract": 1,
+              "falsePositiveControl": 0.3125,
+              "rationaleGrounding": 0,
+              "concernContinuity": 0.875
+            },
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "matched": 0,
+                "total": 2,
+                "applicableCases": 2,
+                "naCases": 14,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.85,
+                "pass": false
+              },
+              "missingRequirementDetection": {
+                "matched": 0,
+                "total": 13,
+                "applicableCases": 5,
+                "naCases": 11,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "matched": 0,
+                "total": 1,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "missingValidationDetection": {
+                "matched": 0,
+                "total": 1,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "matched": 0,
+                "total": 28,
+                "applicableCases": 8,
+                "naCases": 8,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "matched": 0,
+                "total": 5,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "challengeQuality": {
+                "matched": 1,
+                "total": 32,
+                "applicableCases": 16,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.03125,
+                "threshold": 0.9,
+                "pass": false
+              }
+            }
+          },
+          "current": {
+            "attempts": 16,
+            "rawResponses": 16,
+            "strictPasses": 0,
+            "runtimeAccepted": 14,
+            "strictPassRate": 0,
+            "runtimeAcceptanceRate": 0.875,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "runtimeContract": 0.875,
+              "falsePositiveControl": 0.1875,
+              "rationaleGrounding": 0,
+              "concernContinuity": 0.75
+            },
+            "metrics": {
+              "unsupportedAssumptionDetection": {
+                "matched": 0,
+                "total": 2,
+                "applicableCases": 2,
+                "naCases": 14,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.85,
+                "pass": false
+              },
+              "missingRequirementDetection": {
+                "matched": 0,
+                "total": 13,
+                "applicableCases": 5,
+                "naCases": 11,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.85,
+                "pass": false
+              },
+              "hvacInterpretationErrorDetection": {
+                "matched": 0,
+                "total": 1,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "missingValidationDetection": {
+                "matched": 0,
+                "total": 1,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "ambiguityDetection": {
+                "matched": 0,
+                "total": 28,
+                "applicableCases": 8,
+                "naCases": 8,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.8,
+                "pass": false
+              },
+              "boundaryChallengeCoverage": {
+                "matched": 0,
+                "total": 5,
+                "applicableCases": 1,
+                "naCases": 15,
+                "applicable": true,
+                "score": 0,
+                "threshold": 1,
+                "pass": false
+              },
+              "challengeQuality": {
+                "matched": 0,
+                "total": 32,
+                "applicableCases": 16,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0,
+                "threshold": 0.9,
+                "pass": false
+              }
+            }
+          },
+          "metrics": {
+            "unsupportedAssumptionDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "missingRequirementDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "hvacInterpretationErrorDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "missingValidationDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "ambiguityDetection": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "boundaryChallengeCoverage": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "challengeQuality": {
+              "baseline": 0.03125,
+              "current": 0,
+              "delta": -0.03125
+            }
+          },
+          "gates": {
+            "rawResponseFormat": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "schemaConformance": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "runtimeContract": {
+              "baseline": 1,
+              "current": 0.875,
+              "delta": -0.125
+            },
+            "falsePositiveControl": {
+              "baseline": 0.3125,
+              "current": 0.1875,
+              "delta": -0.125
+            },
+            "rationaleGrounding": {
+              "baseline": 0,
+              "current": 0,
+              "delta": 0
+            },
+            "concernContinuity": {
+              "baseline": 0.875,
+              "current": 0.75,
+              "delta": -0.125
+            }
+          },
+          "strictPassDelta": 0,
+          "runtimeAcceptanceDelta": -0.125,
+          "anyPositiveDelta": false
+        },
+        "evidence": "evidence/f6-20261030/v2/attempts.json"
+      }
+    ]
+  },
+  {
+    "agent": "final-review-writer",
+    "versions": [
+      {
+        "version": "v0",
+        "reason": "Prospective baseline: unchanged post-F3 production prompts, not reconstructed historical performance.",
+        "addedInstructions": [],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v0/final-review-writer.md",
+          "sha256": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e"
+        },
+        "baseline": null,
+        "measuredOutcome": {
+          "attempts": 4,
+          "rawResponses": 4,
+          "strictPasses": 3,
+          "runtimeAccepted": 3,
+          "strictPassRate": 0.75,
+          "runtimeAcceptanceRate": 0.75,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "upstreamContract": 1,
+            "reportStructure": 1,
+            "conclusionGrounding": 0.75,
+            "boundedReport": 0.75
+          },
+          "metrics": {
+            "findingPreservation": {
+              "matched": 3,
+              "total": 4,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.75,
+              "threshold": 1,
+              "pass": false
+            },
+            "reportCompleteness": {
+              "matched": 13,
+              "total": 14,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.9285714285714286,
+              "threshold": 1,
+              "pass": false
+            },
+            "outputQuality": {
+              "matched": 14,
+              "total": 16,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.875,
+              "threshold": 0.95,
+              "pass": false
+            }
+          }
+        },
+        "measuredDelta": null,
+        "evidence": "evidence/f6-20261030/v0/attempts.json"
+      },
+      {
+        "version": "v1",
+        "reason": "Separate extraction, review comparison, and literal transcription from speculative completion.",
+        "addedInstructions": [
+          "Treat reportTemplate as an opaque character sequence, not a draft to edit. Produce exactly one JSON string encoding of that sequence as reportMarkdown. Do not regenerate the report from the other input sections.",
+          "Use these JSON encoding rules on template characters: an existing backslash becomes \\\\, an existing double quote becomes \\\", and a line break becomes \\n. Leave words, punctuation, and Markdown delimiters unchanged."
+        ],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v1/final-review-writer.md",
+          "sha256": "1ebd0c8aec89f800e7c5b2cbf196c8e479d6148f86d2f4a9510e22086c5f6f30"
+        },
+        "baseline": "v0",
+        "measuredOutcome": {
+          "attempts": 4,
+          "rawResponses": 4,
+          "strictPasses": 3,
+          "runtimeAccepted": 3,
+          "strictPassRate": 0.75,
+          "runtimeAcceptanceRate": 0.75,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "upstreamContract": 1,
+            "reportStructure": 1,
+            "conclusionGrounding": 0.75,
+            "boundedReport": 0.75
+          },
+          "metrics": {
+            "findingPreservation": {
+              "matched": 3,
+              "total": 4,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.75,
+              "threshold": 1,
+              "pass": false
+            },
+            "reportCompleteness": {
+              "matched": 13,
+              "total": 14,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.9285714285714286,
+              "threshold": 1,
+              "pass": false
+            },
+            "outputQuality": {
+              "matched": 14,
+              "total": 16,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 0.875,
+              "threshold": 0.95,
+              "pass": false
+            }
+          }
+        },
+        "measuredDelta": {
+          "measured": true,
+          "baseline": {
+            "attempts": 4,
+            "rawResponses": 4,
+            "strictPasses": 3,
+            "runtimeAccepted": 3,
+            "strictPassRate": 0.75,
+            "runtimeAcceptanceRate": 0.75,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "upstreamContract": 1,
+              "reportStructure": 1,
+              "conclusionGrounding": 0.75,
+              "boundedReport": 0.75
+            },
+            "metrics": {
+              "findingPreservation": {
+                "matched": 3,
+                "total": 4,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.75,
+                "threshold": 1,
+                "pass": false
+              },
+              "reportCompleteness": {
+                "matched": 13,
+                "total": 14,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.9285714285714286,
+                "threshold": 1,
+                "pass": false
+              },
+              "outputQuality": {
+                "matched": 14,
+                "total": 16,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.875,
+                "threshold": 0.95,
+                "pass": false
+              }
+            }
+          },
+          "current": {
+            "attempts": 4,
+            "rawResponses": 4,
+            "strictPasses": 3,
+            "runtimeAccepted": 3,
+            "strictPassRate": 0.75,
+            "runtimeAcceptanceRate": 0.75,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "upstreamContract": 1,
+              "reportStructure": 1,
+              "conclusionGrounding": 0.75,
+              "boundedReport": 0.75
+            },
+            "metrics": {
+              "findingPreservation": {
+                "matched": 3,
+                "total": 4,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.75,
+                "threshold": 1,
+                "pass": false
+              },
+              "reportCompleteness": {
+                "matched": 13,
+                "total": 14,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.9285714285714286,
+                "threshold": 1,
+                "pass": false
+              },
+              "outputQuality": {
+                "matched": 14,
+                "total": 16,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.875,
+                "threshold": 0.95,
+                "pass": false
+              }
+            }
+          },
+          "metrics": {
+            "findingPreservation": {
+              "baseline": 0.75,
+              "current": 0.75,
+              "delta": 0
+            },
+            "reportCompleteness": {
+              "baseline": 0.9285714285714286,
+              "current": 0.9285714285714286,
+              "delta": 0
+            },
+            "outputQuality": {
+              "baseline": 0.875,
+              "current": 0.875,
+              "delta": 0
+            }
+          },
+          "gates": {
+            "rawResponseFormat": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "schemaConformance": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "upstreamContract": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "reportStructure": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "conclusionGrounding": {
+              "baseline": 0.75,
+              "current": 0.75,
+              "delta": 0
+            },
+            "boundedReport": {
+              "baseline": 0.75,
+              "current": 0.75,
+              "delta": 0
+            }
+          },
+          "strictPassDelta": 0,
+          "runtimeAcceptanceDelta": 0,
+          "anyPositiveDelta": false
+        },
+        "evidence": "evidence/f6-20261030/v1/attempts.json"
+      },
+      {
+        "version": "v2",
+        "reason": "Add a final omission/identity/character audit after the v1 task decomposition; no new facts or output repair.",
+        "addedInstructions": [
+          "Before returning, privately compare the value obtained by decoding your proposed outer JSON once with reportTemplate from beginning to end. Check the first differing character rather than accepting equivalent meaning.",
+          "Specifically check repeated backslashes, quotes inside already quoted Markdown rows, and short conjunctions such as or/and. Preserve them literally. This check is internal only: return no commentary, checksum, or extra fields."
+        ],
+        "template": {
+          "file": "evidence/f6-20261030/prompts/v2/final-review-writer.md",
+          "sha256": "607f2844a1678f58f9e80ea3dac77552a23a679f60585128dd7dbf2fcaf4ffec"
+        },
+        "baseline": "v1",
+        "measuredOutcome": {
+          "attempts": 4,
+          "rawResponses": 4,
+          "strictPasses": 4,
+          "runtimeAccepted": 4,
+          "strictPassRate": 1,
+          "runtimeAcceptanceRate": 1,
+          "gates": {
+            "rawResponseFormat": 1,
+            "schemaConformance": 1,
+            "upstreamContract": 1,
+            "reportStructure": 1,
+            "conclusionGrounding": 1,
+            "boundedReport": 1
+          },
+          "metrics": {
+            "findingPreservation": {
+              "matched": 4,
+              "total": 4,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 1,
+              "threshold": 1,
+              "pass": true
+            },
+            "reportCompleteness": {
+              "matched": 14,
+              "total": 14,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 1,
+              "threshold": 1,
+              "pass": true
+            },
+            "outputQuality": {
+              "matched": 16,
+              "total": 16,
+              "applicableCases": 4,
+              "naCases": 0,
+              "applicable": true,
+              "score": 1,
+              "threshold": 0.95,
+              "pass": true
+            }
+          }
+        },
+        "measuredDelta": {
+          "measured": true,
+          "baseline": {
+            "attempts": 4,
+            "rawResponses": 4,
+            "strictPasses": 3,
+            "runtimeAccepted": 3,
+            "strictPassRate": 0.75,
+            "runtimeAcceptanceRate": 0.75,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "upstreamContract": 1,
+              "reportStructure": 1,
+              "conclusionGrounding": 0.75,
+              "boundedReport": 0.75
+            },
+            "metrics": {
+              "findingPreservation": {
+                "matched": 3,
+                "total": 4,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.75,
+                "threshold": 1,
+                "pass": false
+              },
+              "reportCompleteness": {
+                "matched": 13,
+                "total": 14,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.9285714285714286,
+                "threshold": 1,
+                "pass": false
+              },
+              "outputQuality": {
+                "matched": 14,
+                "total": 16,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 0.875,
+                "threshold": 0.95,
+                "pass": false
+              }
+            }
+          },
+          "current": {
+            "attempts": 4,
+            "rawResponses": 4,
+            "strictPasses": 4,
+            "runtimeAccepted": 4,
+            "strictPassRate": 1,
+            "runtimeAcceptanceRate": 1,
+            "gates": {
+              "rawResponseFormat": 1,
+              "schemaConformance": 1,
+              "upstreamContract": 1,
+              "reportStructure": 1,
+              "conclusionGrounding": 1,
+              "boundedReport": 1
+            },
+            "metrics": {
+              "findingPreservation": {
+                "matched": 4,
+                "total": 4,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 1,
+                "threshold": 1,
+                "pass": true
+              },
+              "reportCompleteness": {
+                "matched": 14,
+                "total": 14,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 1,
+                "threshold": 1,
+                "pass": true
+              },
+              "outputQuality": {
+                "matched": 16,
+                "total": 16,
+                "applicableCases": 4,
+                "naCases": 0,
+                "applicable": true,
+                "score": 1,
+                "threshold": 0.95,
+                "pass": true
+              }
+            }
+          },
+          "metrics": {
+            "findingPreservation": {
+              "baseline": 0.75,
+              "current": 1,
+              "delta": 0.25
+            },
+            "reportCompleteness": {
+              "baseline": 0.9285714285714286,
+              "current": 1,
+              "delta": 0.0714285714285714
+            },
+            "outputQuality": {
+              "baseline": 0.875,
+              "current": 1,
+              "delta": 0.125
+            }
+          },
+          "gates": {
+            "rawResponseFormat": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "schemaConformance": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "upstreamContract": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "reportStructure": {
+              "baseline": 1,
+              "current": 1,
+              "delta": 0
+            },
+            "conclusionGrounding": {
+              "baseline": 0.75,
+              "current": 1,
+              "delta": 0.25
+            },
+            "boundedReport": {
+              "baseline": 0.75,
+              "current": 1,
+              "delta": 0.25
+            }
+          },
+          "strictPassDelta": 0.25,
+          "runtimeAcceptanceDelta": 0.25,
+          "anyPositiveDelta": true
+        },
+        "evidence": "evidence/f6-20261030/v2/attempts.json"
+      }
+    ]
+  }
+]

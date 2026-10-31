@@ -1,0 +1,15 @@
+{
+  "requirementSummary": "The ticket requests that the DX Coil Height field update immediately after each edit, but also states it must never update after an edit.",
+  "hvacTerminology": [
+    "DX Coil Height"
+  ],
+  "businessRules": [
+    "DX Coil Height must update immediately after every edit.",
+    "DX Coil Height must never update after an edit."
+  ],
+  "developerConsiderations": [],
+  "ambiguities": [
+    "The ticket contains contradictory requirements: one says DX Coil Height must update immediately after every edit, another says it must never update after an edit. Which behavior is intended?"
+  ],
+  "confidence": "LOW"
+}

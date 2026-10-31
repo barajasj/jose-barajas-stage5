@@ -1,0 +1,75 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter accurately reflected the ticket's validation rules, but it left four ambiguities unresolved. Each ambiguity must be clarified before the implementation can be considered complete, so the review fails.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Exact rounding tie-breaking is unspecified.",
+      "action": "Obtain clarification from the ticket owner on how to break ties when rounding to the nearest increment.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "Exact rounding tie-breaking is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The source of the 1-inch spacing configuration is unspecified.",
+      "action": "Obtain clarification from the ticket owner on the origin and definition of the 1-inch spacing configuration for the 3/8-inch tube.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The source of the 1-inch spacing configuration is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The response to out-of-range input is unspecified.",
+      "action": "Obtain clarification from the ticket owner on the required behavior when a user enters a coil height outside the 1.25\" to 100\" range.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The response to out-of-range input is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Behavior for an unlisted coil configuration is unspecified.",
+      "action": "Obtain clarification from the ticket owner on how to handle coil height validation for coil configurations not listed in the increment table.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Behavior for an unlisted coil configuration is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    }
+  ],
+  "resolutions": []
+}

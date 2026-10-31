@@ -1,6 +1,31 @@
 # HVAC Requirement Interpreter Evaluation
 
-## Current Live Evidence - Deliverable 5
+## F6 Measured Prompt Changes
+
+Protocol: `docs/F6-MEASUREMENT.md`; versions/hypotheses:
+`evals/f6-iterations.js`; ledger: `prompts/prompt-evolution.md`.
+Eight fixed interpreter cases were measured unchanged across v0->v1->v2 (24
+real responses). The corrected scorer/labels stayed frozen.
+
+| Measurement | v0 | v1 | v2 | Cycle 1 Delta | Cycle 2 Delta |
+|---|---:|---:|---:|---:|---:|
+| Strict full-step passes | 0/8 | 0/8 | 0/8 | 0 pp | 0 pp |
+| Runtime accepted | 8/8 | 8/8 | 8/8 | 0 pp | 0 pp |
+| Confidence-policy consistency | 7/8 | 8/8 | 8/8 | +12.5 pp | 0 pp |
+| HVAC terminology matches | 38/49 | 40/49 | 39/49 | +4.08 pp | -2.04 pp |
+| Requirement extraction matches | 6/39 | 5/39 | 3/39 | -2.56 pp | -5.13 pp |
+
+v1 adds explicit extraction/policy separation; v2 adds a final
+omission/speculation audit. Confidence-policy improvement does not compensate for
+declining extraction scores or failed hard gates. These bounded-label scores are
+not independently adjudicated semantic error rates. No candidate was promoted.
+
+All raw responses, per-case gates, exact version hashes/diffs, and both cycles'
+unrounded paired results: [measured summary](../evidence/f6-20261030/MEASURED-SUMMARY.md),
+[machine results](../evidence/f6-20261030/measured-results.json),
+[prompt ledger](../evidence/f6-20261030/prompt-evolution-ledger.json).
+
+## Preserved Live Evidence - Deliverable 5
 
 Authoritative package: `evidence/d5-20261030T1940Z/`, collected 2026-10-30.
 All 26 direct cases have untouched real responses; all 15 mandatory metric types

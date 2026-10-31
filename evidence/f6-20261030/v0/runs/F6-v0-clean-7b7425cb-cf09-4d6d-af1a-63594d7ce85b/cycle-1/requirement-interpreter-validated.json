@@ -1,0 +1,27 @@
+{
+  "requirementSummary": "DX Coil Height must be calculated as the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are already validated and no additional behavior is required.",
+  "hvacTerminology": [
+    "DX Coil",
+    "Cooling Circuit",
+    "Height"
+  ],
+  "businessRules": [
+    "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+    "Recalculate immediately after a height edit.",
+    "An empty circuit list produces 0 inches.",
+    "Inputs are already validated; no other behavior is in scope."
+  ],
+  "developerConsiderations": [
+    "Trigger recalculation on the height edit event.",
+    "Resulting DX Coil Height must be expressed in inches.",
+    "Handle an empty circuit list by returning 0 inches.",
+    "Do not perform additional input validation."
+  ],
+  "ambiguities": [
+    "What specific change should trigger the immediate recalculation (e.g., edit of a circuit height, addition/removal of a circuit, etc.)?",
+    "Should the sum be rounded or formatted in any particular way, or retain full precision?",
+    "Should only certain circuits be included in the sum (e.g., active circuits), or are all circuits always summed?",
+    "Is there any maximum or minimum allowed DX Coil Height beyond the sum calculation?"
+  ],
+  "confidence": "MEDIUM"
+}

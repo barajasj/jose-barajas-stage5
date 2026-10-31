@@ -1,0 +1,8 @@
+{
+  "version": "v1",
+  "caseId": "boundary",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v1-boundary-d0e5a1b6-323e-4f3a-9a8d-bb10c423b03b",
+  "inputHash": "6597b6fcbc73a175f621c3d821be8ed05fd00a9812b139d2c6bb7c713607e14c",
+  "startedAt": "2026-10-30T23:14:57.255Z"
+}

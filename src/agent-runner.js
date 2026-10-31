@@ -33,7 +33,7 @@ function hash(value) {
   return createHash('sha256').update(value).digest('hex');
 }
 
-function createAgentRunner({ invokeModel = invokeLlm } = {}) {
+function createAgentRunner({ invokeModel = invokeLlm, promptFiles = {} } = {}) {
   return async function runAgent(agentId, input, correlationId, options = {}) {
     const {
       cycle = 1,
@@ -71,7 +71,7 @@ function createAgentRunner({ invokeModel = invokeLlm } = {}) {
           'Ticket must be nonblank text.');
       }
       input = JSON.parse(JSON.stringify(input));
-      const promptFile = path.resolve(__dirname, '..', agent.promptFile);
+      const promptFile = path.resolve(__dirname, '..', promptFiles[agentId] || agent.promptFile);
       const schemaFile = path.resolve(__dirname, '..', agent.schemaFile);
       const variables = { ...input, reviewCycle: cycle };
       if (agentId === 'adversarial-reviewer') {

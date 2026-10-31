@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "caseId": "missing",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v1-missing-11d01002-23c2-45cd-86a9-63e1489b40a5",
+  "inputHash": "a2329678935c63e16fc35269959a10e8d684d5efa68304bda3bdbea045ac82af",
+  "startedAt": "2026-10-30T23:14:26.947Z",
+  "finishedAt": "2026-10-30T23:14:30.094Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v1/runs/F6-v1-missing-11d01002-23c2-45cd-86a9-63e1489b40a5/cycle-1"
+}

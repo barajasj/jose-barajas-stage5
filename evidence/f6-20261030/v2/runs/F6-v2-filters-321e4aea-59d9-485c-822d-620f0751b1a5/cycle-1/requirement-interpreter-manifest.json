@@ -1,0 +1,29 @@
+{
+  "correlationId": "F6-v2-filters-321e4aea-59d9-485c-822d-620f0751b1a5",
+  "workflow": "hvac-ticket-governance",
+  "agent": "requirement-interpreter",
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "runtimeMode": "real",
+  "cycle": 1,
+  "timestamp": "2026-10-30T23:17:46.139Z",
+  "modelSettings": {
+    "temperature": 0
+  },
+  "inputHash": "3b03a93c0ab616680c1a2b1a7812d09ce6aa31516d45612e4864d4217eb5debb",
+  "ticketHash": "ab331ceeb294b6dd59bdae9e475c7c2ad1720d903c17990a21617d57a0147085",
+  "promptHash": "ee3ad9defd448e2ea3c490b33712902df78ad287f46ae8809e2a3b28c81167b5",
+  "promptTemplateHash": "8906f88e1915f1f4399b79b2816779f8b6633ad50e62a9b00edd55cd7eabfaf4",
+  "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+  "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+  "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+  "promptTokens": 1515,
+  "completionTokens": 1530,
+  "totalTokens": 3045,
+  "cost": 0.004582,
+  "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+  "rawHash": "bce7d1775f55a31a62eb268782ef378c9235d66881e06f71f0e42943bd161253",
+  "outputHash": "cc6fcfcf472f1a4cad5e2b08fb5dbf75b179e0c9e41a165d068360d53370294c",
+  "rawArtifact": "evidence\\f6-20261030\\v2\\runs\\F6-v2-filters-321e4aea-59d9-485c-822d-620f0751b1a5\\cycle-1\\requirement-interpreter-raw.txt",
+  "validatedArtifact": "evidence\\f6-20261030\\v2\\runs\\F6-v2-filters-321e4aea-59d9-485c-822d-620f0751b1a5\\cycle-1\\requirement-interpreter-validated.json",
+  "status": "SUCCESS"
+}

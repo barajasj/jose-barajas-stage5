@@ -1,0 +1,12 @@
+{
+  "version": "v0",
+  "caseId": "minor-label",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v0-minor-label-f20cc97a-c06c-4d0e-a526-162e3f30b00d",
+  "inputHash": "d35397a24582e25f60b239684367975805f5de516fc24566ca23a11f7f1b7b81",
+  "startedAt": "2026-10-30T23:11:58.757Z",
+  "finishedAt": "2026-10-30T23:12:04.398Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v0/runs/F6-v0-minor-label-f20cc97a-c06c-4d0e-a526-162e3f30b00d/cycle-1"
+}

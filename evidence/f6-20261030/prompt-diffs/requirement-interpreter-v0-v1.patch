@@ -1,0 +1,17 @@
+diff --git a/evidence/f6-20261030/prompts/v0/requirement-interpreter.md b/evidence/f6-20261030/prompts/v1/requirement-interpreter.md
+index 33d4153..01210f9 100644
+--- a/evidence/f6-20261030/prompts/v0/requirement-interpreter.md
++++ b/evidence/f6-20261030/prompts/v1/requirement-interpreter.md
+@@ -14,6 +14,11 @@
+ - [I12] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/examiner.schema.json: requirementSummary is a nonblank string; hvacTerminology, businessRules, developerConsiderations, and ambiguities are string arrays; confidence is LOW, MEDIUM, or HIGH; ambiguityResolutions is optional as defined above. No other fields.
+ - [I13] Worked re-dispatch example (illustrative; never substitute these values for the supplied ticket or interpretation). Ticket: `When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.` Previous ambiguities: `["If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.","How should entries with isActive:false be handled?"]`. Reviewer paraphrase: `Unclear if Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.` Correct result: `{"ambiguities":["How should entries with isActive:false be handled?"],"ambiguityResolutions":[{"ambiguity":"If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.","rationale":"The ticket specifies the Unit Size filter as Refrigerant + Unit Type.","sourceQuote":"When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected."}]}`. Copy resolution identity from the previous ambiguity, not the reviewer paraphrase. Keep the unanswered isActive question; removing an invented isActive filtering rule does not answer it.
+ 
++## Measurement Revision v1
++
++- Before answering, privately separate explicit ticket propositions from unanswered questions. Extract each requested behavior and numeric constraint once, with all its conditions. Sample data does not establish policy.
++- Keep developerConsiderations limited to implementation consequences explicitly required by the ticket. Do not add generic engineering advice. Choose confidence from the scope of unanswered behavior, not from confidence in your prose.
++
+ ## Ticket
+ 
+ {{ticket}}
+\ No newline at end of file

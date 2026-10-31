@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "caseId": "writer-fail",
+  "agent": "final-review-writer",
+  "correlationId": "F6-v1-writer-fail-d8992557-3ea7-461e-af33-8b6d20611224",
+  "inputHash": "6a80fa71623115be4fcd9eec4ad56db358288408120a01f08ae445abb2c6f9cc",
+  "startedAt": "2026-10-30T23:15:30.496Z",
+  "finishedAt": "2026-10-30T23:15:34.581Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v1/runs/F6-v1-writer-fail-d8992557-3ea7-461e-af33-8b6d20611224/cycle-1"
+}

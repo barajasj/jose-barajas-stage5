@@ -1,6 +1,34 @@
 # Adversarial Reviewer Evaluation
 
-## Current Live Evidence - Deliverable 5
+## F6 Measured Prompt Changes
+
+Protocol: `docs/F6-MEASUREMENT.md`; versions/hypotheses:
+`evals/f6-iterations.js`; ledger: `prompts/prompt-evolution.md`.
+Sixteen fixed reviewer cases were measured unchanged across v0->v1->v2 (48 real
+responses). Whole-input comparison and final contract audits are prompt changes,
+not scorer changes.
+
+| Measurement | v0 | v1 | v2 | Cycle 1 Delta | Cycle 2 Delta |
+|---|---:|---:|---:|---:|---:|
+| Strict full-step passes | 0/16 | 0/16 | 0/16 | 0 pp | 0 pp |
+| Runtime accepted | 15/16 | 16/16 | 14/16 | +6.25 pp | -12.5 pp |
+| Bounded false-positive gate | 3/16 | 5/16 | 3/16 | +12.5 pp | -12.5 pp |
+| Concern-continuity gate | 14/16 | 14/16 | 12/16 | 0 pp | -12.5 pp |
+| Challenge-quality matches | 1/32 | 1/32 | 0/32 | 0 pp | -3.125 pp |
+
+v0 `retained` omitted sourced prior-finding resolutions; v1 corrected this runtime
+failure. v2 `hvac` and `validation` returned invalid source quotations and were
+rejected without repair. All three rejections remain scored observations.
+The v2 candidate is not promoted. Both changes were measured; two successful
+improvements are not demonstrated. Frozen-label failures alone are not proof
+of semantic errors.
+
+All raw responses, exact diffs, positive/negative case deltas, and diagnostics:
+[measured summary](../evidence/f6-20261030/MEASURED-SUMMARY.md),
+[runtime rejections](../evidence/f6-20261030/runtime-rejections.json),
+[machine results](../evidence/f6-20261030/measured-results.json).
+
+## Preserved Live Evidence - Deliverable 5
 
 `evidence/d5-20261030T1940Z/` contains every response from one authorized batch,
 not selected successes. Of 16 direct reviewer cases, 11 passed runtime contracts;

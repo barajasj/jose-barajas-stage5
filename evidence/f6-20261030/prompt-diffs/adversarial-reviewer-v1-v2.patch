@@ -1,0 +1,18 @@
+diff --git a/evidence/f6-20261030/prompts/v1/adversarial-reviewer.md b/evidence/f6-20261030/prompts/v2/adversarial-reviewer.md
+index 2d8c136..407ca72 100644
+--- a/evidence/f6-20261030/prompts/v1/adversarial-reviewer.md
++++ b/evidence/f6-20261030/prompts/v2/adversarial-reviewer.md
+@@ -18,10 +18,12 @@
+ - [R16] Before returning, check every finding individually against the schema: include all required fields, including ambiguityRefs even when its value is []. A missing action, sourceRefs, or ambiguityRefs makes the whole response invalid. For OPEN_AMBIGUITY, quote the exact complete ambiguity string from the referenced interpreter pointer and use that exact pointer in ambiguityRefs. For every other kind, use ambiguityRefs: []. Copy source quotes exactly; never paraphrase or repair text inside a quote. Complete OPEN_AMBIGUITY example: {"id":"F1","severity":"MEDIUM","kind":"OPEN_AMBIGUITY","description":"The ticket does not define the rounding tie-break policy.","action":"Obtain clarification from the ticket owner on the tie-break policy.","sourceRefs":[{"artifact":"interpreter","pointer":"/ambiguities/0","quote":"The ticket does not define the rounding tie-break policy."}],"ambiguityRefs":["/ambiguities/0"]}
+ - [R17] Worked non-ambiguity example, illustrative only; do not copy this finding into an unrelated review. Example input: `{"ticket":"Calculate DX Coil Height as the sum of circuit heights.","interpreterResult":{"requirementSummary":"Calculate DX Coil Height as the sum of circuit heights.","hvacTerminology":["DX Coil"],"businessRules":["Calculate DX Coil Height as the sum of circuit heights.","Round the sum to the nearest inch."],"developerConsiderations":[],"ambiguities":[],"confidence":"HIGH"}}`. Complete finding: `{"id":"F1","severity":"HIGH","kind":"UNSUPPORTED_ASSUMPTION","description":"The interpreter adds a nearest-inch rounding policy not specified by the ticket.","action":"Remove the unsupported rounding policy.","sourceRefs":[{"artifact":"ticket","pointer":"","quote":"Calculate DX Coil Height as the sum of circuit heights."},{"artifact":"interpreter","pointer":"/businessRules/1","quote":"Round the sum to the nearest inch."}],"ambiguityRefs":[]}`. The interpreter pointer identifies one scalar string, both quotes are copied exactly, and ambiguityRefs is present even though empty.
+ 
+-## Measurement Revision v1
++## Measurement Revision v2
+ 
+ - Before drafting findings, compare each ticket proposition against the entire actual interpretation, not businessRules alone. A proposition already captured in the summary or developerConsiderations is not absent everywhere.
+ - For each proposed finding, privately identify the specific defective scalar or the missing proposition. Then copy the shortest sufficient ticket quote and the complete relevant interpreter scalar, with its zero-based pointer. Reject your own finding if the input already corrects the alleged defect.
++- Privately audit every finding before emitting JSON: its claim must still be true for the current input, its action must address exactly that defect, and its severity must reflect impact rather than the number of findings.
++- Run a final pointer/identity checklist: every current ambiguity index is covered, every interpreter quote equals the complete scalar at that pointer, every non-ambiguity finding has ambiguityRefs: [], and every disappearing prior ID has a supported resolution. Do not turn this checklist into additional findings.
+ 
+ ## Ticket
+ 

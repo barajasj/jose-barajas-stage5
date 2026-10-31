@@ -1,0 +1,14 @@
+{
+  "sequence": 22,
+  "startedAt": "2026-10-30T23:19:34.249Z",
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "temperature": 0,
+  "promptHash": "e293c5fa00da9a14beb03fe25c9fa98d78cf850b28f712196c75189090f2ddb6",
+  "providerRetries": 0,
+  "status": "RESPONSE_RECEIVED",
+  "rawHash": "4d6ec26758b4768a63d1088777e1503b20290be0125f59fd7a3082b401ad531b",
+  "promptTokens": 1663,
+  "completionTokens": 2734,
+  "totalTokens": 4397,
+  "finishedAt": "2026-10-30T23:19:45.571Z"
+}

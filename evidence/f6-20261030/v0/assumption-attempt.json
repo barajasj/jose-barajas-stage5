@@ -1,0 +1,12 @@
+{
+  "version": "v0",
+  "caseId": "assumption",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v0-assumption-f1b0f507-26ba-4bc9-a108-1f8c690868d6",
+  "inputHash": "844148820d9bede976294c7581d927e3f1ab95034315764df55e2e6147fb7b85",
+  "startedAt": "2026-10-30T23:11:05.639Z",
+  "finishedAt": "2026-10-30T23:11:17.656Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v0/runs/F6-v0-assumption-f1b0f507-26ba-4bc9-a108-1f8c690868d6/cycle-1"
+}

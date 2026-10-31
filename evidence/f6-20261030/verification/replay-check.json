@@ -1,0 +1,23 @@
+{
+  "pass": true,
+  "measurementPass": true,
+  "modelAcceptancePass": false,
+  "measuredResultsSha256": "d57013e7be7f5de5bb9d557b3ebcc59a0ec78640c6de212b982d18912c14b72d",
+  "pairs": [
+    {
+      "before": "v0",
+      "after": "v1",
+      "pairs": 28,
+      "unmatched": 0,
+      "baselineOnly": 0
+    },
+    {
+      "before": "v1",
+      "after": "v2",
+      "pairs": 28,
+      "unmatched": 0,
+      "baselineOnly": 0
+    }
+  ],
+  "note": "Final package seal verified separately after all verification files are written."
+}

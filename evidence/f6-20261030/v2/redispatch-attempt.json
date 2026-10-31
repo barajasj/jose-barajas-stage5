@@ -1,0 +1,12 @@
+{
+  "version": "v2",
+  "caseId": "redispatch",
+  "agent": "requirement-interpreter",
+  "correlationId": "F6-v2-redispatch-e3b377b5-5edc-4c19-a016-acae395b3d53",
+  "inputHash": "44ef1b3a5d866384cef22c2a81b0ecb9064cf7450c66d0dd146a0e76c2213e65",
+  "startedAt": "2026-10-30T23:18:03.152Z",
+  "finishedAt": "2026-10-30T23:18:08.266Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-redispatch-e3b377b5-5edc-4c19-a016-acae395b3d53/cycle-1"
+}

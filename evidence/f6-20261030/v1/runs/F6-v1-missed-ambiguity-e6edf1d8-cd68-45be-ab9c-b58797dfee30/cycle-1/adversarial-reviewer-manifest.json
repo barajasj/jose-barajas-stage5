@@ -1,0 +1,29 @@
+{
+  "correlationId": "F6-v1-missed-ambiguity-e6edf1d8-cd68-45be-ab9c-b58797dfee30",
+  "workflow": "hvac-ticket-governance",
+  "agent": "adversarial-reviewer",
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "runtimeMode": "real",
+  "cycle": 1,
+  "timestamp": "2026-10-30T23:14:47.333Z",
+  "modelSettings": {
+    "temperature": 0
+  },
+  "inputHash": "5a2973cce48c468811c105631e165b902f44e6b41800093472621aba64188111",
+  "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+  "promptHash": "e2285950ea919481593b16b6824fbf45b7ccf2986a4703ba2146a4672c3b0d96",
+  "promptTemplateHash": "1f3c3b63078929789918a7b722eb53b04d46d7a9a83ff0885e50f6b6bb48ebb3",
+  "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+  "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+  "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+  "promptTokens": 2942,
+  "completionTokens": 878,
+  "totalTokens": 3820,
+  "cost": 0.003666,
+  "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+  "rawHash": "80c3c686b41e62710fd5bc56c1f7450ddd1cd63c433dbd44e40a278874ea3581",
+  "outputHash": "7133958cc48d3e0ad969eb7eb261429c0acc598d3c3ddd76a8d7117ce6895672",
+  "rawArtifact": "evidence\\f6-20261030\\v1\\runs\\F6-v1-missed-ambiguity-e6edf1d8-cd68-45be-ab9c-b58797dfee30\\cycle-1\\adversarial-reviewer-raw.txt",
+  "validatedArtifact": "evidence\\f6-20261030\\v1\\runs\\F6-v1-missed-ambiguity-e6edf1d8-cd68-45be-ab9c-b58797dfee30\\cycle-1\\adversarial-reviewer-validated.json",
+  "status": "SUCCESS"
+}

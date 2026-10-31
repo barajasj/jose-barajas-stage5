@@ -1,0 +1,30 @@
+{
+  "changed": [
+    "CERTIFICATION-EVIDENCE.md",
+    "README.md",
+    "evals/adversarial-reviewer-eval.md",
+    "evals/final-review-writer-eval.md",
+    "evals/requirement-interpreter-eval.md",
+    "evals/test-cases.json",
+    "package.json",
+    "prompts/prompt-evolution.md",
+    "src/agent-runner.js",
+    "src/eval-runner.js",
+    "src/evidence-package.js",
+    "tests/eval-runner.test.js"
+  ],
+  "added": [
+    "docs/F6-MEASUREMENT.md",
+    "evals/f6-iterations.js",
+    "src/f6-plan.js",
+    "src/collect-f6-evidence.js",
+    "src/f6-analysis.js",
+    "src/run-f6.js",
+    "tests/f6-measurement.test.js"
+  ],
+  "evidenceDirectory": "evidence/f6-20261030",
+  "untouchedPreexistingUntrackedFiles": [
+    "additional-discussion-comments-related-to-the-review.md",
+    "stage5-certification-examination-report.md"
+  ]
+}

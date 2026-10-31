@@ -1,0 +1,27 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output includes an ambiguity resolution for a tie‑breaking rule that is not present in the ticket and does not correspond to any entry in the /ambiguities array. This introduces an unsupported assumption and violates the required schema, preventing a clean PASS.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "UNSUPPORTED_ASSUMPTION",
+      "description": "The interpreter adds an ambiguity resolution for a non‑existent ambiguity, assuming a rounding tie‑breaking rule that is not specified in the ticket.",
+      "action": "Clarify the rounding tie‑breaking policy with the ticket owner or remove the unsupported ambiguity resolution entry.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "If the entered value is not an exact multiple, round it to the nearest valid increment."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguityResolutions/0/ambiguity",
+          "quote": "Exact rounding tie-breaking is unspecified."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "caseId": "missed-ambiguity",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v1-missed-ambiguity-e6edf1d8-cd68-45be-ab9c-b58797dfee30",
+  "inputHash": "5a2973cce48c468811c105631e165b902f44e6b41800093472621aba64188111",
+  "startedAt": "2026-10-30T23:14:47.333Z",
+  "finishedAt": "2026-10-30T23:14:51.471Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v1/runs/F6-v1-missed-ambiguity-e6edf1d8-cd68-45be-ab9c-b58797dfee30/cycle-1"
+}

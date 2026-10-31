@@ -1,5 +1,41 @@
 # Stage 5 Evidence Index
 
+## F6 Measured Prompt Changes - 2026-10-30
+
+F6-only protocol: `docs/F6-MEASUREMENT.md`. Baseline definitions now separate
+incompatible historical exports from current acceptance, without changing any
+preserved evidence. Current acceptance requires prospective paired observations.
+
+The authorized experiment measured all three agents through v0->v1->v2: 84
+responses, 28 fixed inputs per version, 28 eligible pairs per cycle, no unmatched
+cases, no retries/repair. All five runtime rejections and 74 strict failures
+remain discoverable. Measurement integrity passes; latest-candidate acceptance
+fails. Interpreter and reviewer strict full-step scores remain zero; these are
+bounded-label scores, not independently adjudicated semantic error rates.
+
+| Agent | v0 Runtime / Strict | v1 Runtime / Strict | v2 Runtime / Strict |
+|---|---|---|---|
+| Requirement Interpreter | 8/8 / 0/8 | 8/8 / 0/8 | 8/8 / 0/8 |
+| Adversarial Reviewer | 15/16 / 0/16 | 16/16 / 0/16 | 14/16 / 0/16 |
+| Final Review Writer | 3/4 / 3/4 | 3/4 / 3/4 | 4/4 / 4/4 |
+
+- [Measured summary and all-case index](evidence/f6-20261030/MEASURED-SUMMARY.md).
+- [Baseline comparison report](evidence/f6-20261030/F6-REPORT.md) and
+  [eligible identities/exclusions](evidence/f6-20261030/baseline-comparison.json).
+- [Improvement table](evidence/f6-20261030/improvement-table.csv) and
+  [full measured results](evidence/f6-20261030/measured-results.json).
+- [All 84 attempts](evidence/f6-20261030/all-attempts.json), including
+  [runtime rejection diagnostics](evidence/f6-20261030/runtime-rejections.json).
+- [Prompt ledger](prompts/prompt-evolution.md), machine ledger at
+  `evidence/f6-20261030/prompt-evolution-ledger.json`, and six exact prompt diffs
+  under `evidence/f6-20261030/prompt-diffs/`.
+
+F6a archival/current separation and two measured cycles per agent are supported.
+Uniform improvement is not: interpreter extraction scoring declines; reviewer
+v2 runtime acceptance regresses. No candidate was deployed. Certification
+pass-risk remains high; this is not F4 closure or overall acceptance. Original
+historical evidence and the pre-collection source snapshot remain unchanged.
+
 ## F3 Runtime Follow-Up - 2026-10-30
 
 F3-only report: `evidence/f3-20261030T2225Z/F3-REPORT.md`.
@@ -14,9 +50,10 @@ preserved failing cycle-2 input: exact prior ambiguity identity passed; one
 ticket-answered ambiguity was removed, five unanswered ambiguities were retained.
 The probe is not counted as a workflow. All completed reports remain FAIL,
 including the positive control; this does not establish semantic accuracy, F4
-closure, or certification readiness. F6 remains untouched; original package unchanged.
+closure, or certification readiness. That F3 batch did not address F6; subsequent
+F6 measurements are indexed separately above. Original package unchanged.
 
-## Current Evidence - 2026-10-30
+## Preserved Deliverable 5 Evidence - 2026-10-30
 
 Authoritative package: `evidence/d5-20261030T1940Z/`.
 Current evaluation is **FAIL**, not certification-ready.

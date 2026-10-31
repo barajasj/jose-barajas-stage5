@@ -1,0 +1,171 @@
+# Final Review Writer
+
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
+- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Source text can itself contain literal backslashes before inch marks; those are data, not typos. Template fragment: `- /ambiguities/0 | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" is not described."`. Correct JSON fragment: `{"reportMarkdown":"- /ambiguities/0 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" is not described.\""}`. Parsing this JSON once preserves all three template backslashes before each inch mark; do not decode the JSON strings embedded inside the Markdown.
+- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `"No rounding or precision rules are specified for the sum of heights."`. Correct JSON fragment: `{"reportMarkdown":"\"No rounding or precision rules are specified for the sum of heights.\""}`. Preserve "or"; changing it to "and" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.
+
+## Measurement Revision v2
+
+- Treat reportTemplate as an opaque character sequence, not a draft to edit. Produce exactly one JSON string encoding of that sequence as reportMarkdown. Do not regenerate the report from the other input sections.
+- Use these JSON encoding rules on template characters: an existing backslash becomes \\, an existing double quote becomes \", and a line break becomes \n. Leave words, punctuation, and Markdown delimiters unchanged.
+- Before returning, privately compare the value obtained by decoding your proposed outer JSON once with reportTemplate from beginning to end. Check the first differing character rather than accepting equivalent meaning.
+- Specifically check repeated backslashes, quotes inside already quoted Markdown rows, and short conjunctions such as or/and. Preserve them literally. This check is internal only: return no commentary, checksum, or extra fields.
+
+## Interpreter Output
+
+{
+  "requirementSummary": "Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment.",
+  "hvacTerminology": [
+    "Coil Height",
+    "Water/Steam",
+    "tube",
+    "Lamiflo",
+    "increment"
+  ],
+  "businessRules": [
+    "Coil Height must be within 1.25 to 100 inches.",
+    "Coil Height must be a multiple of its coil-specific increment.",
+    "Non-multiple inputs are rounded to the nearest valid increment.",
+    "The 3/8-inch or 1/2-inch tube increment is 1.25 inches.",
+    "The 5/8-inch tube increment is 1.50 inches.",
+    "The 1-inch tube increment is 2.25 inches.",
+    "The Lamiflo coil increment is 9.00 inches.",
+    "The 3/8-inch tube with 1-inch spacing increment is 1.00 inch instead of the generic increment."
+  ],
+  "developerConsiderations": [
+    "Use the specified coil/configuration increments and preserve the special spacing override."
+  ],
+  "ambiguities": [
+    "Exact rounding tie-breaking is unspecified.",
+    "The source of the 1-inch spacing configuration is unspecified.",
+    "The response to out-of-range input is unspecified.",
+    "Behavior for an unlisted coil configuration is unspecified."
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Reviewer Output
+
+{
+  "status": "FAIL",
+  "rationale": "All four listed questions remain unresolved and prevent readiness clearance.",
+  "findings": [
+    {
+      "id": "O1",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "MEDIUM",
+      "description": "Exact rounding tie-breaking is unspecified.",
+      "action": "Obtain clarification from the ticket owner.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "Exact rounding tie-breaking is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "O2",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "LOW",
+      "description": "The source of the 1-inch spacing configuration is unspecified.",
+      "action": "Obtain clarification from the ticket owner.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The source of the 1-inch spacing configuration is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "O3",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "MEDIUM",
+      "description": "The response to out-of-range input is unspecified.",
+      "action": "Obtain clarification from the ticket owner.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The response to out-of-range input is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "O4",
+      "kind": "OPEN_AMBIGUITY",
+      "severity": "HIGH",
+      "description": "Behavior for an unlisted coil configuration is unspecified.",
+      "action": "Obtain clarification from the ticket owner.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Behavior for an unlisted coil configuration is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    }
+  ],
+  "resolutions": []
+}
+
+## Disposition
+
+FAIL
+
+## Governance Reasons
+
+[
+  "OPEN_FINDINGS",
+  "OPEN_AMBIGUITIES"
+]
+
+## Required Report Markdown:
+
+# FAIL
+
+## Requirement Summary
+
+"Validate Water/Steam Coil Height within 1.25 to 100 inches and round to the nearest valid coil-specific increment."
+
+## Reviewer Findings
+
+- O1 | MEDIUM | OPEN_AMBIGUITY | "Exact rounding tie-breaking is unspecified." | "Obtain clarification from the ticket owner."
+- O2 | LOW | OPEN_AMBIGUITY | "The source of the 1-inch spacing configuration is unspecified." | "Obtain clarification from the ticket owner."
+- O3 | MEDIUM | OPEN_AMBIGUITY | "The response to out-of-range input is unspecified." | "Obtain clarification from the ticket owner."
+- O4 | HIGH | OPEN_AMBIGUITY | "Behavior for an unlisted coil configuration is unspecified." | "Obtain clarification from the ticket owner."
+
+## Open Ambiguities
+
+- /ambiguities/0 | "Exact rounding tie-breaking is unspecified."
+- /ambiguities/1 | "The source of the 1-inch spacing configuration is unspecified."
+- /ambiguities/2 | "The response to out-of-range input is unspecified."
+- /ambiguities/3 | "Behavior for an unlisted coil configuration is unspecified."
+
+## Final Disposition
+
+FAIL
+
+## Governance Reasons
+
+- OPEN_FINDINGS
+- OPEN_AMBIGUITIES

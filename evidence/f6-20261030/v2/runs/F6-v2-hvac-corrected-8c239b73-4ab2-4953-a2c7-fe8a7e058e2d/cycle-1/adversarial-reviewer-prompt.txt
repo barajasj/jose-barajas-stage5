@@ -1,0 +1,305 @@
+# Adversarial Reviewer
+
+- [R01] Detect interpreter assumptions unsupported by the ticket, distinguishing requested behavior from an invented implementation policy.
+- [R02] Detect explicit business requirements omitted or contradicted by the actual interpreter output; do not accuse it of omitting content it already includes.
+- [R03] Detect incorrect HVAC meanings, units, and coil/configuration interpretations.
+- [R04] Detect missing or incorrect explicit validation constraints. Ask for clarification of absent policy rather than supplying it.
+- [R05] Detect ambiguities the interpreter missed; distinguish these from questions it already identified.
+- [R06] Every unresolved interpreter ambiguity blocks PASS. Enumerate the current ambiguities array from index 0 and create an OPEN_AMBIGUITY finding for EVERY entry with its exact /ambiguities/N reference and complete interpreter source quote. Do not skip an entry because it overlaps another concern or appears unnecessary; the reviewer cannot remove current interpreter ambiguities. Do not claim the interpreter missed an already-listed question. Only current /ambiguities/N pointers belong in ambiguityRefs; an unsupported ambiguityResolutions entry is an UNSUPPORTED_ASSUMPTION with ambiguityRefs: [].
+- [R07] For relevant validation tickets, challenge boundary values, configuration overrides/detection, rounding ties, unknown configurations, and range/increment interaction. A gap is a clarification question, not an invented rule.
+- [R08] Ground findings in both the original ticket and actual interpreter output. Copy each source quote verbatim from one artifact; do not normalize characters, units, punctuation, wording, or whitespace. A ticket quote is a contiguous substring with pointer ""; prefer a short quote within a single line rather than joining separate lines and losing CRLF characters or spaces. An interpreter quote is the exact complete string at its JSON pointer after decoding the input JSON. Count array indices from 0 and verify the quote is at that index, not a neighboring index. Point to a string such as /businessRules/0, never an array such as /businessRules or an empty interpreter pointer. Text from interpreter ambiguities is not ticket text: do not label it artifact "ticket". These citation rules also apply to resolutions. Every quote must support the specific claim, not merely occur somewhere. Do not invent requirements, false omissions, or concerns on a complete correct interpretation.
+- [R09] Each finding contains a stable id, kind, LOW/MEDIUM/HIGH severity, specific description, concrete correction or clarification action, sourceRefs, and ambiguityRefs. Kinds are UNSUPPORTED_ASSUMPTION, MISSING_REQUIREMENT, HVAC_ERROR, MISSING_VALIDATION, or OPEN_AMBIGUITY. Each sourceRef contains artifact (ticket or interpreter), pointer (empty for ticket, JSON pointer for interpreter), and an exact nonempty quote. ALWAYS include ambiguityRefs: [] for every non-OPEN_AMBIGUITY finding. Only OPEN_AMBIGUITY uses nonempty ambiguityRefs.
+- [R10] Assign severity by impact: HIGH for incorrect or missing core behavior preventing reliable implementation; MEDIUM for unresolved behavior/validation needing clarification; LOW for a minor supported concern. Every severity blocks PASS.
+- [R11] Set PASS if and only if findings is empty and no interpreter ambiguity remains; set FAIL for any nonempty findings. An inconsistent status is invalid.
+- [R12] Supply a substantive rationale explaining the supported review result; a clean PASS must explain why the stated behavior is captured without unsupported claims or open questions.
+- [R13] Preserve prior finding IDs for concerns that remain. Each disappearing prior finding needs a resolutions entry containing findingId, rationale, and sourceRefs showing the correction in current artifacts.
+- [R14] Independently verify interpreter ambiguityResolutions against the ticket. A quotation that does not answer the removed question is not a resolution; flag unsupported removal as UNSUPPORTED_ASSUMPTION.
+- [R15] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/challenges.schema.json. Root fields are status, rationale, findings, and resolutions; no extra fields. Use the finding and resolution structures above.
+- [R16] Before returning, check every finding individually against the schema: include all required fields, including ambiguityRefs even when its value is []. A missing action, sourceRefs, or ambiguityRefs makes the whole response invalid. For OPEN_AMBIGUITY, quote the exact complete ambiguity string from the referenced interpreter pointer and use that exact pointer in ambiguityRefs. For every other kind, use ambiguityRefs: []. Copy source quotes exactly; never paraphrase or repair text inside a quote. Complete OPEN_AMBIGUITY example: {"id":"F1","severity":"MEDIUM","kind":"OPEN_AMBIGUITY","description":"The ticket does not define the rounding tie-break policy.","action":"Obtain clarification from the ticket owner on the tie-break policy.","sourceRefs":[{"artifact":"interpreter","pointer":"/ambiguities/0","quote":"The ticket does not define the rounding tie-break policy."}],"ambiguityRefs":["/ambiguities/0"]}
+- [R17] Worked non-ambiguity example, illustrative only; do not copy this finding into an unrelated review. Example input: `{"ticket":"Calculate DX Coil Height as the sum of circuit heights.","interpreterResult":{"requirementSummary":"Calculate DX Coil Height as the sum of circuit heights.","hvacTerminology":["DX Coil"],"businessRules":["Calculate DX Coil Height as the sum of circuit heights.","Round the sum to the nearest inch."],"developerConsiderations":[],"ambiguities":[],"confidence":"HIGH"}}`. Complete finding: `{"id":"F1","severity":"HIGH","kind":"UNSUPPORTED_ASSUMPTION","description":"The interpreter adds a nearest-inch rounding policy not specified by the ticket.","action":"Remove the unsupported rounding policy.","sourceRefs":[{"artifact":"ticket","pointer":"","quote":"Calculate DX Coil Height as the sum of circuit heights."},{"artifact":"interpreter","pointer":"/businessRules/1","quote":"Round the sum to the nearest inch."}],"ambiguityRefs":[]}`. The interpreter pointer identifies one scalar string, both quotes are copied exactly, and ambiguityRefs is present even though empty.
+
+## Measurement Revision v2
+
+- Before drafting findings, compare each ticket proposition against the entire actual interpretation, not businessRules alone. A proposition already captured in the summary or developerConsiderations is not absent everywhere.
+- For each proposed finding, privately identify the specific defective scalar or the missing proposition. Then copy the shortest sufficient ticket quote and the complete relevant interpreter scalar, with its zero-based pointer. Reject your own finding if the input already corrects the alleged defect.
+- Privately audit every finding before emitting JSON: its claim must still be true for the current input, its action must address exactly that defect, and its severity must reflect impact rather than the number of findings.
+- Run a final pointer/identity checklist: every current ambiguity index is covered, every interpreter quote equals the complete scalar at that pointer, every non-ambiguity finding has ambiguityRefs: [], and every disappearing prior ID has a supported resolution. Do not turn this checklist into additional findings.
+
+## Ticket
+
+# Ticket 03
+
+## Title
+
+FW Series: Condenser Configuration Inputs
+
+## Description
+
+Business value: Captures the detailed physical and environmental parameters for Air Cooled (AC) and Evaporative Cooled (EC) condensers, as well as per-circuit refrigeration configurations, enabling accurate ECS calculations.
+
+When the user selects the Condenser Type "AC" or "EC", the corresponding input fields should be displayed.
+
+### Condenser Inputs — Air Cooled (AC)
+
+| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |
+|-----|--------|------------|--------|------|-------------------|-------|
+| 1 | Design Ambient | Numeric Input | User / Default | °F / °C | 95°F | Echoed in output 3.7 |
+| 2 | ASHRAE Summer Design | Numeric Input | User / Default | °F / °C | — | |
+| 3 | Default Condenser | Checkbox | User | — | — | Condenser selection mode |
+| 4 | High Amb. / Altit. Cond. | Checkbox | User | — | — | Condenser selection mode |
+| 5 | Condenser Tube Material | Dropdown | User / Default | — | Copper | |
+| 6 | Condenser Fin Material | Dropdown | User / Default | — | Aluminum | |
+| 7 | Condenser Tube Size | Dropdown | User / Default | mm | 3/8, 3/8 w/ 1" spacing | |
+| 8 | Condenser Fin Type | Dropdown | User / Default | — | Corrugated | |
+
+### Condenser Inputs — Evaporative Cooled (EC)
+
+| Row | Detail | Input Type | Source | Unit | Default / Options | Notes |
+|-----|--------|------------|--------|------|-------------------|-------|
+| 1 | Bank ID# | ID | System | — | — | |
+| 2 | Copies of this Bank | Numeric Input | User | — | — | |
+| 3 | EC Model | Dropdown | User | — | — | See Catalog |
+| 4 | Wet Bulb Temperature | Numeric Input | User | °F / °C | — | |
+
+
+## Acceptance Criteria
+
+Given the AC/EC condenser parameters and per-circuit cooling configurations, 
+When processed, 
+Then the system outputs condenser and circuit-level configuration ready for ECS calculation.
+
+Given the user is configuring an AC condenser, 
+When they enter ambient design conditions and coil geometry, 
+Then the system records the condenser parameters.
+
+Given the user is configuring an EC condenser, 
+When they enter the EC model and wet bulb temperature, 
+Then the system records the EC condenser parameters.
+
+Given the user configures an AC condenser, 
+When they select Condenser Passes, 
+Then the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options.
+
+Given the user configures an AC condenser, 
+When they select Roof Type, 
+Then the system shall display the specified dark and light roof type options with and without parapet/shrouding.
+
+
+## Interpreter Output
+
+{
+  "requirementSummary": "Show AC or EC condenser inputs by selection and record condenser and circuit configuration for ECS calculation.",
+  "hvacTerminology": [
+    "Air Cooled",
+    "Evaporative Cooled",
+    "Condenser Type",
+    "AC",
+    "EC",
+    "ASHRAE",
+    "Condenser Tube Material",
+    "Condenser Fin Material",
+    "Condenser Tube Size",
+    "Condenser Fin Type",
+    "Bank ID#",
+    "EC Model",
+    "Wet Bulb Temperature",
+    "Condenser Passes",
+    "Roof Type",
+    "ECS"
+  ],
+  "businessRules": [
+    "Selecting Condenser Type AC or EC displays the corresponding input fields.",
+    "AC records Design Ambient in degrees F or C with a default of 95 degrees F and ASHRAE Summer Design.",
+    "AC includes Default Condenser and High Amb. / Altit. Cond. checkboxes.",
+    "AC Condenser Tube Material defaults to Copper and Condenser Fin Material defaults to Aluminum.",
+    "AC Condenser Tube Size options are 3/8 and 3/8 with 1-inch spacing; Condenser Fin Type defaults to Corrugated.",
+    "EC includes system Bank ID#, user Copies of this Bank, EC Model from the catalog, and Wet Bulb Temperature in degrees F or C.",
+    "AC Condenser Passes options are AutoOdd, AutoEven, and integers 2 through 41 in increments of 1.",
+    "AC Roof Type offers dark and light options with and without parapet/shrouding.",
+    "Ambient design conditions and coil geometry are recorded for AC condensers.",
+    "EC model and wet bulb temperature are recorded for EC condensers.",
+    "Condenser and per-circuit cooling configuration are output ready for ECS calculation."
+  ],
+  "developerConsiderations": [
+    "Display the input fields corresponding to the selected AC or EC condenser type."
+  ],
+  "ambiguities": [
+    "The exact Roof Type option list is unspecified.",
+    "The EC Model catalog entries are unspecified.",
+    "Numeric validation ranges are unspecified.",
+    "Temperature conversion and unit selection behavior are unspecified.",
+    "The detailed per-circuit configuration fields are unspecified."
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Previous Review (null on the initial cycle)
+
+null
+
+## Required Output JSON Schema
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "findings",
+    "rationale",
+    "resolutions"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "severity",
+          "kind",
+          "description",
+          "action",
+          "sourceRefs",
+          "ambiguityRefs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "kind": {
+            "enum": [
+              "UNSUPPORTED_ASSUMPTION",
+              "MISSING_REQUIREMENT",
+              "HVAC_ERROR",
+              "MISSING_VALIDATION",
+              "OPEN_AMBIGUITY"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "sourceRefs": {
+            "$ref": "#/definitions/sourceRefs"
+          },
+          "ambiguityRefs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^/ambiguities/(0|[1-9][0-9]*)$"
+            }
+          }
+        }
+      }
+    },
+    "resolutions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "findingId",
+          "rationale",
+          "sourceRefs"
+        ],
+        "properties": {
+          "findingId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "rationale": {
+            "type": "string",
+            "pattern": "\\S"
+          },
+          "sourceRefs": {
+            "$ref": "#/definitions/sourceRefs"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "sourceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact",
+          "pointer",
+          "quote"
+        ],
+        "properties": {
+          "artifact": {
+            "enum": [
+              "ticket",
+              "interpreter"
+            ]
+          },
+          "pointer": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "string",
+            "pattern": "\\S"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "PASS"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "findings": {
+            "type": "array",
+            "maxItems": 0
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "findings": {
+            "type": "array",
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

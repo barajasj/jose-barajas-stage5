@@ -1,0 +1,8 @@
+{
+  "version": "v0",
+  "caseId": "missing-corrected",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v0-missing-corrected-6c772efc-5900-4ebb-b9e0-c7bdce13d75a",
+  "inputHash": "074205509514bdfc1c18d1a38795dfd58ab8890431ddbcd67462a7b634286d3c",
+  "startedAt": "2026-10-30T23:12:36.524Z"
+}

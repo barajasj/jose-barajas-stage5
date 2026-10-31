@@ -1,0 +1,29 @@
+{
+  "correlationId": "F6-v2-ticket4-final-review-writer-355ad45c-ac75-4b1e-b29a-df4eb91cfc7f",
+  "workflow": "hvac-ticket-governance",
+  "agent": "final-review-writer",
+  "model": "accounts/fireworks/models/gpt-oss-120b",
+  "runtimeMode": "real",
+  "cycle": 1,
+  "timestamp": "2026-10-30T23:20:15.456Z",
+  "modelSettings": {
+    "temperature": 0
+  },
+  "inputHash": "7ee5cb71512b76bd60b9b8ec2214f7c4abdf2b1167667aca467dddd5c8f570e1",
+  "ticketHash": null,
+  "promptHash": "809d9eca0bf61f036378302560570cd982b709753f1ad774639a43bb39672562",
+  "promptTemplateHash": "607f2844a1678f58f9e80ea3dac77552a23a679f60585128dd7dbf2fcaf4ffec",
+  "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+  "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+  "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+  "promptTokens": 2871,
+  "completionTokens": 6586,
+  "totalTokens": 9457,
+  "cost": 0.0179,
+  "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+  "rawHash": "b2e68df59df8926b9f37504c677423651fde22815d0192405a3b08099d5bd655",
+  "outputHash": "b2e68df59df8926b9f37504c677423651fde22815d0192405a3b08099d5bd655",
+  "rawArtifact": "evidence\\f6-20261030\\v2\\runs\\F6-v2-ticket4-final-review-writer-355ad45c-ac75-4b1e-b29a-df4eb91cfc7f\\cycle-1\\final-review-writer-raw.txt",
+  "validatedArtifact": "evidence\\f6-20261030\\v2\\runs\\F6-v2-ticket4-final-review-writer-355ad45c-ac75-4b1e-b29a-df4eb91cfc7f\\cycle-1\\final-review-writer-validated.json",
+  "status": "SUCCESS"
+}

@@ -1,0 +1,12 @@
+{
+  "version": "v1",
+  "caseId": "clean",
+  "agent": "requirement-interpreter",
+  "correlationId": "F6-v1-clean-ec014170-7f92-4061-94f6-3ec47b777eba",
+  "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+  "startedAt": "2026-10-30T23:14:02.225Z",
+  "finishedAt": "2026-10-30T23:14:06.599Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v1/runs/F6-v1-clean-ec014170-7f92-4061-94f6-3ec47b777eba/cycle-1"
+}

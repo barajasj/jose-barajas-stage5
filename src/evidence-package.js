@@ -47,7 +47,7 @@ function snapshotSources(directory) {
 function exportBaselines(directory, definitions) {
   const exports = [];
   const fixtures = definitions.fixtures.map((fixture, i) => {
-    if (fixture.baseline.state !== 'required') return fixture;
+    if (!['required', 'archival-incompatible'].includes(fixture.baseline.state)) return fixture;
     const { ref, file } = fixture.baseline.ref ? fixture.baseline : (fixture.baseline.origin || {});
     if (!ref) throw new Error('Historical export requires an immutable Git baseline reference.');
     const bytes = execFileSync('git', ['show', `${ref}:${file}`], { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
@@ -58,7 +58,10 @@ function exportBaselines(directory, definitions) {
       gitBlob: git(['rev-parse', `${ref}:${file}`]), sha256: hash(bytes),
       compatibility: 'Original bytes, not upgraded to current runtime contracts; no fabricated completed status.'
     });
-    return { ...fixture, baseline: { state: 'required', file: relative(target) } };
+    return { ...fixture, baseline: {
+      state: fixture.baseline.state, file: relative(target),
+      ...(fixture.baseline.reason ? { reason: fixture.baseline.reason } : {})
+    } };
   });
   writeJson(path.join(directory, 'baselines', 'exports.json'), exports);
   return fixtures;

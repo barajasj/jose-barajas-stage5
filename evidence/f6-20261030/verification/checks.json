@@ -1,0 +1,81 @@
+{
+  "verificationPass": true,
+  "tests": {
+    "tests": 89,
+    "passed": 89,
+    "failed": 0
+  },
+  "coverage": {
+    "pass": true,
+    "checks": 61,
+    "negativeControls": 152
+  },
+  "authoredControlsPass": true,
+  "replayMatches": true,
+  "modelAcceptancePass": false,
+  "fullEvaluatorPass": false,
+  "fullEvaluatorErrors": [
+    "fixtures/hvac-ticket-2.md: Workflow must have an explicit completed status.",
+    "fixtures/hvac-ticket-3.md: Workflow must have an explicit completed status.",
+    "fixtures/hvac-ticket-4.md: Workflow must have an explicit completed status.",
+    "evidence/d5-20261030T1940Z/fixtures/positive-control.md: Workflow must have an explicit completed status."
+  ],
+  "f6Comparison": {
+    "directory": "evidence/f6-20261030",
+    "measurementPass": true,
+    "positiveCyclesPerAgent": {
+      "requirement-interpreter": 1,
+      "adversarial-reviewer": 1,
+      "final-review-writer": 1
+    },
+    "pairsPerCycle": [
+      {
+        "before": "v0",
+        "after": "v1",
+        "pairs": 28
+      },
+      {
+        "before": "v1",
+        "after": "v2",
+        "pairs": 28
+      }
+    ],
+    "errors": []
+  },
+  "originalCollectionEntriesUnchanged": true,
+  "originalManifestSha256": "2e9803a3bbd1ce2505e6c79a65510b673ec5a15d01e600d037b06883b017179d",
+  "trackedHistoricalEvidenceFiles": 1565,
+  "productionPromptsAndF2F3ContractsUnchanged": true,
+  "preservedPackages": [
+    {
+      "directory": "evidence/d5-20261030T1940Z",
+      "pass": true,
+      "files": 510,
+      "errors": []
+    },
+    {
+      "directory": "evidence/f3-20261030T2218Z",
+      "pass": true,
+      "files": 413,
+      "errors": []
+    },
+    {
+      "directory": "evidence/f3-20261030T2225Z",
+      "pass": true,
+      "files": 408,
+      "errors": []
+    },
+    {
+      "directory": "evidence/f3-ticket2-20261030T2247Z",
+      "pass": true,
+      "files": 120,
+      "errors": []
+    },
+    {
+      "directory": "evidence/f3-ticket2-redispatch-20261030T2250Z",
+      "pass": true,
+      "files": 100,
+      "errors": []
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "requirementSummary": "The UI must validate the entered coil height for Water/Steam coils, ensuring the value is between 1.25\" and 100\" and is a multiple of a coil‑specific increment (1.25\", 1.5\", 2.25\", 9\", or 1\" depending on tube size and configuration). If the entered value is not an exact multiple, it must be rounded to the nearest valid increment.",
+  "hvacTerminology": [
+    "Coil Height",
+    "Water/Steam coils",
+    "tube",
+    "Lamiflo coil",
+    "increment",
+    "spacing",
+    "3/8\" tube",
+    "1/2\" tube",
+    "5/8\" tube",
+    "1\" tube",
+    "3/8\" tube with 1\" spacing"
+  ],
+  "businessRules": [
+    "Valid coil height values must be between 1.25\" and 100\" inclusive.",
+    "The entered coil height must be a multiple of a coil‑specific increment.",
+    "If the entered coil height is not an exact multiple of the applicable increment, it must be rounded to the nearest valid increment.",
+    "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+    "For 5/8\" tube, the increment is 1.50\".",
+    "For 1\" tube, the increment is 2.25\".",
+    "For Lamiflo coil, the increment is 9.00\".",
+    "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+  ],
+  "developerConsiderations": [
+    "Implement a mapping from coil type/configuration to its specific height increment (1.25\", 1.5\", 2.25\", 9\", 1\").",
+    "Apply rounding logic to compute the nearest multiple of the applicable increment for a given input.",
+    "Enforce the overall valid range (1.25\" – 100\") after rounding (or before, as defined by implementation).",
+    "Validate that the coil being edited is a Water/Steam coil before applying these rules.",
+    "Handle floating‑point arithmetic to avoid precision errors when calculating multiples and rounding.",
+    "UI must display the rounded value or an error if the final value falls outside the allowed range."
+  ],
+  "ambiguities": [
+    "When rounding to the nearest increment, how should ties (exactly halfway between two multiples) be resolved?",
+    "Should the valid range validation be performed before rounding, after rounding, or both?",
+    "If rounding results in a value outside the 1.25\"–100\" range, what is the expected behavior (e.g., reject input, clamp to range, or display an error)?",
+    "How should coil types or configurations not listed (e.g., other tube sizes) be handled?",
+    "Should the UI automatically replace the entered value with the rounded value, or merely display a validation message?"
+  ],
+  "confidence": "MEDIUM"
+}

@@ -1,0 +1,12 @@
+{
+  "version": "v2",
+  "caseId": "conflict",
+  "agent": "requirement-interpreter",
+  "correlationId": "F6-v2-conflict-4dbad8d8-0d12-4919-add8-498d1af5fed5",
+  "inputHash": "e0f26f168a99b9a85132bfc0cd8610160a73bd71bcba82cf37ae10cd39fee4ec",
+  "startedAt": "2026-10-30T23:17:59.691Z",
+  "finishedAt": "2026-10-30T23:18:03.152Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-conflict-4dbad8d8-0d12-4919-add8-498d1af5fed5/cycle-1"
+}

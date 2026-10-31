@@ -1,0 +1,8 @@
+{
+  "version": "v0",
+  "caseId": "missed-ambiguity",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v0-missed-ambiguity-0148426b-cf8c-4bc8-9342-77bf22bc0e66",
+  "inputHash": "5a2973cce48c468811c105631e165b902f44e6b41800093472621aba64188111",
+  "startedAt": "2026-10-30T23:11:37.578Z"
+}

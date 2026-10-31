@@ -1,6 +1,41 @@
 # Prompt Evolution
 
-## Current Evidence Qualification - 2026-10-30
+## F6 Measured Ledger - 2026-10-30
+
+84 authorized real-model calls measured v0->v1->v2 on 28 fixed inputs. Both
+cycles have 28 strictly eligible pairs and no unmatched cases. All observations,
+including five runtime rejections, are retained; no retries or repairs occurred.
+Scorer: `content-v3-reviewed-equivalents`, SHA-256
+`08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76`.
+Neither labels nor runtime contracts changed during collection.
+
+Protocol: `docs/F6-MEASUREMENT.md`. Full results and all positive/negative deltas:
+[`MEASURED-SUMMARY.md`](../evidence/f6-20261030/MEASURED-SUMMARY.md).
+Machine ledger (exact hashes, added instructions, results, and deltas):
+[`prompt-evolution-ledger.json`](../evidence/f6-20261030/prompt-evolution-ledger.json).
+Exact six prompt diffs: `evidence/f6-20261030/prompt-diffs/`.
+
+| Agent | Version | Reason For Change | Measured Outcome | Evidence Location |
+|---|---|---|---|---|
+| Requirement Interpreter | v0 | Unchanged post-F3 baseline | Strict 0/8; runtime 8/8; confidence-policy 7/8; extraction 6/39 | [v0 attempts](../evidence/f6-20261030/v0/attempts.json); `prompts/v0/requirement-interpreter.md` in package |
+| Requirement Interpreter | v1 | Separate explicit extraction, unanswered policy, and grounded implementation consequences | Strict 0/8; runtime 8/8; confidence 8/8 (+12.5 pp); terminology 40/49 (+4.08 pp); extraction 5/39 (-2.56 pp) | [v1 attempts](../evidence/f6-20261030/v1/attempts.json); `prompts/v1/requirement-interpreter.md` in package |
+| Requirement Interpreter | v2 | Audit numeric/configuration omissions, speculative rules, and redispatch identity after v1 | Strict 0/8; runtime 8/8; confidence 8/8 (0 pp); terminology 39/49 (-2.04 pp); extraction 3/39 (-5.13 pp) | [v2 attempts](../evidence/f6-20261030/v2/attempts.json); `prompts/v2/requirement-interpreter.md` in package |
+| Adversarial Reviewer | v0 | Unchanged post-F3 baseline | Strict 0/16; runtime 15/16 | [v0 attempts](../evidence/f6-20261030/v0/attempts.json); `prompts/v0/adversarial-reviewer.md` in package |
+| Adversarial Reviewer | v1 | Compare against the whole interpretation and establish the precise supported defect before citation | Strict 0/16; runtime 16/16 (+6.25 pp); bounded false-positive gate 5/16 (+12.5 pp) | [v1 attempts](../evidence/f6-20261030/v1/attempts.json); `prompts/v1/adversarial-reviewer.md` in package |
+| Adversarial Reviewer | v2 | Audit finding support/severity, pointer identity, ambiguity coverage, and prior IDs after v1 | Strict 0/16; runtime 14/16 (-12.5 pp); two invalid source quotations; no promotion | [v2 attempts](../evidence/f6-20261030/v2/attempts.json); `prompts/v2/adversarial-reviewer.md` in package |
+| Final Review Writer | v0 | Unchanged post-F3 baseline | Strict/runtime 3/4; ticket-4 nested escaping rejected | [v0 attempts](../evidence/f6-20261030/v0/attempts.json); `prompts/v0/final-review-writer.md` in package |
+| Final Review Writer | v1 | Transcribe opaque template characters with one outer JSON encoding instead of regenerating prose | Strict/runtime 3/4 (0 pp); same nested-escaping failure retained | [v1 attempts](../evidence/f6-20261030/v1/attempts.json); `prompts/v1/final-review-writer.md` in package |
+| Final Review Writer | v2 | Compare decoded characters and audit backslashes, embedded quotes, and conjunctions after v1 | Strict/runtime 4/4 (+25 pp); preservation 4/4, completeness 14/14, output quality 16/16 | [v2 attempts](../evidence/f6-20261030/v2/attempts.json); `prompts/v2/final-review-writer.md` in package |
+
+Deltas are versus the immediately preceding version; full-precision decisions
+remain in JSON. These are two measured change cycles per agent, not two successful
+improvements per agent. Each agent has a positive observation in one cycle; mixed
+and negative outcomes remain visible. Strict bounded-label scores are not
+general semantic-accuracy estimates. No production prompt was promoted.
+Single observations on a development suite do not establish causal improvement,
+repeat-run reliability, or certification PASS. Historical claims stay withdrawn.
+
+## Preserved Deliverable 5 Qualification - 2026-10-30
 
 The live batch in `evidence/d5-20261030T1940Z/` changed no prompts. It establishes
 neither a prompt-improvement delta nor two measured prompt-change cycles per agent.

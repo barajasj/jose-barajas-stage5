@@ -1,0 +1,7 @@
+agent,cycle,attempts,baseline_strict_passes,current_strict_passes,strict_pass_delta,baseline_runtime_accepted,current_runtime_accepted,runtime_acceptance_delta
+requirement-interpreter,v0->v1,8,0,0,0,8,8,0
+adversarial-reviewer,v0->v1,16,0,0,0,15,16,0.0625
+final-review-writer,v0->v1,4,3,3,0,3,3,0
+requirement-interpreter,v1->v2,8,0,0,0,8,8,0
+adversarial-reviewer,v1->v2,16,0,0,0,16,14,-0.125
+final-review-writer,v1->v2,4,3,4,0.25,3,4,0.25

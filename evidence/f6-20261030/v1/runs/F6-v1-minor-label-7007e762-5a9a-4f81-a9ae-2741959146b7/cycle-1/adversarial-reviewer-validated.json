@@ -1,0 +1,27 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter incorrectly labels the output as \"DX height\" instead of the exact required label \"DX Coil Height\" specified in the ticket, violating the core requirement.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "UNSUPPORTED_ASSUMPTION",
+      "description": "The interpreter uses the label \"DX height\" which is not specified by the ticket; the ticket requires the exact label \"DX Coil Height\".",
+      "action": "Replace the label in the business rule with the exact required label \"DX Coil Height\".",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Display the calculated height using the exact label \"DX Coil Height\"."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "Display the calculated height using the label \"DX height\"."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

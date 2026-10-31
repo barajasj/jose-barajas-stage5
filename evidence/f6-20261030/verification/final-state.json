@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-10-30T23:25:55.794Z",
+  "commit": "2f1a7a12023be67d3b7ed2afd8ac6fdb560883d9",
+  "dirty": true,
+  "scorerHash": "08218b2c6568063db18d49c68d07c72b3c064b8cde296675438ce5f7ba582a76",
+  "files": [
+    {
+      "file": "CERTIFICATION-EVIDENCE.md",
+      "sha256": "551ed0ea27448c86ce2ab129178d1d9bdc2023f149bfe029db46d7ddb202d789"
+    },
+    {
+      "file": "README.md",
+      "sha256": "dcde55890870fb6799e89699c37da5a002e9ed3039bb7e8734986fbe138e9589"
+    },
+    {
+      "file": "evals/adversarial-reviewer-eval.md",
+      "sha256": "ddc921e51ffa154cd8d4473196a56b5b54b092c2012af72db792a3390b863632"
+    },
+    {
+      "file": "evals/final-review-writer-eval.md",
+      "sha256": "ed40f068d66973b844c4dc24bad33cbd34b827b3a845f00d579706e4ec8b8fc5"
+    },
+    {
+      "file": "evals/requirement-interpreter-eval.md",
+      "sha256": "e2dcd4f36466d57fad123867833ea8a1bb747dce0f11fdde8f5431b209d89cd5"
+    },
+    {
+      "file": "evals/test-cases.json",
+      "sha256": "5315ff6675765ebd2f5211ac03e24c20fda5aba0a8e8bef76cd6f26ab836e18c"
+    },
+    {
+      "file": "package.json",
+      "sha256": "177f4a89bacc3e37425cce73d2b47de2f12d59c91b59dffeed291019ac119d57"
+    },
+    {
+      "file": "prompts/prompt-evolution.md",
+      "sha256": "a0febee5e402f32aadfbec737093e57aceb88e5cbfab8590f9267be8970bfe51"
+    },
+    {
+      "file": "src/agent-runner.js",
+      "sha256": "da392bd118669df319616d3addd0cd92c37cd78e0b70b39f570c5504c19b12f6"
+    },
+    {
+      "file": "src/eval-runner.js",
+      "sha256": "fa179f5f3373ed8daca07949abbabc377f91b8550de7cc15fedebf75add97aa4"
+    },
+    {
+      "file": "src/evidence-package.js",
+      "sha256": "4243ef3877c26b1f7797d5914aed1a2949c04b264b8e7ad01d332d97ff317685"
+    },
+    {
+      "file": "tests/eval-runner.test.js",
+      "sha256": "1ca48a68bc10521e633a056b83d76735d83ede25a65e1c6d868149c34328c667"
+    },
+    {
+      "file": "docs/F6-MEASUREMENT.md",
+      "sha256": "cdea6bde506b0754cfe06cf0bd0682c54a3cc69add343009876acf73eb00ef54"
+    },
+    {
+      "file": "evals/f6-iterations.js",
+      "sha256": "a84dbf3c4834c3c32d6e663ee27178b8f85a31fadf70ee4694a24596a59462e8"
+    },
+    {
+      "file": "src/f6-plan.js",
+      "sha256": "725757c230ba0a3b4ead77862f64dc494938c9eda0131eb6cb9f210e72221548"
+    },
+    {
+      "file": "src/collect-f6-evidence.js",
+      "sha256": "4120f4c1483168cbd64d08866854a9b65e2bddfba51a6c9cfdcad6e6892355b1"
+    },
+    {
+      "file": "src/f6-analysis.js",
+      "sha256": "bf6be5c24e9588bd95a3ac82c6a52afd2092c1ba974cb5f4a946061261753d4a"
+    },
+    {
+      "file": "src/run-f6.js",
+      "sha256": "ea9807c82e211b7b930ca4ece4536d607747b4fce82a116a5b083a04b8f99939"
+    },
+    {
+      "file": "tests/f6-measurement.test.js",
+      "sha256": "e67f6551ff161a8131abf5b466dbe7c4a11f14826507cf1c4ad3aaf2988b3457"
+    }
+  ],
+  "documentationSnapshot": [
+    {
+      "file": "verification/docs/README.md",
+      "sha256": "dcde55890870fb6799e89699c37da5a002e9ed3039bb7e8734986fbe138e9589"
+    },
+    {
+      "file": "verification/docs/CERTIFICATION-EVIDENCE.md",
+      "sha256": "551ed0ea27448c86ce2ab129178d1d9bdc2023f149bfe029db46d7ddb202d789"
+    },
+    {
+      "file": "verification/docs/prompts/prompt-evolution.md",
+      "sha256": "a0febee5e402f32aadfbec737093e57aceb88e5cbfab8590f9267be8970bfe51"
+    },
+    {
+      "file": "verification/docs/docs/F6-MEASUREMENT.md",
+      "sha256": "cdea6bde506b0754cfe06cf0bd0682c54a3cc69add343009876acf73eb00ef54"
+    },
+    {
+      "file": "verification/docs/evals/requirement-interpreter-eval.md",
+      "sha256": "e2dcd4f36466d57fad123867833ea8a1bb747dce0f11fdde8f5431b209d89cd5"
+    },
+    {
+      "file": "verification/docs/evals/adversarial-reviewer-eval.md",
+      "sha256": "ddc921e51ffa154cd8d4473196a56b5b54b092c2012af72db792a3390b863632"
+    },
+    {
+      "file": "verification/docs/evals/final-review-writer-eval.md",
+      "sha256": "ed40f068d66973b844c4dc24bad33cbd34b827b3a845f00d579706e4ec8b8fc5"
+    }
+  ],
+  "scope": "F6 only; original collection source/docs retained, final docs added separately; no production prompt deployment or Git commit."
+}

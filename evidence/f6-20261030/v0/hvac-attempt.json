@@ -1,0 +1,12 @@
+{
+  "version": "v0",
+  "caseId": "hvac",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v0-hvac-39d6fc43-f3c1-4845-b6c2-c278d827ad32",
+  "inputHash": "af6bf4551382f0ecf3637787a691c16a24ba2357e7cbae2cd174d168172c1e0d",
+  "startedAt": "2026-10-30T23:11:20.494Z",
+  "finishedAt": "2026-10-30T23:11:31.089Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v0/runs/F6-v0-hvac-39d6fc43-f3c1-4845-b6c2-c278d827ad32/cycle-1"
+}

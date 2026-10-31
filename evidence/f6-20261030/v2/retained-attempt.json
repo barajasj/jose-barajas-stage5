@@ -1,0 +1,12 @@
+{
+  "version": "v2",
+  "caseId": "retained",
+  "agent": "adversarial-reviewer",
+  "correlationId": "F6-v2-retained-34f52a49-207b-4904-aac3-fe231a487108",
+  "inputHash": "641cedcbc499ea2b75d1f511a4be954fb29191a1cb9e188ffd21fcb764f6da44",
+  "startedAt": "2026-10-30T23:19:06.176Z",
+  "finishedAt": "2026-10-30T23:19:09.396Z",
+  "status": "SUCCESS",
+  "hasRawResponse": true,
+  "runsDirectory": "evidence/f6-20261030/v2/runs/F6-v2-retained-34f52a49-207b-4904-aac3-fe231a487108/cycle-1"
+}

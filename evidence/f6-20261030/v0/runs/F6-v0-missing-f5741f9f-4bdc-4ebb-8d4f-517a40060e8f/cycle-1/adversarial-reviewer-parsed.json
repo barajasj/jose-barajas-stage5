@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "rationale": "The interpreter accurately captures all explicit requirements from the ticket: it records that entering a Cooling Package triggers calculations and populates Cooling Circuits, that DX Coil Height is the sum of the populated Circuit heights, and that the DX Coil Information must update when a Circuit Height is edited. No unsupported assumptions, missing requirements, HVAC terminology errors, or validation constraints are introduced, and there are no unresolved ambiguities.",
+  "findings": [],
+  "resolutions": []
+}
