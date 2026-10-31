@@ -89,9 +89,13 @@ The definitions are discoverable through `evals/test-cases.json.loadBearingAudit
 | R14 verify removed questions | ambiguityResolutionVerification | `bad-resolution-detection`: a real range quotation does not resolve rounding ties |
 | R15 raw JSON/schema | rawResponseFormat, schemaConformance | `adversarial-reviewer-raw/schema`: fences, prose, wrong root/type, or extra field |
 | R16 complete finding example | schemaConformance, findingActionability | Field omission rejected by schema (observed live: audit `HVAC-TICKET-1793313465729-*` missing `action`); generic or invented action rejected by `actionability` |
+| R17 worked non-ambiguity example | schemaConformance, findingActionability, ticketGrounding, interpreterGrounding | `actionability` and grounding cases: copied or ungrounded example finding, missing `ambiguityRefs`, and quotes absent from the supplied artifacts are rejected |
 | Ticket input slot | ticketGrounding | Assertions tied to the fixed ticket, not expected accusation keywords alone |
 | Interpreter input slot | interpreterGrounding, reviewerAmbiguityCoverage | Actual clean/defective output determines expected challenges |
 | Previous-review input slot | concernContinuity | Remaining IDs preserved; each correction is explicitly supported |
+
+
+Prompt headings (for example `## Ticket`) are labels for the input slot beneath them, not separate instructions. Each heading inherits the criteria of its slot in the maps above: ticket grounding, interpreter grounding, previous-review continuity, schema conformance, disposition fidelity, and bounded-Markdown fidelity.
 
 ### Examiner unit reconciliation and preferred treatment
 

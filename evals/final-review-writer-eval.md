@@ -67,11 +67,16 @@ The supplemental audit runs with `node src/run-load-bearing-audit.js` (`--json` 
 | W05 no new findings/conclusions | findingPreservation, conclusionGrounding | New finding, unsupported “no concerns” conclusion, or empty summary rejected |
 | W06 substantive bounded report | boundedMarkdownFidelity, conclusionGrounding | Extra section or bare section labels rejected; only outer whitespace/CRLF differences permitted |
 | W07 raw JSON/schema | rawResponseFormat, schemaConformance | `final-review-writer-raw/schema`: fences, surrounding prose, wrong type, extra field |
+| W08 nested-escaping fragment | boundedMarkdownFidelity | `*-bounded-markdown`: decoded or normalized backslashes before inch marks rejected; reportMarkdown must equal the supplied template |
+| W09 verbatim-wording fragment | findingPreservation, boundedMarkdownFidelity | `*-bounded-markdown`: changing "or" to "and" or any template wording rejected |
 | Interpreter input slot | writerInterpreterGrounding | Content must equal the supplied summary and all open ambiguities |
 | Reviewer input slot | findingPreservation, reportCompleteness | Content must preserve every supplied concern and add none |
 | Disposition input slot | dispositionFidelity | Heading and body must both equal coordinator input |
 | Reason-code input slot | dispositionFidelity | Exact supplied reason codes required |
 | Bounded-Markdown input slot | boundedMarkdownFidelity | Rendered content must match supplied bounded Markdown |
+
+
+Prompt headings (for example `## Ticket`) are labels for the input slot beneath them, not separate instructions. Each heading inherits the criteria of its slot in the maps above: ticket grounding, interpreter grounding, previous-review continuity, schema conformance, disposition fidelity, and bounded-Markdown fidelity.
 
 ### Examiner unit reconciliation and preferred treatment
 

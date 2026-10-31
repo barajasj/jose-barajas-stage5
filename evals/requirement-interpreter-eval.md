@@ -137,10 +137,14 @@ Observed on this revision: all **61 valid counterparts accepted** and all **152 
 | I10 empty arrays versus real questions | emptyArrayDiscipline | `empty-arrays`: invented terms/rules/technical policy or removed question on a sparse ticket |
 | I11 re-dispatch safety | redispatchSafety | `redispatch`: erased unresolved question, invented validation, or irrelevant-but-real resolution quotation |
 | I12 JSON/schema contract | rawResponseFormat, schemaConformance | `requirement-interpreter-raw/schema`: fences, surrounding prose, array root, wrong types, extra field |
+| I13 worked re-dispatch example | redispatchSafety | `redispatch`: the example's paraphrase-keyed resolution, erased unanswered question, or invented rule is rejected; identity must come from the previous ambiguity |
 | Ticket input slot | summaryAccuracy, sourceGrounding | Ticket-specific complete propositions; unrelated-ticket summary rejected |
 | Appended previous interpretation | redispatchSafety | Same fixed previous interpretation and explicitly sourced correction |
 | Appended reviewer feedback | redispatchSafety, sourceGrounding | Required correction captured without fabricating absent validation policy |
 | Appended ambiguity preservation | redispatchSafety | Prior unanswered questions retained; only a genuinely answered question is removed |
+
+
+Prompt headings (for example `## Ticket`) are labels for the input slot beneath them, not separate instructions. Each heading inherits the criteria of its slot in the maps above: ticket grounding, interpreter grounding, previous-review continuity, schema conformance, disposition fidelity, and bounded-Markdown fidelity.
 
 ### Examiner unit reconciliation and preferred treatment
 
