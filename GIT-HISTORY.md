@@ -4,8 +4,8 @@ This file documents the meaningful version-control
 history of the project for examination. The full
 legacy exported commit log is `git-log.txt`. The current verified export is
 `evidence/d5-20261030T1940Z/git-history.txt`; collection commit/dirty state and
-executed source hashes are preserved in that package. Deliverable 5 is not
-committed yet; no measured prompt-change commits are invented.
+executed source hashes are preserved in that package. The Deliverable 5 package
+was committed in `58236a4`; measured F6 prompt-change evidence in `ecaabb5`.
 
 Regenerate after future commits:
 
@@ -29,6 +29,10 @@ git log --stat --format="commit %H%nAuthor: %an <%ae>%nDate: %ad%n%n    %s%n    
 | `bae61b6` | 2026-10-29 | Executable instruction coverage and targeted mutation controls |
 | `374ed51` | 2026-10-29 | Complete reviewer finding example, required-field controls, and schema details |
 | `8a09d44` | 2026-10-30 | Content-v2 scoring, direct cases, provenance validation, NA accounting, and failing evaluation exits |
+| `58236a4` | 2026-10-30 | Measured evidence collection (Deliverable 5 package), refreshed workflow executions, certification outputs |
+| `79e8db7` | 2026-10-30 | Scorer validity, reviewed equivalence matching, gold-label accuracy |
+| `2f1a7a1` | 2026-10-30 | Ambiguity continuity fixes and workflow completion improvements (F3) |
+| `ecaabb5` | 2026-10-30 | Evaluator validity, workflow reliability, and F6 measured prompt-change evidence (v0-v2, 84 calls) |
 
 ## Iterative Development Evidence
 

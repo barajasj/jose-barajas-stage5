@@ -256,8 +256,12 @@ iteration's target (below).
 
 - Re-test: every subsequent reviewer execution in
   `audit/audit-log.jsonl` parsed and schema-validated
-  successfully (52 consecutive SUCCESS entries, zero
-  parse failures after the fix).
+  successfully. The earlier "52 consecutive SUCCESS"
+  count (and the "21" in `prompts/prompt-evolution.md`)
+  is withdrawn: neither is reproducible from the
+  append-only audit log, which keeps growing and also
+  holds SCHEMA_FAILURE entries. Use the current audit
+  log and `evidence/f6-20261030/` for counts.
 - Measured: challengeQuality 1.000 on both baseline
   and final runs — all findings carry valid
   severities and actionable descriptions.
@@ -272,8 +276,14 @@ iteration's target (below).
   `-pass1.json` artifact snapshots in
   `src/artifact-writer.js`, giving a measurable
   pass-1 vs pass-2 comparison.
-- Re-test: missingRequirementDetection rose from
-  0.250 to 0.727 (+0.477). On ticket 1 the second
+- Attribution: harness-side change only (no reviewer
+  prompt wording changed); the "actionable challenges"
+  wording in older notes is not in the current prompt.
+- Re-test (historical keyword scorer, not current
+  acceptance; baseline pooled tickets 1-3, final pooled
+  tickets 1-4): missingRequirementDetection rose from
+  0.250 to 0.727 (+0.477). On matched tickets 1-3 the
+  same scorer gives 0.250 to 1.000. On ticket 1 the second
   pass resolved the HIGH finding while preserving
   the MEDIUM/LOW challenges.
 - Remaining gap: ticket 4 reviewer returned PASS

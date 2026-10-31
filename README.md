@@ -59,7 +59,9 @@ Environment:
 
 Copy `env.example` to `.env` and set `AI_API_KEY`
 for live model execution, or set `RUNTIME_MODE=mock`
-for offline/mock testing.
+for offline/mock testing. The default when `RUNTIME_MODE` is unset is `mock`; live
+execution is env-gated. `isolated_context` in `sub-agents.config.yaml` is a declared
+configuration flag; isolation is realized by stateless per-agent requests with no tools.
 
 ---
 
@@ -342,6 +344,10 @@ node src/run-evals.js
 The default evaluator validates persisted real-model evidence and exits nonzero for missing
 direct responses, incompatible historical artifacts, hard-gate violations, or missed thresholds.
 It prints JSON without overwriting historical `sub-agents-results.json`.
+That file is ARCHIVAL (generated 2026-10-22 with the retired keyword scorer and a
+`4fcbf47` baseline); it is not current acceptance evidence. Current measured evidence:
+`evidence/d5-20261030T1940Z/`, `evidence/f3-*`, and `evidence/f6-20261030/`.
+`evidence/run1/` is likewise archival: the original `4fcbf47` exports plus later copies.
 Use `--responses FILE` for fixed direct-step observations and `--definitions FILE` for
 compatible workflow/baseline paths. Full contracts and `content-v3-reviewed-equivalents` scoring rules:
 `evals/requirement-interpreter-eval.md`, "Current scorer - Deliverable 4".

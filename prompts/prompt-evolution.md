@@ -91,9 +91,12 @@ Issue:
 Reviewer findings were too generic.
 
 Improvement:
-Added requirement to produce actionable challenges.
+Coordinator re-dispatch loop plus `-pass1.json` snapshots
+(harness-side; no reviewer prompt wording changed, so this is not
+prompt evolution). Attribution matches `evals/adversarial-reviewer-eval.md`.
 
-Measured:
+Measured (historical keyword scorer; baseline pooled tickets 1-3,
+final pooled tickets 1-4; on matched tickets 1-3 it is 0.250 -> 1.000):
 `missingRequirementDetection` baseline
 0.250 -> final 0.727 (+0.477). Remaining
 gap driven by ticket-4 PASS verdict; see
@@ -115,9 +118,9 @@ the exact output structure to all three
 agent prompts.
 
 Measured:
-Structured-output success 0% ->
-21 consecutive SUCCESS entries in
-`audit/audit-log.jsonl` after the change.
+Structured-output success 0% -> subsequent runs parsed. The earlier
+"21" and "52" consecutive-SUCCESS counts conflict and are withdrawn;
+the append-only audit log is the only source for counts.
 
 ---
 

@@ -21,7 +21,11 @@ failed scored steps. All 15 mandatory metric types have direct observations.
   cycles per agent, plus repeat runs. Preserve every attempt; no cherry-picking.
 
 Per-case causes and raw artifact paths: `diagnostics.json` in the package.
-No additional API calls are authorized by these instructions.
+API use for further measurement was authorized by the owner on 2026-10-30 for
+F3/F6 collection (see `evidence/f3-*` and `evidence/f6-20261030/`). Any new live run
+needs fresh owner approval and must preserve every attempt, including failures.
+Open: F6 latest-candidate strict acceptance is FAIL; reviewer v2 regressed; interpreter
+strict scores remain 0/8.
 
 ## Implemented Runtime Components
 
