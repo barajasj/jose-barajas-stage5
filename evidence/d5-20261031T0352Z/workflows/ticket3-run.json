@@ -1,0 +1,976 @@
+{
+  "runtimeMode": "real",
+  "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+  "status": "COMPLETED",
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ],
+  "reviewCycles": [
+    {
+      "cycle": 1,
+      "interpreterResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+        "agentId": "requirement-interpreter",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "requirementSummary": "When a user selects Condenser Type \"AC\" (Air Cooled) or \"EC\" (Evaporative Cooled), the system displays the corresponding input fields, records the entered parameters, and, for AC condensers, provides specific options for Condenser Passes and Roof Type. The recorded AC/EC parameters together with per‑circuit cooling configurations are output as a configuration ready for ECS calculation.",
+          "hvacTerminology": [
+            "Condenser Type",
+            "Air Cooled (AC)",
+            "Evaporative Cooled (EC)",
+            "Design Ambient",
+            "ASHRAE Summer Design",
+            "Condenser Passes",
+            "AutoOdd",
+            "AutoEven",
+            "Roof Type",
+            "dark roof",
+            "light roof",
+            "parapet",
+            "shrouding",
+            "Condenser Tube Material",
+            "Condenser Fin Material",
+            "Condenser Tube Size",
+            "Condenser Fin Type",
+            "Bank ID#",
+            "EC Model",
+            "Wet Bulb Temperature",
+            "circuit‑level configuration",
+            "ECS calculation"
+          ],
+          "businessRules": [
+            "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields shall be displayed.",
+            "For an AC condenser, the Design Ambient field shall be a numeric input with default 95°F (or equivalent in °C) and its value shall be echoed in output 3.7.",
+            "For an AC condenser, the ASHRAE Summer Design field shall be a numeric input with no default specified.",
+            "For an AC condenser, the Default Condenser field shall be a user‑selectable checkbox.",
+            "For an AC condenser, the High Amb. / Altit. Cond. field shall be a user‑selectable checkbox.",
+            "For an AC condenser, the Condenser Tube Material field shall be a dropdown with default \"Copper\".",
+            "For an AC condenser, the Condenser Fin Material field shall be a dropdown with default \"Aluminum\".",
+            "For an AC condenser, the Condenser Tube Size field shall be a dropdown offering \"3/8\" and \"3/8 w/ 1\\\" spacing\" options (units mm).",
+            "For an AC condenser, the Condenser Fin Type field shall be a dropdown with default \"Corrugated\".",
+            "For an EC condenser, the Bank ID# field shall be an ID supplied by the system.",
+            "For an EC condenser, the Copies of this Bank field shall be a numeric input.",
+            "For an EC condenser, the EC Model field shall be a dropdown populated from the catalog.",
+            "For an EC condenser, the Wet Bulb Temperature field shall be a numeric input (units °F/°C).",
+            "Given the AC/EC condenser parameters and per‑circuit cooling configurations, when processed, the system shall output condenser and circuit‑level configuration ready for ECS calculation.",
+            "When configuring an AC condenser and the user enters ambient design conditions and coil geometry, the system shall record the condenser parameters.",
+            "When configuring an EC condenser and the user enters the EC model and wet bulb temperature, the system shall record the EC condenser parameters.",
+            "When configuring an AC condenser and the user selects Condenser Passes, the system shall display options: AutoOdd, AutoEven, and the integers 2 through 41 inclusive, incrementing by 1.",
+            "When configuring an AC condenser and the user selects Roof Type, the system shall display the specified dark and light roof type options, each with and without parapet/shrouding."
+          ],
+          "developerConsiderations": [
+            "Implement conditional UI rendering to show AC‑specific fields when Condenser Type = AC and EC‑specific fields when Condenser Type = EC.",
+            "Support numeric inputs with unit selection (°F/°C) and default values where specified.",
+            "Provide dropdown components with the listed default selections and options.",
+            "Implement checkbox components for Default Condenser and High Amb. / Altit. Cond. fields.",
+            "Render Condenser Passes options list containing AutoOdd, AutoEven, and numbers 2‑41 inclusive.",
+            "Render Roof Type options covering dark and light roof variants, each with optional parapet and shrouding selections.",
+            "Record entered parameters for later ECS calculation output.",
+            "Ensure the Design Ambient default of 95°F is pre‑populated in the UI."
+          ],
+          "ambiguities": [
+            "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.",
+            "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear.",
+            "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.",
+            "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed.",
+            "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.",
+            "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined.",
+            "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.",
+            "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described.",
+            "How the system generates or retrieves the Bank ID# from the system is not explained."
+          ],
+          "confidence": "MEDIUM"
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+          "workflow": "hvac-ticket-governance",
+          "agent": "requirement-interpreter",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-31T03:56:20.495Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "48364f3e10a454ed63786474dca9a7bdeaa140317a0e51b303f8d65527783c87",
+          "ticketHash": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce",
+          "promptHash": "6e24ac9a1f749d730839b2ab9b380c9e05079a0b1976a60f54c266fdb2b77a94",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 1501,
+          "completionTokens": 2550,
+          "totalTokens": 4051,
+          "cost": 0.007126,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "14d0d21d6b0b09cd0b29ec2bcde1c4634e0f4e64e5e7978f5aaaf388642cd10d",
+          "outputHash": "2c18c31ccc790333b3d9f0b9b0d620750e521ec18b4a499255ad2246ab1c8a0d",
+          "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\requirement-interpreter-raw.txt",
+          "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\requirement-interpreter-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "reviewResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+        "agentId": "adversarial-reviewer",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "status": "FAIL",
+          "rationale": "The interpreter accurately reflects the ticket requirements and does not add unsupported assumptions. However, nine ambiguities identified by the interpreter remain unresolved, each of which blocks a PASS result.",
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.",
+              "action": "Obtain clarification from the ticket owner on the required validation ranges or limits for Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/0",
+                  "quote": "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/0"
+              ]
+            },
+            {
+              "id": "F2",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear.",
+              "action": "Clarify whether Condenser Tube Size options should be entered/displayed in mm, inches, or both, and define any required conversion or representation.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/1",
+                  "quote": "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/1"
+              ]
+            },
+            {
+              "id": "F3",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.",
+              "action": "Provide the complete enumeration of dark and light roof type options and specify how parapet and shrouding selections are associated with each.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/2",
+                  "quote": "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/2"
+              ]
+            },
+            {
+              "id": "F4",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed.",
+              "action": "Supply the list of EC Model options that should populate the dropdown, or reference the catalog location where they can be retrieved.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/3",
+                  "quote": "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/3"
+              ]
+            },
+            {
+              "id": "F5",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.",
+              "action": "Clarify the required per‑circuit cooling configuration inputs and their format that are needed for the ECS calculation.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/4",
+                  "quote": "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/4"
+              ]
+            },
+            {
+              "id": "F6",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined.",
+              "action": "Explain what \"output 3.7\" refers to, its purpose, and how the Design Ambient value should be echoed there.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/5",
+                  "quote": "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/5"
+              ]
+            },
+            {
+              "id": "F7",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.",
+              "action": "Specify the selection rules for AutoOdd, AutoEven, and the numeric pass options (2‑41) – whether they are mutually exclusive or can be combined.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/6",
+                  "quote": "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/6"
+              ]
+            },
+            {
+              "id": "F8",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described.",
+              "action": "Provide the intended purpose of the \"Copies of this Bank\" field and define the acceptable range or set of values.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/7",
+                  "quote": "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/7"
+              ]
+            },
+            {
+              "id": "F9",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "How the system generates or retrieves the Bank ID# from the system is not explained.",
+              "action": "Explain the mechanism by which the Bank ID# is generated or retrieved, including any system sources or formats.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/8",
+                  "quote": "How the system generates or retrieves the Bank ID# from the system is not explained."
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/8"
+              ]
+            }
+          ],
+          "resolutions": []
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+          "workflow": "hvac-ticket-governance",
+          "agent": "adversarial-reviewer",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-31T03:56:30.268Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "dfb410c5559eb5b791f8b1a7589e09f942b91227ef1b2caed5fae57c9086b5df",
+          "ticketHash": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce",
+          "promptHash": "fb0f4bb52ecfc6ddfd641f6944861740585a387fb90c4b96f85b57e19720cabd",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 4035,
+          "completionTokens": 3800,
+          "totalTokens": 7835,
+          "cost": 0.011517,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "35cda31d98a26a0d103e950aea9a68f362839f54291ad44fd5e66545a6c8278b",
+          "outputHash": "33a7b836b069879162b2e581824af5e49c234f812d85bfe88118827ab0b67319",
+          "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\adversarial-reviewer-raw.txt",
+          "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\adversarial-reviewer-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    }
+  ],
+  "totalCost": 0.028885,
+  "humanGovernance": null,
+  "auditSummary": {
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "stepsExecuted": 3,
+    "reDispatched": false,
+    "reviewCyclesExecuted": 1,
+    "reviewLimitReached": false,
+    "totalPromptTokens": 9945,
+    "totalCompletionTokens": 9565,
+    "totalTokens": 19510,
+    "totalCost": 0.028885,
+    "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)"
+  },
+  "interpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "When a user selects Condenser Type \"AC\" (Air Cooled) or \"EC\" (Evaporative Cooled), the system displays the corresponding input fields, records the entered parameters, and, for AC condensers, provides specific options for Condenser Passes and Roof Type. The recorded AC/EC parameters together with per‑circuit cooling configurations are output as a configuration ready for ECS calculation.",
+      "hvacTerminology": [
+        "Condenser Type",
+        "Air Cooled (AC)",
+        "Evaporative Cooled (EC)",
+        "Design Ambient",
+        "ASHRAE Summer Design",
+        "Condenser Passes",
+        "AutoOdd",
+        "AutoEven",
+        "Roof Type",
+        "dark roof",
+        "light roof",
+        "parapet",
+        "shrouding",
+        "Condenser Tube Material",
+        "Condenser Fin Material",
+        "Condenser Tube Size",
+        "Condenser Fin Type",
+        "Bank ID#",
+        "EC Model",
+        "Wet Bulb Temperature",
+        "circuit‑level configuration",
+        "ECS calculation"
+      ],
+      "businessRules": [
+        "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields shall be displayed.",
+        "For an AC condenser, the Design Ambient field shall be a numeric input with default 95°F (or equivalent in °C) and its value shall be echoed in output 3.7.",
+        "For an AC condenser, the ASHRAE Summer Design field shall be a numeric input with no default specified.",
+        "For an AC condenser, the Default Condenser field shall be a user‑selectable checkbox.",
+        "For an AC condenser, the High Amb. / Altit. Cond. field shall be a user‑selectable checkbox.",
+        "For an AC condenser, the Condenser Tube Material field shall be a dropdown with default \"Copper\".",
+        "For an AC condenser, the Condenser Fin Material field shall be a dropdown with default \"Aluminum\".",
+        "For an AC condenser, the Condenser Tube Size field shall be a dropdown offering \"3/8\" and \"3/8 w/ 1\\\" spacing\" options (units mm).",
+        "For an AC condenser, the Condenser Fin Type field shall be a dropdown with default \"Corrugated\".",
+        "For an EC condenser, the Bank ID# field shall be an ID supplied by the system.",
+        "For an EC condenser, the Copies of this Bank field shall be a numeric input.",
+        "For an EC condenser, the EC Model field shall be a dropdown populated from the catalog.",
+        "For an EC condenser, the Wet Bulb Temperature field shall be a numeric input (units °F/°C).",
+        "Given the AC/EC condenser parameters and per‑circuit cooling configurations, when processed, the system shall output condenser and circuit‑level configuration ready for ECS calculation.",
+        "When configuring an AC condenser and the user enters ambient design conditions and coil geometry, the system shall record the condenser parameters.",
+        "When configuring an EC condenser and the user enters the EC model and wet bulb temperature, the system shall record the EC condenser parameters.",
+        "When configuring an AC condenser and the user selects Condenser Passes, the system shall display options: AutoOdd, AutoEven, and the integers 2 through 41 inclusive, incrementing by 1.",
+        "When configuring an AC condenser and the user selects Roof Type, the system shall display the specified dark and light roof type options, each with and without parapet/shrouding."
+      ],
+      "developerConsiderations": [
+        "Implement conditional UI rendering to show AC‑specific fields when Condenser Type = AC and EC‑specific fields when Condenser Type = EC.",
+        "Support numeric inputs with unit selection (°F/°C) and default values where specified.",
+        "Provide dropdown components with the listed default selections and options.",
+        "Implement checkbox components for Default Condenser and High Amb. / Altit. Cond. fields.",
+        "Render Condenser Passes options list containing AutoOdd, AutoEven, and numbers 2‑41 inclusive.",
+        "Render Roof Type options covering dark and light roof variants, each with optional parapet and shrouding selections.",
+        "Record entered parameters for later ECS calculation output.",
+        "Ensure the Design Ambient default of 95°F is pre‑populated in the UI."
+      ],
+      "ambiguities": [
+        "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.",
+        "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear.",
+        "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.",
+        "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed.",
+        "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.",
+        "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined.",
+        "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.",
+        "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described.",
+        "How the system generates or retrieves the Bank ID# from the system is not explained."
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:56:20.495Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "48364f3e10a454ed63786474dca9a7bdeaa140317a0e51b303f8d65527783c87",
+      "ticketHash": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce",
+      "promptHash": "6e24ac9a1f749d730839b2ab9b380c9e05079a0b1976a60f54c266fdb2b77a94",
+      "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1501,
+      "completionTokens": 2550,
+      "totalTokens": 4051,
+      "cost": 0.007126,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "14d0d21d6b0b09cd0b29ec2bcde1c4634e0f4e64e5e7978f5aaaf388642cd10d",
+      "outputHash": "2c18c31ccc790333b3d9f0b9b0d620750e521ec18b4a499255ad2246ab1c8a0d",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "reviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter accurately reflects the ticket requirements and does not add unsupported assumptions. However, nine ambiguities identified by the interpreter remain unresolved, each of which blocks a PASS result.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.",
+          "action": "Obtain clarification from the ticket owner on the required validation ranges or limits for Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear.",
+          "action": "Clarify whether Condenser Tube Size options should be entered/displayed in mm, inches, or both, and define any required conversion or representation.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.",
+          "action": "Provide the complete enumeration of dark and light roof type options and specify how parapet and shrouding selections are associated with each.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed.",
+          "action": "Supply the list of EC Model options that should populate the dropdown, or reference the catalog location where they can be retrieved.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "F5",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.",
+          "action": "Clarify the required per‑circuit cooling configuration inputs and their format that are needed for the ECS calculation.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        },
+        {
+          "id": "F6",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined.",
+          "action": "Explain what \"output 3.7\" refers to, its purpose, and how the Design Ambient value should be echoed there.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/5",
+              "quote": "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/5"
+          ]
+        },
+        {
+          "id": "F7",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.",
+          "action": "Specify the selection rules for AutoOdd, AutoEven, and the numeric pass options (2‑41) – whether they are mutually exclusive or can be combined.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/6",
+              "quote": "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/6"
+          ]
+        },
+        {
+          "id": "F8",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described.",
+          "action": "Provide the intended purpose of the \"Copies of this Bank\" field and define the acceptable range or set of values.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/7",
+              "quote": "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/7"
+          ]
+        },
+        {
+          "id": "F9",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "How the system generates or retrieves the Bank ID# from the system is not explained.",
+          "action": "Explain the mechanism by which the Bank ID# is generated or retrieved, including any system sources or formats.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/8",
+              "quote": "How the system generates or retrieves the Bank ID# from the system is not explained."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/8"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:56:30.268Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "dfb410c5559eb5b791f8b1a7589e09f942b91227ef1b2caed5fae57c9086b5df",
+      "ticketHash": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce",
+      "promptHash": "fb0f4bb52ecfc6ddfd641f6944861740585a387fb90c4b96f85b57e19720cabd",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 4035,
+      "completionTokens": 3800,
+      "totalTokens": 7835,
+      "cost": 0.011517,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "35cda31d98a26a0d103e950aea9a68f362839f54291ad44fd5e66545a6c8278b",
+      "outputHash": "33a7b836b069879162b2e581824af5e49c234f812d85bfe88118827ab0b67319",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalInterpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "When a user selects Condenser Type \"AC\" (Air Cooled) or \"EC\" (Evaporative Cooled), the system displays the corresponding input fields, records the entered parameters, and, for AC condensers, provides specific options for Condenser Passes and Roof Type. The recorded AC/EC parameters together with per‑circuit cooling configurations are output as a configuration ready for ECS calculation.",
+      "hvacTerminology": [
+        "Condenser Type",
+        "Air Cooled (AC)",
+        "Evaporative Cooled (EC)",
+        "Design Ambient",
+        "ASHRAE Summer Design",
+        "Condenser Passes",
+        "AutoOdd",
+        "AutoEven",
+        "Roof Type",
+        "dark roof",
+        "light roof",
+        "parapet",
+        "shrouding",
+        "Condenser Tube Material",
+        "Condenser Fin Material",
+        "Condenser Tube Size",
+        "Condenser Fin Type",
+        "Bank ID#",
+        "EC Model",
+        "Wet Bulb Temperature",
+        "circuit‑level configuration",
+        "ECS calculation"
+      ],
+      "businessRules": [
+        "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields shall be displayed.",
+        "For an AC condenser, the Design Ambient field shall be a numeric input with default 95°F (or equivalent in °C) and its value shall be echoed in output 3.7.",
+        "For an AC condenser, the ASHRAE Summer Design field shall be a numeric input with no default specified.",
+        "For an AC condenser, the Default Condenser field shall be a user‑selectable checkbox.",
+        "For an AC condenser, the High Amb. / Altit. Cond. field shall be a user‑selectable checkbox.",
+        "For an AC condenser, the Condenser Tube Material field shall be a dropdown with default \"Copper\".",
+        "For an AC condenser, the Condenser Fin Material field shall be a dropdown with default \"Aluminum\".",
+        "For an AC condenser, the Condenser Tube Size field shall be a dropdown offering \"3/8\" and \"3/8 w/ 1\\\" spacing\" options (units mm).",
+        "For an AC condenser, the Condenser Fin Type field shall be a dropdown with default \"Corrugated\".",
+        "For an EC condenser, the Bank ID# field shall be an ID supplied by the system.",
+        "For an EC condenser, the Copies of this Bank field shall be a numeric input.",
+        "For an EC condenser, the EC Model field shall be a dropdown populated from the catalog.",
+        "For an EC condenser, the Wet Bulb Temperature field shall be a numeric input (units °F/°C).",
+        "Given the AC/EC condenser parameters and per‑circuit cooling configurations, when processed, the system shall output condenser and circuit‑level configuration ready for ECS calculation.",
+        "When configuring an AC condenser and the user enters ambient design conditions and coil geometry, the system shall record the condenser parameters.",
+        "When configuring an EC condenser and the user enters the EC model and wet bulb temperature, the system shall record the EC condenser parameters.",
+        "When configuring an AC condenser and the user selects Condenser Passes, the system shall display options: AutoOdd, AutoEven, and the integers 2 through 41 inclusive, incrementing by 1.",
+        "When configuring an AC condenser and the user selects Roof Type, the system shall display the specified dark and light roof type options, each with and without parapet/shrouding."
+      ],
+      "developerConsiderations": [
+        "Implement conditional UI rendering to show AC‑specific fields when Condenser Type = AC and EC‑specific fields when Condenser Type = EC.",
+        "Support numeric inputs with unit selection (°F/°C) and default values where specified.",
+        "Provide dropdown components with the listed default selections and options.",
+        "Implement checkbox components for Default Condenser and High Amb. / Altit. Cond. fields.",
+        "Render Condenser Passes options list containing AutoOdd, AutoEven, and numbers 2‑41 inclusive.",
+        "Render Roof Type options covering dark and light roof variants, each with optional parapet and shrouding selections.",
+        "Record entered parameters for later ECS calculation output.",
+        "Ensure the Design Ambient default of 95°F is pre‑populated in the UI."
+      ],
+      "ambiguities": [
+        "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.",
+        "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear.",
+        "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.",
+        "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed.",
+        "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.",
+        "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined.",
+        "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.",
+        "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described.",
+        "How the system generates or retrieves the Bank ID# from the system is not explained."
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:56:20.495Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "48364f3e10a454ed63786474dca9a7bdeaa140317a0e51b303f8d65527783c87",
+      "ticketHash": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce",
+      "promptHash": "6e24ac9a1f749d730839b2ab9b380c9e05079a0b1976a60f54c266fdb2b77a94",
+      "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1501,
+      "completionTokens": 2550,
+      "totalTokens": 4051,
+      "cost": 0.007126,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "14d0d21d6b0b09cd0b29ec2bcde1c4634e0f4e64e5e7978f5aaaf388642cd10d",
+      "outputHash": "2c18c31ccc790333b3d9f0b9b0d620750e521ec18b4a499255ad2246ab1c8a0d",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter accurately reflects the ticket requirements and does not add unsupported assumptions. However, nine ambiguities identified by the interpreter remain unresolved, each of which blocks a PASS result.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.",
+          "action": "Obtain clarification from the ticket owner on the required validation ranges or limits for Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear.",
+          "action": "Clarify whether Condenser Tube Size options should be entered/displayed in mm, inches, or both, and define any required conversion or representation.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.",
+          "action": "Provide the complete enumeration of dark and light roof type options and specify how parapet and shrouding selections are associated with each.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed.",
+          "action": "Supply the list of EC Model options that should populate the dropdown, or reference the catalog location where they can be retrieved.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "F5",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.",
+          "action": "Clarify the required per‑circuit cooling configuration inputs and their format that are needed for the ECS calculation.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        },
+        {
+          "id": "F6",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined.",
+          "action": "Explain what \"output 3.7\" refers to, its purpose, and how the Design Ambient value should be echoed there.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/5",
+              "quote": "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/5"
+          ]
+        },
+        {
+          "id": "F7",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.",
+          "action": "Specify the selection rules for AutoOdd, AutoEven, and the numeric pass options (2‑41) – whether they are mutually exclusive or can be combined.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/6",
+              "quote": "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/6"
+          ]
+        },
+        {
+          "id": "F8",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described.",
+          "action": "Provide the intended purpose of the \"Copies of this Bank\" field and define the acceptable range or set of values.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/7",
+              "quote": "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/7"
+          ]
+        },
+        {
+          "id": "F9",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "How the system generates or retrieves the Bank ID# from the system is not explained.",
+          "action": "Explain the mechanism by which the Bank ID# is generated or retrieved, including any system sources or formats.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/8",
+              "quote": "How the system generates or retrieves the Bank ID# from the system is not explained."
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/8"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:56:30.268Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "dfb410c5559eb5b791f8b1a7589e09f942b91227ef1b2caed5fae57c9086b5df",
+      "ticketHash": "9329634348dc5b17716c6ee43b71caed0fcccc420c8f20375eed837784842dce",
+      "promptHash": "fb0f4bb52ecfc6ddfd641f6944861740585a387fb90c4b96f85b57e19720cabd",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 4035,
+      "completionTokens": 3800,
+      "totalTokens": 7835,
+      "cost": 0.011517,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "35cda31d98a26a0d103e950aea9a68f362839f54291ad44fd5e66545a6c8278b",
+      "outputHash": "33a7b836b069879162b2e581824af5e49c234f812d85bfe88118827ab0b67319",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReport": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+    "agentId": "final-review-writer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "reportMarkdown": "# FAIL\n\n## Requirement Summary\n\n\"When a user selects Condenser Type \\\"AC\\\" (Air Cooled) or \\\"EC\\\" (Evaporative Cooled), the system displays the corresponding input fields, records the entered parameters, and, for AC condensers, provides specific options for Condenser Passes and Roof Type. The recorded AC/EC parameters together with per‑circuit cooling configurations are output as a configuration ready for ECS calculation.\"\n\n## Reviewer Findings\n\n- F1 | MEDIUM | OPEN_AMBIGUITY | \"The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.\" | \"Obtain clarification from the ticket owner on the required validation ranges or limits for Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature.\"\n- F2 | MEDIUM | OPEN_AMBIGUITY | \"The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \\\"3/8\\\"); the required unit conversion or representation is unclear.\" | \"Clarify whether Condenser Tube Size options should be entered/displayed in mm, inches, or both, and define any required conversion or representation.\"\n- F3 | MEDIUM | OPEN_AMBIGUITY | \"The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.\" | \"Provide the complete enumeration of dark and light roof type options and specify how parapet and shrouding selections are associated with each.\"\n- F4 | MEDIUM | OPEN_AMBIGUITY | \"The specific EC Model options to be shown in the dropdown are referenced as \\\"See Catalog\\\" but not listed.\" | \"Supply the list of EC Model options that should populate the dropdown, or reference the catalog location where they can be retrieved.\"\n- F5 | MEDIUM | OPEN_AMBIGUITY | \"Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.\" | \"Clarify the required per‑circuit cooling configuration inputs and their format that are needed for the ECS calculation.\"\n- F6 | MEDIUM | OPEN_AMBIGUITY | \"The meaning and source of \\\"output 3.7\\\" where Design Ambient is echoed is not defined.\" | \"Explain what \\\"output 3.7\\\" refers to, its purpose, and how the Design Ambient value should be echoed there.\"\n- F7 | MEDIUM | OPEN_AMBIGUITY | \"Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.\" | \"Specify the selection rules for AutoOdd, AutoEven, and the numeric pass options (2‑41) – whether they are mutually exclusive or can be combined.\"\n- F8 | MEDIUM | OPEN_AMBIGUITY | \"The purpose and valid values for the \\\"Copies of this Bank\\\" numeric input are not described.\" | \"Provide the intended purpose of the \\\"Copies of this Bank\\\" field and define the acceptable range or set of values.\"\n- F9 | MEDIUM | OPEN_AMBIGUITY | \"How the system generates or retrieves the Bank ID# from the system is not explained.\" | \"Explain the mechanism by which the Bank ID# is generated or retrieved, including any system sources or formats.\"\n\n## Open Ambiguities\n\n- /ambiguities/0 | \"The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.\"\n- /ambiguities/1 | \"The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \\\"3/8\\\"); the required unit conversion or representation is unclear.\"\n- /ambiguities/2 | \"The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.\"\n- /ambiguities/3 | \"The specific EC Model options to be shown in the dropdown are referenced as \\\"See Catalog\\\" but not listed.\"\n- /ambiguities/4 | \"Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.\"\n- /ambiguities/5 | \"The meaning and source of \\\"output 3.7\\\" where Design Ambient is echoed is not defined.\"\n- /ambiguities/6 | \"Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.\"\n- /ambiguities/7 | \"The purpose and valid values for the \\\"Copies of this Bank\\\" numeric input are not described.\"\n- /ambiguities/8 | \"How the system generates or retrieves the Bank ID# from the system is not explained.\"\n\n## Final Disposition\n\nFAIL\n\n## Governance Reasons\n\n- OPEN_FINDINGS\n- OPEN_AMBIGUITIES"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f",
+      "workflow": "hvac-ticket-governance",
+      "agent": "final-review-writer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:56:47.186Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "3e60d353389e4b0d1556be067d4d1e5daf1e898975407e3fbd1d6fac539ac666",
+      "ticketHash": null,
+      "promptHash": "273bca963000d8887b96a3bf824dea3af2706ae0d86b22495a0a59aef0d24277",
+      "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+      "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 4409,
+      "completionTokens": 3215,
+      "totalTokens": 7624,
+      "cost": 0.010242,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "0b8b6cdd7bc06e4b4df838eddcd5ca6691fecfca7e785d796a013f2c13eaa08a",
+      "outputHash": "0b8b6cdd7bc06e4b4df838eddcd5ca6691fecfca7e785d796a013f2c13eaa08a",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\final-review-writer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418980495-ab01e652-2310-40f1-b89e-0c18cb2aa67f\\cycle-1\\final-review-writer-validated.json",
+      "status": "SUCCESS"
+    }
+  }
+}

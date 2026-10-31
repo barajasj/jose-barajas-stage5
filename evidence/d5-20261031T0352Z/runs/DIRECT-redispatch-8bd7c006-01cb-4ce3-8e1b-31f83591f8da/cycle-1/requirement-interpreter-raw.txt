@@ -1,0 +1,33 @@
+{
+  "requirementSummary": "Populate Cooling Circuits for a Cooling Package, sum their heights into DX Coil Height, and update the total when a Circuit Height is edited.",
+  "hvacTerminology": [
+    "DX Coil",
+    "Cooling Package",
+    "Cooling Circuits",
+    "Circuit Height",
+    "DX Coil Information",
+    "R-454B"
+  ],
+  "businessRules": [
+    "Entering a Cooling Package runs calculations and populates Cooling Circuits.",
+    "DX Coil Height is the sum of all populated Cooling Circuit heights.",
+    "When a Circuit Height is edited, the form must recalculate the sum of all Circuit Heights and update the Height field in DX Coil Information."
+  ],
+  "developerConsiderations": [
+    "Update DX Coil Information when a Circuit Height is edited."
+  ],
+  "ambiguities": [
+    "Height units are unspecified.",
+    "Valid height ranges and precision are unspecified.",
+    "The source and format of starting circuit values are unspecified.",
+    "Behavior when circuits are added or removed is unspecified."
+  ],
+  "ambiguityResolutions": [
+    {
+      "ambiguity": "How are circuit heights combined?",
+      "rationale": "The ticket specifies that heights are summed to compute the DX Coil Height.",
+      "sourceQuote": "Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information."
+    }
+  ],
+  "confidence": "MEDIUM"
+}

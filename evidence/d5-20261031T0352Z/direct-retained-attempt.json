@@ -1,0 +1,8 @@
+{
+  "caseId": "retained",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-retained-05ab9ff1-d3de-4806-9d76-44e28f00981c",
+  "hasRawResponse": true,
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Prior findings disappeared without sourced resolutions."
+}

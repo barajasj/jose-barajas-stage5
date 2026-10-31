@@ -1,0 +1,7 @@
+{
+  "tools": [
+    "launch_requirement_interpreter",
+    "launch_adversarial_reviewer",
+    "launch_final_review_writer"
+  ]
+}

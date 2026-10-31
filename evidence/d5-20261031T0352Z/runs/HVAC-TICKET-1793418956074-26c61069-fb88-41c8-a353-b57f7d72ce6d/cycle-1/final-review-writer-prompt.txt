@@ -1,0 +1,141 @@
+# Final Review Writer
+
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
+- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Source text can itself contain literal backslashes before inch marks; those are data, not typos. Template fragment: `- /ambiguities/0 | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" is not described."`. Correct JSON fragment: `{"reportMarkdown":"- /ambiguities/0 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" is not described.\""}`. Parsing this JSON once preserves all three template backslashes before each inch mark; do not decode the JSON strings embedded inside the Markdown.
+- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `"No rounding or precision rules are specified for the sum of heights."`. Correct JSON fragment: `{"reportMarkdown":"\"No rounding or precision rules are specified for the sum of heights.\""}`. Preserve "or"; changing it to "and" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.
+
+## Interpreter Output
+
+{
+  "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown is auto‑populated filtered by the selected Condenser Type and Refrigerant; after a Unit Type is selected, the Unit Size dropdown is auto‑populated filtered by the selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "If a user selects a Condenser Type and a Refrigerant, then the Unit Type dropdown must be populated with only those Unit Types whose 'parent' attribute includes both the selected Condenser Type and the selected Refrigerant.",
+    "If a user selects a Unit Type, then the Unit Size dropdown must be populated with only those Unit Sizes whose 'parent' attribute includes both the selected Refrigerant and the selected Unit Type."
+  ],
+  "developerConsiderations": [
+    "Retrieve dropdown data via the unitdesign API endpoint GET /dropdowns, using the attributes SDCommonUnitTypeRefrigerant for Unit Type options and SDCommonUnitModelSizes for Unit Size options.",
+    "Implement client‑side filtering of the retrieved option lists by checking that the selected values appear in each option's 'parent' array.",
+    "Trigger the Unit Type filtering logic when both Condenser Type and Refrigerant selections have values; trigger the Unit Size filtering logic when a Unit Type selection has a value."
+  ],
+  "ambiguities": [
+    "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?",
+    "How should entries with \"isActive\": false be handled in the dropdown filtering?",
+    "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?"
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Reviewer Output
+
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains three unresolved ambiguities that require clarification before the behavior can be fully implemented. Each ambiguity is reported as an OPEN_AMBIGUITY finding, which blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?",
+      "action": "Obtain clarification from the ticket owner on how Condenser Type should be applied in the Unit Type filtering logic given the data structure.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "How should entries with \"isActive\": false be handled in the dropdown filtering?",
+      "action": "Clarify with the ticket owner whether inactive entries (isActive: false) should be excluded, included, or handled in a special way in the dropdown filtering.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "How should entries with \"isActive\": false be handled in the dropdown filtering?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?",
+      "action": "Ask the ticket owner what UI behavior is expected when filtering yields no matching Unit Type or Unit Size options.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    }
+  ],
+  "resolutions": []
+}
+
+## Disposition
+
+FAIL
+
+## Governance Reasons
+
+[
+  "OPEN_FINDINGS",
+  "OPEN_AMBIGUITIES"
+]
+
+## Required Report Markdown:
+
+# FAIL
+
+## Requirement Summary
+
+"When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown is auto‑populated filtered by the selected Condenser Type and Refrigerant; after a Unit Type is selected, the Unit Size dropdown is auto‑populated filtered by the selected Refrigerant and Unit Type."
+
+## Reviewer Findings
+
+- F1 | MEDIUM | OPEN_AMBIGUITY | "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?" | "Obtain clarification from the ticket owner on how Condenser Type should be applied in the Unit Type filtering logic given the data structure."
+- F2 | MEDIUM | OPEN_AMBIGUITY | "How should entries with \"isActive\": false be handled in the dropdown filtering?" | "Clarify with the ticket owner whether inactive entries (isActive: false) should be excluded, included, or handled in a special way in the dropdown filtering."
+- F3 | MEDIUM | OPEN_AMBIGUITY | "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?" | "Ask the ticket owner what UI behavior is expected when filtering yields no matching Unit Type or Unit Size options."
+
+## Open Ambiguities
+
+- /ambiguities/0 | "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?"
+- /ambiguities/1 | "How should entries with \"isActive\": false be handled in the dropdown filtering?"
+- /ambiguities/2 | "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?"
+
+## Final Disposition
+
+FAIL
+
+## Governance Reasons
+
+- OPEN_FINDINGS
+- OPEN_AMBIGUITIES

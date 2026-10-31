@@ -1,0 +1,8 @@
+{
+  "caseId": "bad-resolution",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-bad-resolution-a081e1db-d4f4-46bf-ab58-7d415c5ec995",
+  "hasRawResponse": true,
+  "status": "GOVERNANCE_FAILURE",
+  "reason": "Source quote is not present in the referenced artifact."
+}

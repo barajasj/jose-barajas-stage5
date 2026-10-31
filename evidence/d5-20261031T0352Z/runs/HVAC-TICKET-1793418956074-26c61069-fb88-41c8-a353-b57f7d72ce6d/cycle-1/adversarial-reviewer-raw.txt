@@ -1,0 +1,58 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains three unresolved ambiguities that require clarification before the behavior can be fully implemented. Each ambiguity is reported as an OPEN_AMBIGUITY finding, which blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?",
+      "action": "Obtain clarification from the ticket owner on how Condenser Type should be applied in the Unit Type filtering logic given the data structure.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "How should entries with \"isActive\": false be handled in the dropdown filtering?",
+      "action": "Clarify with the ticket owner whether inactive entries (isActive: false) should be excluded, included, or handled in a special way in the dropdown filtering.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "How should entries with \"isActive\": false be handled in the dropdown filtering?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?",
+      "action": "Ask the ticket owner what UI behavior is expected when filtering yields no matching Unit Type or Unit Size options.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    }
+  ],
+  "resolutions": []
+}

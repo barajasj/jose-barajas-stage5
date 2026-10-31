@@ -1,0 +1,487 @@
+{
+  "runtimeMode": "real",
+  "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+  "status": "COMPLETED",
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ],
+  "reviewCycles": [
+    {
+      "cycle": 1,
+      "interpreterResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+        "agentId": "requirement-interpreter",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "requirementSummary": "DX Coil Height must be calculated as the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are already validated and no other behavior is required.",
+          "hvacTerminology": [
+            "DX Coil",
+            "Cooling Circuit",
+            "Height"
+          ],
+          "businessRules": [
+            "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+            "DX Coil Height must be recalculated immediately after a height edit.",
+            "If the circuit list is empty, DX Coil Height is 0 inches.",
+            "Inputs are already validated; no other behavior is in scope."
+          ],
+          "developerConsiderations": [
+            "Implement aggregation that sums the Height values of all Cooling Circuits (in inches) to produce DX Coil Height.",
+            "Trigger the aggregation synchronously whenever a height edit event occurs.",
+            "Return a DX Coil Height of 0 inches when the list of Cooling Circuits is empty.",
+            "Assume all input values are pre‑validated; no additional validation logic is required."
+          ],
+          "ambiguities": [
+            "What specific actions are considered a \"height edit\" that should trigger recalculation (e.g., editing a circuit height, adding or removing circuits)?",
+            "Should recalculation also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes?"
+          ],
+          "confidence": "MEDIUM"
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+          "workflow": "hvac-ticket-governance",
+          "agent": "requirement-interpreter",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-31T03:57:22.256Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+          "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+          "promptHash": "597f81108cbe8c1e4fd45035dfb20de0ff0305488a1828fa5e251cfcd1c15309",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 901,
+          "completionTokens": 1096,
+          "totalTokens": 1997,
+          "cost": 0.00319,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "28234e6f4cad28c24f1be1a3fd22856516a23b12af6a3a9934492b6a703c01d1",
+          "outputHash": "5f277fe17a668ee7a455b0dfe8119805fc1ba24b0c2a8f6272661f861590e9bd",
+          "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\requirement-interpreter-raw.txt",
+          "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\requirement-interpreter-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "reviewResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+        "agentId": "adversarial-reviewer",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "status": "FAIL",
+          "rationale": "The interpreter accurately reflects all explicit requirements from the ticket, but it leaves two open ambiguities regarding the definition of a \"height edit\" and whether circuit addition/removal should trigger recalculation. These unresolved questions block a PASS result.",
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Unclear which actions are considered a \"height edit\" that should trigger recalculation.",
+              "action": "Obtain clarification from the ticket owner on the specific actions that constitute a height edit (e.g., editing a circuit height, adding or removing circuits).",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/0",
+                  "quote": "What specific actions are considered a \"height edit\" that should trigger recalculation (e.g., editing a circuit height, adding or removing circuits)?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/0"
+              ]
+            },
+            {
+              "id": "F2",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "Unclear whether recalculation should also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes.",
+              "action": "Obtain clarification from the ticket owner on whether recalculation is required on circuit addition/removal or only on height value changes.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/1",
+                  "quote": "Should recalculation also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/1"
+              ]
+            }
+          ],
+          "resolutions": []
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+          "workflow": "hvac-ticket-governance",
+          "agent": "adversarial-reviewer",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-31T03:57:29.102Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "b77731f3a2dfa2146fca84673ad9867dcdeffeb72c9c637922ae9f29c70d00e5",
+          "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+          "promptHash": "0a9237c1dd0634eb009e6b576a033a07541cb6e9763b38747ec662f7bf639acf",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 2555,
+          "completionTokens": 1033,
+          "totalTokens": 3588,
+          "cost": 0.00386,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "daee68d2359942ac9062e8eb77f6b05dc2817df1423423918167afc01ceb51a1",
+          "outputHash": "d792430615f2ee3fa677eb520de5bb9c04bb520bb4f6bc42a66e0986fb47d0f7",
+          "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\adversarial-reviewer-raw.txt",
+          "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\adversarial-reviewer-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    }
+  ],
+  "totalCost": 0.010993,
+  "humanGovernance": null,
+  "auditSummary": {
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "stepsExecuted": 3,
+    "reDispatched": false,
+    "reviewCyclesExecuted": 1,
+    "reviewLimitReached": false,
+    "totalPromptTokens": 5121,
+    "totalCompletionTokens": 3373,
+    "totalTokens": 8494,
+    "totalCost": 0.010993,
+    "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)"
+  },
+  "interpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "DX Coil Height must be calculated as the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are already validated and no other behavior is required.",
+      "hvacTerminology": [
+        "DX Coil",
+        "Cooling Circuit",
+        "Height"
+      ],
+      "businessRules": [
+        "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+        "DX Coil Height must be recalculated immediately after a height edit.",
+        "If the circuit list is empty, DX Coil Height is 0 inches.",
+        "Inputs are already validated; no other behavior is in scope."
+      ],
+      "developerConsiderations": [
+        "Implement aggregation that sums the Height values of all Cooling Circuits (in inches) to produce DX Coil Height.",
+        "Trigger the aggregation synchronously whenever a height edit event occurs.",
+        "Return a DX Coil Height of 0 inches when the list of Cooling Circuits is empty.",
+        "Assume all input values are pre‑validated; no additional validation logic is required."
+      ],
+      "ambiguities": [
+        "What specific actions are considered a \"height edit\" that should trigger recalculation (e.g., editing a circuit height, adding or removing circuits)?",
+        "Should recalculation also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes?"
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:57:22.256Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "promptHash": "597f81108cbe8c1e4fd45035dfb20de0ff0305488a1828fa5e251cfcd1c15309",
+      "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 901,
+      "completionTokens": 1096,
+      "totalTokens": 1997,
+      "cost": 0.00319,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "28234e6f4cad28c24f1be1a3fd22856516a23b12af6a3a9934492b6a703c01d1",
+      "outputHash": "5f277fe17a668ee7a455b0dfe8119805fc1ba24b0c2a8f6272661f861590e9bd",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "reviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter accurately reflects all explicit requirements from the ticket, but it leaves two open ambiguities regarding the definition of a \"height edit\" and whether circuit addition/removal should trigger recalculation. These unresolved questions block a PASS result.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Unclear which actions are considered a \"height edit\" that should trigger recalculation.",
+          "action": "Obtain clarification from the ticket owner on the specific actions that constitute a height edit (e.g., editing a circuit height, adding or removing circuits).",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "What specific actions are considered a \"height edit\" that should trigger recalculation (e.g., editing a circuit height, adding or removing circuits)?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Unclear whether recalculation should also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes.",
+          "action": "Obtain clarification from the ticket owner on whether recalculation is required on circuit addition/removal or only on height value changes.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Should recalculation also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:57:29.102Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "b77731f3a2dfa2146fca84673ad9867dcdeffeb72c9c637922ae9f29c70d00e5",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "promptHash": "0a9237c1dd0634eb009e6b576a033a07541cb6e9763b38747ec662f7bf639acf",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2555,
+      "completionTokens": 1033,
+      "totalTokens": 3588,
+      "cost": 0.00386,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "daee68d2359942ac9062e8eb77f6b05dc2817df1423423918167afc01ceb51a1",
+      "outputHash": "d792430615f2ee3fa677eb520de5bb9c04bb520bb4f6bc42a66e0986fb47d0f7",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalInterpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "DX Coil Height must be calculated as the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are already validated and no other behavior is required.",
+      "hvacTerminology": [
+        "DX Coil",
+        "Cooling Circuit",
+        "Height"
+      ],
+      "businessRules": [
+        "DX Coil Height equals the sum of Cooling Circuit Heights in inches.",
+        "DX Coil Height must be recalculated immediately after a height edit.",
+        "If the circuit list is empty, DX Coil Height is 0 inches.",
+        "Inputs are already validated; no other behavior is in scope."
+      ],
+      "developerConsiderations": [
+        "Implement aggregation that sums the Height values of all Cooling Circuits (in inches) to produce DX Coil Height.",
+        "Trigger the aggregation synchronously whenever a height edit event occurs.",
+        "Return a DX Coil Height of 0 inches when the list of Cooling Circuits is empty.",
+        "Assume all input values are pre‑validated; no additional validation logic is required."
+      ],
+      "ambiguities": [
+        "What specific actions are considered a \"height edit\" that should trigger recalculation (e.g., editing a circuit height, adding or removing circuits)?",
+        "Should recalculation also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes?"
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:57:22.256Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "47e7f9d4416b82e008b437b7abb5f0ead30ff5c3be1d1679beea70fcd7a60071",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "promptHash": "597f81108cbe8c1e4fd45035dfb20de0ff0305488a1828fa5e251cfcd1c15309",
+      "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 901,
+      "completionTokens": 1096,
+      "totalTokens": 1997,
+      "cost": 0.00319,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "28234e6f4cad28c24f1be1a3fd22856516a23b12af6a3a9934492b6a703c01d1",
+      "outputHash": "5f277fe17a668ee7a455b0dfe8119805fc1ba24b0c2a8f6272661f861590e9bd",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter accurately reflects all explicit requirements from the ticket, but it leaves two open ambiguities regarding the definition of a \"height edit\" and whether circuit addition/removal should trigger recalculation. These unresolved questions block a PASS result.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Unclear which actions are considered a \"height edit\" that should trigger recalculation.",
+          "action": "Obtain clarification from the ticket owner on the specific actions that constitute a height edit (e.g., editing a circuit height, adding or removing circuits).",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "What specific actions are considered a \"height edit\" that should trigger recalculation (e.g., editing a circuit height, adding or removing circuits)?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "Unclear whether recalculation should also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes.",
+          "action": "Obtain clarification from the ticket owner on whether recalculation is required on circuit addition/removal or only on height value changes.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Should recalculation also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:57:29.102Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "b77731f3a2dfa2146fca84673ad9867dcdeffeb72c9c637922ae9f29c70d00e5",
+      "ticketHash": "92a5d550b1cf2f1111b9bfbfd5f7d286df6f788240972098658fd4ac0ae11ed1",
+      "promptHash": "0a9237c1dd0634eb009e6b576a033a07541cb6e9763b38747ec662f7bf639acf",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2555,
+      "completionTokens": 1033,
+      "totalTokens": 3588,
+      "cost": 0.00386,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "daee68d2359942ac9062e8eb77f6b05dc2817df1423423918167afc01ceb51a1",
+      "outputHash": "d792430615f2ee3fa677eb520de5bb9c04bb520bb4f6bc42a66e0986fb47d0f7",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReport": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+    "agentId": "final-review-writer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "reportMarkdown": "# FAIL\n\n## Requirement Summary\n\n\"DX Coil Height must be calculated as the sum of all Cooling Circuit Heights (in inches), recalculated immediately after any height edit, with an empty circuit list resulting in 0 inches. Inputs are already validated and no other behavior is required.\"\n\n## Reviewer Findings\n\n- F1 | MEDIUM | OPEN_AMBIGUITY | \"Unclear which actions are considered a \\\"height edit\\\" that should trigger recalculation.\" | \"Obtain clarification from the ticket owner on the specific actions that constitute a height edit (e.g., editing a circuit height, adding or removing circuits).\"\n- F2 | MEDIUM | OPEN_AMBIGUITY | \"Unclear whether recalculation should also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes.\" | \"Obtain clarification from the ticket owner on whether recalculation is required on circuit addition/removal or only on height value changes.\"\n\n## Open Ambiguities\n\n- /ambiguities/0 | \"What specific actions are considered a \\\"height edit\\\" that should trigger recalculation (e.g., editing a circuit height, adding or removing circuits)?\"\n- /ambiguities/1 | \"Should recalculation also occur when circuits are added to or removed from the list, or only when an existing circuit's height value changes?\"\n\n## Final Disposition\n\nFAIL\n\n## Governance Reasons\n\n- OPEN_FINDINGS\n- OPEN_AMBIGUITIES"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "final-review-writer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:57:33.585Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "6738f115eacc4619a5a8870e5ab5af63935a30708e40bf8bf3972cf5b8cdff3a",
+      "ticketHash": null,
+      "promptHash": "c1ffec374f1167135f7e719bc35fa5e062df4aafc13869ab72ccaa4257292d4b",
+      "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+      "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1665,
+      "completionTokens": 1244,
+      "totalTokens": 2909,
+      "cost": 0.003943,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "7a9c53617397ea0da6969e8b55edb7a08023d38115e3f7797b1983496ec15375",
+      "outputHash": "f7b127dcdeda7ac2edae45b2cb8603eb140448f526ad6d8b6ccaf58793173638",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\final-review-writer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419042256-72ab76d7-3fbb-4034-88cb-25d0975ec68b\\cycle-1\\final-review-writer-validated.json",
+      "status": "SUCCESS"
+    }
+  }
+}

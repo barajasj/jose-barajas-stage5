@@ -1,0 +1,7 @@
+{
+  "caseId": "missed-ambiguity",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-missed-ambiguity-e864777b-8404-4d37-82ef-5ca42572cd9a",
+  "hasRawResponse": true,
+  "status": "SUCCESS"
+}

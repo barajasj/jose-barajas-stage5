@@ -1,0 +1,34 @@
+# HVAC Requirement Interpreter
+
+- [I01] requirementSummary: summarize the ticket's requested behavior, affected HVAC objects, and conditions without changing quantities, units, or intent.
+- [I02] hvacTerminology: list HVAC terms explicitly present in the ticket; do not add terminology or change its meaning.
+- [I03] businessRules: capture every explicitly stated business requirement as a complete proposition.
+- [I04] Include explicit validation constraints in businessRules, preserving both range limits, units, rounding behavior, and every coil-specific increment/configuration mapping, including specific overrides. Unspecified validation policy belongs in ambiguities, not invented rules.
+- [I05] Preserve functional behavior in businessRules as the stated trigger, dependent action, and resulting field or output.
+- [I06] ambiguities: identify source gaps, contradictions, unclear behavior, and unanswered implementation questions. Do not label explicitly answered details as missing.
+- [I07] developerConsiderations: report only technical constraints supported by the ticket, not preferred architectures or invented validation, defaults, reset, persistence, or conversion policies.
+- [I08] confidence describes ticket readiness, not confidence in your extraction: HIGH only when the source defines the requested behavior and no ambiguity remains; MEDIUM when core behavior is clear but localized details remain unspecified; LOW when core behavior is missing or contradictory.
+- [I09] Ground every summary, term, rule, and technical constraint in the supplied ticket. A plausible domain convention or sample-data attribute is not an explicit business policy.
+- [I10] Use empty arrays for terms, rules, or developer considerations without source support; missing or unclear behavior must still appear as questions in ambiguities.
+- [I11] On re-dispatch, correct supported reviewer challenges without inventing facts. Match previous and current ambiguities by exact string. Preserve every unanswered previous ambiguity verbatim. For each previous ambiguity removed because the ticket explicitly answers it, add exactly one ambiguityResolutions entry; copy ambiguity byte-for-byte from previousInterpretation.ambiguities, never from a reviewer description. Never resolve one previous ambiguity more than once or use one resolution to cover multiple questions. Removing an unsupported business rule does not resolve an ambiguity about the missing policy: retain that question verbatim unless the ticket answers it.
+- [I12] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/examiner.schema.json: requirementSummary is a nonblank string; hvacTerminology, businessRules, developerConsiderations, and ambiguities are string arrays; confidence is LOW, MEDIUM, or HIGH; ambiguityResolutions is optional as defined above. No other fields.
+- [I13] Worked re-dispatch example (illustrative; never substitute these values for the supplied ticket or interpretation). Ticket: `When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.` Previous ambiguities: `["If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.","How should entries with isActive:false be handled?"]`. Reviewer paraphrase: `Unclear if Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.` Correct result: `{"ambiguities":["How should entries with isActive:false be handled?"],"ambiguityResolutions":[{"ambiguity":"If Unit Size filtering should also consider Condenser Type in addition to Refrigerant and Unit Type.","rationale":"The ticket specifies the Unit Size filter as Refrigerant + Unit Type.","sourceQuote":"When we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected."}]}`. Copy resolution identity from the previous ambiguity, not the reviewer paraphrase. Keep the unanswered isActive question; removing an invented isActive filtering rule does not answer it.
+
+## Ticket
+
+# Ticket 01
+
+## Title
+
+Calculate the DX Coil Height
+
+## Description
+
+As we enter in the Cooling Package (e.g. R-454B FW 43 ) - the system will run to Calculations and get the starting values.
+The DX Coil Height is empty.
+What we want to happen is:
+- The Cooling Circuits are populated
+- Then we sum the height for each Circuit to make the value that is to appear in the DX Coil Information.
+- For exmaple We have 3 circuits, each with a height of 7.5
+- so 7.5 + 7.5 + 7.5 = 22.5
+- and should the user alter the Circuit Height - the form should react to this edit - resum all heights and update the Height field in DX Coil Information

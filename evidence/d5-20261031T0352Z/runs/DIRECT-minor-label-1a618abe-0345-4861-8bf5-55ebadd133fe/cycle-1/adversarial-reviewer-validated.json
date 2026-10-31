@@ -1,0 +1,47 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output does not satisfy the ticket requirement to display the calculated height using the exact label \"DX Coil Height\". It incorrectly uses the label \"DX height\" and omits the exact‑label requirement from its summary.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "UNSUPPORTED_ASSUMPTION",
+      "description": "The interpreter adds a label \"DX height\" that differs from the ticket‑specified exact label \"DX Coil Height\".",
+      "action": "Replace the label in the business rule with the exact ticket label \"DX Coil Height\".",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Display the calculated height using the exact label \"DX Coil Height\"."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "Display the calculated height using the label \"DX height\"."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F2",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter omits the requirement to use the exact label \"DX Coil Height\" in its requirement summary.",
+      "action": "Add the exact‑label requirement to the interpreter output, e.g., include it in the requirement summary or a business rule.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Display the calculated height using the exact label \"DX Coil Height\"."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/requirementSummary",
+          "quote": "Display the calculated height."
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

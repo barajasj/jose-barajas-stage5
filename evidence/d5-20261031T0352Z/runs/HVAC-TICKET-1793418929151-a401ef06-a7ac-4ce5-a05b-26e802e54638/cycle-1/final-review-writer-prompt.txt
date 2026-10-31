@@ -1,0 +1,223 @@
+# Final Review Writer
+
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
+- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Source text can itself contain literal backslashes before inch marks; those are data, not typos. Template fragment: `- /ambiguities/0 | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" is not described."`. Correct JSON fragment: `{"reportMarkdown":"- /ambiguities/0 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" is not described.\""}`. Parsing this JSON once preserves all three template backslashes before each inch mark; do not decode the JSON strings embedded inside the Markdown.
+- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `"No rounding or precision rules are specified for the sum of heights."`. Correct JSON fragment: `{"reportMarkdown":"\"No rounding or precision rules are specified for the sum of heights.\""}`. Preserve "or"; changing it to "and" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.
+
+## Interpreter Output
+
+{
+  "requirementSummary": "When a Cooling Package is entered and calculations run, the system must populate the Cooling Circuits, sum the heights of all circuits to set the DX Coil Height in the DX Coil Information, and recalculate and update that field whenever a circuit height is edited.",
+  "hvacTerminology": [
+    "DX Coil",
+    "Cooling Package",
+    "Cooling Circuits",
+    "Circuit Height",
+    "DX Coil Information",
+    "R-454B FW 43"
+  ],
+  "businessRules": [
+    "After a Cooling Package is entered and the system runs calculations to obtain starting values, the Cooling Circuits must be populated.",
+    "The DX Coil Height field in the DX Coil Information must be set to the sum of the heights of all populated Cooling Circuits.",
+    "If a user alters the height of any Cooling Circuit, the system must recalculate the sum of all circuit heights and update the DX Coil Height field in the DX Coil Information accordingly."
+  ],
+  "developerConsiderations": [
+    "Implement logic to trigger population of Cooling Circuits immediately after a Cooling Package entry and calculation completion.",
+    "Calculate the sum of circuit heights and bind the result to the DX Coil Height field in DX Coil Information.",
+    "Add event handling to detect changes to any Circuit Height and recompute the total height, updating the DX Coil Height field in real time or upon edit completion.",
+    "Ensure that the sum operation handles numeric values and ignores or validates non-numeric or missing heights."
+  ],
+  "ambiguities": [
+    "How is the number of Cooling Circuits determined when a Cooling Package is entered?",
+    "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?",
+    "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?",
+    "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?",
+    "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?",
+    "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?",
+    "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Reviewer Output
+
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains several unresolved ambiguities that have not been clarified. According to the review policy, each open ambiguity must be reported as an OPEN_AMBIGUITY finding, and any remaining ambiguity blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter does not know how the number of Cooling Circuits is determined when a Cooling Package is entered.",
+      "action": "Obtain clarification from the ticket owner on how the number of Cooling Circuits should be determined.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "How is the number of Cooling Circuits determined when a Cooling Package is entered?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter lacks information about the units used for Circuit Height and DX Coil Height and any required display unit.",
+      "action": "Obtain clarification from the ticket owner on the units for Circuit Height and DX Coil Height and any required unit for the displayed sum.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter does not know whether the summed DX Coil Height should be rounded or formatted to a certain number of decimal places.",
+      "action": "Obtain clarification from the ticket owner on rounding or formatting requirements for the DX Coil Height sum.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter lacks guidance on handling a Circuit Height that is blank, non‑numeric, or otherwise invalid.",
+      "action": "Obtain clarification from the ticket owner on how to handle blank, non‑numeric, or invalid Circuit Height values.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter does not know whether the DX Coil Height should update immediately on each edit (real‑time) or after a specific event such as field blur or form submission.",
+      "action": "Obtain clarification from the ticket owner on the desired update timing for DX Coil Height after a Circuit Height edit.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter lacks information about any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height.",
+      "action": "Obtain clarification from the ticket owner on any allowed minimum or maximum values for Circuit Heights and the total DX Coil Height.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/5",
+          "quote": "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/5"
+      ]
+    },
+    {
+      "id": "F7",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter does not know whether only active or enabled circuits should be included in the sum, and how activity is determined.",
+      "action": "Obtain clarification from the ticket owner on whether only active/enabled circuits are summed and how activity is defined.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/6",
+          "quote": "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/6"
+      ]
+    }
+  ],
+  "resolutions": []
+}
+
+## Disposition
+
+FAIL
+
+## Governance Reasons
+
+[
+  "OPEN_FINDINGS",
+  "OPEN_AMBIGUITIES"
+]
+
+## Required Report Markdown:
+
+# FAIL
+
+## Requirement Summary
+
+"When a Cooling Package is entered and calculations run, the system must populate the Cooling Circuits, sum the heights of all circuits to set the DX Coil Height in the DX Coil Information, and recalculate and update that field whenever a circuit height is edited."
+
+## Reviewer Findings
+
+- F1 | MEDIUM | OPEN_AMBIGUITY | "The interpreter does not know how the number of Cooling Circuits is determined when a Cooling Package is entered." | "Obtain clarification from the ticket owner on how the number of Cooling Circuits should be determined."
+- F2 | MEDIUM | OPEN_AMBIGUITY | "The interpreter lacks information about the units used for Circuit Height and DX Coil Height and any required display unit." | "Obtain clarification from the ticket owner on the units for Circuit Height and DX Coil Height and any required unit for the displayed sum."
+- F3 | MEDIUM | OPEN_AMBIGUITY | "The interpreter does not know whether the summed DX Coil Height should be rounded or formatted to a certain number of decimal places." | "Obtain clarification from the ticket owner on rounding or formatting requirements for the DX Coil Height sum."
+- F4 | MEDIUM | OPEN_AMBIGUITY | "The interpreter lacks guidance on handling a Circuit Height that is blank, non‑numeric, or otherwise invalid." | "Obtain clarification from the ticket owner on how to handle blank, non‑numeric, or invalid Circuit Height values."
+- F5 | MEDIUM | OPEN_AMBIGUITY | "The interpreter does not know whether the DX Coil Height should update immediately on each edit (real‑time) or after a specific event such as field blur or form submission." | "Obtain clarification from the ticket owner on the desired update timing for DX Coil Height after a Circuit Height edit."
+- F6 | MEDIUM | OPEN_AMBIGUITY | "The interpreter lacks information about any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height." | "Obtain clarification from the ticket owner on any allowed minimum or maximum values for Circuit Heights and the total DX Coil Height."
+- F7 | MEDIUM | OPEN_AMBIGUITY | "The interpreter does not know whether only active or enabled circuits should be included in the sum, and how activity is determined." | "Obtain clarification from the ticket owner on whether only active/enabled circuits are summed and how activity is defined."
+
+## Open Ambiguities
+
+- /ambiguities/0 | "How is the number of Cooling Circuits determined when a Cooling Package is entered?"
+- /ambiguities/1 | "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?"
+- /ambiguities/2 | "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?"
+- /ambiguities/3 | "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?"
+- /ambiguities/4 | "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?"
+- /ambiguities/5 | "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?"
+- /ambiguities/6 | "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+
+## Final Disposition
+
+FAIL
+
+## Governance Reasons
+
+- OPEN_FINDINGS
+- OPEN_AMBIGUITIES

@@ -6,6 +6,26 @@
 authorized batch. Default evaluation still FAILs: seven evidence errors and 26
 failed scored steps. All 15 mandatory metric types have direct observations.
 
+## Latest Batch - 2026-10-31
+
+`evidence/d5-20261031T0352Z/` is one more authorized live batch (41 of 51 calls, one
+attempt per case, no repair or retry, same prompts as the 10-30 batch). Evaluation still
+FAILs: five evidence errors and 24 failed scored steps (8 interpreter, 16 reviewer).
+
+| Measure | 10-30 batch | 10-31 batch |
+|---|---|---|
+| Direct runtime successes | 20/26 | 23/26 |
+| Direct scorer passes | 2/26 | 2/26 |
+| Workflows completed | 1/5 | 5/5 (all FAIL disposition, as open ambiguities block PASS) |
+| Evidence errors | 7 | 5 |
+| Failed scored steps | 26 | 24 |
+
+Open from this batch: direct cases `hvac`, `retained`, `bad-resolution` fail runtime
+governance; all five evidence errors are missing frozen reviewer labels for the new workflow
+reviewer inputs (needs a separately reviewed label change, not inference from output);
+interpreter strict scores remain low (requirement extraction 0.15 vs 0.9, ambiguity 0.18 vs 0.8).
+This is a repeat sample of unchanged prompts, not a measured prompt-change cycle.
+
 ## Required Before Certification
 
 - Address reviewer missing `ambiguityRefs`, invalid source quotations/pointers,

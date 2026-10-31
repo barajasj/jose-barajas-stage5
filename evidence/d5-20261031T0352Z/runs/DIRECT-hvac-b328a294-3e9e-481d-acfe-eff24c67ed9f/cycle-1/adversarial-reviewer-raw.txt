@@ -1,0 +1,117 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter misinterprets the core HVAC terminology by swapping the meanings of AC and EC, and it omits all substantive business rules, input specifications, and acceptance criteria required by the ticket. These omissions and the incorrect definition prevent reliable implementation of the condenser configuration functionality.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "HIGH",
+      "kind": "HVAC_ERROR",
+      "description": "The interpreter incorrectly defines AC and EC, swapping their meanings.",
+      "action": "Correct the business rule to state that AC means Air Cooled and EC means Evaporative Cooled.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+        },
+        {
+          "artifact": "interpreter",
+          "pointer": "/businessRules/0",
+          "quote": "AC means Evaporative Cooled and EC means Air Cooled."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F2",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter does not capture the requirement to display the appropriate input fields when the user selects Condenser Type AC or EC.",
+      "action": "Add a business rule that when Condenser Type is \"AC\" or \"EC\", the corresponding input fields are displayed.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "When the user selects the Condenser Type \"AC\" or \"EC\", the corresponding input fields should be displayed."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F3",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter omits the acceptance criterion that selecting Condenser Passes for an AC condenser shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options.",
+      "action": "Add this acceptance criterion to the business rules.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Given the user configures an AC condenser,\nWhen they select Condenser Passes,\nThen the system shall display AutoOdd, AutoEven, and 2 through 41 in increments of 1 as options."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F4",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter omits the acceptance criterion that selecting Roof Type for an AC condenser shall display the specified dark and light roof type options with and without parapet/shrouding.",
+      "action": "Add this acceptance criterion to the business rules.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Given the user configures an AC condenser,\nWhen they select Roof Type,\nThen the system shall display the specified dark and light roof type options with and without parapet/shrouding."
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F5",
+      "severity": "HIGH",
+      "kind": "MISSING_REQUIREMENT",
+      "description": "The interpreter does not capture the detailed input specifications for Air Cooled condensers, such as Design Ambient, ASHRAE Summer Design, and tube/fin material selections.",
+      "action": "Add business rules for each Air Cooled condenser input field as described in the ticket tables.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "| 1 | Design Ambient | Numeric Input | User / Default | °F / °C | 95°F | Echoed in output 3.7 |"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "| 5 | Condenser Tube Material | Dropdown | User / Default | — | Copper |"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "| 7 | Condenser Tube Size | Dropdown | User / Default | mm | 3/8, 3/8 w/ 1\" spacing |"
+        }
+      ],
+      "ambiguityRefs": []
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "MISSING_VALIDATION",
+      "description": "The interpreter provides no validation constraints for numeric inputs (e.g., Design Ambient must be a numeric value within realistic temperature ranges).",
+      "action": "Specify validation rules for each numeric input, including allowed units, ranges, and default handling.",
+      "sourceRefs": [
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Design Ambient | Numeric Input | User / Default | °F / °C | 95°F"
+        },
+        {
+          "artifact": "ticket",
+          "pointer": "",
+          "quote": "Wet Bulb Temperature | Numeric Input | User | °F / °C | —"
+        }
+      ],
+      "ambiguityRefs": []
+    }
+  ],
+  "resolutions": []
+}

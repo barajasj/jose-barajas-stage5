@@ -1,0 +1,160 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter accurately reflects the ticket requirements and does not add unsupported assumptions. However, nine ambiguities identified by the interpreter remain unresolved, each of which blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified.",
+      "action": "Obtain clarification from the ticket owner on the required validation ranges or limits for Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The acceptable range or validation limits for numeric inputs such as Design Ambient, ASHRAE Summer Design, and Wet Bulb Temperature are not specified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear.",
+      "action": "Clarify whether Condenser Tube Size options should be entered/displayed in mm, inches, or both, and define any required conversion or representation.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The unit column for Condenser Tube Size lists mm, but the option values are expressed as fractions of an inch (e.g., \"3/8\"); the required unit conversion or representation is unclear."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated.",
+      "action": "Provide the complete enumeration of dark and light roof type options and specify how parapet and shrouding selections are associated with each.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The exact list of dark and light roof type options, including how parapet and shrouding are presented, is not enumerated."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed.",
+      "action": "Supply the list of EC Model options that should populate the dropdown, or reference the catalog location where they can be retrieved.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "The specific EC Model options to be shown in the dropdown are referenced as \"See Catalog\" but not listed."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided.",
+      "action": "Clarify the required per‑circuit cooling configuration inputs and their format that are needed for the ECS calculation.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "Details of the per‑circuit cooling configurations that feed into the ECS calculation are not provided."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined.",
+      "action": "Explain what \"output 3.7\" refers to, its purpose, and how the Design Ambient value should be echoed there.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/5",
+          "quote": "The meaning and source of \"output 3.7\" where Design Ambient is echoed is not defined."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/5"
+      ]
+    },
+    {
+      "id": "F7",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified.",
+      "action": "Specify the selection rules for AutoOdd, AutoEven, and the numeric pass options (2‑41) – whether they are mutually exclusive or can be combined.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/6",
+          "quote": "Whether AutoOdd and AutoEven are mutually exclusive with the numeric pass options, or can be selected together, is not clarified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/6"
+      ]
+    },
+    {
+      "id": "F8",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described.",
+      "action": "Provide the intended purpose of the \"Copies of this Bank\" field and define the acceptable range or set of values.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/7",
+          "quote": "The purpose and valid values for the \"Copies of this Bank\" numeric input are not described."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/7"
+      ]
+    },
+    {
+      "id": "F9",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "How the system generates or retrieves the Bank ID# from the system is not explained.",
+      "action": "Explain the mechanism by which the Bank ID# is generated or retrieved, including any system sources or formats.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/8",
+          "quote": "How the system generates or retrieves the Bank ID# from the system is not explained."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/8"
+      ]
+    }
+  ],
+  "resolutions": []
+}

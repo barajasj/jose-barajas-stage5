@@ -1,0 +1,29 @@
+{
+  "ticket": "# Ticket 02\r\n\r\n## Title\r\n\r\nAutopopulate Unit Type and Unit Size\r\n\r\n## Description\r\n\r\nIn the \"CONDENSER TYPE\" section:\r\n- When a user selects the Condenser Type and the Refrigerant from their dropdowns, we should populate the Unit Type dropdown filtered by the condenser type and the refrigerant that was selected.\r\n- After a user selects a Unit Type, we should populate the Unit Size dropdown filtered by the Refrigerant + Unit Type that was selected\r\n\r\n## Acceptance Criteria\r\n\r\nWhen we select the Condenser Type and the Refrigerant we should see the Unit Type dropdown filtered by Condenser Type + Refrigerant selected.\r\nWhen we select the Unit Type, we should see the Unit Size dropdown filtered by Refrigerant + Unit Type selected.\r\n\r\n## Relevant Discussion\r\nThe Refrigerants comes from an unitdesign api GET /dropdowns\r\nthe attribute to get Unit Type is SDCommonUnitTypeRefrigerant\r\nfor example, we sould filter by the \"parent\" that contains the refrigerant selected.\r\n  \"SDCommonUnitTypeRefrigerant\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"CU\",\r\n      \"value\": \"CU\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"display\": \"CUE\",\r\n      \"value\": \"CUE\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"R-513A\"\r\n      ],\r\n      \"isActive\": true\r\n    },..\r\n]\r\n\r\nThe attribute for Unit Size is SDCommonUnitModelSizes\r\nfor example, we sould filter by the \"parent\" that contains both the refrigerant and the Unit Type selected.\r\n\t\r\n\"SDCommonUnitModelSizes\": [\r\n    {\r\n      \"id\": 0,\r\n      \"display\": \"101\",\r\n      \"value\": \"101\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },\r\n    {\r\n      \"id\": 1,\r\n      \"display\": \"103\",\r\n      \"value\": \"103\",\r\n      \"parent\": [\r\n        \"R-410A\",\r\n        \"R-454B\",\r\n        \"CU\"\r\n      ],\r\n      \"isActive\": true\r\n    },...\r\n]",
+  "interpreterResult": {
+    "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown is auto‑populated filtered by the selected Condenser Type and Refrigerant; after a Unit Type is selected, the Unit Size dropdown is auto‑populated filtered by the selected Refrigerant and Unit Type.",
+    "hvacTerminology": [
+      "Condenser Type",
+      "Refrigerant",
+      "Unit Type",
+      "Unit Size",
+      "SDCommonUnitTypeRefrigerant",
+      "SDCommonUnitModelSizes"
+    ],
+    "businessRules": [
+      "If a user selects a Condenser Type and a Refrigerant, then the Unit Type dropdown must be populated with only those Unit Types whose 'parent' attribute includes both the selected Condenser Type and the selected Refrigerant.",
+      "If a user selects a Unit Type, then the Unit Size dropdown must be populated with only those Unit Sizes whose 'parent' attribute includes both the selected Refrigerant and the selected Unit Type."
+    ],
+    "developerConsiderations": [
+      "Retrieve dropdown data via the unitdesign API endpoint GET /dropdowns, using the attributes SDCommonUnitTypeRefrigerant for Unit Type options and SDCommonUnitModelSizes for Unit Size options.",
+      "Implement client‑side filtering of the retrieved option lists by checking that the selected values appear in each option's 'parent' array.",
+      "Trigger the Unit Type filtering logic when both Condenser Type and Refrigerant selections have values; trigger the Unit Size filtering logic when a Unit Type selection has a value."
+    ],
+    "ambiguities": [
+      "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?",
+      "How should entries with \"isActive\": false be handled in the dropdown filtering?",
+      "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?"
+    ],
+    "confidence": "MEDIUM"
+  }
+}

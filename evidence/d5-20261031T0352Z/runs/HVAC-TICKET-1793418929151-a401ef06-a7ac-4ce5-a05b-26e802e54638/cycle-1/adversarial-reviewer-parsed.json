@@ -1,0 +1,126 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains several unresolved ambiguities that have not been clarified. According to the review policy, each open ambiguity must be reported as an OPEN_AMBIGUITY finding, and any remaining ambiguity blocks a PASS result.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter does not know how the number of Cooling Circuits is determined when a Cooling Package is entered.",
+      "action": "Obtain clarification from the ticket owner on how the number of Cooling Circuits should be determined.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "How is the number of Cooling Circuits determined when a Cooling Package is entered?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter lacks information about the units used for Circuit Height and DX Coil Height and any required display unit.",
+      "action": "Obtain clarification from the ticket owner on the units for Circuit Height and DX Coil Height and any required unit for the displayed sum.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter does not know whether the summed DX Coil Height should be rounded or formatted to a certain number of decimal places.",
+      "action": "Obtain clarification from the ticket owner on rounding or formatting requirements for the DX Coil Height sum.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter lacks guidance on handling a Circuit Height that is blank, non‑numeric, or otherwise invalid.",
+      "action": "Obtain clarification from the ticket owner on how to handle blank, non‑numeric, or invalid Circuit Height values.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter does not know whether the DX Coil Height should update immediately on each edit (real‑time) or after a specific event such as field blur or form submission.",
+      "action": "Obtain clarification from the ticket owner on the desired update timing for DX Coil Height after a Circuit Height edit.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    },
+    {
+      "id": "F6",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter lacks information about any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height.",
+      "action": "Obtain clarification from the ticket owner on any allowed minimum or maximum values for Circuit Heights and the total DX Coil Height.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/5",
+          "quote": "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/5"
+      ]
+    },
+    {
+      "id": "F7",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter does not know whether only active or enabled circuits should be included in the sum, and how activity is determined.",
+      "action": "Obtain clarification from the ticket owner on whether only active/enabled circuits are summed and how activity is defined.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/6",
+          "quote": "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/6"
+      ]
+    }
+  ],
+  "resolutions": []
+}

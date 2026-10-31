@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "rationale": "The interpreter accurately reflects all explicit requirements from the ticket, including coil-specific increments, rounding behavior, and the valid range of 1.25\" to 100\". No unsupported assumptions, missing requirements, HVAC terminology errors, or validation gaps are present, and the interpreter reports no ambiguities.",
+  "findings": [],
+  "resolutions": []
+}

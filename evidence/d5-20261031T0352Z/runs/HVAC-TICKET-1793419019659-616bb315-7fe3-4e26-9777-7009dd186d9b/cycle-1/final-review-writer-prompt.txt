@@ -1,0 +1,189 @@
+# Final Review Writer
+
+- [W01] Use the supplied interpreter requirementSummary as the report summary without changing its meaning, quantities, or conditions.
+- [W02] Present every reviewer concern exactly once with its unchanged finding ID, severity, kind, description, and action.
+- [W03] Preserve every open interpreter ambiguity, separately attributed to the interpreter rather than invented as a new reviewer finding.
+- [W04] State the coordinator disposition consistently in the heading and final disposition section, and retain its supplied governance reason codes.
+- [W05] Introduce no findings or conclusions beyond the supplied artifacts; do not claim all requirements are satisfied or no concerns remain when concerns are open.
+- [W06] Copy the bounded reportTemplate supplied below as the parsed value of reportMarkdown, including every section, character, finding, ambiguity, disposition, and reason. The template already contains Markdown text; do not paraphrase it, correct it, normalize quotes, or remove backslashes. Encode that value only as required for the outer JSON object, so JSON.parse() of your response produces the original template text. Only outer whitespace and CRLF line endings may differ; do not add or remove report content or sections.
+- [W07] Return only a JSON object parseable by JSON.parse(), without fences or surrounding prose, conforming to schemas/final-review.schema.json with reportMarkdown as its sole nonblank string field.
+- [W08] Worked nested-escaping fragment, not a complete report; always return the entire supplied template. Source text can itself contain literal backslashes before inch marks; those are data, not typos. Template fragment: `- /ambiguities/0 | "The method for indicating \"3/8\\\" tube with 1\\\" spacing\" is not described."`. Correct JSON fragment: `{"reportMarkdown":"- /ambiguities/0 | \"The method for indicating \\\"3/8\\\\\\\" tube with 1\\\\\\\" spacing\\\" is not described.\""}`. Parsing this JSON once preserves all three template backslashes before each inch mark; do not decode the JSON strings embedded inside the Markdown.
+- [W09] Worked verbatim-wording fragment, not a complete report. Template fragment: `"No rounding or precision rules are specified for the sum of heights."`. Correct JSON fragment: `{"reportMarkdown":"\"No rounding or precision rules are specified for the sum of heights.\""}`. Preserve "or"; changing it to "and" is invalid even if it sounds natural. Copy the actual template, not these illustrative fragments.
+
+## Interpreter Output
+
+{
+  "requirementSummary": "The UI must validate the entered Coil Height for Water/Steam coils, ensuring the value is between 1.25\" and 100\", is a multiple of a coil‑specific increment, and if not an exact multiple, round it to the nearest valid increment. The increment to use depends on the tube size or coil type/configuration as specified.",
+  "hvacTerminology": [
+    "Coil Height",
+    "Water/Steam coils",
+    "tube",
+    "Lamiflo coil",
+    "increment",
+    "spacing"
+  ],
+  "businessRules": [
+    "Valid range: entered Coil Height must be between 1.25\" and 100\" inclusive.",
+    "The entered Coil Height must be a multiple of a coil‑specific increment.",
+    "If the entered Coil Height is not an exact multiple of the applicable increment, round it to the nearest valid increment.",
+    "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+    "For 5/8\" tube, the increment is 1.50\".",
+    "For 1\" tube, the increment is 2.25\".",
+    "For Lamiflo coil, the increment is 9.00\".",
+    "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+  ],
+  "developerConsiderations": [
+    "Implement a mapping from tube size / coil type / spacing configuration to the corresponding increment value.",
+    "Validate that the entered value falls within the 1.25\"–100\" range before or after rounding, as appropriate.",
+    "Apply rounding logic to the nearest increment, preserving the original unit of inches.",
+    "Ensure that both 3/8\" tube and 1/2\" tube share the same increment rule.",
+    "Handle user input that may include decimal fractions and convert them to a numeric representation for validation."
+  ],
+  "ambiguities": [
+    "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?",
+    "Should the range validation be performed before rounding, after rounding, or both?",
+    "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?",
+    "Does the validation differ between Water coils and Steam coils, or are they treated identically?",
+    "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+  ],
+  "confidence": "MEDIUM"
+}
+
+## Reviewer Output
+
+{
+  "status": "FAIL",
+  "rationale": "The interpreter correctly captured the business rules and validation requirements from the ticket, but it left five open questions unresolved. Each listed ambiguity must be addressed before the implementation can be considered complete, so the review fails.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not specify how to round when the entered value is exactly halfway between two valid increments.",
+      "action": "Obtain clarification from the ticket owner on the tie‑break rounding policy.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not define whether range validation should occur before rounding, after rounding, or both.",
+      "action": "Obtain clarification from the ticket owner on the order of range validation relative to rounding.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "Should the range validation be performed before rounding, after rounding, or both?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not explain how to handle coil types or tube sizes that are not listed (e.g., 3/4\" tube).",
+      "action": "Obtain clarification from the ticket owner on the handling of unlisted coil types or tube sizes.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not state whether validation differs between Water coils and Steam coils.",
+      "action": "Obtain clarification from the ticket owner on whether Water and Steam coil validations are identical or differ.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Does the validation differ between Water coils and Steam coils, or are they treated identically?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The ticket does not indicate whether inputs may be provided in units other than inches.",
+      "action": "Obtain clarification from the ticket owner on accepted input units and any required conversion logic.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    }
+  ],
+  "resolutions": []
+}
+
+## Disposition
+
+FAIL
+
+## Governance Reasons
+
+[
+  "OPEN_FINDINGS",
+  "OPEN_AMBIGUITIES"
+]
+
+## Required Report Markdown:
+
+# FAIL
+
+## Requirement Summary
+
+"The UI must validate the entered Coil Height for Water/Steam coils, ensuring the value is between 1.25\" and 100\", is a multiple of a coil‑specific increment, and if not an exact multiple, round it to the nearest valid increment. The increment to use depends on the tube size or coil type/configuration as specified."
+
+## Reviewer Findings
+
+- F1 | MEDIUM | OPEN_AMBIGUITY | "The ticket does not specify how to round when the entered value is exactly halfway between two valid increments." | "Obtain clarification from the ticket owner on the tie‑break rounding policy."
+- F2 | MEDIUM | OPEN_AMBIGUITY | "The ticket does not define whether range validation should occur before rounding, after rounding, or both." | "Obtain clarification from the ticket owner on the order of range validation relative to rounding."
+- F3 | MEDIUM | OPEN_AMBIGUITY | "The ticket does not explain how to handle coil types or tube sizes that are not listed (e.g., 3/4\" tube)." | "Obtain clarification from the ticket owner on the handling of unlisted coil types or tube sizes."
+- F4 | MEDIUM | OPEN_AMBIGUITY | "The ticket does not state whether validation differs between Water coils and Steam coils." | "Obtain clarification from the ticket owner on whether Water and Steam coil validations are identical or differ."
+- F5 | MEDIUM | OPEN_AMBIGUITY | "The ticket does not indicate whether inputs may be provided in units other than inches." | "Obtain clarification from the ticket owner on accepted input units and any required conversion logic."
+
+## Open Ambiguities
+
+- /ambiguities/0 | "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?"
+- /ambiguities/1 | "Should the range validation be performed before rounding, after rounding, or both?"
+- /ambiguities/2 | "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?"
+- /ambiguities/3 | "Does the validation differ between Water coils and Steam coils, or are they treated identically?"
+- /ambiguities/4 | "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+
+## Final Disposition
+
+FAIL
+
+## Governance Reasons
+
+- OPEN_FINDINGS
+- OPEN_AMBIGUITIES

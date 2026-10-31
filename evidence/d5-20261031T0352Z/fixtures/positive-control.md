@@ -1,0 +1,1 @@
+DX Coil Height equals the sum of Cooling Circuit Heights in inches. Recalculate immediately after a height edit. An empty circuit list produces 0 inches. Inputs are already validated; no other behavior is in scope.

@@ -1,0 +1,7 @@
+{
+  "caseId": "validation",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-validation-d8f5f06f-978a-47f0-80a5-994ca751f715",
+  "hasRawResponse": true,
+  "status": "SUCCESS"
+}

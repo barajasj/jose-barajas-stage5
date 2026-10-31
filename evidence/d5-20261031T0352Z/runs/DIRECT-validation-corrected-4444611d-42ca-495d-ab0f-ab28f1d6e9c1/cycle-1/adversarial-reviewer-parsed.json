@@ -1,0 +1,75 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains four unresolved ambiguities, each of which blocks a PASS result per the review policy. No other issues were detected.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Exact rounding tie-breaking is unspecified.",
+      "action": "Obtain clarification from the ticket owner on the rounding tie-breaking policy.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "Exact rounding tie-breaking is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The source of the 1-inch spacing configuration is unspecified.",
+      "action": "Obtain clarification from the ticket owner on the origin and applicability of the 1-inch spacing configuration.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The source of the 1-inch spacing configuration is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The response to out-of-range input is unspecified.",
+      "action": "Obtain clarification from the ticket owner on how to handle inputs outside the 1.25\" to 100\" range.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "The response to out-of-range input is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Behavior for an unlisted coil configuration is unspecified.",
+      "action": "Obtain clarification from the ticket owner on how to handle coil configurations not listed in the increment table.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Behavior for an unlisted coil configuration is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    }
+  ],
+  "resolutions": []
+}

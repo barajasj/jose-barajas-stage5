@@ -1,0 +1,92 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains unresolved ambiguities listed in its ambiguities array. Each ambiguity must be addressed before the interpretation can be considered complete, thus the review fails.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The exact Roof Type option list is unspecified.",
+      "action": "Obtain clarification from the ticket owner on the complete Roof Type option list.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The exact Roof Type option list is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The EC Model catalog entries are unspecified.",
+      "action": "Obtain clarification from the ticket owner on the EC Model catalog entries that should be available.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "The EC Model catalog entries are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Numeric validation ranges are unspecified.",
+      "action": "Obtain clarification from the ticket owner on acceptable numeric ranges for all numeric inputs (e.g., Design Ambient, ASHRAE Summer Design, Wet Bulb Temperature, etc.).",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Numeric validation ranges are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    },
+    {
+      "id": "F4",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "Temperature conversion and unit selection behavior are unspecified.",
+      "action": "Obtain clarification from the ticket owner on how temperature units are selected, displayed, and converted between °F and °C.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/3",
+          "quote": "Temperature conversion and unit selection behavior are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/3"
+      ]
+    },
+    {
+      "id": "F5",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The detailed per-circuit configuration fields are unspecified.",
+      "action": "Obtain clarification from the ticket owner on the specific per-circuit cooling configuration fields that must be captured.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/4",
+          "quote": "The detailed per-circuit configuration fields are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/4"
+      ]
+    }
+  ],
+  "resolutions": []
+}

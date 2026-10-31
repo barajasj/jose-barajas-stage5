@@ -1,0 +1,7 @@
+{
+  "caseId": "clean-review",
+  "agent": "adversarial-reviewer",
+  "correlationId": "DIRECT-clean-review-544a4e97-6b90-4d0d-b14b-d721a226d9e8",
+  "hasRawResponse": true,
+  "status": "SUCCESS"
+}

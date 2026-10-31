@@ -1,0 +1,763 @@
+{
+  "runtimeMode": "real",
+  "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+  "status": "COMPLETED",
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ],
+  "reviewCycles": [
+    {
+      "cycle": 1,
+      "interpreterResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+        "agentId": "requirement-interpreter",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "requirementSummary": "When a Cooling Package is entered and calculations run, the system must populate the Cooling Circuits, sum the heights of all circuits to set the DX Coil Height in the DX Coil Information, and recalculate and update that field whenever a circuit height is edited.",
+          "hvacTerminology": [
+            "DX Coil",
+            "Cooling Package",
+            "Cooling Circuits",
+            "Circuit Height",
+            "DX Coil Information",
+            "R-454B FW 43"
+          ],
+          "businessRules": [
+            "After a Cooling Package is entered and the system runs calculations to obtain starting values, the Cooling Circuits must be populated.",
+            "The DX Coil Height field in the DX Coil Information must be set to the sum of the heights of all populated Cooling Circuits.",
+            "If a user alters the height of any Cooling Circuit, the system must recalculate the sum of all circuit heights and update the DX Coil Height field in the DX Coil Information accordingly."
+          ],
+          "developerConsiderations": [
+            "Implement logic to trigger population of Cooling Circuits immediately after a Cooling Package entry and calculation completion.",
+            "Calculate the sum of circuit heights and bind the result to the DX Coil Height field in DX Coil Information.",
+            "Add event handling to detect changes to any Circuit Height and recompute the total height, updating the DX Coil Height field in real time or upon edit completion.",
+            "Ensure that the sum operation handles numeric values and ignores or validates non-numeric or missing heights."
+          ],
+          "ambiguities": [
+            "How is the number of Cooling Circuits determined when a Cooling Package is entered?",
+            "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?",
+            "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?",
+            "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?",
+            "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?",
+            "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?",
+            "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+          ],
+          "confidence": "MEDIUM"
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+          "workflow": "hvac-ticket-governance",
+          "agent": "requirement-interpreter",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-31T03:55:29.151Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "077a9f54373c5f65dfab00a9472bf9e72800e9694802462179b331701d15f125",
+          "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282",
+          "promptHash": "522890e393a63e3dbee06ef3e6f780916f5349cc9c0721754c971331cd3d21ee",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 1028,
+          "completionTokens": 1939,
+          "totalTokens": 2967,
+          "cost": 0.005361,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "1783dfcc665d2d3992b589eb6b9c32ed9440139c1d122f21859fa8841703cf5c",
+          "outputHash": "45be07c7e140c9dddf6b3251bb9b6253398d40c1adb3eb3fdd8678ebe0b0b772",
+          "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\requirement-interpreter-raw.txt",
+          "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\requirement-interpreter-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "reviewResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+        "agentId": "adversarial-reviewer",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "status": "FAIL",
+          "rationale": "The interpreter output contains several unresolved ambiguities that have not been clarified. According to the review policy, each open ambiguity must be reported as an OPEN_AMBIGUITY finding, and any remaining ambiguity blocks a PASS result.",
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The interpreter does not know how the number of Cooling Circuits is determined when a Cooling Package is entered.",
+              "action": "Obtain clarification from the ticket owner on how the number of Cooling Circuits should be determined.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/0",
+                  "quote": "How is the number of Cooling Circuits determined when a Cooling Package is entered?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/0"
+              ]
+            },
+            {
+              "id": "F2",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The interpreter lacks information about the units used for Circuit Height and DX Coil Height and any required display unit.",
+              "action": "Obtain clarification from the ticket owner on the units for Circuit Height and DX Coil Height and any required unit for the displayed sum.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/1",
+                  "quote": "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/1"
+              ]
+            },
+            {
+              "id": "F3",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The interpreter does not know whether the summed DX Coil Height should be rounded or formatted to a certain number of decimal places.",
+              "action": "Obtain clarification from the ticket owner on rounding or formatting requirements for the DX Coil Height sum.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/2",
+                  "quote": "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/2"
+              ]
+            },
+            {
+              "id": "F4",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The interpreter lacks guidance on handling a Circuit Height that is blank, non‑numeric, or otherwise invalid.",
+              "action": "Obtain clarification from the ticket owner on how to handle blank, non‑numeric, or invalid Circuit Height values.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/3",
+                  "quote": "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/3"
+              ]
+            },
+            {
+              "id": "F5",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The interpreter does not know whether the DX Coil Height should update immediately on each edit (real‑time) or after a specific event such as field blur or form submission.",
+              "action": "Obtain clarification from the ticket owner on the desired update timing for DX Coil Height after a Circuit Height edit.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/4",
+                  "quote": "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/4"
+              ]
+            },
+            {
+              "id": "F6",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The interpreter lacks information about any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height.",
+              "action": "Obtain clarification from the ticket owner on any allowed minimum or maximum values for Circuit Heights and the total DX Coil Height.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/5",
+                  "quote": "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/5"
+              ]
+            },
+            {
+              "id": "F7",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The interpreter does not know whether only active or enabled circuits should be included in the sum, and how activity is determined.",
+              "action": "Obtain clarification from the ticket owner on whether only active/enabled circuits are summed and how activity is defined.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/6",
+                  "quote": "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/6"
+              ]
+            }
+          ],
+          "resolutions": []
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+          "workflow": "hvac-ticket-governance",
+          "agent": "adversarial-reviewer",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-31T03:55:37.699Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "f640d32d9f8bc91ef3e6bda6fbedd1023f012c258e660c97e1c0b551af5fa13f",
+          "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282",
+          "promptHash": "c2069bad57f9f5570bb1aae45a7e6c45b0116f320cec1300f519e029601b8c80",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 2856,
+          "completionTokens": 2098,
+          "totalTokens": 4954,
+          "cost": 0.006673,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "249b380f974367ce3712b4fd09fdd1cf8a8e0e46ef6e340c6673ab27c4a60f5a",
+          "outputHash": "f8b065ef1fd70d18b30f27176c704338d4efeaefdb1a69f4403e359f24af796a",
+          "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\adversarial-reviewer-raw.txt",
+          "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\adversarial-reviewer-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    }
+  ],
+  "totalCost": 0.020066,
+  "humanGovernance": null,
+  "auditSummary": {
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "stepsExecuted": 3,
+    "reDispatched": false,
+    "reviewCyclesExecuted": 1,
+    "reviewLimitReached": false,
+    "totalPromptTokens": 6913,
+    "totalCompletionTokens": 6644,
+    "totalTokens": 13557,
+    "totalCost": 0.020066,
+    "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)"
+  },
+  "interpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "When a Cooling Package is entered and calculations run, the system must populate the Cooling Circuits, sum the heights of all circuits to set the DX Coil Height in the DX Coil Information, and recalculate and update that field whenever a circuit height is edited.",
+      "hvacTerminology": [
+        "DX Coil",
+        "Cooling Package",
+        "Cooling Circuits",
+        "Circuit Height",
+        "DX Coil Information",
+        "R-454B FW 43"
+      ],
+      "businessRules": [
+        "After a Cooling Package is entered and the system runs calculations to obtain starting values, the Cooling Circuits must be populated.",
+        "The DX Coil Height field in the DX Coil Information must be set to the sum of the heights of all populated Cooling Circuits.",
+        "If a user alters the height of any Cooling Circuit, the system must recalculate the sum of all circuit heights and update the DX Coil Height field in the DX Coil Information accordingly."
+      ],
+      "developerConsiderations": [
+        "Implement logic to trigger population of Cooling Circuits immediately after a Cooling Package entry and calculation completion.",
+        "Calculate the sum of circuit heights and bind the result to the DX Coil Height field in DX Coil Information.",
+        "Add event handling to detect changes to any Circuit Height and recompute the total height, updating the DX Coil Height field in real time or upon edit completion.",
+        "Ensure that the sum operation handles numeric values and ignores or validates non-numeric or missing heights."
+      ],
+      "ambiguities": [
+        "How is the number of Cooling Circuits determined when a Cooling Package is entered?",
+        "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?",
+        "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?",
+        "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?",
+        "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?",
+        "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?",
+        "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:55:29.151Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "077a9f54373c5f65dfab00a9472bf9e72800e9694802462179b331701d15f125",
+      "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282",
+      "promptHash": "522890e393a63e3dbee06ef3e6f780916f5349cc9c0721754c971331cd3d21ee",
+      "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1028,
+      "completionTokens": 1939,
+      "totalTokens": 2967,
+      "cost": 0.005361,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "1783dfcc665d2d3992b589eb6b9c32ed9440139c1d122f21859fa8841703cf5c",
+      "outputHash": "45be07c7e140c9dddf6b3251bb9b6253398d40c1adb3eb3fdd8678ebe0b0b772",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "reviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter output contains several unresolved ambiguities that have not been clarified. According to the review policy, each open ambiguity must be reported as an OPEN_AMBIGUITY finding, and any remaining ambiguity blocks a PASS result.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter does not know how the number of Cooling Circuits is determined when a Cooling Package is entered.",
+          "action": "Obtain clarification from the ticket owner on how the number of Cooling Circuits should be determined.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "How is the number of Cooling Circuits determined when a Cooling Package is entered?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter lacks information about the units used for Circuit Height and DX Coil Height and any required display unit.",
+          "action": "Obtain clarification from the ticket owner on the units for Circuit Height and DX Coil Height and any required unit for the displayed sum.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter does not know whether the summed DX Coil Height should be rounded or formatted to a certain number of decimal places.",
+          "action": "Obtain clarification from the ticket owner on rounding or formatting requirements for the DX Coil Height sum.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter lacks guidance on handling a Circuit Height that is blank, non‑numeric, or otherwise invalid.",
+          "action": "Obtain clarification from the ticket owner on how to handle blank, non‑numeric, or invalid Circuit Height values.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "F5",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter does not know whether the DX Coil Height should update immediately on each edit (real‑time) or after a specific event such as field blur or form submission.",
+          "action": "Obtain clarification from the ticket owner on the desired update timing for DX Coil Height after a Circuit Height edit.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        },
+        {
+          "id": "F6",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter lacks information about any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height.",
+          "action": "Obtain clarification from the ticket owner on any allowed minimum or maximum values for Circuit Heights and the total DX Coil Height.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/5",
+              "quote": "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/5"
+          ]
+        },
+        {
+          "id": "F7",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter does not know whether only active or enabled circuits should be included in the sum, and how activity is determined.",
+          "action": "Obtain clarification from the ticket owner on whether only active/enabled circuits are summed and how activity is defined.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/6",
+              "quote": "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/6"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:55:37.699Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "f640d32d9f8bc91ef3e6bda6fbedd1023f012c258e660c97e1c0b551af5fa13f",
+      "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282",
+      "promptHash": "c2069bad57f9f5570bb1aae45a7e6c45b0116f320cec1300f519e029601b8c80",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2856,
+      "completionTokens": 2098,
+      "totalTokens": 4954,
+      "cost": 0.006673,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "249b380f974367ce3712b4fd09fdd1cf8a8e0e46ef6e340c6673ab27c4a60f5a",
+      "outputHash": "f8b065ef1fd70d18b30f27176c704338d4efeaefdb1a69f4403e359f24af796a",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalInterpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "When a Cooling Package is entered and calculations run, the system must populate the Cooling Circuits, sum the heights of all circuits to set the DX Coil Height in the DX Coil Information, and recalculate and update that field whenever a circuit height is edited.",
+      "hvacTerminology": [
+        "DX Coil",
+        "Cooling Package",
+        "Cooling Circuits",
+        "Circuit Height",
+        "DX Coil Information",
+        "R-454B FW 43"
+      ],
+      "businessRules": [
+        "After a Cooling Package is entered and the system runs calculations to obtain starting values, the Cooling Circuits must be populated.",
+        "The DX Coil Height field in the DX Coil Information must be set to the sum of the heights of all populated Cooling Circuits.",
+        "If a user alters the height of any Cooling Circuit, the system must recalculate the sum of all circuit heights and update the DX Coil Height field in the DX Coil Information accordingly."
+      ],
+      "developerConsiderations": [
+        "Implement logic to trigger population of Cooling Circuits immediately after a Cooling Package entry and calculation completion.",
+        "Calculate the sum of circuit heights and bind the result to the DX Coil Height field in DX Coil Information.",
+        "Add event handling to detect changes to any Circuit Height and recompute the total height, updating the DX Coil Height field in real time or upon edit completion.",
+        "Ensure that the sum operation handles numeric values and ignores or validates non-numeric or missing heights."
+      ],
+      "ambiguities": [
+        "How is the number of Cooling Circuits determined when a Cooling Package is entered?",
+        "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?",
+        "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?",
+        "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?",
+        "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?",
+        "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?",
+        "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:55:29.151Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "077a9f54373c5f65dfab00a9472bf9e72800e9694802462179b331701d15f125",
+      "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282",
+      "promptHash": "522890e393a63e3dbee06ef3e6f780916f5349cc9c0721754c971331cd3d21ee",
+      "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1028,
+      "completionTokens": 1939,
+      "totalTokens": 2967,
+      "cost": 0.005361,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "1783dfcc665d2d3992b589eb6b9c32ed9440139c1d122f21859fa8841703cf5c",
+      "outputHash": "45be07c7e140c9dddf6b3251bb9b6253398d40c1adb3eb3fdd8678ebe0b0b772",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter output contains several unresolved ambiguities that have not been clarified. According to the review policy, each open ambiguity must be reported as an OPEN_AMBIGUITY finding, and any remaining ambiguity blocks a PASS result.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter does not know how the number of Cooling Circuits is determined when a Cooling Package is entered.",
+          "action": "Obtain clarification from the ticket owner on how the number of Cooling Circuits should be determined.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "How is the number of Cooling Circuits determined when a Cooling Package is entered?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter lacks information about the units used for Circuit Height and DX Coil Height and any required display unit.",
+          "action": "Obtain clarification from the ticket owner on the units for Circuit Height and DX Coil Height and any required unit for the displayed sum.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter does not know whether the summed DX Coil Height should be rounded or formatted to a certain number of decimal places.",
+          "action": "Obtain clarification from the ticket owner on rounding or formatting requirements for the DX Coil Height sum.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter lacks guidance on handling a Circuit Height that is blank, non‑numeric, or otherwise invalid.",
+          "action": "Obtain clarification from the ticket owner on how to handle blank, non‑numeric, or invalid Circuit Height values.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "F5",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter does not know whether the DX Coil Height should update immediately on each edit (real‑time) or after a specific event such as field blur or form submission.",
+          "action": "Obtain clarification from the ticket owner on the desired update timing for DX Coil Height after a Circuit Height edit.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        },
+        {
+          "id": "F6",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter lacks information about any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height.",
+          "action": "Obtain clarification from the ticket owner on any allowed minimum or maximum values for Circuit Heights and the total DX Coil Height.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/5",
+              "quote": "Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/5"
+          ]
+        },
+        {
+          "id": "F7",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The interpreter does not know whether only active or enabled circuits should be included in the sum, and how activity is determined.",
+          "action": "Obtain clarification from the ticket owner on whether only active/enabled circuits are summed and how activity is defined.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/6",
+              "quote": "Should only active or enabled circuits be included in the sum, and if so, how is activity determined?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/6"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:55:37.699Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "f640d32d9f8bc91ef3e6bda6fbedd1023f012c258e660c97e1c0b551af5fa13f",
+      "ticketHash": "78c1a1ef73ed8663d725e69e2df3ee3fee7a9d75d75fc3f0440d06bcddf84282",
+      "promptHash": "c2069bad57f9f5570bb1aae45a7e6c45b0116f320cec1300f519e029601b8c80",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2856,
+      "completionTokens": 2098,
+      "totalTokens": 4954,
+      "cost": 0.006673,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "249b380f974367ce3712b4fd09fdd1cf8a8e0e46ef6e340c6673ab27c4a60f5a",
+      "outputHash": "f8b065ef1fd70d18b30f27176c704338d4efeaefdb1a69f4403e359f24af796a",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReport": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+    "agentId": "final-review-writer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "reportMarkdown": "# FAIL\n\n## Requirement Summary\n\n\"When a Cooling Package is entered and calculations run, the system must populate the Cooling Circuits, sum the heights of all circuits to set the DX Coil Height in the DX Coil Information, and recalculate and update that field whenever a circuit height is edited.\"\n\n## Reviewer Findings\n\n- F1 | MEDIUM | OPEN_AMBIGUITY | \"The interpreter does not know how the number of Cooling Circuits is determined when a Cooling Package is entered.\" | \"Obtain clarification from the ticket owner on how the number of Cooling Circuits should be determined.\"\n- F2 | MEDIUM | OPEN_AMBIGUITY | \"The interpreter lacks information about the units used for Circuit Height and DX Coil Height and any required display unit.\" | \"Obtain clarification from the ticket owner on the units for Circuit Height and DX Coil Height and any required unit for the displayed sum.\"\n- F3 | MEDIUM | OPEN_AMBIGUITY | \"The interpreter does not know whether the summed DX Coil Height should be rounded or formatted to a certain number of decimal places.\" | \"Obtain clarification from the ticket owner on rounding or formatting requirements for the DX Coil Height sum.\"\n- F4 | MEDIUM | OPEN_AMBIGUITY | \"The interpreter lacks guidance on handling a Circuit Height that is blank, non‑numeric, or otherwise invalid.\" | \"Obtain clarification from the ticket owner on how to handle blank, non‑numeric, or invalid Circuit Height values.\"\n- F5 | MEDIUM | OPEN_AMBIGUITY | \"The interpreter does not know whether the DX Coil Height should update immediately on each edit (real‑time) or after a specific event such as field blur or form submission.\" | \"Obtain clarification from the ticket owner on the desired update timing for DX Coil Height after a Circuit Height edit.\"\n- F6 | MEDIUM | OPEN_AMBIGUITY | \"The interpreter lacks information about any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height.\" | \"Obtain clarification from the ticket owner on any allowed minimum or maximum values for Circuit Heights and the total DX Coil Height.\"\n- F7 | MEDIUM | OPEN_AMBIGUITY | \"The interpreter does not know whether only active or enabled circuits should be included in the sum, and how activity is determined.\" | \"Obtain clarification from the ticket owner on whether only active/enabled circuits are summed and how activity is defined.\"\n\n## Open Ambiguities\n\n- /ambiguities/0 | \"How is the number of Cooling Circuits determined when a Cooling Package is entered?\"\n- /ambiguities/1 | \"What units are used for Circuit Height and DX Coil Height, and should the sum be displayed in a specific unit?\"\n- /ambiguities/2 | \"Should the summed DX Coil Height be rounded or formatted to a certain number of decimal places?\"\n- /ambiguities/3 | \"How should the system handle a Circuit Height that is blank, non-numeric, or otherwise invalid?\"\n- /ambiguities/4 | \"Should the DX Coil Height update immediately on each edit (real‑time) or after a specific event such as field blur or form submission?\"\n- /ambiguities/5 | \"Are there any minimum or maximum limits for individual Circuit Heights or the total DX Coil Height?\"\n- /ambiguities/6 | \"Should only active or enabled circuits be included in the sum, and if so, how is activity determined?\"\n\n## Final Disposition\n\nFAIL\n\n## Governance Reasons\n\n- OPEN_FINDINGS\n- OPEN_AMBIGUITIES"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638",
+      "workflow": "hvac-ticket-governance",
+      "agent": "final-review-writer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:55:46.452Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "8dd2bf52c461ce81db1bb4ff77f702bdfc203512bc6497b7467ed5afad095faf",
+      "ticketHash": null,
+      "promptHash": "75f8678cdbefde1df97f0266081a3bec8b0097907ccf654ca1b85a5ab82aa865",
+      "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+      "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 3029,
+      "completionTokens": 2607,
+      "totalTokens": 5636,
+      "cost": 0.008032,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "ee3b4cc3ff9fa34a789525cdc965d48ae05f2ee795e7826f4be2ebb1e3b5128e",
+      "outputHash": "ee3b4cc3ff9fa34a789525cdc965d48ae05f2ee795e7826f4be2ebb1e3b5128e",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\final-review-writer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793418929151-a401ef06-a7ac-4ce5-a05b-26e802e54638\\cycle-1\\final-review-writer-validated.json",
+      "status": "SUCCESS"
+    }
+  }
+}

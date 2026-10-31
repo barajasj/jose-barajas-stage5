@@ -1,0 +1,39 @@
+{
+  "ticket": "# Ticket 04\r\n\r\n## Title\r\n\r\nFW Series: UI Input validation and ranges for Coil Height\r\n\r\n## Description\r\nCoil Height of Water/Steam coils must be a multiple of specified value, round input to closest: 3/8\" & 1/2\" tube → multiple of 1.25\"; 5/8\" tube → multiple of 1.50\"; 1\" tube → multiple of 2.25\"; Lamiflo coil → multiple of 9\"; 3/8\" tube w/ 1\" spacing → multiple of 1\"\r\n\r\n## Acceptance Criteria\r\n\r\n- Valid range: 1.25\" to 100\"\r\n- The entered value must be a multiple of a coil-specific increment.\r\n- If the entered value is not an exact multiple, round it to the nearest valid increment.\r\n- Height increments by coil type/configuration:\r\n  - 3/8\" tube or 1/2\" tube: Increment = 1.25\"\r\n  - 5/8\" tube: Increment = 1.50\"\r\n  - 1\" tube: Increment = 2.25\"\r\n  - Lamiflo coil: Increment = 9.00\"\r\n  - 3/8\" tube with 1\" spacing: Increment = 1.00\"\r\n- Examples:\r\n  - Tube Size = 3/8\" User enters 14.1\" Nearest valid value = 13.75\" (11 × 1.25)\r\n  - Tube Size = 5/8\" User enters 14.0\" Nearest valid value = 13.5\" (9 × 1.5)\r\n  - Tube Size = 1\" User enters 16.0\" Nearest valid value = 15.75\" (7 × 2.25)\r\n  - Lamiflo coil User enters 20\" Nearest valid value = 18\"",
+  "interpreterResult": {
+    "requirementSummary": "The UI must validate the entered Coil Height for Water/Steam coils, ensuring the value is between 1.25\" and 100\", is a multiple of a coil‑specific increment, and if not an exact multiple, round it to the nearest valid increment. The increment to use depends on the tube size or coil type/configuration as specified.",
+    "hvacTerminology": [
+      "Coil Height",
+      "Water/Steam coils",
+      "tube",
+      "Lamiflo coil",
+      "increment",
+      "spacing"
+    ],
+    "businessRules": [
+      "Valid range: entered Coil Height must be between 1.25\" and 100\" inclusive.",
+      "The entered Coil Height must be a multiple of a coil‑specific increment.",
+      "If the entered Coil Height is not an exact multiple of the applicable increment, round it to the nearest valid increment.",
+      "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+      "For 5/8\" tube, the increment is 1.50\".",
+      "For 1\" tube, the increment is 2.25\".",
+      "For Lamiflo coil, the increment is 9.00\".",
+      "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+    ],
+    "developerConsiderations": [
+      "Implement a mapping from tube size / coil type / spacing configuration to the corresponding increment value.",
+      "Validate that the entered value falls within the 1.25\"–100\" range before or after rounding, as appropriate.",
+      "Apply rounding logic to the nearest increment, preserving the original unit of inches.",
+      "Ensure that both 3/8\" tube and 1/2\" tube share the same increment rule.",
+      "Handle user input that may include decimal fractions and convert them to a numeric representation for validation."
+    ],
+    "ambiguities": [
+      "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?",
+      "Should the range validation be performed before rounding, after rounding, or both?",
+      "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?",
+      "Does the validation differ between Water coils and Steam coils, or are they treated identically?",
+      "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+    ],
+    "confidence": "MEDIUM"
+  }
+}

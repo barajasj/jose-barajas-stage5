@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "rationale": "The interpreter accurately reflects all explicit requirements from the ticket, introduces no unsupported assumptions, contains correct HVAC terminology, and does not omit any validation constraints. There are no ambiguities reported by the interpreter, and no additional ambiguities are identified that can be referenced, so the interpretation is complete and correct.",
+  "findings": [],
+  "resolutions": []
+}

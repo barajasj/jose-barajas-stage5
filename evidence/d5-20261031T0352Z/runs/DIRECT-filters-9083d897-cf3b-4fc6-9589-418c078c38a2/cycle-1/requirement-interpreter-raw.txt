@@ -1,0 +1,26 @@
+{
+  "requirementSummary": "When a user selects a Condenser Type and Refrigerant, the Unit Type dropdown is auto‑populated filtered by the selected Condenser Type and Refrigerant; after a Unit Type is selected, the Unit Size dropdown is auto‑populated filtered by the selected Refrigerant and Unit Type.",
+  "hvacTerminology": [
+    "Condenser Type",
+    "Refrigerant",
+    "Unit Type",
+    "Unit Size",
+    "SDCommonUnitTypeRefrigerant",
+    "SDCommonUnitModelSizes"
+  ],
+  "businessRules": [
+    "If a user selects a Condenser Type and a Refrigerant, then the Unit Type dropdown must be populated with only those Unit Types whose 'parent' attribute includes both the selected Condenser Type and the selected Refrigerant.",
+    "If a user selects a Unit Type, then the Unit Size dropdown must be populated with only those Unit Sizes whose 'parent' attribute includes both the selected Refrigerant and the selected Unit Type."
+  ],
+  "developerConsiderations": [
+    "Retrieve dropdown data via the unitdesign API endpoint GET /dropdowns, using the attributes SDCommonUnitTypeRefrigerant for Unit Type options and SDCommonUnitModelSizes for Unit Size options.",
+    "Implement client‑side filtering of the retrieved option lists by checking that the selected values appear in each option's 'parent' array.",
+    "Trigger the Unit Type filtering logic when both Condenser Type and Refrigerant selections have values; trigger the Unit Size filtering logic when a Unit Type selection has a value."
+  ],
+  "ambiguities": [
+    "How should the Condenser Type be used to filter Unit Type when the provided SDCommonUnitTypeRefrigerant data only includes refrigerant in its parent array?",
+    "How should entries with \"isActive\": false be handled in the dropdown filtering?",
+    "What should the UI display if no matching Unit Type or Unit Size entries are found after filtering?"
+  ],
+  "confidence": "MEDIUM"
+}

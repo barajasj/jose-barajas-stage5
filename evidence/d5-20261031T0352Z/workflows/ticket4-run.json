@@ -1,0 +1,673 @@
+{
+  "runtimeMode": "real",
+  "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+  "status": "COMPLETED",
+  "disposition": "FAIL",
+  "reasonCodes": [
+    "OPEN_FINDINGS",
+    "OPEN_AMBIGUITIES"
+  ],
+  "reviewCycles": [
+    {
+      "cycle": 1,
+      "interpreterResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+        "agentId": "requirement-interpreter",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "requirementSummary": "The UI must validate the entered Coil Height for Water/Steam coils, ensuring the value is between 1.25\" and 100\", is a multiple of a coil‑specific increment, and if not an exact multiple, round it to the nearest valid increment. The increment to use depends on the tube size or coil type/configuration as specified.",
+          "hvacTerminology": [
+            "Coil Height",
+            "Water/Steam coils",
+            "tube",
+            "Lamiflo coil",
+            "increment",
+            "spacing"
+          ],
+          "businessRules": [
+            "Valid range: entered Coil Height must be between 1.25\" and 100\" inclusive.",
+            "The entered Coil Height must be a multiple of a coil‑specific increment.",
+            "If the entered Coil Height is not an exact multiple of the applicable increment, round it to the nearest valid increment.",
+            "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+            "For 5/8\" tube, the increment is 1.50\".",
+            "For 1\" tube, the increment is 2.25\".",
+            "For Lamiflo coil, the increment is 9.00\".",
+            "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+          ],
+          "developerConsiderations": [
+            "Implement a mapping from tube size / coil type / spacing configuration to the corresponding increment value.",
+            "Validate that the entered value falls within the 1.25\"–100\" range before or after rounding, as appropriate.",
+            "Apply rounding logic to the nearest increment, preserving the original unit of inches.",
+            "Ensure that both 3/8\" tube and 1/2\" tube share the same increment rule.",
+            "Handle user input that may include decimal fractions and convert them to a numeric representation for validation."
+          ],
+          "ambiguities": [
+            "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?",
+            "Should the range validation be performed before rounding, after rounding, or both?",
+            "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?",
+            "Does the validation differ between Water coils and Steam coils, or are they treated identically?",
+            "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+          ],
+          "confidence": "MEDIUM"
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+          "workflow": "hvac-ticket-governance",
+          "agent": "requirement-interpreter",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-31T03:56:59.659Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+          "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+          "promptHash": "87739587aa5984b7a987ae00618d342f635f60e6588d2645cc8f9613edbaff97",
+          "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+          "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 1249,
+          "completionTokens": 1548,
+          "totalTokens": 2797,
+          "cost": 0.004494,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "48158b9ba842a89fcc292862e80b1b3be4ca15e23c15373ed9a974416a7f692e",
+          "outputHash": "fcaefa97c16354318719fe808fd15d0e6f646dccd1593abe3d19d43e818d9187",
+          "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\requirement-interpreter-raw.txt",
+          "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\requirement-interpreter-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "reviewResult": {
+        "success": true,
+        "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+        "agentId": "adversarial-reviewer",
+        "cycle": 1,
+        "runtimeMode": "real",
+        "output": {
+          "status": "FAIL",
+          "rationale": "The interpreter correctly captured the business rules and validation requirements from the ticket, but it left five open questions unresolved. Each listed ambiguity must be addressed before the implementation can be considered complete, so the review fails.",
+          "findings": [
+            {
+              "id": "F1",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The ticket does not specify how to round when the entered value is exactly halfway between two valid increments.",
+              "action": "Obtain clarification from the ticket owner on the tie‑break rounding policy.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/0",
+                  "quote": "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/0"
+              ]
+            },
+            {
+              "id": "F2",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The ticket does not define whether range validation should occur before rounding, after rounding, or both.",
+              "action": "Obtain clarification from the ticket owner on the order of range validation relative to rounding.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/1",
+                  "quote": "Should the range validation be performed before rounding, after rounding, or both?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/1"
+              ]
+            },
+            {
+              "id": "F3",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The ticket does not explain how to handle coil types or tube sizes that are not listed (e.g., 3/4\" tube).",
+              "action": "Obtain clarification from the ticket owner on the handling of unlisted coil types or tube sizes.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/2",
+                  "quote": "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/2"
+              ]
+            },
+            {
+              "id": "F4",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The ticket does not state whether validation differs between Water coils and Steam coils.",
+              "action": "Obtain clarification from the ticket owner on whether Water and Steam coil validations are identical or differ.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/3",
+                  "quote": "Does the validation differ between Water coils and Steam coils, or are they treated identically?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/3"
+              ]
+            },
+            {
+              "id": "F5",
+              "severity": "MEDIUM",
+              "kind": "OPEN_AMBIGUITY",
+              "description": "The ticket does not indicate whether inputs may be provided in units other than inches.",
+              "action": "Obtain clarification from the ticket owner on accepted input units and any required conversion logic.",
+              "sourceRefs": [
+                {
+                  "artifact": "interpreter",
+                  "pointer": "/ambiguities/4",
+                  "quote": "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+                }
+              ],
+              "ambiguityRefs": [
+                "/ambiguities/4"
+              ]
+            }
+          ],
+          "resolutions": []
+        },
+        "audit": {
+          "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+          "workflow": "hvac-ticket-governance",
+          "agent": "adversarial-reviewer",
+          "model": "accounts/fireworks/models/gpt-oss-120b",
+          "runtimeMode": "real",
+          "cycle": 1,
+          "timestamp": "2026-10-31T03:57:06.715Z",
+          "modelSettings": {
+            "temperature": 0
+          },
+          "inputHash": "b54e3464e795a40bca5afe3bb7636fda0c7e2113270f17535d1d204de06b6725",
+          "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+          "promptHash": "2a930a0df617514af87930ac5604cb9fc92e38638dae711644acf77c586d7cb0",
+          "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+          "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+          "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+          "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+          "promptTokens": 3135,
+          "completionTokens": 1921,
+          "totalTokens": 5056,
+          "cost": 0.00637,
+          "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+          "rawHash": "9ce216001e29d9f43048f32d676d813181fc2d995cb895344cce74e840536a80",
+          "outputHash": "bdcd2314342424c0415ce204c07b4cd4b129c649192f598ffa9278603d797691",
+          "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\adversarial-reviewer-raw.txt",
+          "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\adversarial-reviewer-validated.json",
+          "status": "SUCCESS"
+        }
+      },
+      "disposition": "FAIL",
+      "reasonCodes": [
+        "OPEN_FINDINGS",
+        "OPEN_AMBIGUITIES"
+      ]
+    }
+  ],
+  "totalCost": 0.017135,
+  "humanGovernance": null,
+  "auditSummary": {
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "stepsExecuted": 3,
+    "reDispatched": false,
+    "reviewCyclesExecuted": 1,
+    "reviewLimitReached": false,
+    "totalPromptTokens": 6910,
+    "totalCompletionTokens": 5472,
+    "totalTokens": 12382,
+    "totalCost": 0.017135,
+    "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)"
+  },
+  "interpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "The UI must validate the entered Coil Height for Water/Steam coils, ensuring the value is between 1.25\" and 100\", is a multiple of a coil‑specific increment, and if not an exact multiple, round it to the nearest valid increment. The increment to use depends on the tube size or coil type/configuration as specified.",
+      "hvacTerminology": [
+        "Coil Height",
+        "Water/Steam coils",
+        "tube",
+        "Lamiflo coil",
+        "increment",
+        "spacing"
+      ],
+      "businessRules": [
+        "Valid range: entered Coil Height must be between 1.25\" and 100\" inclusive.",
+        "The entered Coil Height must be a multiple of a coil‑specific increment.",
+        "If the entered Coil Height is not an exact multiple of the applicable increment, round it to the nearest valid increment.",
+        "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+        "For 5/8\" tube, the increment is 1.50\".",
+        "For 1\" tube, the increment is 2.25\".",
+        "For Lamiflo coil, the increment is 9.00\".",
+        "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+      ],
+      "developerConsiderations": [
+        "Implement a mapping from tube size / coil type / spacing configuration to the corresponding increment value.",
+        "Validate that the entered value falls within the 1.25\"–100\" range before or after rounding, as appropriate.",
+        "Apply rounding logic to the nearest increment, preserving the original unit of inches.",
+        "Ensure that both 3/8\" tube and 1/2\" tube share the same increment rule.",
+        "Handle user input that may include decimal fractions and convert them to a numeric representation for validation."
+      ],
+      "ambiguities": [
+        "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?",
+        "Should the range validation be performed before rounding, after rounding, or both?",
+        "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?",
+        "Does the validation differ between Water coils and Steam coils, or are they treated identically?",
+        "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:56:59.659Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "promptHash": "87739587aa5984b7a987ae00618d342f635f60e6588d2645cc8f9613edbaff97",
+      "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1249,
+      "completionTokens": 1548,
+      "totalTokens": 2797,
+      "cost": 0.004494,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "48158b9ba842a89fcc292862e80b1b3be4ca15e23c15373ed9a974416a7f692e",
+      "outputHash": "fcaefa97c16354318719fe808fd15d0e6f646dccd1593abe3d19d43e818d9187",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "reviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter correctly captured the business rules and validation requirements from the ticket, but it left five open questions unresolved. Each listed ambiguity must be addressed before the implementation can be considered complete, so the review fails.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not specify how to round when the entered value is exactly halfway between two valid increments.",
+          "action": "Obtain clarification from the ticket owner on the tie‑break rounding policy.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not define whether range validation should occur before rounding, after rounding, or both.",
+          "action": "Obtain clarification from the ticket owner on the order of range validation relative to rounding.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Should the range validation be performed before rounding, after rounding, or both?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not explain how to handle coil types or tube sizes that are not listed (e.g., 3/4\" tube).",
+          "action": "Obtain clarification from the ticket owner on the handling of unlisted coil types or tube sizes.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not state whether validation differs between Water coils and Steam coils.",
+          "action": "Obtain clarification from the ticket owner on whether Water and Steam coil validations are identical or differ.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Does the validation differ between Water coils and Steam coils, or are they treated identically?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "F5",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not indicate whether inputs may be provided in units other than inches.",
+          "action": "Obtain clarification from the ticket owner on accepted input units and any required conversion logic.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:57:06.715Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "b54e3464e795a40bca5afe3bb7636fda0c7e2113270f17535d1d204de06b6725",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "promptHash": "2a930a0df617514af87930ac5604cb9fc92e38638dae711644acf77c586d7cb0",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 3135,
+      "completionTokens": 1921,
+      "totalTokens": 5056,
+      "cost": 0.00637,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "9ce216001e29d9f43048f32d676d813181fc2d995cb895344cce74e840536a80",
+      "outputHash": "bdcd2314342424c0415ce204c07b4cd4b129c649192f598ffa9278603d797691",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalInterpreterResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+    "agentId": "requirement-interpreter",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "requirementSummary": "The UI must validate the entered Coil Height for Water/Steam coils, ensuring the value is between 1.25\" and 100\", is a multiple of a coil‑specific increment, and if not an exact multiple, round it to the nearest valid increment. The increment to use depends on the tube size or coil type/configuration as specified.",
+      "hvacTerminology": [
+        "Coil Height",
+        "Water/Steam coils",
+        "tube",
+        "Lamiflo coil",
+        "increment",
+        "spacing"
+      ],
+      "businessRules": [
+        "Valid range: entered Coil Height must be between 1.25\" and 100\" inclusive.",
+        "The entered Coil Height must be a multiple of a coil‑specific increment.",
+        "If the entered Coil Height is not an exact multiple of the applicable increment, round it to the nearest valid increment.",
+        "For 3/8\" tube or 1/2\" tube, the increment is 1.25\".",
+        "For 5/8\" tube, the increment is 1.50\".",
+        "For 1\" tube, the increment is 2.25\".",
+        "For Lamiflo coil, the increment is 9.00\".",
+        "For 3/8\" tube with 1\" spacing, the increment is 1.00\"."
+      ],
+      "developerConsiderations": [
+        "Implement a mapping from tube size / coil type / spacing configuration to the corresponding increment value.",
+        "Validate that the entered value falls within the 1.25\"–100\" range before or after rounding, as appropriate.",
+        "Apply rounding logic to the nearest increment, preserving the original unit of inches.",
+        "Ensure that both 3/8\" tube and 1/2\" tube share the same increment rule.",
+        "Handle user input that may include decimal fractions and convert them to a numeric representation for validation."
+      ],
+      "ambiguities": [
+        "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?",
+        "Should the range validation be performed before rounding, after rounding, or both?",
+        "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?",
+        "Does the validation differ between Water coils and Steam coils, or are they treated identically?",
+        "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+      ],
+      "confidence": "MEDIUM"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "requirement-interpreter",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:56:59.659Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "b17047893d28d8d8862de5290fbe4d4d714ba0e77f73a140e8f39022e68be610",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "promptHash": "87739587aa5984b7a987ae00618d342f635f60e6588d2645cc8f9613edbaff97",
+      "promptTemplateHash": "5f5b8aac315ad358a8bb54e202eea1bae2f7b2c93988f4c8c06da9a9586d17b2",
+      "schemaHash": "b1ef055e72d94648f1fb1ae82dd62a9711d7155abc6738885334ff455495e0a9",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 1249,
+      "completionTokens": 1548,
+      "totalTokens": 2797,
+      "cost": 0.004494,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "48158b9ba842a89fcc292862e80b1b3be4ca15e23c15373ed9a974416a7f692e",
+      "outputHash": "fcaefa97c16354318719fe808fd15d0e6f646dccd1593abe3d19d43e818d9187",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\requirement-interpreter-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\requirement-interpreter-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReviewResult": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+    "agentId": "adversarial-reviewer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "status": "FAIL",
+      "rationale": "The interpreter correctly captured the business rules and validation requirements from the ticket, but it left five open questions unresolved. Each listed ambiguity must be addressed before the implementation can be considered complete, so the review fails.",
+      "findings": [
+        {
+          "id": "F1",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not specify how to round when the entered value is exactly halfway between two valid increments.",
+          "action": "Obtain clarification from the ticket owner on the tie‑break rounding policy.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/0",
+              "quote": "If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/0"
+          ]
+        },
+        {
+          "id": "F2",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not define whether range validation should occur before rounding, after rounding, or both.",
+          "action": "Obtain clarification from the ticket owner on the order of range validation relative to rounding.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/1",
+              "quote": "Should the range validation be performed before rounding, after rounding, or both?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/1"
+          ]
+        },
+        {
+          "id": "F3",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not explain how to handle coil types or tube sizes that are not listed (e.g., 3/4\" tube).",
+          "action": "Obtain clarification from the ticket owner on the handling of unlisted coil types or tube sizes.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/2",
+              "quote": "How should coil types or tube sizes not listed (e.g., 3/4\" tube) be handled?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/2"
+          ]
+        },
+        {
+          "id": "F4",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not state whether validation differs between Water coils and Steam coils.",
+          "action": "Obtain clarification from the ticket owner on whether Water and Steam coil validations are identical or differ.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/3",
+              "quote": "Does the validation differ between Water coils and Steam coils, or are they treated identically?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/3"
+          ]
+        },
+        {
+          "id": "F5",
+          "severity": "MEDIUM",
+          "kind": "OPEN_AMBIGUITY",
+          "description": "The ticket does not indicate whether inputs may be provided in units other than inches.",
+          "action": "Obtain clarification from the ticket owner on accepted input units and any required conversion logic.",
+          "sourceRefs": [
+            {
+              "artifact": "interpreter",
+              "pointer": "/ambiguities/4",
+              "quote": "Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?"
+            }
+          ],
+          "ambiguityRefs": [
+            "/ambiguities/4"
+          ]
+        }
+      ],
+      "resolutions": []
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "adversarial-reviewer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:57:06.715Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "b54e3464e795a40bca5afe3bb7636fda0c7e2113270f17535d1d204de06b6725",
+      "ticketHash": "f5171094df6e4892a2500d347a8a36db5eeaf9fb6e01d5b809b18da6a9f35215",
+      "promptHash": "2a930a0df617514af87930ac5604cb9fc92e38638dae711644acf77c586d7cb0",
+      "promptTemplateHash": "ef83401346ced8c091eda058e152e324ea28a96302246154960d1d2ee59bb713",
+      "schemaHash": "c1f9f048f9d5960d5f2222fd42d3525e7b2530fa91d573716b353a01ea8b18f3",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 3135,
+      "completionTokens": 1921,
+      "totalTokens": 5056,
+      "cost": 0.00637,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "9ce216001e29d9f43048f32d676d813181fc2d995cb895344cce74e840536a80",
+      "outputHash": "bdcd2314342424c0415ce204c07b4cd4b129c649192f598ffa9278603d797691",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\adversarial-reviewer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\adversarial-reviewer-validated.json",
+      "status": "SUCCESS"
+    }
+  },
+  "finalReport": {
+    "success": true,
+    "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+    "agentId": "final-review-writer",
+    "cycle": 1,
+    "runtimeMode": "real",
+    "output": {
+      "reportMarkdown": "# FAIL\n\n## Requirement Summary\n\n\"The UI must validate the entered Coil Height for Water/Steam coils, ensuring the value is between 1.25\\\" and 100\\\", is a multiple of a coil‑specific increment, and if not an exact multiple, round it to the nearest valid increment. The increment to use depends on the tube size or coil type/configuration as specified.\"\n\n## Reviewer Findings\n\n- F1 | MEDIUM | OPEN_AMBIGUITY | \"The ticket does not specify how to round when the entered value is exactly halfway between two valid increments.\" | \"Obtain clarification from the ticket owner on the tie‑break rounding policy.\"\n- F2 | MEDIUM | OPEN_AMBIGUITY | \"The ticket does not define whether range validation should occur before rounding, after rounding, or both.\" | \"Obtain clarification from the ticket owner on the order of range validation relative to rounding.\"\n- F3 | MEDIUM | OPEN_AMBIGUITY | \"The ticket does not explain how to handle coil types or tube sizes that are not listed (e.g., 3/4\\\" tube).\" | \"Obtain clarification from the ticket owner on the handling of unlisted coil types or tube sizes.\"\n- F4 | MEDIUM | OPEN_AMBIGUITY | \"The ticket does not state whether validation differs between Water coils and Steam coils.\" | \"Obtain clarification from the ticket owner on whether Water and Steam coil validations are identical or differ.\"\n- F5 | MEDIUM | OPEN_AMBIGUITY | \"The ticket does not indicate whether inputs may be provided in units other than inches.\" | \"Obtain clarification from the ticket owner on accepted input units and any required conversion logic.\"\n\n## Open Ambiguities\n\n- /ambiguities/0 | \"If the entered value is exactly halfway between two valid increments, which direction should rounding prefer (up or down)?\"\n- /ambiguities/1 | \"Should the range validation be performed before rounding, after rounding, or both?\"\n- /ambiguities/2 | \"How should coil types or tube sizes not listed (e.g., 3/4\\\" tube) be handled?\"\n- /ambiguities/3 | \"Does the validation differ between Water coils and Steam coils, or are they treated identically?\"\n- /ambiguities/4 | \"Are inputs provided in units other than inches (e.g., millimeters) ever expected, and if so, how should they be converted?\"\n\n## Final Disposition\n\nFAIL\n\n## Governance Reasons\n\n- OPEN_FINDINGS\n- OPEN_AMBIGUITIES"
+    },
+    "audit": {
+      "correlationId": "HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b",
+      "workflow": "hvac-ticket-governance",
+      "agent": "final-review-writer",
+      "model": "accounts/fireworks/models/gpt-oss-120b",
+      "runtimeMode": "real",
+      "cycle": 1,
+      "timestamp": "2026-10-31T03:57:14.572Z",
+      "modelSettings": {
+        "temperature": 0
+      },
+      "inputHash": "dba2666593a8536121a9adb79acf86d81be2dc03668b647cf0f5b38ff3676d01",
+      "ticketHash": null,
+      "promptHash": "27df5caa85a6c4db76fd03b84a96b67718cb84461550606ff6a87309e19e77ce",
+      "promptTemplateHash": "804be5ea986bd9422c3782cd911e639f341a6ee7813fb6347bfeaf1e6f985b6e",
+      "schemaHash": "5112ad55bdc0bb84cf602a354802d95e9f64a6469ec5c2431a3bf7d61d02767c",
+      "governancePolicyHash": "75e5ed1f61e82615ab4bb6a5eb73afa6d9bfd4fc5870c04390c6a280ec357c88",
+      "reportContractHash": "7832216b4e422d5f8b2d06de27b88962483878bbbeb4cab48282f86660e7d7c5",
+      "promptTokens": 2526,
+      "completionTokens": 2003,
+      "totalTokens": 4529,
+      "cost": 0.006271,
+      "costMethod": "Estimated from pricing for accounts/fireworks/models/gpt-oss-120b ($0.5/1M input, $2.5/1M output)",
+      "rawHash": "2bce99be80841be50efc6c95ce82eec83d6d062ddf98a2aaab45cae822bd6d3d",
+      "outputHash": "e7c8cc0cc7e57462b741e7cf7ad557bf5279bb55a0070cb2c7c023edc2751e33",
+      "rawArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\final-review-writer-raw.txt",
+      "validatedArtifact": "evidence\\d5-20261031T0352Z\\runs\\HVAC-TICKET-1793419019659-616bb315-7fe3-4e26-9777-7009dd186d9b\\cycle-1\\final-review-writer-validated.json",
+      "status": "SUCCESS"
+    }
+  }
+}

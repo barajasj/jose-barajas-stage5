@@ -1,0 +1,26 @@
+[
+  {
+    "file": "evidence/d5-20261031T0352Z/baselines/ticket1-run.json",
+    "sourceCommit": "4fcbf4787948a5014e5df3e20639990142475fbd",
+    "sourcePath": "evidence/run1/ticket1-run.json",
+    "gitBlob": "7d50156270d4330937a102ec0508e92223134942",
+    "sha256": "8237e7b2e025d93cd0f364461abbf35cb5f9cfa804af6e40dc77c3e898b3152e",
+    "compatibility": "Original bytes, not upgraded to current runtime contracts; no fabricated completed status."
+  },
+  {
+    "file": "evidence/d5-20261031T0352Z/baselines/ticket2-run.json",
+    "sourceCommit": "4fcbf4787948a5014e5df3e20639990142475fbd",
+    "sourcePath": "evidence/run1/ticket2-run.json",
+    "gitBlob": "5958d1aa24198ad1e6113fad6beb45961faa06a1",
+    "sha256": "3c978cefac8052c880036b1d8e92956be515110033e533e8922169c0dd0be8ad",
+    "compatibility": "Original bytes, not upgraded to current runtime contracts; no fabricated completed status."
+  },
+  {
+    "file": "evidence/d5-20261031T0352Z/baselines/ticket3-run.json",
+    "sourceCommit": "4fcbf4787948a5014e5df3e20639990142475fbd",
+    "sourcePath": "evidence/run1/ticket3-run.json",
+    "gitBlob": "eeba16c8b6fc8fe62da71aaba32543f900268763",
+    "sha256": "982629ac9c0c29c6a91f4406a7ce84ea4745a35b69f5214c416fa785c72db3f5",
+    "compatibility": "Original bytes, not upgraded to current runtime contracts; no fabricated completed status."
+  }
+]

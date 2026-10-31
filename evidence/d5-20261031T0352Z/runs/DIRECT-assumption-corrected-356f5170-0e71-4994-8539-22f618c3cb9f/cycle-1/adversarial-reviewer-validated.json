@@ -1,0 +1,58 @@
+{
+  "status": "FAIL",
+  "rationale": "The interpreter output contains unresolved ambiguities that block a definitive implementation; these ambiguities are listed as OPEN_AMBIGUITY findings.",
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter reports that the Condenser Type mapping is unclear because the example parent data contains refrigerants.",
+      "action": "Clarify how Condenser Type should be used to filter Unit Type, and provide appropriate data mapping.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/0",
+          "quote": "The Condenser Type mapping is unclear because the example parent data contains refrigerants."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/0"
+      ]
+    },
+    {
+      "id": "F2",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter notes that behavior when filters produce no results is unspecified.",
+      "action": "Specify the expected UI behavior when no Unit Types or Unit Sizes match the selected criteria.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/1",
+          "quote": "Empty filter-result behavior is unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/1"
+      ]
+    },
+    {
+      "id": "F3",
+      "severity": "MEDIUM",
+      "kind": "OPEN_AMBIGUITY",
+      "description": "The interpreter indicates that case sensitivity and downstream selection reset behavior are unspecified.",
+      "action": "Define case sensitivity handling for dropdown values and whether selecting a new Condenser Type or Refrigerant should reset previously selected Unit Type or Unit Size.",
+      "sourceRefs": [
+        {
+          "artifact": "interpreter",
+          "pointer": "/ambiguities/2",
+          "quote": "Case sensitivity and downstream selection reset behavior are unspecified."
+        }
+      ],
+      "ambiguityRefs": [
+        "/ambiguities/2"
+      ]
+    }
+  ],
+  "resolutions": []
+}
