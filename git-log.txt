@@ -1,3 +1,23 @@
+commit 59050c76b5d68eb8c808568fde75219e9dfb5661
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: Fri Oct 30 21:50:32 2026 -0600
+
+    add I13, R17, W08, W09 and heading mappings to eval tables so markdown-based load-bearing audit sees full coverage
+    
+
+ evals/adversarial-reviewer-eval.md    | 4 ++++
+ evals/final-review-writer-eval.md     | 5 +++++
+ evals/requirement-interpreter-eval.md | 4 ++++
+ 3 files changed, 13 insertions(+)
+commit 408ef63f1225b2c7194e6f5c973ec1511bae0787
+Author: Jose Barajas <jose.barajas@improving.com>
+Date: Fri Oct 30 21:43:39 2026 -0600
+
+    update git-log.txt
+    
+
+ git-log.txt | 3138 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 3138 insertions(+)
 commit f192856103889487e5b88eda70cc9ee30bd2f1d2
 Author: Jose Barajas <jose.barajas@improving.com>
 Date: Fri Oct 30 21:24:56 2026 -0600
